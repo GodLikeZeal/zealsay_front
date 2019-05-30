@@ -32,12 +32,15 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['~/assets/style/app.styl'],
+  css: ['~/assets/style/app.styl', '~/assets/scss/styles/index.scss'],
 
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuetify'],
+  plugins: [
+    { src: '@/plugins/vuetify', ssr: true },
+    { src: '@/plugins/vue-perfect-scrollbar', ssr: false }
+  ],
 
   /*
    ** Nuxt.js modules
