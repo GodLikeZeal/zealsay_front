@@ -27,7 +27,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: '~/components/material/loading.vue',
 
   /*
    ** Global CSS
@@ -48,6 +48,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
     '@nuxtjs/pwa'
   ],
   /*
@@ -55,6 +56,12 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    prefix: '/api/',
+    proxy: true // Can be also an object with default options
+  },
+
+  proxy: {
+    '/api/': { target: 'http://localhost:8090', pathRewrite: { '^/api/': '' } }
   },
 
   /*

@@ -11,29 +11,19 @@
       class="pa-4"
       dark
     >
-      <v-icon
-        size="40"
-      >
+      <v-icon size="40">
         {{ icon }}
       </v-icon>
     </v-card>
     <div class="text-xs-right">
-      <p
-        class="category grey--text font-weight-light"
-        v-text="title"
-      />
-      <h3
-        class="title display-1 font-weight-light">
+      <p class="category grey--text font-weight-light" v-text="title" />
+      <h3 class="title display-1 font-weight-light">
         {{ value }} <small>{{ smallValue }}</small>
       </h3>
     </div>
 
     <template slot="actions">
-      <v-icon
-        :color="subIconColor"
-        size="20"
-        class="mr-2"
-      >
+      <v-icon :color="subIconColor" size="20" class="mr-2">
         {{ subIcon }}
       </v-icon>
       <span

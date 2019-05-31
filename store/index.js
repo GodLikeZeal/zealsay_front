@@ -16,7 +16,7 @@ requireModule.keys().forEach(fileName => {
     }
   }
 
-  modules[moduleName][imported] = requireModule(fileName).default
+  modules[moduleName][imported] = requireModule(fileName).admin
 })
 
 export default modules

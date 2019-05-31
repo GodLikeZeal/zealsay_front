@@ -1,12 +1,9 @@
 <template>
-  <v-toolbar
-    color="primary"
-    fixed
-    dark
-    app
-  >
+  <v-toolbar color="primary" fixed dark app>
     <v-toolbar-title class="ml-0 pl-3">
-      <v-toolbar-side-icon @click.stop="handleDrawerToggle"></v-toolbar-side-icon>
+      <v-toolbar-side-icon
+        @click.stop="handleDrawerToggle"
+      ></v-toolbar-side-icon>
     </v-toolbar-title>
     <v-text-field
       flat
@@ -17,16 +14,10 @@
     >
     </v-text-field>
     <v-spacer></v-spacer>
-    <v-btn
-      icon
-      href="https://github.com/GodLikeZeal/zealsay_material_ui.git"
-    >
+    <v-btn icon href="https://github.com/GodLikeZeal/zealsay_material_ui.git">
       <v-icon>fa fa-github</v-icon>
     </v-btn>
-    <v-btn
-      icon
-      @click="handleFullScreen()"
-    >
+    <v-btn icon @click="handleFullScreen()">
       <v-icon>fullscreen</v-icon>
     </v-btn>
     <v-menu
@@ -36,15 +27,8 @@
       :nudge-bottom="14"
       transition="scale-transition"
     >
-      <v-btn
-        icon
-        flat
-        slot="activator"
-      >
-        <v-badge
-          color="red"
-          overlap
-        >
+      <v-btn slot="activator" icon flat>
+        <v-badge color="red" overlap>
           <span slot="badge">3</span>
           <v-icon medium>notifications</v-icon>
         </v-badge>
@@ -57,29 +41,22 @@
       :nudge-bottom="10"
       transition="scale-transition"
     >
-      <router-link
-              v-ripple
-              class="toolbar-items"
-              to="/user-profile"
-      >
+      <router-link v-ripple class="toolbar-items" to="/user-profile">
         <v-avatar size="30px">
-          <img
-                  :src="avatar"
-                  alt="Michael Wang"
-          />
+          <img :src="avatar" alt="Michael Wang" />
         </v-avatar>
       </router-link>
       <v-list class="pa-0">
         <v-list-tile
-          v-for="(item,index) in items"
+          v-for="(item, index) in items"
           :to="!item.href ? { name: item.name } : null"
+          :key="index"
           :href="item.href"
-          @click="item.click"
           ripple="ripple"
           :disabled="item.disabled"
           :target="item.target"
           rel="noopener"
-          :key="index"
+          @click="item.click"
         >
           <v-list-tile-action v-if="item.icon">
             <v-icon>{{ item.icon }}</v-icon>
@@ -93,23 +70,23 @@
   </v-toolbar>
 </template>
 <script>
-import { mapGetters } from 'vuex';
-import NotificationList from './NotificationList';
-import Util from '@/util';
-const vm=this;
+import { mapGetters } from 'vuex'
+import NotificationList from './NotificationList'
+import Util from '@/util'
+const vm = this
 export default {
-  name: 'app-toolbar',
+  name: 'AppToolbar',
   components: {
     NotificationList
   },
-  data: (vm) => ({
+  data: vm => ({
     items: [
       {
         icon: 'account_circle',
         href: '#',
         title: 'Profile',
         click: e => {
-          console.log(e);
+          console.log(e)
         }
       },
       {
@@ -117,7 +94,7 @@ export default {
         href: '#',
         title: 'Settings',
         click: e => {
-          console.log(e);
+          console.log(e)
         }
       },
       {
@@ -132,23 +109,23 @@ export default {
     ]
   }),
   computed: {
-    toolbarColor () {
-      return this.$vuetify.options.extra.mainNav;
+    toolbarColor() {
+      return this.$vuetify.options.extra.mainNav
     },
     ...mapGetters(['name', 'avatar', 'roles'])
   },
   methods: {
-    handleDrawerToggle () {
-      window.getApp.$emit('APP_DRAWER_TOGGLED');
+    handleDrawerToggle() {
+      window.getApp.$emit('APP_DRAWER_TOGGLED')
     },
-    handleFullScreen () {
-      Util.toggleFullScreen();
+    handleFullScreen() {
+      Util.toggleFullScreen()
     },
-    logout () {
+    logout() {
       this.$store.dispatch('LogOut').then(() => {
-            location.reload(); // In order to re-instantiate the vue-router object to avoid bugs
-          });
+        location.reload() // In order to re-instantiate the vue-router object to avoid bugs
+      })
     }
   }
-};
+}
 </script>

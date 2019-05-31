@@ -315,7 +315,7 @@ export default {
       category: [],
       startmenu: false,
       endmenu: false,
-      color: ['info', 'success', 'primary', 'warning', 'error', 'default']
+      color: ['info', 'success', 'primary', 'warning', 'error', 'admin.vue']
     }
   },
   computed: {

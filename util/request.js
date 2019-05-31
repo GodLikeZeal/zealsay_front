@@ -1,4 +1,3 @@
-import axios from 'axios'
 import store from '@/store'
 import cloneDeep from 'lodash.clonedeep'
 import { createRequestToken } from '@/util/auth'
@@ -14,37 +13,39 @@ const fetch = options => {
 
   const cloneData = cloneDeep(data)
   let headers = {}
+  // eslint-disable-next-line no-console
+  console.log(store)
   if (store.state.user.token) {
     headers = { Authorization: createRequestToken() }
   }
   switch (method.toLowerCase()) {
     case 'get':
-      return axios.get(url, {
+      return this.$axios.get(url, {
         headers: headers,
         params: cloneData
       })
     case 'delete':
-      return axios.delete(url, {
+      return this.$axios.delete(url, {
         headers: headers,
         data: cloneData
       })
     case 'post':
-      return axios.post(url, cloneData, {
+      return this.$axios.post(url, cloneData, {
         headers: headers
       })
     case 'put':
-      return axios.put(url, cloneData, {
+      return this.$axios.put(url, cloneData, {
         headers: headers
       })
     case 'patch':
-      return axios.patch(url, cloneData, {
+      return this.$axios.patch(url, cloneData, {
         headers: headers
       })
     case 'upload':
       headers['Content-Type'] = 'multipart/form-data'
-      return axios.create({ headers: headers }).post(url, data)
+      return this.$axios.create({ headers: headers }).post(url, data)
     default:
-      return axios(options)
+      return this.$axios(options)
   }
 }
 

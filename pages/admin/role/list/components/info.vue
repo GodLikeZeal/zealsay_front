@@ -119,7 +119,7 @@ export default {
       require('@/assets/food/辣条.png'),
       require('@/assets/food/鱿鱼仔.png')
     ],
-    color: ['info', 'success', 'primary', 'warning', 'error', 'default']
+    color: ['info', 'success', 'primary', 'warning', 'error', 'admin.vue']
   })
 }
 </script>

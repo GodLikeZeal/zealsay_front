@@ -8,7 +8,7 @@
               <v-card-text>
                 <div class="layout column align-center">
                   <img
-                    src="~/assets/image/logo/logo.png"
+                    src="/assets/image/logo/logo.png"
                     alt="Vue Material Admin"
                     width="200"
                     height="150"

@@ -1,9 +1,5 @@
 <template>
-  <v-card
-    v-bind="$attrs"
-    :style="styles"
-    v-on="$listeners"
-  >
+  <v-card v-bind="$attrs" :style="styles" v-on="$listeners">
     <helper-offset
       v-if="hasOffset"
       :inline="inline"
@@ -17,35 +13,20 @@
         class="v-card--material__header"
         dark
       >
-        <slot
-          v-if="!title && !text"
-          name="header"
-        />
+        <slot v-if="!title && !text" name="header" />
         <span v-else>
-          <h4
-            class="title font-weight-light mb-2"
-            v-text="title"
-          />
-          <p
-            class="category font-weight-light"
-            v-text="text"
-          />
+          <h4 class="title font-weight-light mb-2" v-text="title" />
+          <p class="category font-weight-light" v-text="text" />
         </span>
       </v-card>
-      <slot
-        v-else
-        name="offset"
-      />
+      <slot v-else name="offset" />
     </helper-offset>
 
     <v-card-text>
       <slot />
     </v-card-text>
 
-    <v-divider
-      v-if="$slots.actions"
-      class="mx-3"
-    />
+    <v-divider v-if="$slots.actions" class="mx-3" />
 
     <v-card-actions v-if="$slots.actions">
       <slot name="actions" />
@@ -89,13 +70,10 @@ export default {
   },
 
   computed: {
-    hasOffset () {
-      return this.$slots.header ||
-        this.$slots.offset ||
-        this.title ||
-        this.text
+    hasOffset() {
+      return this.$slots.header || this.$slots.offset || this.title || this.text
     },
-    styles () {
+    styles() {
       if (!this.hasOffset) return null
 
       return {
@@ -108,11 +86,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .v-card--material {
-    &__header {
-      &.v-card {
-        border-radius: 4px;
-      }
+.v-card--material {
+  &__header {
+    &.v-card {
+      border-radius: 4px;
     }
   }
+}
 </style>
