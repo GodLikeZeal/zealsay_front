@@ -57,11 +57,16 @@ export default {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     prefix: '/api/',
-    proxy: true // Can be also an object with default options
+    proxy: true, // Can be also an object with default options
+    credentials: true
   },
 
   proxy: {
-    '/api/': { target: 'http://localhost:8090', pathRewrite: { '^/api/': '' } }
+    '/api/': {
+      target: 'http://localhost:8090',
+      changeOrigin: true,
+      pathRewrite: { '^/api/': '/api/' }
+    }
   },
 
   /*

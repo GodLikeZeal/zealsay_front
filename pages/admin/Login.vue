@@ -8,7 +8,7 @@
               <v-card-text>
                 <div class="layout column align-center">
                   <img
-                    src="/assets/image/logo/logo.png"
+                    src="~/assets/image/logo/logo.png"
                     alt="Vue Material Admin"
                     width="200"
                     height="150"
@@ -64,6 +64,7 @@
 
 <script>
 export default {
+  layout: 'default',
   data() {
     return {
       alert: false,
@@ -94,7 +95,7 @@ export default {
         .dispatch('user/LoginByUsername', this.model)
         .then(() => {
           this.loading = false
-          this.$router.push({ path: this.redirect || '/dashboard' })
+          this.$router.push({ path: this.redirect || '/admin/Dashboard' })
         })
         .catch(err => {
           this.loading = false

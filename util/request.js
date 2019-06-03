@@ -1,91 +1,59 @@
-import store from '@/store'
-import cloneDeep from 'lodash.clonedeep'
-import { createRequestToken } from '@/util/auth'
+import http from 'http'
+import https from 'https'
+import axios from 'axios'
+// import { Message } from 'element-ui'
+// import qs from 'qs'
+// import config from './config'
 
-// const prifix = 'https://api.zealsay.com';
-const prifix = 'http://localhost:8090'
-// console.log(prifix)
-const fetch = options => {
-  // eslint-disable-next-line prefer-const
-  let { method = 'get', data, url } = options
-
-  url = prifix + url
-
-  const cloneData = cloneDeep(data)
-  let headers = {}
-  // eslint-disable-next-line no-console
-  console.log(store)
-  if (store.state.user.token) {
-    headers = { Authorization: createRequestToken() }
-  }
-  switch (method.toLowerCase()) {
-    case 'get':
-      return this.$axios.get(url, {
-        headers: headers,
-        params: cloneData
-      })
-    case 'delete':
-      return this.$axios.delete(url, {
-        headers: headers,
-        data: cloneData
-      })
-    case 'post':
-      return this.$axios.post(url, cloneData, {
-        headers: headers
-      })
-    case 'put':
-      return this.$axios.put(url, cloneData, {
-        headers: headers
-      })
-    case 'patch':
-      return this.$axios.patch(url, cloneData, {
-        headers: headers
-      })
-    case 'upload':
-      headers['Content-Type'] = 'multipart/form-data'
-      return this.$axios.create({ headers: headers }).post(url, data)
-    default:
-      return this.$axios(options)
-  }
+const config = {
+  // 自定义的请求头
+  headers: {
+    'X-Requested-With': 'XMLHttpRequest',
+    'X-Agent': 'Juejin/Web'
+  },
+  // 超时设置
+  timeout: 10000,
+  // 跨域是否带Token
+  withCredentials: true,
+  // 响应的数据格式 json / blob /document /arraybuffer / text / stream
+  responseType: 'json',
+  // XSRF 设置
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+  // 用于node.js
+  httpAgent: new http.Agent({
+    keepAlive: true
+  }),
+  httpsAgent: new https.Agent({
+    keepAlive: true
+  })
 }
 
-export default function request(options) {
-  return fetch(options)
-    .then(response => {
-      // eslint-disable-next-line no-unused-vars
-      const { statusText, status } = response
-      const data = response.data
-      if (data.code === '404' || data.code === '401') {
-        // 跳转404路由
-        this.$router.push({ path: `/error/${data.code}` })
-        return
-      }
-      if (data.code !== '200') {
-        // Message({
-        //   message: data.message,
-        //   type: 'error',
-        //   duration: 5 * 1000
-        // })
-      }
-      return Promise.resolve({
-        success: true,
-        statusCode: status,
-        ...data
-      })
-    })
-    .catch(error => {
-      const { response } = error
-      let msg
-      let statusCode
-      if (response && response instanceof Object) {
-        const { data, statusText } = response
-        statusCode = response.status
-        msg = data.message || statusText
-      } else {
-        statusCode = 600
-        msg = error.message || '网络异常，请检查后重试!'
-      }
-      // eslint-disable-next-line prefer-promise-reject-errors
-      return Promise.reject({ success: false, statusCode, message: msg })
-    })
+if (process.server) {
+  config.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env
+    .PORT || 3000}`
 }
+
+const request = axios.create(config)
+
+// POST 传参序列化
+request.interceptors.request.use(
+  config => {
+    // if (config.method === 'post') config.data = qs.stringify(config.data)
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
+// 返回状态判断
+request.interceptors.response.use(
+  res => {
+    return res.data
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
+
+export default request
