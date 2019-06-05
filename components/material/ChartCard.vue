@@ -21,9 +21,12 @@
 </template>
 
 <script>
+import Card from './Card'
 export default {
+  components: {
+    'material-card': Card
+  },
   inheritAttrs: false,
-
   props: {
     data: {
       type: Object,

@@ -275,7 +275,17 @@
 </template>
 
 <script>
+import Card from '~/components/material/Card'
+import ChartCard from '~/components/material/ChartCard'
+import StatsCard from '~/components/material/StatsCard'
+
 export default {
+  layout: 'admin',
+  components: {
+    'material-card': Card,
+    'material-chart-card': ChartCard,
+    'material-stats-card': StatsCard
+  },
   data() {
     return {
       dailySalesChart: {

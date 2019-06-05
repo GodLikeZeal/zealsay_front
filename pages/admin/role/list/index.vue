@@ -133,6 +133,7 @@ import editForm from './components/editForm'
 
 export default {
   name: 'User',
+  layout: 'admin',
   components: { addForm, editForm },
   data() {
     return {

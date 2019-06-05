@@ -35,9 +35,12 @@
 </template>
 
 <script>
+import Offset from '~/components/helper/Offset'
 export default {
+  components: {
+    'helper-offset': Offset
+  },
   inheritAttrs: false,
-
   props: {
     color: {
       type: String,

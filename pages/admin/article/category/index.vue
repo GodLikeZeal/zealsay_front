@@ -118,6 +118,7 @@ import addForm from './components/addForm'
 
 export default {
   name: 'Category',
+  layout: 'admin',
   components: { addForm },
   data: () => ({
     addFormVisible: false,

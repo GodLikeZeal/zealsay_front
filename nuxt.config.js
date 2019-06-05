@@ -32,13 +32,21 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['~/assets/style/app.styl', '~/assets/scss/styles/index.scss'],
+  css: [
+    'material-design-icons-iconfont/dist/material-design-icons.css',
+    'vuetify/dist/vuetify.min.css',
+    '~/assets/style/app.styl',
+    'chartist/dist/chartist.min.css',
+    '~/assets/scss/styles/index.scss'
+  ],
 
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
     { src: '@/plugins/vuetify', ssr: true },
+    { src: '@/plugins/sweetalert2', ssr: false },
+    { src: '@/plugins/chartist', ssr: true },
     { src: '@/plugins/vue-perfect-scrollbar', ssr: false }
   ],
 

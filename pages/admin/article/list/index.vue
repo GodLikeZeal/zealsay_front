@@ -282,6 +282,7 @@ import {
 
 export default {
   name: 'User',
+  layout: 'admin',
   data() {
     return {
       searchData: {},

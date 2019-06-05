@@ -2,7 +2,7 @@
   <div id="appRoot">
     <transition>
       <keep-alive>
-        <router-view></router-view>
+        <nuxt />
       </keep-alive>
     </transition>
   </div>

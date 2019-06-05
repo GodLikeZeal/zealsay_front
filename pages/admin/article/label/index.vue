@@ -82,6 +82,7 @@ import addForm from './components/addForm'
 
 export default {
   name: 'ArticleLabel',
+  layout: 'admin',
   components: { addForm },
   data: () => ({
     search_text: '',

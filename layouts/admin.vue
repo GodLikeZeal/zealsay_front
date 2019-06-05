@@ -1,6 +1,6 @@
 <template>
   <div id="appRoot">
-    <template v-if="!$route.meta.public">
+    <template>
       <v-app>
         <!--<core-filter/>-->
 
@@ -121,7 +121,7 @@
             <v-layout class="fill-height" tag="v-list" column>
               <v-list-tile avatar>
                 <v-list-tile-avatar color="white">
-                  <v-img src="assets/image/logo/cat.png" height="34" contain />
+                  <v-img :src="logo" height="34" contain />
                 </v-list-tile-avatar>
                 <v-list-tile-title class="title">
                   zealsay
@@ -295,13 +295,6 @@
         </v-content>
       </v-app>
     </template>
-    <template v-else>
-      <transition>
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
-      </transition>
-    </template>
   </div>
 </template>
 
@@ -324,6 +317,7 @@ export default {
       'Another One'
     ],
     title: null,
+    logo: '/assets/image/logo/cat.png',
     responsive: false,
     responsiveInput: false,
     items: [

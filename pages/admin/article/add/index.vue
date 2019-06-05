@@ -175,6 +175,7 @@ import VueCropper from 'vue-cropper'
 
 export default {
   name: 'Add',
+  layout: 'admin',
   components: {
     'upload-btn': UploadButton,
     'vue-cropper': VueCropper
