@@ -4,7 +4,7 @@ const Menu = [
     title: 'Dashboard',
     group: 'apps',
     icon: 'dashboard',
-    name: 'Dashboard'
+    href: '/admin/dashboard'
   },
   { header: '用户' },
   {
@@ -12,15 +12,32 @@ const Menu = [
     group: 'user',
     icon: 'group',
     items: [
-      { name: 'list', title: '用户列表', component: 'userlist' },
-      { name: 'add', title: '用户添加', component: 'useradd' }
+      {
+        name: 'list',
+        title: '用户列表',
+        component: 'userlist',
+        href: '/admin/user/list'
+      },
+      {
+        name: 'add',
+        title: '用户添加',
+        component: 'useradd',
+        href: '/admin/user/add'
+      }
     ]
   },
   {
     title: '角色管理',
     group: 'role',
     icon: 'people_outline',
-    items: [{ name: 'list', title: '角色列表', component: 'rolelist' }]
+    items: [
+      {
+        name: 'list',
+        title: '角色列表',
+        component: 'rolelist',
+        href: '/admin/role/list'
+      }
+    ]
   },
   { header: '站点资源' },
   {
@@ -28,10 +45,30 @@ const Menu = [
     group: 'article',
     icon: 'book',
     items: [
-      { name: 'write', title: '写文章', component: 'articleadd' },
-      { name: 'list', title: '文章列表', component: 'articlelist' },
-      { name: 'menu', title: '分类目录', component: 'category' },
-      { name: 'label', title: '标签云管理', component: 'label' }
+      {
+        name: 'write',
+        title: '写文章',
+        component: 'articleadd',
+        href: '/admin/article/add'
+      },
+      {
+        name: 'list',
+        title: '文章列表',
+        component: 'articlelist',
+        href: '/admin/article/list'
+      },
+      {
+        name: 'menu',
+        title: '分类目录',
+        component: 'category',
+        href: '/admin/article/category'
+      },
+      {
+        name: 'label',
+        title: '标签云管理',
+        component: 'label',
+        href: '/admin/article/label'
+      }
     ]
   },
   {
@@ -39,8 +76,18 @@ const Menu = [
     group: 'media',
     icon: 'panorama',
     items: [
-      { name: 'list', title: '媒体库', component: 'Dashboard' },
-      { name: 'write', title: '添加', component: 'Dashboard' }
+      {
+        name: 'list',
+        title: '媒体库',
+        component: 'Dashboard',
+        href: '/admin/dashboard'
+      },
+      {
+        name: 'write',
+        title: '添加',
+        component: 'Dashboard',
+        href: '/admin/dashboard'
+      }
     ]
   }
 ]
