@@ -2,7 +2,7 @@
   <v-content>
     <div id="core-view">
       <v-fade-transition mode="out-in">
-        <router-view />
+        <nuxt />
       </v-fade-transition>
     </div>
     <core-footer v-if="$route.name !== 'Maps'" />
@@ -10,7 +10,11 @@
 </template>
 
 <script>
+import Footer from '~/components/core/Footer'
 export default {
+  components: {
+    'core-footer': Footer
+  },
   metaInfo() {
     return {
       title: 'zealsay 后台管理系统'

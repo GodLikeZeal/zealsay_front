@@ -8,12 +8,12 @@
           color="info"
           type="Line"
         >
-          <h4 class="title font-weight-light">Daily Sales</h4>
+          <h4 class="title font-weight-light">日活跃用户</h4>
           <p class="category d-inline-flex font-weight-light">
             <v-icon color="green" small>
               mdi-arrow-up
             </v-icon>
-            <span class="green--text">55%</span>&nbsp; increase in today's sales
+            <span class="green--text">55%</span>&nbsp; 相比较昨天
           </p>
 
           <template slot="actions">
@@ -21,7 +21,7 @@
               mdi-clock-outline
             </v-icon>
             <span class="caption grey--text font-weight-light"
-              >updated 4 minutes ago</span
+              >最后更新于4分钟前</span
             >
           </template>
         </material-chart-card>
@@ -34,9 +34,9 @@
           color="red"
           type="Bar"
         >
-          <h4 class="title font-weight-light">Email Subscription</h4>
+          <h4 class="title font-weight-light">网站浏览量</h4>
           <p class="category d-inline-flex font-weight-light">
-            Last Campaign Performance
+            本周数据一览
           </p>
 
           <template slot="actions">
@@ -44,7 +44,7 @@
               mdi-clock-outline
             </v-icon>
             <span class="caption grey--text font-weight-light"
-              >updated 10 minutes ago</span
+              >最后更新10分钟前</span
             >
           </template>
         </material-chart-card>
@@ -56,9 +56,9 @@
           color="green"
           type="Line"
         >
-          <h3 class="title font-weight-light">Completed Tasks</h3>
+          <h3 class="title font-weight-light">文章新增量</h3>
           <p class="category d-inline-flex font-weight-light">
-            Last Last Campaign Performance
+            上周数据展示
           </p>
 
           <template slot="actions">
@@ -66,7 +66,7 @@
               mdi-clock-outline
             </v-icon>
             <span class="caption grey--text font-weight-light"
-              >campaign sent 26 minutes ago</span
+              >最后更新于26分钟之前</span
             >
           </template>
         </material-chart-card>
@@ -85,7 +85,7 @@
         <material-stats-card
           color="orange"
           icon="mdi-content-copy"
-          title="Used Space"
+          title="硬盘使用"
           value="49/50"
           small-value="GB"
           sub-icon="mdi-alert"
@@ -98,7 +98,7 @@
         <material-stats-card
           color="red"
           icon="mdi-information-outline"
-          title="Fixed Issues"
+          title="已修复Issues"
           value="75"
           sub-icon="mdi-tag"
           sub-text="Tracked from Github"

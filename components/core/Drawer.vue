@@ -82,6 +82,7 @@
                       :to="genChildTarget(item, grand)"
                       :href="grand.href"
                       ripple="ripple"
+                      nuxt
                     >
                       <v-list-tile-content>
                         <v-list-tile-title>{{ grand.title }}</v-list-tile-title>
@@ -97,6 +98,7 @@
                     :disabled="subItem.disabled"
                     :target="subItem.target"
                     ripple="ripple"
+                    nuxt
                   >
                     <v-list-tile-content>
                       <v-list-tile-title
@@ -127,6 +129,7 @@
                 :disabled="item.disabled"
                 :target="item.target"
                 rel="noopener"
+                nuxt
               >
                 <v-list-tile-action v-if="item.icon">
                   <v-icon>{{ item.icon }}</v-icon>
