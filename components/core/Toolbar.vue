@@ -70,7 +70,7 @@
         >
           <v-btn slot="activator" flat icon class="toolbar-items">
             <v-avatar size="30px">
-              <v-img :src="avatar" alt="Michael Wang" />
+              <v-img :src="this.$auth.user.avatar" alt="Michael Wang" />
             </v-avatar>
           </v-btn>
           <v-card>
@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations } from 'vuex'
 import mFilter from '@/components/core/Filter'
 
 export default {
@@ -147,8 +147,7 @@ export default {
   computed: {
     toolbarColor() {
       return this.$vuetify.options.extra.mainNav
-    },
-    ...mapGetters('user', ['name', 'avatar', 'roles'])
+    }
   },
   watch: {
     $route(val) {
@@ -180,9 +179,9 @@ export default {
         this.responsiveInput = true
       }
     },
-    logout() {
-      this.$store.dispatch('user/LogOut').then(() => {
-        location.reload() // In order to re-instantiate the vue-router object to avoid bugs
+    async logout() {
+      await this.$auth.logout().then(() => {
+        location.reload() // In order to re-instantiate the vue-router object to avoid bugs)
       })
     }
   }

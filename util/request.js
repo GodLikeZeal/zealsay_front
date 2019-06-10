@@ -1,6 +1,7 @@
 import http from 'http'
 import https from 'https'
 import axios from 'axios'
+import { getcookiesInClient } from '@/util/auth'
 // import { Message } from 'element-ui'
 // import qs from 'qs'
 // import config from './config'
@@ -9,7 +10,7 @@ const config = {
   // 自定义的请求头
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
-    'X-Agent': 'Juejin/Web'
+    'X-Agent': 'zealsay/Web'
   },
   // 超时设置
   timeout: 10000,
@@ -33,7 +34,15 @@ if (process.server) {
   config.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env
     .PORT || 3000}`
 }
-
+// 自定义请求头
+const token = getcookiesInClient('auth._refresh_token.local')
+// eslint-disable-next-line no-console
+console.log('token')
+// eslint-disable-next-line no-console
+console.log(token)
+// if (token) {
+//   config.headers.Authorization = token
+// }
 const request = axios.create(config)
 
 // POST 传参序列化

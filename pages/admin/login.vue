@@ -63,8 +63,11 @@
 </template>
 
 <script>
+import qs from 'qs'
+
 export default {
   layout: 'default',
+  auth: false,
   data() {
     return {
       alert: false,
@@ -91,11 +94,14 @@ export default {
     login() {
       this.loading = true
       // 登录接口待调试
-      this.$store
-        .dispatch('user/LoginByUsername', this.model)
+      const data = this.model
+      this.$auth
+        .loginWith('local', { data: qs.stringify(data) })
         .then(() => {
           this.loading = false
-          this.$router.push({ path: this.redirect || '/admin/Dashboard' })
+          this.$router.push({
+            path: this.redirect || '/admin/dashboard'
+          })
         })
         .catch(err => {
           this.loading = false
@@ -105,6 +111,20 @@ export default {
             this.visible = false
           }, 3000)
         })
+      // this.$store
+      //   .dispatch('user/LoginByUsername', this.model)
+      //   .then(() => {
+      //     this.loading = false
+      //     this.$router.push({ path: this.redirect || '/admin/Dashboard' })
+      //   })
+      //   .catch(err => {
+      //     this.loading = false
+      //     this.visible = true
+      //     this.errMsg = err.message
+      //     setTimeout(() => {
+      //       this.visible = false
+      //     }, 3000)
+      //   })
     }
   }
 }

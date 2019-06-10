@@ -60,6 +60,40 @@ export default {
     '@nuxtjs/pwa'
   ],
   /*
+   ** auth middleware
+   */
+  router: {
+    middleware: ['auth']
+  },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/api/v1/authentication/login',
+            method: 'post',
+            propertyName: 'data.token'
+          },
+          logout: { url: '/api/v1/authentication/logout', method: 'get' },
+          user: {
+            url: '/api/v1/authentication/user',
+            method: 'get',
+            propertyName: 'data'
+          }
+        },
+        tokenRequired: true,
+        tokenType: 'Bearer '
+      }
+    },
+    redirect: {
+      login: '/admin/login',
+      logout: '/',
+      callback: '/login',
+      home: '/'
+    },
+    watchLoggedIn: true // 默认为true
+  },
+  /*
    ** Axios module configuration
    */
   axios: {
@@ -73,7 +107,7 @@ export default {
     '/api/': {
       target: 'http://localhost:8090',
       changeOrigin: true,
-      pathRewrite: { '^/api/': '/api/' }
+      pathRewrite: { '^/api/': '/' }
     }
   },
 

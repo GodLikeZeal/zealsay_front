@@ -49,8 +49,8 @@
       <v-list class="pa-0">
         <v-list-tile
           v-for="(item, index) in items"
-          :to="!item.href ? { name: item.name } : null"
           :key="index"
+          :to="!item.href ? { name: item.name } : null"
           :href="item.href"
           ripple="ripple"
           :disabled="item.disabled"
@@ -73,7 +73,6 @@
 import { mapGetters } from 'vuex'
 import NotificationList from './NotificationList'
 import Util from '@/util'
-const vm = this
 export default {
   name: 'AppToolbar',
   components: {
@@ -86,6 +85,7 @@ export default {
         href: '#',
         title: 'Profile',
         click: e => {
+          // eslint-disable-next-line no-console
           console.log(e)
         }
       },
@@ -94,6 +94,7 @@ export default {
         href: '#',
         title: 'Settings',
         click: e => {
+          // eslint-disable-next-line no-console
           console.log(e)
         }
       },
@@ -112,7 +113,7 @@ export default {
     toolbarColor() {
       return this.$vuetify.options.extra.mainNav
     },
-    ...mapGetters(['name', 'avatar', 'roles'])
+    ...mapGetters(['user'])
   },
   methods: {
     handleDrawerToggle() {
