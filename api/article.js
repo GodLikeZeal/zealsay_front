@@ -7,7 +7,7 @@ import request from '@/util/request'
  * @date 2019-03-13  16:13
  */
 export function getCategoryList(obj) {
-  return request({
+  return this.$axios.$get({
     url: '/api/v1/article/category',
     method: 'get',
     data: obj

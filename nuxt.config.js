@@ -45,6 +45,7 @@ export default {
    */
   plugins: [
     { src: '@/plugins/vuetify', ssr: true },
+    { src: '@/plugins/axios', ssr: true },
     { src: '@/plugins/sweetalert2', ssr: false },
     { src: '@/plugins/chartist', ssr: true },
     { src: '@/plugins/vue-perfect-scrollbar', ssr: false }
@@ -107,7 +108,8 @@ export default {
     '/api/': {
       target: 'http://localhost:8090',
       changeOrigin: true,
-      pathRewrite: { '^/api/': '/' }
+      pathRewrite: { '^/api/': '/api/' },
+      retry: { retries: 3 }
     }
   },
 
