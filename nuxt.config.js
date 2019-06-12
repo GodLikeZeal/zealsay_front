@@ -46,7 +46,7 @@ export default {
   plugins: [
     { src: '@/plugins/vuetify', ssr: true },
     { src: '@/plugins/axios', ssr: false },
-    { src: '@/plugins/sweetalert2', ssr: false },
+    { src: '@/plugins/dialog', ssr: false },
     { src: '@/plugins/chartist', ssr: true },
     { src: '@/plugins/vue-perfect-scrollbar', ssr: false }
   ],
@@ -58,7 +58,19 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    [
+      'vue-sweetalert2/nuxt',
+      {
+        buttonsStyling: false,
+        heightAuto: false,
+        grow: true,
+        confirmButtonClass: 'mx-4 v-btn v-btn--round primary',
+        confirmButtonText: '确定',
+        cancelButtonClass: 'mx-4 v-btn v-btn--round default',
+        cancelButtonText: '取消'
+      }
+    ]
   ],
   /*
    ** auth middleware

@@ -1,15 +1,15 @@
 <template>
   <v-fab-transition>
     <v-btn
+      v-show="fab"
+      v-scroll="onScroll"
       fab="fab"
       small
       dark="dark"
       fixed="fixed"
       bottom="bottom"
       right="right"
-      v-scroll="onScroll"
       color="red"
-      v-show="fab"
       @click="toTop"
     >
       <v-icon>keyboard_arrow_up</v-icon>
