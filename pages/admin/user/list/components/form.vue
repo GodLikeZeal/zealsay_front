@@ -4,35 +4,10 @@
       <v-container fill-height fluid>
         <v-layout fill-height class="center">
           <v-flex xs12 align-center flexbox>
-            <div style="height: 100px;width: 100px;margin: 10px auto;">
-              <vue-cropper
-                ref="cropper"
-                style="background-repeat:repeat"
-                :img="form.avatar"
-                :output-size="option.outputSize"
-                :output-type="option.outputType"
-                :info="option.info"
-                :can-scale="option.canScale"
-                :can-move-box="option.canMoveBox"
-                :center-box="option.centerBox"
-                :auto-crop="option.autoCrop"
-                :auto-crop-width="option.autoCropWidth"
-                :auto-crop-height="option.autoCropHeight"
-                :fixed="option.fixed"
-                :fixed-number="option.fixedNumber"
-              ></vue-cropper>
-            </div>
             <h6 class="category text-gray ffont-weight-light mb-3">头像预览</h6>
             <p class="card-description font-weight-light">
               支持JPG、PNG格式图片，不超过5M。拖拽或缩放图中的虚线方格可调整头像
             </p>
-            <upload-btn
-              outline
-              color="indigo"
-              title="点击修改头像"
-              :file-changed-callback="fileChanged"
-            >
-            </upload-btn>
           </v-flex>
         </v-layout>
       </v-container>
@@ -125,15 +100,9 @@
 import { editUser, uploadImage } from '@/api/user'
 import { validateUsername, validatePhone, validateEmail } from '@/util/validate'
 import { getRoleList } from '@/api/role'
-import UploadButton from 'vuetify-upload-button'
-import VueCropper from 'vue-cropper'
 
 export default {
   name: 'Edit',
-  components: {
-    'upload-btn': UploadButton,
-    'vue-cropper': VueCropper
-  },
   props: ['row', 'alert'],
   data: () => ({
     name: 'edit',
@@ -199,27 +168,18 @@ export default {
       set: function() {}
     }
   },
-  created() {
-    if (!this.roles.length) {
-      getRoleList().then(res => {
-        if (res.code === '200') {
-          this.roles = res.data.map(r => {
-            return {
-              value: r.value,
-              text: r.name
-            }
-          })
-        } else {
-          this.$swal({
-            text: '拉取角色信息失败',
-            type: 'error',
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000
-          })
+  async asyncData({ app, query, error }) {
+    const { code, message, data } = await app.$axios.$request(getRoleList())
+    if (code === '200') {
+      const roles = data.map(r => {
+        return {
+          value: r.value,
+          text: r.name
         }
       })
+      return { roles: roles }
+    } else {
+      return error({ statusCode: code, message: message })
     }
   },
   methods: {

@@ -213,6 +213,7 @@ import forms from './components/form'
 import info from './components/info'
 export default {
   name: 'User',
+  layout: 'admin',
   components: { forms },
   data() {
     return {
@@ -254,8 +255,17 @@ export default {
       set: function() {}
     }
   },
-  created() {
-    this.search()
+  async asyncData({ app, query, error }) {
+    const { code, message, data } = await app.$axios.$request(getUserList())
+    if (code === '200') {
+      const pagination = {}
+      pagination.page = data.currentPage
+      pagination.rowsPerPage = data.pageSize
+      pagination.totalItems = data.total
+      return { desserts: data.records, pagination: pagination }
+    } else {
+      return error({ statusCode: code, message: message })
+    }
   },
   methods: {
     search() {

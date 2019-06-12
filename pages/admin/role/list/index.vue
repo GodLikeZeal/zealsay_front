@@ -171,43 +171,56 @@ export default {
       set: function() {}
     }
   },
-  created() {
-    const searchData = this.searchData
-    searchData.pageSize = this.pagination.rowsPerPage
-    searchData.pageNumber = this.pagination.page
-    getRolePageList()
-      .then(res => {
-        if (res.code === '200') {
-          this.desserts = res.data.records
-          this.pagination.page = res.data.currentPage
-          this.pagination.rowsPerPage = res.data.pageSize
-          this.pagination.totalItems = res.data.total
-        } else {
+  async asyncData({ app, query, error }) {
+    const res = await app.$axios.$request(getRolePageList())
+    if (res.code === '200') {
+      const pagination = {}
+      pagination.page = res.data.currentPage
+      pagination.rowsPerPage = res.data.pageSize
+      pagination.totalItems = res.data.total
+      return { desserts: res.data.records, pagination: pagination }
+    } else {
+      return error({ statusCode: res.code, message: res.message })
+    }
+  },
+  methods: {
+    search() {
+      const searchData = this.searchData
+      searchData.pageSize = this.pagination.rowsPerPage
+      searchData.pageNumber = this.pagination.page
+      this.$axios
+        .$request(getRolePageList(searchData))
+        .then(res => {
+          if (res.code === '200') {
+            this.desserts = res.data.records
+            this.pagination.page = res.data.currentPage
+            this.pagination.rowsPerPage = res.data.pageSize
+            this.pagination.totalItems = res.data.total
+          } else {
+            this.$swal({
+              text: '拉取角色列表失败',
+              type: 'error',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3000
+            })
+          }
+        })
+        .catch(e => {
           this.$swal({
-            text: '拉取角色列表失败',
+            text: e.message,
             type: 'error',
             toast: true,
             position: 'top',
             showConfirmButton: false,
             timer: 3000
           })
-        }
-      })
-      .catch(e => {
-        this.$swal({
-          text: e.message,
-          type: 'error',
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 3000
         })
-      })
-      .finally(() => {
-        this.loading = false
-      })
-  },
-  methods: {
+        .finally(() => {
+          this.loading = false
+        })
+    },
     refresh(obj) {
       getRolePageList(obj).then(res => {
         this.desserts = res.data.records

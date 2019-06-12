@@ -1,4 +1,3 @@
-import request from '@/util/request'
 /**
  * 获取用户列表.
  *
@@ -6,11 +5,11 @@ import request from '@/util/request'
  * @date 2019-03-13  16:13
  */
 export function getUserList(obj) {
-  return request({
+  return {
     url: '/api/v1/user/page',
     method: 'GET',
     data: obj
-  })
+  }
 }
 /**
  * 后台添加用户.
@@ -19,11 +18,11 @@ export function getUserList(obj) {
  * @date 2019-03-13  16:14
  */
 export function addUser(obj) {
-  return request({
+  return {
     url: '/api/v1/user',
     method: 'POST',
     data: obj
-  })
+  }
 }
 /**
  * 修改用户信息.
@@ -32,11 +31,11 @@ export function addUser(obj) {
  * @date 2019-03-13  16:15
  */
 export function editUser(obj) {
-  return request({
+  return {
     url: '/api/v1/user',
     method: 'PUT',
     data: obj
-  })
+  }
 }
 /**
  * 批量禁用用户.
@@ -45,11 +44,11 @@ export function editUser(obj) {
  * @date 2019-03-13  16:16
  */
 export function disabeledUserBatch(obj) {
-  return request({
+  return {
     url: '/api/v1/user/disable/batch',
     method: 'PUT',
     data: obj
-  })
+  }
 }
 /**
  * 批量解封用户.
@@ -58,11 +57,11 @@ export function disabeledUserBatch(obj) {
  * @date 2019-03-13  16:16
  */
 export function unsealingUserBatch(obj) {
-  return request({
+  return {
     url: '/api/v1/user/unsealing/batch',
     method: 'PUT',
     data: obj
-  })
+  }
 }
 /**
  * 根据id禁用用户.
@@ -71,10 +70,10 @@ export function unsealingUserBatch(obj) {
  * @date 2019-03-13  16:16
  */
 export function disabeledUser(obj) {
-  return request({
+  return {
     url: '/api/v1/user/disable/' + obj,
     method: 'PUT'
-  })
+  }
 }
 /**
  * 根据id解封用户.
@@ -83,10 +82,10 @@ export function disabeledUser(obj) {
  * @date 2019-03-13  16:16
  */
 export function unsealingUser(obj) {
-  return request({
+  return {
     url: '/api/v1/user/unsealing/' + obj,
     method: 'PUT'
-  })
+  }
 }
 
 /**
@@ -96,11 +95,11 @@ export function unsealingUser(obj) {
  * @date 2019-03-13  16:16
  */
 export function getIsInUseByUsername(obj) {
-  return request({
+  return {
     url: '/use/username/' + obj.username,
     method: 'GET',
     data: obj.id
-  })
+  }
 }
 
 /**
@@ -110,11 +109,11 @@ export function getIsInUseByUsername(obj) {
  * @date 2019-03-13  16:16
  */
 export function getIsInUseByPhone(obj) {
-  return request({
+  return {
     url: '/use/phone/' + obj.phoneNumber,
     method: 'GET',
     data: obj.id
-  })
+  }
 }
 
 /**
@@ -124,11 +123,11 @@ export function getIsInUseByPhone(obj) {
  * @date 2019-03-13  16:16
  */
 export function getIsInUseByEmail(obj) {
-  return request({
+  return {
     url: '/use/email/' + obj.email,
     method: 'GET',
     data: obj.id
-  })
+  }
 }
 
 /**
@@ -138,11 +137,11 @@ export function getIsInUseByEmail(obj) {
  * @date 2019-03-13  16:16
  */
 export function uploadImage(obj) {
-  return request({
+  return {
     url: '/api/v1/qiniu/upload',
     method: 'upload',
     data: obj
-  })
+  }
 }
 /**
  * 图片批量上传.
@@ -151,9 +150,9 @@ export function uploadImage(obj) {
  * @date 2019-03-13  16:16
  */
 export function uploadImageMultiple(obj) {
-  return request({
+  return {
     url: '/api/v1/qiniu/upload/multiple',
     method: 'upload',
     data: obj
-  })
+  }
 }

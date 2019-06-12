@@ -1,10 +1,12 @@
 <template>
   <div id="appRoot">
-    <transition>
-      <keep-alive>
-        <nuxt />
-      </keep-alive>
-    </transition>
+    <v-app>
+      <transition>
+        <keep-alive>
+          <nuxt />
+        </keep-alive>
+      </transition>
+    </v-app>
   </div>
 </template>
 

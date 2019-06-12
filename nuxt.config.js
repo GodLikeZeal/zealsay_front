@@ -45,7 +45,7 @@ export default {
    */
   plugins: [
     { src: '@/plugins/vuetify', ssr: true },
-    { src: '@/plugins/axios', ssr: true },
+    { src: '@/plugins/axios', ssr: false },
     { src: '@/plugins/sweetalert2', ssr: false },
     { src: '@/plugins/chartist', ssr: true },
     { src: '@/plugins/vue-perfect-scrollbar', ssr: false }
@@ -66,6 +66,9 @@ export default {
   router: {
     middleware: ['auth']
   },
+  /*
+   *配置auth.
+   */
   auth: {
     strategies: {
       local: {
@@ -101,15 +104,17 @@ export default {
     // See https://github.com/nuxt-community/axios-module#options
     prefix: '/api/',
     proxy: true, // Can be also an object with default options
-    credentials: true
+    credentials: true,
+    retry: { retries: 3 },
+    progress: true,
+    debug: true
   },
 
   proxy: {
     '/api/': {
       target: 'http://localhost:8090',
       changeOrigin: true,
-      pathRewrite: { '^/api/': '/api/' },
-      retry: { retries: 3 }
+      pathRewrite: { '^/api/': '/' }
     }
   },
 

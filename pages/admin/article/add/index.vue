@@ -30,33 +30,6 @@
             <p class="card-description font-weight-light">
               支持JPG、PNG格式图片，不超过5M。拖拽或缩放图中的虚线方格可调整头像，注意上方小头像预览效果
             </p>
-            <div style="height: 200px;">
-              <vue-cropper
-                ref="cropper"
-                style="background-repeat:repeat"
-                :img="option.img"
-                :output-size="option.outputSize"
-                :output-type="option.outputType"
-                :info="option.info"
-                :can-scale="option.canScale"
-                :can-move-box="option.canMoveBox"
-                :center-box="option.centerBox"
-                :auto-crop="option.autoCrop"
-                :auto-crop-width="option.autoCropWidth"
-                :auto-crop-height="option.autoCropHeight"
-                :fixed="option.fixed"
-                :fixed-number="option.fixedNumber"
-                @realTime="realTime"
-              ></vue-cropper>
-            </div>
-            <upload-btn
-              class="font-weight-light"
-              color="primary"
-              title="更换封面"
-              round
-              :file-changed-callback="fileChanged"
-            >
-            </upload-btn>
           </v-card-text>
         </material-card>
       </v-flex>
@@ -170,16 +143,10 @@ import {
   saveArticle,
   getArticleLabelList
 } from '@/api/article'
-import UploadButton from 'vuetify-upload-button'
-import VueCropper from 'vue-cropper'
 
 export default {
   name: 'Add',
   layout: 'admin',
-  components: {
-    'upload-btn': UploadButton,
-    'vue-cropper': VueCropper
-  },
   data: () => ({
     form: {
       title: '',
@@ -229,7 +196,8 @@ export default {
   },
   created() {
     this.categoryLoading = true
-    getCategoryList()
+    this.$axios
+      .$request(getCategoryList())
       .then(res => {
         if (res.code === '200') {
           this.category = res.data.map(r => {
@@ -262,7 +230,8 @@ export default {
       .finally(() => {
         this.categoryLoading = false
       })
-    getArticleLabelList()
+    this.$axios
+      .$request(getArticleLabelList())
       .then(res => {
         if (res.code === '200') {
           this.labels = res.data.map(r => r.name)
@@ -359,7 +328,8 @@ export default {
           // do something
           const file = data
           param.append('file', file, this.file.name)
-          uploadImage(param)
+          this.$axios
+            .$request(uploadImage(param))
             .then(res => {
               if (res.code === '200') {
                 this.form.coverImage = res.data
@@ -399,7 +369,8 @@ export default {
         for (const _img in this.img_file) {
           formdata.append('files', this.img_file[_img], _img)
         }
-        uploadImageMultiple(formdata)
+        this.$axios
+          .$request(uploadImageMultiple(formdata))
           .then(res => {
             if (res.code === '200') {
               for (const img in res.data) {
@@ -464,7 +435,8 @@ export default {
           })
       } else {
         // 开始提交文章信息
-        saveArticle(this.form)
+        this.$axios
+          .$request(saveArticle(this.form))
           .then(res => {
             if (res.code === '200') {
               this.loading = false

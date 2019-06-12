@@ -329,48 +329,40 @@ export default {
       set: function() {}
     }
   },
-  created() {
-    // 加载数据
-    this.loading = true
-    this.categoryLoading = true
-    this.search()
-    getCategoryList()
-      .then(res => {
-        if (res.code === '200') {
-          const de = {}
-          de.text = '请选择分类目录'
-          de.value = ''
-          this.category.push(de)
-          for (let i = 0; i < res.data.length; i++) {
-            const re = {}
-            re.text = res.data[i].name
-            re.value = res.data[i].id
-            this.category.push(re)
-          }
-        } else {
-          this.$swal({
-            text: '拉取分类目录信息失败',
-            type: 'error',
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000
-          })
-        }
+  async asyncData({ app, query, error }) {
+    const resCategory = await app.$axios.$request(getCategoryList())
+    const category = []
+    if (resCategory.code === '200') {
+      const de = {}
+      de.text = '请选择分类目录'
+      de.value = ''
+      category.push(de)
+      for (let i = 0; i < resCategory.data.length; i++) {
+        const re = {}
+        re.text = resCategory.data[i].name
+        re.value = resCategory.data[i].id
+        category.push(re)
+      }
+    } else {
+      return error({
+        statusCode: resCategory.code,
+        message: resCategory.message
       })
-      .catch(e => {
-        this.$swal({
-          text: e.message,
-          type: 'error',
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 3000
-        })
-      })
-      .finally(() => {
-        this.categoryLoading = false
-      })
+    }
+    const resArticle = await app.$axios.$request(getArticlePageList())
+    const pagination = {}
+    if (resArticle.code === '200') {
+      pagination.page = resArticle.data.currentPage
+      pagination.rowsPerPage = resArticle.data.pageSize
+      pagination.totalItems = resArticle.data.total
+    } else {
+      return error({ statusCode: resArticle.code, message: resArticle.message })
+    }
+    return {
+      category: category,
+      desserts: resArticle.data.records,
+      pagination: pagination
+    }
   },
   methods: {
     search() {
@@ -378,7 +370,8 @@ export default {
       const searchData = this.searchData
       searchData.pageSize = this.pagination.rowsPerPage
       searchData.pageNumber = this.pagination.page
-      getArticlePageList(searchData)
+      this.$axios
+        .$request(getArticlePageList(searchData))
         .then(res => {
           if (res.code === '200') {
             this.desserts = res.data.records

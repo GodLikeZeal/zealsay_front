@@ -161,12 +161,19 @@ export default {
       return this.active[0]
     }
   },
-  created() {
-    this.refresh()
+  async asyncData({ app, query, error }) {
+    const res = await app.$axios.$request(getCategoryList())
+    if (res.code === '200') {
+      const categorys = res.data
+      return { categorys: categorys }
+    } else {
+      return error({ statusCode: res.code, message: res.message })
+    }
   },
   methods: {
     refresh() {
-      getCategoryList()
+      this.$axios
+        .$request(getCategoryList())
         .then(res => {
           if (res.code === '200' && res.data) {
             this.categorys = res.data
@@ -194,7 +201,8 @@ export default {
     },
     editSubmit(obj) {
       if (this.$refs.form.validate()) {
-        updateCategory(obj)
+        this.$axios
+          .$request(updateCategory(obj))
           .then(res => {
             if (res.code === '200' && res.data) {
               this.$swal({
@@ -242,7 +250,8 @@ export default {
           })
           return
         }
-        deleteCategory(id)
+        this.$axios
+          .$request(deleteCategory(id))
           .then(res => {
             if (res.code === '200' && res.data) {
               this.$swal({

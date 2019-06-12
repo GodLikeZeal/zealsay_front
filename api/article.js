@@ -1,5 +1,3 @@
-import request from '@/util/request'
-
 /**
  * 获取分类列表.
  *
@@ -7,11 +5,11 @@ import request from '@/util/request'
  * @date 2019-03-13  16:13
  */
 export function getCategoryList(obj) {
-  return this.$axios.$get({
+  return {
     url: '/api/v1/article/category',
     method: 'get',
     data: obj
-  })
+  }
 }
 
 /**
@@ -21,11 +19,11 @@ export function getCategoryList(obj) {
  * @date 2019-03-13  16:13
  */
 export function addCategory(obj) {
-  return request({
+  return {
     url: '/api/v1/article/category',
     method: 'post',
     data: obj
-  })
+  }
 }
 
 /**
@@ -35,11 +33,11 @@ export function addCategory(obj) {
  * @date 2019-03-13  16:13
  */
 export function updateCategory(obj) {
-  return request({
+  return {
     url: '/api/v1/article/category',
     method: 'put',
     data: obj
-  })
+  }
 }
 
 /**
@@ -49,10 +47,10 @@ export function updateCategory(obj) {
  * @date 2019-03-13  16:13
  */
 export function deleteCategory(id) {
-  return request({
+  return {
     url: '/api/v1/article/category/' + id,
     method: 'delete'
-  })
+  }
 }
 
 /**
@@ -62,10 +60,10 @@ export function deleteCategory(id) {
  * @date 2019-05-15  14:53
  */
 export function getArticle(id) {
-  return request({
+  return {
     url: '/api/v1/article/' + id,
     method: 'get'
-  })
+  }
 }
 
 /**
@@ -75,11 +73,11 @@ export function getArticle(id) {
  * @date 2019-03-13  16:13
  */
 export function saveArticle(obj) {
-  return request({
+  return {
     url: '/api/v1/article',
     method: 'post',
     data: obj
-  })
+  }
 }
 
 /**
@@ -89,11 +87,11 @@ export function saveArticle(obj) {
  * @date 2019-03-13  16:13
  */
 export function updateArticle(obj) {
-  return request({
+  return {
     url: '/api/v1/article',
     method: 'put',
     data: obj
-  })
+  }
 }
 
 /**
@@ -103,11 +101,11 @@ export function updateArticle(obj) {
  * @date 2019-03-13  16:13
  */
 export function getArticlePageList(obj) {
-  return request({
+  return {
     url: '/api/v1/article/page',
     method: 'get',
-    data: obj
-  })
+    params: obj
+  }
 }
 
 /**
@@ -117,10 +115,10 @@ export function getArticlePageList(obj) {
  * @date 2019-05-15  12:04
  */
 export function markArticleDown(id) {
-  return request({
+  return {
     url: '/api/v1/article/down/' + id,
     method: 'put'
-  })
+  }
 }
 
 /**
@@ -130,10 +128,10 @@ export function markArticleDown(id) {
  * @date 2019-05-15  12:05
  */
 export function markArticleUp(id) {
-  return request({
+  return {
     url: '/api/v1/article/up/' + id,
     method: 'put'
-  })
+  }
 }
 
 /**
@@ -143,11 +141,11 @@ export function markArticleUp(id) {
  * @date 2019/5/20 21:32
  */
 export function getArticleLabelPage(obj) {
-  return request({
+  return {
     url: '/api/v1/article/label/page',
     method: 'get',
     data: obj
-  })
+  }
 }
 
 /**
@@ -157,10 +155,10 @@ export function getArticleLabelPage(obj) {
  * @date 2019/5/20 21:32
  */
 export function getArticleLabelList(obj) {
-  return request({
+  return {
     url: '/api/v1/article/label',
     method: 'get'
-  })
+  }
 }
 
 /**
@@ -170,11 +168,11 @@ export function getArticleLabelList(obj) {
  * @date 2019/5/20 21:33
  */
 export function addArticleLabel(obj) {
-  return request({
+  return {
     url: '/api/v1/article/label',
     method: 'post',
     data: obj
-  })
+  }
 }
 
 /**
@@ -184,11 +182,11 @@ export function addArticleLabel(obj) {
  * @date 2019/5/20 21:33
  */
 export function updateArticleLabel(obj) {
-  return request({
+  return {
     url: '/api/v1/article/label',
     method: 'put',
     data: obj
-  })
+  }
 }
 
 /**
@@ -198,8 +196,8 @@ export function updateArticleLabel(obj) {
  * @date 2019/5/20 21:34
  */
 export function deleteArticleLabel(id) {
-  return request({
+  return {
     url: '/api/v1/article/label/' + id,
     method: 'delete'
-  })
+  }
 }

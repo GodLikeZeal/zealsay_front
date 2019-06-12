@@ -31,14 +31,6 @@
             <p class="card-description font-weight-light">
               有人住高楼，有人在深沟，有人光万丈，有人一身锈，世人万千种，浮云莫去求，斯人若彩虹，遇上方知有。
             </p>
-            <upload-btn
-              class="font-weight-light"
-              color="primary"
-              title="上传头像"
-              round
-              :file-changed-callback="fileChanged"
-            >
-            </upload-btn>
           </v-card-text>
         </material-card>
       </v-flex>
@@ -181,13 +173,9 @@ import {
   validatePhone,
   validateEmail
 } from '@/util/validate'
-import UploadButton from 'vuetify-upload-button'
 
 export default {
   name: 'Add',
-  components: {
-    'upload-btn': UploadButton
-  },
   data: () => ({
     form: {
       username: '',

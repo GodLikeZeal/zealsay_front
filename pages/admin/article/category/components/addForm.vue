@@ -95,7 +95,8 @@ export default {
       // 开始提交
       if (this.$refs.form.validate()) {
         this.form.parentId = this.parentId
-        addCategory(this.form)
+        this.$axios
+          .$request(addCategory(this.form))
           .then(res => {
             this.loading = false
             if (res.code === '200' && res.data) {
