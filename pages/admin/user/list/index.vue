@@ -129,7 +129,7 @@
           <td class="text-xs-right">{{ props.item.age }}</td>
           <td class="text-xs-right">{{ props.item.phoneNumber }}</td>
           <td class="text-xs-right">{{ props.item.email }}</td>
-          <td class="text-xs-right text-success">
+          <td class="text-xs-right">
             <span v-if="props.item.status == 'NORMAL'">
               正常<v-icon color="success" small>fa-plug</v-icon>
             </span>
@@ -272,7 +272,8 @@ export default {
       const searchData = this.searchData
       searchData.pageSize = this.pagination.rowsPerPage
       searchData.pageNumber = this.pagination.page
-      getUserList(searchData)
+      this.$axios
+        .$request(getUserList(searchData))
         .then(res => {
           if (res.code === '200') {
             this.desserts = res.data.records
@@ -339,7 +340,7 @@ export default {
         showCancelButton: true
       }).then(result => {
         if (result.value) {
-          disabeledUser(row.id).then(res => {
+          this.$axios.$request(disabeledUser(row.id)).then(res => {
             if (res.code === '200' && res.data) {
               this.$swal({
                 title: '操作成功!',
@@ -366,7 +367,7 @@ export default {
         showCancelButton: true
       }).then(result => {
         if (result.value) {
-          unsealingUser(row.id).then(res => {
+          this.$axios.$request(unsealingUser(row.id)).then(res => {
             if (res.code === '200' && res.data) {
               this.$swal({
                 title: '操作成功!',
@@ -395,7 +396,7 @@ export default {
           showCancelButton: true
         }).then(result => {
           if (result.value) {
-            disabeledUserBatch(param).then(res => {
+            this.$axios.$request(disabeledUserBatch(param)).then(res => {
               if (res.code === '200' && res.data) {
                 this.$swal({
                   title: '操作成功!',
@@ -431,7 +432,7 @@ export default {
           showCancelButton: true
         }).then(result => {
           if (result.value) {
-            unsealingUserBatch(param).then(res => {
+            this.$axios.$request(unsealingUserBatch(param)).then(res => {
               if (res.code === '200' && res.data) {
                 this.$swal({
                   title: '操作成功!',

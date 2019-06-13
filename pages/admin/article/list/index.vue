@@ -443,7 +443,7 @@ export default {
         showCancelButton: true
       }).then(result => {
         if (result.value) {
-          markArticleDown(row.id).then(res => {
+          this.$axios.$request(markArticleDown(row.id)).then(res => {
             if (res.code === '200' && res.data) {
               this.$swal({
                 title: '操作成功!',

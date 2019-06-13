@@ -41,13 +41,13 @@
               </v-card-text>
               <v-card-actions>
                 <v-btn icon>
-                  <v-icon color="blue">fa fa-facebook-square fa-lg</v-icon>
+                  <v-icon medium color="light-green">mdi-wechat </v-icon>
                 </v-btn>
                 <v-btn icon>
-                  <v-icon color="red">fa fa-google fa-lg</v-icon>
+                  <v-icon medium color="light-blue">mdi-qqchat</v-icon>
                 </v-btn>
                 <v-btn icon>
-                  <v-icon color="light-blue">fa fa-twitter fa-lg</v-icon>
+                  <v-icon medium color="light-grey">mdi-github-circle</v-icon>
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn block color="primary" :loading="loading" @click="login"
