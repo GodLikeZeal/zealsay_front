@@ -90,14 +90,25 @@ export default {
     labels: [],
     addFormVisible: false
   }),
-  created() {
-    this.search()
+  async asyncData({ app, query, error }) {
+    const resArticleLabel = await app.$axios.$request(getArticleLabelPage())
+    if (resArticleLabel.code === '200') {
+      const labels = resArticleLabel.data.records
+      const total = resArticleLabel.data.total
+      return { labels: labels, total: total }
+    } else {
+      return error({
+        statusCode: resArticleLabel.code,
+        message: resArticleLabel.message
+      })
+    }
   },
   methods: {
     search() {
       const serachData = {}
       serachData.name = this.search_text
-      getArticleLabelPage(serachData)
+      this.$axios
+        .$request(getArticleLabelPage(serachData))
         .then(res => {
           if (res.code === '200') {
             this.labels = res.data.records
@@ -132,7 +143,8 @@ export default {
       this.addFormVisible = false
     },
     remove(id) {
-      deleteArticleLabel(id)
+      this.$axios
+        .$request(deleteArticleLabel(id))
         .then(res => {
           if (res.code === '200') {
             this.search()

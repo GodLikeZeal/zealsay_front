@@ -176,6 +176,7 @@ import {
 
 export default {
   name: 'Add',
+  layout: 'admin',
   data: () => ({
     form: {
       username: '',
@@ -232,48 +233,37 @@ export default {
     ],
     emailRules: [v => !v || validateEmail(v) || '不是合法的邮箱']
   }),
-  created() {
-    this.provinceLoading = true
-    getProvinceList().then(res => {
-      if (res.code === '200') {
-        this.province = res.data.map(r => {
-          return {
-            value: r.code,
-            text: r.name
-          }
-        })
-      } else {
-        this.$swal({
-          text: '拉取省市区信息失败',
-          type: 'error',
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 3000
-        })
-      }
-      this.provinceLoading = false
-    })
-    if (!this.roles.length) {
-      getRoleList().then(res => {
-        if (res.code === '200') {
-          this.roles = res.data.map(r => {
-            return {
-              value: r.value,
-              text: r.name
-            }
-          })
-        } else {
-          this.$swal({
-            text: '拉取角色信息失败',
-            type: 'error',
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000
-          })
+  async asyncData({ app, query, error }) {
+    const resProvince = await app.$axios.$request(getProvinceList())
+    let provinces = []
+    if (resProvince.code === '200') {
+      provinces = resProvince.data.map(r => {
+        return {
+          value: r.code,
+          text: r.name
         }
       })
+    } else {
+      return error({
+        statusCode: resProvince.code,
+        message: resProvince.message
+      })
+    }
+    const resRole = await app.$axios.$request(getRoleList())
+    let roles = []
+    if (resRole.code === '200') {
+      roles = resRole.data.map(r => {
+        return {
+          value: r.value,
+          text: r.name
+        }
+      })
+    } else {
+      return error({ statusCode: resRole.code, message: resRole.message })
+    }
+    return {
+      province: provinces,
+      roles: roles
     }
   },
   methods: {
@@ -281,7 +271,7 @@ export default {
       this.cityLoading = true
       const obj = {}
       obj.code = this.form.province
-      getCityList(obj).then(res => {
+      this.$axios.$request(getCityList(obj)).then(res => {
         if (res.code === '200') {
           this.city = res.data.map(r => {
             return {
@@ -306,7 +296,7 @@ export default {
       this.areaLoading = true
       const obj = {}
       obj.code = this.form.city
-      getAreaList(obj).then(res => {
+      this.$axios.$request(getAreaList(obj)).then(res => {
         if (res.code === '200') {
           this.area = res.data.map(r => {
             return {
@@ -343,7 +333,8 @@ export default {
             // do something
             const file = data
             param.append('file', file, this.file.name)
-            uploadImage(param)
+            this.$axios
+              .$request(uploadImage(param))
               .then(res => {
                 if (res.code === '200') {
                   this.form.avatar = res.data
@@ -381,7 +372,8 @@ export default {
     },
     save() {
       // 开始提交
-      addUser(this.form)
+      this.$axios
+        .$request(addUser(this.form))
         .then(res => {
           this.loading = false
           if (res.code === '200' && res.data) {

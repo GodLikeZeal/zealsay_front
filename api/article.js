@@ -144,7 +144,7 @@ export function getArticleLabelPage(obj) {
   return {
     url: '/api/v1/article/label/page',
     method: 'get',
-    data: obj
+    params: obj
   }
 }
 

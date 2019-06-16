@@ -1,16 +1,16 @@
 const Menu = [
-  { header: '看板' },
+  { header: '看板动态' },
   {
-    title: 'Dashboard',
+    title: '桌面看板',
     group: 'apps',
-    icon: 'dashboard',
+    icon: 'mdi-monitor-dashboard',
     href: '/admin/dashboard'
   },
-  { header: '用户' },
+  { header: '用户权限' },
   {
     title: '用户管理',
     group: 'user',
-    icon: 'group',
+    icon: 'mdi-account-tie',
     items: [
       {
         name: 'list',
@@ -29,7 +29,7 @@ const Menu = [
   {
     title: '角色管理',
     group: 'role',
-    icon: 'people_outline',
+    icon: 'mdi-account-supervisor',
     items: [
       {
         name: 'list',
@@ -43,7 +43,7 @@ const Menu = [
   {
     title: '文章',
     group: 'article',
-    icon: 'book',
+    icon: 'mdi-book-open-page-variant',
     items: [
       {
         name: 'write',
