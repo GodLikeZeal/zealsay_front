@@ -221,6 +221,43 @@ export default {
       return this.previews
     }
   },
+  async asyncData({ app, query, error }) {
+    const resCategory = await app.$axios.$request(getCategoryList())
+    const category = []
+    if (resCategory.code === '200') {
+      const de = {}
+      de.text = '请选择分类目录'
+      de.value = ''
+      category.push(de)
+      for (let i = 0; i < resCategory.data.length; i++) {
+        const re = {}
+        re.text = resCategory.data[i].name
+        re.value = resCategory.data[i].id
+        category.push(re)
+      }
+    } else {
+      return error({
+        statusCode: resCategory.code,
+        message: resCategory.message
+      })
+    }
+    const resArticle = await app.$axios.$request(
+      getArticle(app.$route.query.id)
+    )
+    const pagination = {}
+    if (resArticle.code === '200') {
+      pagination.page = resArticle.data.currentPage
+      pagination.rowsPerPage = resArticle.data.pageSize
+      pagination.totalItems = resArticle.data.total
+    } else {
+      return error({ statusCode: resArticle.code, message: resArticle.message })
+    }
+    return {
+      category: category,
+      desserts: resArticle.data.records,
+      pagination: pagination
+    }
+  },
   created() {
     this.categoryLoading = true
     getCategoryList()
