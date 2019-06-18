@@ -11,14 +11,6 @@
               :lazy-src="form.avatar"
               :src="form.avatar"
             />
-
-            <upload-btn
-              outline
-              color="indigo"
-              title="点击修改头像"
-              :file-changed-callback="fileChanged"
-            >
-            </upload-btn>
           </v-flex>
         </v-layout>
       </v-container>
@@ -111,13 +103,9 @@
 import { editUser, uploadImage } from '@/api/user'
 import { validateUsername, validatePhone, validateEmail } from '@/util/validate'
 import { getRoleList } from '@/api/role'
-import UploadButton from 'vuetify-upload-button'
 
 export default {
   name: 'Edit',
-  components: {
-    'upload-btn': UploadButton
-  },
   props: ['row', 'alert'],
   data: () => ({
     name: 'edit',

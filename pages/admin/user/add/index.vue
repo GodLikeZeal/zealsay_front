@@ -3,26 +3,20 @@
     <v-layout justify-center wrap>
       <v-flex xs12 md8>
         <material-card class="v-card-profile">
-          <div style="height: 100px;width: 100px;margin: 10px auto;">
-            <vueCropper
-              ref="cropper"
-              style="background-repeat:repeat"
-              :img="form.avatar"
-              :output-size="option.outputSize"
-              :output-type="option.outputType"
-              :info="option.info"
-              :can-scale="option.canScale"
-              :can-move-box="option.canMoveBox"
-              :center-box="option.centerBox"
-              :auto-crop="option.autoCrop"
-              :auto-crop-width="option.autoCropWidth"
-              :auto-crop-height="option.autoCropHeight"
-              :fixed="option.fixed"
-              :fixed-number="option.fixedNumber"
-            ></vueCropper>
-          </div>
           <v-card-text class="text-xs-center">
-            <h6 class="category text-gray ffont-weight-light mb-3">用户头像</h6>
+            <v-avatar class="avator" size="120" color="grey lighten-4">
+              <img
+                :src="
+                  files.length
+                    ? files[0].url
+                    : 'https://pan.zealsay.com/20190319220833147000000.jpg'
+                "
+                alt="avatar"
+              />
+            </v-avatar>
+            <h6 class="category text-gray ffont-weight-light mb-3">
+              用户头像
+            </h6>
             <h5 class="card-title font-weight-light">
               Some of us get dipped in flat, some in satin, some in gloss....
               But every once in a while you find someone who's iridescent, and
@@ -192,22 +186,7 @@ export default {
       introduction: '',
       role: ''
     },
-    option: {
-      img: 'https://pan.zealsay.com/20190317010254129000000.jpg', // 裁剪图片的地址
-      info: true, // 裁剪框的大小信息
-      outputSize: 1, // 裁剪生成图片的质量
-      outputType: 'jpeg', // 裁剪生成图片的格式
-      canScale: true, // 图片是否允许滚轮缩放
-      autoCrop: true, // 是否默认生成截图框
-      canMoveBox: true, // 截图框能否拖动
-      centerBox: true, // 截图框能否拖动
-      autoCropWidth: 150, // 默认生成截图框宽度
-      autoCropHeight: 150, // 默认生成截图框高度
-      fixed: true, // 是否开启截图框宽高固定比例
-      fixedNumber: [4, 4] // 截图框的宽高比例
-    },
     valid: false,
-    image: 'https://pan.zealsay.com/20190317010254129000000.jpg',
     roles: [],
     province: [],
     city: [],
@@ -215,7 +194,7 @@ export default {
     provinceLoading: false,
     cityLoading: false,
     areaLoading: false,
-    file: '',
+    files: [],
     loading: false,
     usernameRules: [
       v => !!v || '用户名不能为空!',
@@ -404,31 +383,13 @@ export default {
         .finally(() => {
           this.loading = false
         })
-    },
-    fileChanged(file) {
-      // handle file here. File will be an object.
-      // If multiple prop is true, it will return an object array of files.
-      const self = this
-      // 看支持不支持FileReader
-      if (!file || !window.FileReader) return
-      if (/^image/.test(file.type)) {
-        self.file = file
-        // 创建一个reader
-        const reader = new FileReader()
-        // 将图片将转成 base64 格式
-        reader.readAsDataURL(file)
-        // 读取成功后的回调
-        reader.onloadend = function() {
-          self.form.avatar = this.result
-        }
-      }
     }
   }
 }
 </script>
 <style lang="less" scoped>
 .avator {
-  margin-top: 20px;
+  margin-bottom: 20px;
   border-radius: 50%;
 }
 </style>

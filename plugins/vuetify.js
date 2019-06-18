@@ -4,6 +4,7 @@ import Vuetify from 'vuetify'
 import zhHans from 'vuetify/es5/locale/zh-Hans'
 import '@mdi/font/css/materialdesignicons.css'
 import { Ripple } from 'vuetify/lib/directives'
+import Avatar from 'vue-avatar'
 import Card from '~/components/material/Card'
 import ChartCard from '~/components/material/ChartCard'
 import StatsCard from '~/components/material/StatsCard'
@@ -32,3 +33,4 @@ Vue.use(Vuetify, {
 Vue.component('material-card', Card)
 Vue.component('material-chart-card', ChartCard)
 Vue.component('material-stats-card', StatsCard)
+Vue.component('avatar', Avatar)

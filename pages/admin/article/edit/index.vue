@@ -28,33 +28,6 @@
             <p class="card-description font-weight-light">
               支持JPG、PNG格式图片，不超过5M。拖拽或缩放图中的虚线方格可调整头像，注意上方小头像预览效果
             </p>
-            <div style="height: 200px;">
-              <vue-cropper
-                ref="cropper"
-                style="background-repeat:repeat"
-                :img="form.coverImage"
-                :output-size="option.outputSize"
-                :output-type="option.outputType"
-                :info="option.info"
-                :can-scale="option.canScale"
-                :can-move-box="option.canMoveBox"
-                :center-box="option.centerBox"
-                :auto-crop="option.autoCrop"
-                :auto-crop-width="option.autoCropWidth"
-                :auto-crop-height="option.autoCropHeight"
-                :fixed="option.fixed"
-                :fixed-number="option.fixedNumber"
-                @realTime="realTime"
-              ></vue-cropper>
-            </div>
-            <upload-btn
-              class="font-weight-light"
-              color="primary"
-              title="更换封面"
-              round
-              :file-changed-callback="fileChanged"
-            >
-            </upload-btn>
           </v-card-text>
         </material-card>
       </v-flex>
@@ -164,16 +137,10 @@
 <script>
 import { uploadImage, uploadImageMultiple } from '@/api/user'
 import { getCategoryList, updateArticle, getArticle } from '@/api/article'
-import UploadButton from 'vuetify-upload-button'
-import VueCropper from 'vue-cropper'
 
 export default {
   name: 'Add',
   layout: 'admin',
-  components: {
-    'upload-btn': UploadButton,
-    'vue-cropper': VueCropper
-  },
   data: () => ({
     form: {
       title: '',
