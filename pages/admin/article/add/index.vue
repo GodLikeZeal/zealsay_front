@@ -1,44 +1,26 @@
 <template>
   <v-container fluid grid-list-xl>
     <v-layout justify-center wrap>
-      <v-flex xs12 md3>
-        <material-card class="v-card-profile">
-          <v-flex xs12 md12>
-            <div
-              class="show-preview"
-              :style="{
-                width: preview_img.w + 'px',
-                height: preview_img.h + 'px',
-                overflow: 'hidden',
-                margin: '5px auto'
-              }"
-            >
-              <div :style="preview_img.div">
-                <v-img
-                  ref="img"
-                  class="avator"
-                  :src="preview_img.url"
-                  :style="preview_img.img"
-                />
-              </div>
-            </div>
-          </v-flex>
-          <v-card-text class="text-xs-center">
-            <h6 class="category text-gray ffont-weight-light mb-3">
-              封面图片预览
-            </h6>
-            <p class="card-description font-weight-light">
-              支持JPG、PNG格式图片，不超过5M。拖拽或缩放图中的虚线方格可调整头像，注意上方小头像预览效果
-            </p>
-          </v-card-text>
-        </material-card>
-      </v-flex>
-      <v-flex xs12 md8>
+      <v-flex xs12 md11>
         <material-card
           color="primary"
           title="文章基本信息"
           text="完善文章信息后，点击提交"
         >
+          <v-card-text class="text-xs-center">
+            <v-avatar-uploader
+              :url="form.coverImage"
+              :request="request"
+              :clickable="clickable"
+              :avatar="avatar"
+              max-size="5120"
+              @success="success"
+              @failed="failed"
+            />
+            <h6 class="category avator text-gray ffont-weight-light mb-3">
+              点击修改封面图片，支持JPG、PNG格式图片，不超过5M。
+            </h6>
+          </v-card-text>
           <v-form ref="form" lazy-validation>
             <v-container py-0>
               <v-layout wrap>
@@ -105,7 +87,7 @@
                     :loading="loading"
                     @click="submit()"
                   >
-                    添加保存
+                    保存文章
                   </v-btn>
                 </v-flex>
               </v-layout>
@@ -176,6 +158,11 @@ export default {
       fixedNumber: [4, 4] // 截图框的宽高比例
     },
     image: 'https://pan.zealsay.com/20190317010254129000000.jpg',
+    clickable: true,
+    avatar: {
+      size: 192,
+      tile: true
+    },
     category: [],
     labels: [],
     categoryLoading: false,
@@ -469,13 +456,30 @@ export default {
             })
           })
       }
+    },
+    request(form, config) {
+      return this.$axios.$request(uploadImage(form), config)
+    },
+    success(res) {
+      // Update user avatar with the latest
+      this.form.coverImage = res.data
+    },
+    failed(error) {
+      this.$swal({
+        text: error.message,
+        type: 'error',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000
+      })
     }
   }
 }
 </script>
 <style lang="less" scoped>
 .avator {
-  margin: 0px auto;
+  margin-top: 20px;
 }
 
 #editor {

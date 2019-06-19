@@ -8,6 +8,7 @@ import Avatar from 'vue-avatar'
 import Card from '~/components/material/Card'
 import ChartCard from '~/components/material/ChartCard'
 import StatsCard from '~/components/material/StatsCard'
+import VAvatarUploader from 'vuetify-avatar-uploader'
 
 Vue.use(Vuetify, {
   theme: {
@@ -34,3 +35,4 @@ Vue.component('material-card', Card)
 Vue.component('material-chart-card', ChartCard)
 Vue.component('material-stats-card', StatsCard)
 Vue.component('avatar', Avatar)
+Vue.component('v-avatar-uploader', VAvatarUploader)

@@ -1,21 +1,20 @@
 <template>
   <v-container fill-height fluid grid-list-xl>
     <v-layout justify-center wrap>
-      <v-flex xs12 md8>
+      <v-flex xs12 md10>
         <material-card class="v-card-profile">
           <v-card-text class="text-xs-center">
-            <v-avatar class="avator" size="120" color="grey lighten-4">
-              <img
-                :src="
-                  files.length
-                    ? files[0].url
-                    : 'https://pan.zealsay.com/20190319220833147000000.jpg'
-                "
-                alt="avatar"
-              />
-            </v-avatar>
-            <h6 class="category text-gray ffont-weight-light mb-3">
-              用户头像
+            <v-avatar-uploader
+              :url="form.avatar"
+              :request="request"
+              :clickable="clickable"
+              :avatar="avatar"
+              maxSize="5120"
+              @success="success"
+              @failed="failed"
+            />
+            <h6 class="category avator text-gray ffont-weight-light mb-3">
+              点击上传用户头像
             </h6>
             <h5 class="card-title font-weight-light">
               Some of us get dipped in flat, some in satin, some in gloss....
@@ -28,7 +27,7 @@
           </v-card-text>
         </material-card>
       </v-flex>
-      <v-flex xs12 md8>
+      <v-flex xs12 md10>
         <material-card
           color="primary"
           title="用户详细信息"
@@ -187,6 +186,10 @@ export default {
       role: ''
     },
     valid: false,
+    clickable: true,
+    avatar: {
+      size: 128
+    },
     roles: [],
     province: [],
     city: [],
@@ -299,54 +302,10 @@ export default {
     submit() {
       this.loading = true
       if (this.$refs.form.validate()) {
-        // 先上传头像
-        if (!(this.file === '')) {
-          const param = new FormData()
-          // 获取截图的base64 数据
-          // this.$refs.cropper.getCropData((data) => {
-          //     // do something
-          //     console.log(data)
-          // });
-          // 获取截图的blob数据
-          this.$refs.cropper.getCropBlob(data => {
-            // do something
-            const file = data
-            param.append('file', file, this.file.name)
-            this.$axios
-              .$request(uploadImage(param))
-              .then(res => {
-                if (res.code === '200') {
-                  this.form.avatar = res.data
-                  this.save()
-                } else {
-                  this.loading = false
-                  this.$swal({
-                    text: res.message,
-                    type: 'error',
-                    toast: true,
-                    position: 'top',
-                    showConfirmButton: false,
-                    timer: 3000
-                  })
-                }
-              })
-              .catch(e => {
-                this.$swal({
-                  text: e.message,
-                  type: 'error',
-                  toast: true,
-                  position: 'top',
-                  showConfirmButton: false,
-                  timer: 3000
-                })
-              })
-              .finally(() => {
-                this.loading = false
-              })
-          })
-        } else {
-          this.save()
-        }
+        // 校验通过则提交保存
+        this.save()
+      } else {
+        this.loading = false
       }
     },
     save() {
@@ -383,13 +342,29 @@ export default {
         .finally(() => {
           this.loading = false
         })
+    },
+    request(form, config) {
+      return this.$axios.$request(uploadImage(form), config)
+    },
+    success(res) {
+      // Update user avatar with the latest
+      this.form.avatar = res.data
+    },
+    failed(error) {
+      this.$swal({
+        text: error.message,
+        type: 'error',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000
+      })
     }
   }
 }
 </script>
 <style lang="less" scoped>
 .avator {
-  margin-bottom: 20px;
-  border-radius: 50%;
+  margin-top: 20px;
 }
 </style>

@@ -26,7 +26,6 @@
     "@mdi/font": "^3.6.95",
     "@nuxtjs/eslint-config": "^0.0.1",
     "babel-eslint": "^10.0.1",
-    "cropperjs": "^1.5.1",
     "eslint": "^5.15.1",
     "eslint-config-prettier": "^4.1.0",
     "eslint-config-standard": ">=12.0.0",
@@ -53,6 +52,7 @@
     "vue-avatar": "^2.1.7",
     "vue-chartist": "^2.2.0",
     "vue-perfect-scrollbar": "^0.1.0",
+    "vuetify-avatar-uploader": "^0.2.1",
     "vuetify-dialog": "^0.3.6"
   }
 }

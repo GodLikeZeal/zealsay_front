@@ -139,7 +139,7 @@ export function getIsInUseByEmail(obj) {
 export function uploadImage(obj) {
   return {
     url: '/api/v1/qiniu/upload',
-    method: 'upload',
+    method: 'post',
     data: obj
   }
 }
@@ -152,7 +152,7 @@ export function uploadImage(obj) {
 export function uploadImageMultiple(obj) {
   return {
     url: '/api/v1/qiniu/upload/multiple',
-    method: 'upload',
+    method: 'post',
     data: obj
   }
 }
