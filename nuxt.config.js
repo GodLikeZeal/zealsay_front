@@ -48,7 +48,8 @@ export default {
     { src: '~/plugins/axios', ssr: false },
     { src: '~/plugins/dialog', ssr: false },
     { src: '~/plugins/chartist', ssr: true },
-    { src: '~/plugins/vue-perfect-scrollbar', ssr: false }
+    { src: '~/plugins/vue-perfect-scrollbar', ssr: false },
+    { src: '~/plugins/vue-mavon-editor', srr: false }
   ],
 
   /*

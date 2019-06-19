@@ -176,109 +176,46 @@ export default {
     ],
     subheadingRules: [v => (v && v.length <= 30) || '副标题不得超过30个字符']
   }),
-  computed: {
-    preview_img: function() {
-      return this.previews
+  async asyncData({ app, query, error }) {
+    const resCategory = await app.$axios.$request(getCategoryList())
+    const category = []
+    if (resCategory.code === '200') {
+      const de = {}
+      de.text = '请选择分类目录'
+      de.value = ''
+      category.push(de)
+      for (let i = 0; i < resCategory.data.length; i++) {
+        const re = {}
+        re.text = resCategory.data[i].name
+        re.value = resCategory.data[i].id
+        category.push(re)
+      }
+    } else {
+      return error({
+        statusCode: resCategory.code,
+        message: resCategory.message
+      })
     }
-  },
-  created() {
-    this.categoryLoading = true
-    this.$axios
-      .$request(getCategoryList())
-      .then(res => {
-        if (res.code === '200') {
-          this.category = res.data.map(r => {
-            return {
-              value: r.id,
-              text: r.name
-            }
-          })
-        } else {
-          this.$swal({
-            text: '拉取分类目录信息失败',
-            type: 'error',
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000
-          })
-        }
+    const resArticleLabel = await app.$axios.$request(getArticleLabelList())
+    let labels = []
+    if (resArticleLabel.code === '200') {
+      labels = resArticleLabel.data.map(r => r.name)
+    } else {
+      return error({
+        statusCode: resArticleLabel.code,
+        message: resArticleLabel.message
       })
-      .catch(e => {
-        this.$swal({
-          text: e.message,
-          type: 'error',
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 3000
-        })
-      })
-      .finally(() => {
-        this.categoryLoading = false
-      })
-    this.$axios
-      .$request(getArticleLabelList())
-      .then(res => {
-        if (res.code === '200') {
-          this.labels = res.data.map(r => r.name)
-        } else {
-          this.$swal({
-            text: '拉取分类目录信息失败',
-            type: 'error',
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000
-          })
-        }
-      })
-      .catch(e => {
-        this.$swal({
-          text: e.message,
-          type: 'error',
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 3000
-        })
-      })
-      .finally(() => {})
+    }
+    return {
+      category: category,
+      labels: labels
+    }
   },
   methods: {
     submit() {
       this.loading = true
       this.uploadimg()
       this.loading = false
-    },
-    fileChanged(file) {
-      // handle file here. File will be an object.
-      // If multiple prop is true, it will return an object array of files.
-      const self = this
-      // 看支持不支持FileReader
-      if (!file || !window.FileReader) return
-      if (/^image/.test(file.type)) {
-        self.file = file
-        // 创建一个reader
-        const reader = new FileReader()
-        // 将图片将转成 base64 格式
-        reader.readAsDataURL(file)
-        // 读取成功后的回调
-        reader.onloadend = function() {
-          self.$refs.img.src = this.result
-          self.image = this.result
-          self.option.img = this.result
-        }
-      } else {
-        this.$swal({
-          text: '要选择一张图片文件才行呢！',
-          type: 'error',
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 3000
-        })
-      }
     },
     cropImage() {
       // get image data for post processing, e.g. upload or setting image src
