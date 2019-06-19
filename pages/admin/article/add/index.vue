@@ -13,7 +13,7 @@
               :request="request"
               :clickable="clickable"
               :avatar="avatar"
-              max-size="5120"
+              :max-size="5120"
               @success="success"
               @failed="failed"
             />
@@ -101,16 +101,18 @@
           title="编辑文章详细内容"
           text="支持使用markdown语法"
         >
-          <div id="editor">
-            <mavon-editor
-              ref="md"
-              v-model="form.contentMd"
-              style="z-index:0;height: 800px"
-              :ishljs="true"
-              @change="changeData"
-              @imgAdd="$imgAdd"
-              @imgDel="$imgDel"
-            />
+          <div id="editor" class="mavonEditor">
+            <no-ssr>
+              <mavon-editor
+                ref="md"
+                v-model="form.contentMd"
+                style="z-index:0;height: 800px"
+                :ishljs="true"
+                @change="changeData"
+                @imgAdd="$imgAdd"
+                @imgDel="$imgDel"
+              />
+            </no-ssr>
           </div>
         </material-card>
       </v-flex>
@@ -214,7 +216,7 @@ export default {
   methods: {
     submit() {
       this.loading = true
-      this.uploadimg()
+      this.save()
       this.loading = false
     },
     cropImage() {
@@ -236,57 +238,6 @@ export default {
     $imgDel(pos) {
       delete this.img_file[pos[1]]
     },
-    uploadimg($e) {
-      // 第一步.将图片上传到服务器.
-      this.loading = true
-      // 先上传头像
-      if (!(this.file === '')) {
-        const param = new FormData()
-        // 获取截图的base64 数据
-        // this.$refs.cropper.getCropData((data) => {
-        //     // do something
-        //     console.log(data)
-        // });
-        // 获取截图的blob数据
-        this.$refs.cropper.getCropBlob(data => {
-          // do something
-          const file = data
-          param.append('file', file, this.file.name)
-          this.$axios
-            .$request(uploadImage(param))
-            .then(res => {
-              if (res.code === '200') {
-                this.form.coverImage = res.data
-                this.image = res.data
-                this.save()
-              } else {
-                this.loading = false
-                this.$swal({
-                  text: res.message,
-                  type: 'error',
-                  toast: true,
-                  position: 'top',
-                  showConfirmButton: false,
-                  timer: 3000
-                })
-              }
-            })
-            .catch(e => {
-              this.loading = false
-              this.$swal({
-                text: e.message,
-                type: 'error',
-                toast: true,
-                position: 'top',
-                showConfirmButton: false,
-                timer: 3000
-              })
-            })
-        })
-      } else {
-        this.save()
-      }
-    },
     save() {
       if (JSON.stringify(this.img_file) !== '{}') {
         const formdata = new FormData()
@@ -302,7 +253,8 @@ export default {
                 this.$refs.md.$img2Url(res.data[img].pos, res.data[img].url)
               }
               // 开始提交文章信息
-              saveArticle(this.form)
+              this.$axios
+                .$request(saveArticle(this.form))
                 .then(res => {
                   if (res.code === '200') {
                     this.loading = true
