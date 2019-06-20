@@ -115,7 +115,7 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    // baseURL: 'https://www.zealsay.com', // 生产环境打开
+    // baseURL: 'https://api.zealsay.com', // 生产环境打开
     // https: true, // 开启https
     prefix: '/app/', // 给路径加个前缀
     proxy: true, // Can be also an object with default options
@@ -127,7 +127,7 @@ export default {
 
   proxy: {
     '/app/': {
-      target: 'http://localhost:8090', // 目标接口域名
+      target: 'https://api.zealsay.com', // 目标接口域名
       changeOrigin: true, // 是否跨域
       pathRewrite: { '^/app/': '' } // 把/api 替换成 /
     }

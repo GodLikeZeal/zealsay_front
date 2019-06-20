@@ -22,9 +22,8 @@ before_install:
 
 
 script:
-- npm install -g @vue/cli
 - npm i
-- vue-cli-service build
+- npm run build
 
 addons:
   ssh_known_hosts:
@@ -32,9 +31,9 @@ addons:
 
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker build  -t zealsay/zealsay_material_ui:$TRAVIS_BRANCH .
-  - docker push zealsay/zealsay_material_ui:$TRAVIS_BRANCH;
-  - sshpass -p $VPS_PASSWORD ssh -o stricthostkeychecking=no travis@$HOST "/home/travis/zealsay/travis-deploy-web.sh $TRAVIS_BRANCH"
+  - docker build  -t zealsay/zealsay_front:$TRAVIS_BRANCH .
+  - docker push zealsay/zealsay_front:$TRAVIS_BRANCH;
+  - sshpass -p $VPS_PASSWORD ssh -o stricthostkeychecking=no travis@$HOST "/home/travis/zealsay/travis-deploy-front.sh $TRAVIS_BRANCH"
 
 
 notifications:
