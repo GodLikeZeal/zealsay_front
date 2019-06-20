@@ -1,0 +1,45 @@
+language: node_js
+
+node_js: 8
+
+sudo: required
+
+# 使用安全列表指定要构建的分支
+branches:
+  only:
+  - master
+  - stable
+
+# Travis-CI Caching
+cache:
+  directories:
+    - node_modules
+
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install sshpass
+
+
+script:
+- npm install -g @vue/cli
+- npm i
+- vue-cli-service build
+
+addons:
+  ssh_known_hosts:
+   - $HOST
+
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker build  -t zealsay/zealsay_material_ui:$TRAVIS_BRANCH .
+  - docker push zealsay/zealsay_material_ui:$TRAVIS_BRANCH;
+  - sshpass -p $VPS_PASSWORD ssh -o stricthostkeychecking=no travis@$HOST "/home/travis/zealsay/travis-deploy-web.sh $TRAVIS_BRANCH"
+
+
+notifications:
+  email:
+    recipients:
+      - zhangleifor@163.com
+    on_success: change # default: change
+    on_failure: always # default: always
