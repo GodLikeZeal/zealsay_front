@@ -115,7 +115,7 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    // baseURL: 'https://api.zealsay.com', // 生产环境打开
+    baseURL: 'https://api.zealsay.com', // 生产环境打开
     // https: true, // 开启https
     prefix: '/app/', // 给路径加个前缀
     proxy: true, // Can be also an object with default options
@@ -157,6 +157,7 @@ export default {
           exclude: /(node_modules)/
         })
       }
-    }
+    },
+    vendor: ['axios']
   }
 }
