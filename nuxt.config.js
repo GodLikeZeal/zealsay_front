@@ -117,7 +117,7 @@ export default {
     // See https://github.com/nuxt-community/axios-module#options
     baseURL: 'https://api.zealsay.com', // 生产环境打开
     // https: true, // 开启https
-    // prefix: '/app/', // 给路径加个前缀
+    prefix: '/app/', // 给路径加个前缀
     proxy: true, // Can be also an object with default options
     credentials: true, // 表示跨域请求时候是否需要携带凭证
     retry: { retries: 3 }, // 超时重试3次
@@ -125,13 +125,13 @@ export default {
     debug: true // 开启调试，线上关闭
   },
 
-  // proxy: {
-  //   '/app/': {
-  //     target: 'https://api.zealsay.com', // 目标接口域名
-  //     changeOrigin: true, // 是否跨域
-  //     pathRewrite: { '^/app/': '' } // 把/api 替换成 /
-  //   }
-  // },
+  proxy: {
+    '/app/': {
+      target: 'https://api.zealsay.com', // 目标接口域名
+      changeOrigin: true, // 是否跨域
+      pathRewrite: { '^/app/': '' } // 把/api 替换成 /
+    }
+  },
 
   /*
    ** Build configuration

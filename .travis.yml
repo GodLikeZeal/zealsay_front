@@ -24,6 +24,7 @@ before_install:
 script:
 - npm i
 - npm run build
+- npm run generate
 
 addons:
   ssh_known_hosts:
