@@ -1,10 +1,14 @@
-FROM nginx:1.15
-
-# 删除nginx 默认配置
-RUN rm /etc/nginx/conf.d/default.conf
-
-# 添加我们自己的配置 default.conf 在下面
-ADD default.conf /etc/nginx/conf.d/
-
-# 将dist文件中的内容复制到 /usr/share/nginx/html/ 这个目录下面
-COPY dist/  /usr/share/nginx/html/
+FROM node:8.2.1
+MAINTAINER zealsay
+ENV NODE_ENV=production
+ENV HOST 0.0.0.0
+RUN mkdir -p /app
+COPY . /app
+WORKDIR /app
+EXPOSE 3000
+#If the environment in China build please open the following comments
+#如果在中国环境下构建请把下面注释打开
+#RUN npm config set registry https://registry.npm.taobao.org
+RUN npm install
+RUN npm run build
+CMD ["npm", "start"]
