@@ -1,6 +1,6 @@
 .v-toolbar {
   min-height: $toolbar-min-height;
-  border-radius: $border-radius-base;
+  //border-radius: $border-radius-base;
   margin-bottom: $margin-general;
 
   &:not(.v-toolbar--fixed) .v-toolbar__content {
@@ -34,6 +34,7 @@
     }
 
     .v-toolbar__items {
+      margin-right: 120px;
       & > div {
         padding: 0 !important;
       }
