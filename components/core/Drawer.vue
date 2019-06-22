@@ -158,7 +158,7 @@ import menu from '@/api/menu'
 
 export default {
   data: () => ({
-    logo: '/cat.png',
+    logo: '/image/logo/cat.png',
     menus: menu,
     responsive: false,
     scrollSettings: {
@@ -182,7 +182,7 @@ export default {
       return true
     },
     computeLogo() {
-      return '/static/m.png'
+      return '~/static/m.png'
     },
 
     sideToolbarColor() {

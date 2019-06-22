@@ -4,6 +4,19 @@
       <v-container fill-height fluid>
         <v-layout fill-height class="center">
           <v-flex xs12 align-center flexbox>
+            <v-avatar-uploader
+              :url="
+                form.avatar
+                  ? form.avatar
+                  : 'https://pan.zealsay.com/20190317010254129000000.jpg'
+              "
+              :request="request"
+              :clickable="clickable"
+              :avatar="avatar"
+              :max-size="5120"
+              @success="success"
+              @failed="failed"
+            />
             <h6 class="category text-gray ffont-weight-light mb-3">头像预览</h6>
             <p class="card-description font-weight-light">
               支持JPG、PNG格式图片，不超过5M。拖拽或缩放图中的虚线方格可调整头像
@@ -108,34 +121,23 @@ export default {
     name: 'edit',
     loading: false,
     file: '',
-    option: {
-      img: 'https://pan.zealsay.com/20190317010254129000000.jpg', // 裁剪图片的地址
-      info: true, // 裁剪框的大小信息
-      outputSize: 1, // 裁剪生成图片的质量
-      outputType: 'jpeg', // 裁剪生成图片的格式
-      canScale: true, // 图片是否允许滚轮缩放
-      autoCrop: true, // 是否默认生成截图框
-      canMoveBox: true, // 截图框能否拖动
-      centerBox: true, // 截图框能否拖动
-      autoCropWidth: 150, // 默认生成截图框宽度
-      autoCropHeight: 150, // 默认生成截图框高度
-      fixed: true, // 是否开启截图框宽高固定比例
-      fixedNumber: [4, 4] // 截图框的宽高比例
-    },
     sexs: [
       {
         value: 1,
         text: '男',
-        avatar:
-          '<img width="15px" src="../../../../../assets/image/sex/boy.png"/>'
+        avatar: '<img width="15px" src="~/static/image/sex/boy.png"/>'
       },
       {
         value: 0,
         text: '女',
-        avatar:
-          '<img width="15px" src="../../../../../assets/image/sex/girl.png"/>'
+        avatar: '<img width="15px" src="~/static/image/sex/girl.png"/>'
       }
     ],
+    valid: false,
+    clickable: true,
+    avatar: {
+      size: 128
+    },
     roles: [],
     usernameRules: [
       v => !!v || '用户名不能为空!',
@@ -188,62 +190,14 @@ export default {
     },
     handleSubmit(obj) {
       this.loading = true
-      if (this.$refs.form.validate()) {
-        // 先上传头像
-        if (!(this.file === '')) {
-          const param = new FormData()
-          // 获取截图的base64 数据
-          // this.$refs.cropper.getCropData((data) => {
-          //     // do something
-          //     console.log(data)
-          // });
-          // 获取截图的blob数据
-          this.$refs.cropper
-            .getCropBlob(data => {
-              // do something
-              const file = data
-              param.append('file', file, this.file.name)
-              uploadImage(param)
-                .then(res => {
-                  if (res.code === '200') {
-                    this.form.avatar = res.data
-                    this.save()
-                  } else {
-                    this.$swal({
-                      text: res.message,
-                      type: 'error',
-                      toast: true,
-                      position: 'top',
-                      showConfirmButton: false,
-                      timer: 3000
-                    })
-                  }
-                })
-                .catch(e => {
-                  this.$swal({
-                    text: e.message,
-                    type: 'error',
-                    toast: true,
-                    position: 'top',
-                    showConfirmButton: false,
-                    timer: 3000
-                  })
-                })
-            })
-            .finally(() => {
-              this.loading = false
-            })
-        } else {
-          this.save()
-        }
-      }
+      this.save()
     },
     save() {
       // 开始提交
-      editUser(this.form)
+      this.$axios
+        .$request(editUser(this.form))
         .then(res => {
           if (res.code === '200' && res.data) {
-            this.loading = false
             this.$swal({
               text: '修改成功',
               type: 'success',
@@ -267,7 +221,6 @@ export default {
           }
         })
         .catch(e => {
-          this.loading = false
           this.$swal({
             text: e.message,
             type: 'error',
@@ -281,44 +234,22 @@ export default {
           this.loading = false
         })
     },
-    fileChanged(file) {
-      if (!file.type.includes('image/')) {
-        this.$swal({
-          text: '请选择一张图片文件',
-          type: 'error',
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 3000
-        })
-        return
-      }
-      // handle file here. File will be an object.
-      // If multiple prop is true, it will return an object array of files.
-      const self = this
-      // 看支持不支持FileReader
-      if (!file || !window.FileReader) return
-      if (/^image/.test(file.type)) {
-        self.file = file
-        // 创建一个reader
-        const reader = new FileReader()
-        // 将图片将转成 base64 格式
-        reader.readAsDataURL(file)
-        // 读取成功后的回调
-        reader.onloadend = function() {
-          self.row.avatar = this.result
-          self.form.avatar = this.result
-        }
-      } else {
-        this.$swal({
-          text: '要选择一张图片文件才行呢！',
-          type: 'error',
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 3000
-        })
-      }
+    request(form, config) {
+      return this.$axios.$request(uploadImage(form), config)
+    },
+    success(res) {
+      // Update user avatar with the latest
+      this.row.avatar = res.data
+    },
+    failed(error) {
+      this.$swal({
+        text: error.message,
+        type: 'error',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000
+      })
     }
   }
 }

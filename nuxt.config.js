@@ -15,7 +15,7 @@ export default {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: 'favicon.ico' },
       {
         rel: 'stylesheet',
         href:
@@ -27,7 +27,10 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: '~/components/material/loading.vue',
+  loading: {
+    color: 'pink',
+    height: '4px'
+  },
 
   /*
    ** Global CSS
@@ -122,12 +125,13 @@ export default {
     credentials: true, // 表示跨域请求时候是否需要携带凭证
     retry: { retries: 3 }, // 超时重试3次
     progress: true, // 请求的时候是否加载loading页面
-    debug: true // 开启调试，线上关闭
+    debug: false // 开启调试，线上关闭
   },
 
   proxy: {
     '/app/': {
-      target: 'https://api.zealsay.com', // 目标接口域名
+      // target: 'https://api.zealsay.com', // 目标接口域名
+      target: 'http://localhost:8090', // 目标接口域名
       changeOrigin: true, // 是否跨域
       pathRewrite: { '^/app/': '' } // 把/api 替换成 /
     }

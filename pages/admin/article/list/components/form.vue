@@ -116,14 +116,12 @@ export default {
       {
         value: 1,
         text: '男',
-        avatar:
-          '<img width="15px" src="../../../../../assets/image/sex/boy.png"/>'
+        avatar: '<img width="15px" src="/static/image/sex/boy.png"/>'
       },
       {
         value: 0,
         text: '女',
-        avatar:
-          '<img width="15px" src="../../../../../assets/image/sex/girl.png"/>'
+        avatar: '<img width="15px" src="/static/image/sex/girl.png"/>'
       }
     ],
     roles: [],
