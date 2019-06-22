@@ -1,26 +1,16 @@
 export default function({ $axios, redirect }) {
-  $axios.onRequest(config => {
-    // eslint-disable-next-line no-console
-    console.log('请求 ' + config.url)
-  })
+  $axios.onRequest(config => {})
 
-  $axios.onResponse(response => {
-    // eslint-disable-next-line no-console
-    console.log('返回 ' + response)
-  })
+  $axios.onResponse(response => {})
 
   $axios.onError(error => {
     // eslint-disable-next-line no-console
-    console.log('出错 ' + error)
+    console.log(error)
   })
 
-  $axios.onRequestError(error => {
-    // eslint-disable-next-line no-console
-    console.log('请求出错 ' + error)
-  })
+  // eslint-disable-next-line handle-callback-err
+  $axios.onRequestError(error => {})
 
-  $axios.onResponseError(error => {
-    // eslint-disable-next-line no-console
-    console.log('返回出错 ' + error)
-  })
+  // eslint-disable-next-line handle-callback-err
+  $axios.onResponseError(error => {})
 }

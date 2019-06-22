@@ -117,8 +117,8 @@
       <v-flex md12 lg6>
         <material-card
           color="orange"
-          title="Employee Stats"
-          text="New employees on 15th September, 2016"
+          title="活跃排行榜"
+          text="最后更新于5分钟前"
         >
           <v-data-table :headers="headers" :items="items" hide-actions>
             <template slot="headerCell" slot-scope="{ header }">
@@ -169,7 +169,7 @@
                     <v-checkbox :value="list[0]" color="green" />
                   </v-list-tile-action>
                   <v-list-tile-title>
-                    Sign contract for "What are conference organized afraid of?"
+                    [refactor]首页展示优化
                   </v-list-tile-title>
                   <div class="d-flex">
                     <v-tooltip top content-class="top">
@@ -202,8 +202,7 @@
                     <v-checkbox :value="list[1]" color="success" />
                   </v-list-tile-action>
                   <v-list-tile-title>
-                    Lines From Great Russian Literature? Or E-mails From My
-                    Boss?
+                    [feat]增加评论系统
                   </v-list-tile-title>
                   <div class="d-flex">
                     <v-tooltip top content-class="top">
@@ -237,8 +236,7 @@
                     <v-checkbox :value="list[2]" color="success" />
                   </v-list-tile-action>
                   <v-list-tile-title>
-                    Flooded: One year later, assessing what was lost and what
-                    was found when a ravaging rain swept through metro Detroit
+                    [fix]: 修复alert弹窗在移动端展示异常
                   </v-list-tile-title>
                   <div class="d-flex">
                     <v-tooltip top content-class="top">
@@ -370,57 +368,57 @@ export default {
         },
         {
           sortable: false,
-          text: 'Name',
+          text: '名称',
           value: 'name'
         },
         {
           sortable: false,
-          text: 'Salary',
+          text: '价值',
           value: 'salary',
           align: 'right'
         },
         {
           sortable: false,
-          text: 'Country',
+          text: '国家',
           value: 'country',
           align: 'right'
         },
         {
           sortable: false,
-          text: 'City',
+          text: '城市',
           value: 'city',
           align: 'right'
         }
       ],
       items: [
         {
-          name: 'Dakota Rice',
-          country: 'Niger',
-          city: 'Oud-Tunrhout',
+          name: 'zeal',
+          country: '中国',
+          city: '北京',
           salary: '$35,738'
         },
         {
-          name: 'Minerva Hooper',
-          country: 'Curaçao',
-          city: 'Sinaai-Waas',
+          name: 'editor',
+          country: '中国',
+          city: '天津',
           salary: '$23,738'
         },
         {
-          name: 'Sage Rodriguez',
-          country: 'Netherlands',
-          city: 'Overland Park',
+          name: '小明',
+          country: '中国',
+          city: '上海',
           salary: '$56,142'
         },
         {
-          name: 'Philip Chanley',
-          country: 'Korea, South',
-          city: 'Gloucester',
+          name: '桔梗',
+          country: '日本',
+          city: '大阪',
           salary: '$38,735'
         },
         {
-          name: 'Doris Greene',
-          country: 'Malawi',
-          city: 'Feldkirchen in Kārnten',
+          name: '山的那边',
+          country: '中国',
+          city: '武汉',
           salary: '$63,542'
         }
       ],

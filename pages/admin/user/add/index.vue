@@ -9,7 +9,7 @@
               :request="request"
               :clickable="clickable"
               :avatar="avatar"
-              max-size="5120"
+              :max-size="5120"
               @success="success"
               @failed="failed"
             />

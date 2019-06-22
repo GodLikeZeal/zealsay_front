@@ -118,12 +118,12 @@
             <img
               v-if="props.item.sex == 1"
               width="24px"
-              src="../../../../assets/image/sex/boy.png"
+              src="~/static/image/sex/boy.png"
             />
             <img
               v-if="props.item.sex == 0"
               width="24px"
-              src="../../../../assets/image/sex/girl.png"
+              src="~/static/image/sex/girl.png"
             />
           </td>
           <td class="text-xs-right">{{ props.item.age }}</td>
@@ -131,53 +131,83 @@
           <td class="text-xs-right">{{ props.item.email }}</td>
           <td class="text-xs-right">
             <span v-if="props.item.status == 'NORMAL'">
-              正常<v-icon color="success" small>fa-plug</v-icon>
+              正常<v-icon color="success" small
+                >mdi-emoticon-excited-outline</v-icon
+              >
             </span>
             <span v-if="props.item.status == 'DISABLED'">
-              封禁<v-icon color="error" small>fa-ban</v-icon>
+              封禁<v-icon color="error" small
+                >mdi-emoticon-devil-outline</v-icon
+              >
             </span>
             <span v-if="props.item.status == 'LOCK'">
-              锁定<v-icon color="warning" small>fa-lock</v-icon>
+              锁定<v-icon color="warning" small
+                >mdi-emoticon-dead-outline</v-icon
+              >
             </span>
           </td>
           <td class="text-xs-right">
             <v-layout justify-center class="mb-2">
-              <v-btn
-                icon
-                flat
-                color="primary"
-                title="详情"
-                @click="handleInfo(props.item)"
-              >
-                <v-icon>portrait</v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                flat
-                color="primary"
-                title="编辑"
-                @click="handleEdit(props.item)"
-              >
-                <v-icon>create</v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                flat
-                color="primary"
-                title="解封"
-                @click="handleUnsealing(props.item)"
-              >
-                <v-icon>how_to_reg</v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                flat
-                color="primary"
-                title="封禁"
-                @click="handleDisabled(props.item)"
-              >
-                <v-icon>remove_circle</v-icon>
-              </v-btn>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn
+                    icon
+                    flat
+                    color="primary"
+                    title="详情"
+                    v-on="on"
+                    @click="handleInfo(props.item)"
+                  >
+                    <v-icon>portrait</v-icon>
+                  </v-btn>
+                </template>
+                <span>详情</span>
+              </v-tooltip>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn
+                    icon
+                    flat
+                    color="primary"
+                    title="编辑"
+                    v-on="on"
+                    @click="handleEdit(props.item)"
+                  >
+                    <v-icon>create</v-icon>
+                  </v-btn>
+                </template>
+                <span>编辑</span>
+              </v-tooltip>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn
+                    icon
+                    flat
+                    color="primary"
+                    title="解封"
+                    v-on="on"
+                    @click="handleUnsealing(props.item)"
+                  >
+                    <v-icon>how_to_reg</v-icon>
+                  </v-btn>
+                </template>
+                <span>解封</span>
+              </v-tooltip>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn
+                    icon
+                    flat
+                    color="primary"
+                    title="封禁"
+                    v-on="on"
+                    @click="handleDisabled(props.item)"
+                  >
+                    <v-icon>remove_circle</v-icon>
+                  </v-btn>
+                </template>
+                <span>封禁</span>
+              </v-tooltip>
             </v-layout>
           </td>
         </tr>
