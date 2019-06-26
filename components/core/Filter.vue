@@ -119,7 +119,31 @@ export default {
   computed: {
     ...mapState('app', ['image', 'color'])
   },
-
+  created(app) {
+    let colorSet
+    if (this.color === 'primary') {
+      colorSet = '#9c27b0'
+    }
+    if (this.color === 'info') {
+      colorSet = '#00bcd4'
+    }
+    if (this.color === 'success') {
+      colorSet = '#4caf50'
+    }
+    if (this.color === 'warning') {
+      colorSet = '#ff9800'
+    }
+    if (this.color === 'danger') {
+      colorSet = '#f44336'
+    }
+    // eslint-disable-next-line no-console
+    console.log(app)
+    if (!colorSet === undefined) {
+      app.$vuetify.theme.primary = colorSet
+    }
+    // eslint-disable-next-line no-console
+    console.log(colorSet)
+  },
   methods: {
     ...mapMutations('app', ['setImage', 'setColor']),
     updateColor(val) {
