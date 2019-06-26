@@ -17,7 +17,7 @@
         <v-layout wrap>
           <v-flex xs12>
             <div class="text-xs-center body-2 text-uppercase sidebar-filter">
-              主题样式设置
+              主题色设置
             </div>
 
             <v-layout justify-center>
@@ -33,59 +33,61 @@
             </v-layout>
             <v-divider class="mt-3" />
           </v-flex>
-          <v-flex xs12>
+          <v-flex xs12 class="align-center">
             <div class="text-xs-center body-2 text-uppercase sidebar-filter">
-              侧边Images
+              开启侧边背景
             </div>
+            <v-switch v-model="slider" @toggle="setSlider(slider)"></v-switch>
+          </v-flex>
+          <v-flex xs12>
+            <v-layout justify-center>
+              <v-flex xs12>
+                <div
+                  class="text-xs-center body-2 text-uppercase sidebar-filter"
+                >
+                  侧边Images
+                </div>
+              </v-flex>
+            </v-layout>
           </v-flex>
           <v-flex v-for="img in images" :key="img" xs3>
             <v-img
               :class="[image === img ? 'image-active' : '']"
               :src="img"
               height="120"
-              @click.native="setImage(img)"
+              @click.native="slider ? setImage(img) : setImage('')"
             />
-          </v-flex>
-          <v-flex xs12>
-            <v-btn
-              target="_blank"
-              color="success"
-              block
-              @click.native="setImage('')"
-            >
-              No background
-            </v-btn>
-          </v-flex>
-          <v-flex xs12>
-            <v-btn
-              href="https://demos.creative-tim.com/vuetify-material-dashboard/documentation"
-              target="_blank"
-              class="white--text"
-              color="warning"
-              block
-            >
-              Documentation
-            </v-btn>
           </v-flex>
           <v-flex xs12>
             <div class="text-xs-center body-2 text-uppercase">
               <div class=" sidebar-filter">
-                Thank You for Sharing!
+                主题模式
               </div>
 
               <div>
                 <v-btn
-                  color="indigo"
-                  class="mr-2 v-btn-facebook"
+                  :color="theme === 'dark' ? '' : 'light-green'"
+                  class="mr-2"
                   fab
                   icon
                   small
                   round
+                  cyan
+                  active
+                  @click.native="setTheme('light')"
                 >
-                  <v-icon>mdi-facebook</v-icon>
+                  <v-icon>mdi-white-balance-sunny</v-icon>
                 </v-btn>
-                <v-btn color="cyan" class="v-btn-twitter" fab icon small round>
-                  <v-icon>mdi-twitter</v-icon>
+                <v-btn
+                  :color="theme === 'dark' ? 'light-green' : ''"
+                  class="mr-2"
+                  fab
+                  icon
+                  small
+                  round
+                  @click.native="setTheme('dark')"
+                >
+                  <v-icon>mdi-weather-night</v-icon>
                 </v-btn>
               </div>
             </div>
@@ -112,40 +114,15 @@ export default {
     images: [
       'https://pan.zealsay.com/340172-106.jpg',
       'https://pan.zealsay.com/132407-106.jpg',
-      'https://pan.zealsay.com/318037-106.jpg',
+      'https://pan.zealsay.com/bg-103.jpg',
       'https://pan.zealsay.com/298125-106.jpg'
     ]
   }),
   computed: {
-    ...mapState('app', ['image', 'color'])
-  },
-  created(app) {
-    let colorSet
-    if (this.color === 'primary') {
-      colorSet = '#9c27b0'
-    }
-    if (this.color === 'info') {
-      colorSet = '#00bcd4'
-    }
-    if (this.color === 'success') {
-      colorSet = '#4caf50'
-    }
-    if (this.color === 'warning') {
-      colorSet = '#ff9800'
-    }
-    if (this.color === 'danger') {
-      colorSet = '#f44336'
-    }
-    // eslint-disable-next-line no-console
-    console.log(app)
-    if (!colorSet === undefined) {
-      app.$vuetify.theme.primary = colorSet
-    }
-    // eslint-disable-next-line no-console
-    console.log(colorSet)
+    ...mapState('app', ['image', 'color', 'theme', 'slider'])
   },
   methods: {
-    ...mapMutations('app', ['setImage', 'setColor']),
+    ...mapMutations('app', ['setImage', 'setColor', 'setTheme', 'setSlider']),
     updateColor(val) {
       let color
       if (val === 'primary') {

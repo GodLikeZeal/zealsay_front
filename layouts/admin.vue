@@ -1,7 +1,7 @@
 <template>
   <div id="appRoot">
     <template>
-      <v-app>
+      <v-app :dark="$store.state.app.theme === 'dark'">
         <!--<core-filter/>-->
 
         <core-toolbar />

@@ -1,6 +1,6 @@
 <template>
   <div id="appRoot">
-    <v-app>
+    <v-app :dark="$store.state.app.theme === 'dark'">
       <transition>
         <keep-alive>
           <nuxt />
