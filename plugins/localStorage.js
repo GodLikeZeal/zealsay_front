@@ -7,6 +7,7 @@ import createPersistedState from 'vuex-persistedstate'
 //     key: 'vuex',
 //     paths: []
 //   })(store)
+
 export default ({ store }) => {
   window.onNuxtReady(() => {
     createPersistedState({
