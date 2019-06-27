@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import Toolbar from '~/components/core/Toolbar'
-import Drawer from '~/components/core/Drawer'
-import View from '~/components/core/View'
+import Toolbar from '@/components/core/Toolbar'
+import Drawer from '@/components/core/Drawer'
+import View from '@/components/core/View'
 
 export default {
   components: {

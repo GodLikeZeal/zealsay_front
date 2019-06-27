@@ -8,7 +8,7 @@
               <v-card-text>
                 <div class="layout column align-center">
                   <img
-                    src="~/static/image/logo/logo.png"
+                    src="@/static/image/logo/logo.png"
                     alt="Zealsay Admin"
                     width="200"
                     height="150"

@@ -118,12 +118,12 @@
             <img
               v-if="props.item.sex == 1"
               width="24px"
-              src="~/static/image/sex/boy.png"
+              src="@/static/image/sex/boy.png"
             />
             <img
               v-if="props.item.sex == 0"
               width="24px"
-              src="~/static/image/sex/girl.png"
+              src="@/static/image/sex/girl.png"
             />
           </td>
           <td class="text-xs-right">{{ props.item.age }}</td>

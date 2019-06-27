@@ -3,13 +3,12 @@
     id="app-drawer"
     v-model="inputValue"
     app
-    dark
     floating
     persistent
     mobile-break-point="991"
     width="260"
   >
-    <v-img :src="image" height="100%">
+    <v-img :src="slider ? image : ''" height="100%">
       <v-layout class="fill-height" tag="v-list" column>
         <v-list-tile avatar>
           <v-list-tile-avatar color="white">
@@ -166,7 +165,7 @@ export default {
     }
   }),
   computed: {
-    ...mapState('app', ['image', 'color']),
+    ...mapState('app', ['image', 'color', 'slider']),
     inputValue: {
       get() {
         return this.$store.state.app.drawer
@@ -182,7 +181,7 @@ export default {
       return true
     },
     computeLogo() {
-      return '~/static/m.png'
+      return '@/static/m.png'
     },
 
     sideToolbarColor() {

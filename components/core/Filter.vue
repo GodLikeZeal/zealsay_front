@@ -37,7 +37,7 @@
             <div class="text-xs-center body-2 text-uppercase sidebar-filter">
               开启侧边背景
             </div>
-            <v-switch v-model="slider" @toggle="setSlider(slider)"></v-switch>
+            <v-switch v-model="slider"></v-switch>
           </v-flex>
           <v-flex xs12>
             <v-layout justify-center>
@@ -55,7 +55,7 @@
               :class="[image === img ? 'image-active' : '']"
               :src="img"
               height="120"
-              @click.native="slider ? setImage(img) : setImage('')"
+              @click.native="setImage(img)"
             />
           </v-flex>
           <v-flex xs12>
@@ -110,6 +110,7 @@ export default {
     }
   },
   data: () => ({
+    ...mapState('app', ['slider']),
     colors: ['primary', 'info', 'success', 'warning', 'danger'],
     images: [
       'https://pan.zealsay.com/340172-106.jpg',
@@ -119,7 +120,12 @@ export default {
     ]
   }),
   computed: {
-    ...mapState('app', ['image', 'color', 'theme', 'slider'])
+    ...mapState('app', ['image', 'color', 'theme'])
+  },
+  watch: {
+    slider: function(newSlider, oldSlider) {
+      this.setSlider(newSlider)
+    }
   },
   methods: {
     ...mapMutations('app', ['setImage', 'setColor', 'setTheme', 'setSlider']),
