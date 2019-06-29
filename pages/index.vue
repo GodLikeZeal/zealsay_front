@@ -35,7 +35,7 @@
         <v-flex xs12 md12 sm6>
           <v-card class="card">
             <v-img
-              transition
+              transition="fade-transition"
               class="white--text"
               height="300px"
               width="100%"
@@ -64,7 +64,7 @@
             <v-layout row>
               <v-flex xs6>
                 <v-img
-                  transition
+                  transition="fade-transition"
                   height="13rem"
                   class="card elevation-3"
                   src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
@@ -89,28 +89,186 @@
               </v-flex>
             </v-layout>
           </v-card>
+          <v-card flat class="card">
+            <v-layout row>
+              <v-flex xs6>
+                <v-img
+                  transition="fade-transition"
+                  height="13rem"
+                  class="card elevation-3"
+                  src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
+                  contain
+                ></v-img>
+              </v-flex>
+              <v-flex xs6>
+                <v-card-title primary-title>
+                  <div>
+                    <div class="font-weight-thin">奇淫技巧</div>
+                    <h4>浅谈自动化测试（一）</h4>
+                    <div class="font-weight-medium">
+                      前言
+                      随着互联网的发展，人工智能和自动化是未来的一大趋势，目前随着敏捷开发模式的流行，持续集成和持续交付的开发过程，对于
+                      <a>阅读更多…</a>
+                    </div>
+                    <h5>
+                      zeal 8月前 415次浏览 2个点赞
+                    </h5>
+                  </div>
+                </v-card-title>
+              </v-flex>
+            </v-layout>
+          </v-card>
+          <v-card flat class="card">
+            <v-layout row>
+              <v-flex xs6>
+                <v-img
+                  transition="fade-transition"
+                  height="13rem"
+                  class="card elevation-3"
+                  src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
+                  contain
+                ></v-img>
+              </v-flex>
+              <v-flex xs6>
+                <v-card-title primary-title>
+                  <div>
+                    <div class="font-weight-thin">奇淫技巧</div>
+                    <h4>浅谈自动化测试（一）</h4>
+                    <div class="font-weight-medium">
+                      前言
+                      随着互联网的发展，人工智能和自动化是未来的一大趋势，目前随着敏捷开发模式的流行，持续集成和持续交付的开发过程，对于
+                      <a>阅读更多…</a>
+                    </div>
+                    <h5>
+                      zeal 8月前 415次浏览 2个点赞
+                    </h5>
+                  </div>
+                </v-card-title>
+              </v-flex>
+            </v-layout>
+          </v-card>
+          <v-card flat class="card">
+            <v-layout row>
+              <v-flex xs6>
+                <v-img
+                  transition="fade-transition"
+                  height="13rem"
+                  class="card elevation-3"
+                  src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
+                  contain
+                ></v-img>
+              </v-flex>
+              <v-flex xs6>
+                <v-card-title primary-title>
+                  <div>
+                    <div class="font-weight-thin">奇淫技巧</div>
+                    <h4>浅谈自动化测试（一）</h4>
+                    <div class="font-weight-medium">
+                      前言
+                      随着互联网的发展，人工智能和自动化是未来的一大趋势，目前随着敏捷开发模式的流行，持续集成和持续交付的开发过程，对于
+                      <a>阅读更多…</a>
+                    </div>
+                    <h5>
+                      zeal 8月前 415次浏览 2个点赞
+                    </h5>
+                  </div>
+                </v-card-title>
+              </v-flex>
+            </v-layout>
+          </v-card>
+          <v-card flat class="card">
+            <v-layout row>
+              <v-flex xs6>
+                <v-img
+                  transition="fade-transition"
+                  height="13rem"
+                  class="card elevation-3"
+                  src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
+                  contain
+                ></v-img>
+              </v-flex>
+              <v-flex xs6>
+                <v-card-title primary-title>
+                  <div>
+                    <div class="font-weight-thin">奇淫技巧</div>
+                    <h4>浅谈自动化测试（一）</h4>
+                    <div class="font-weight-medium">
+                      前言
+                      随着互联网的发展，人工智能和自动化是未来的一大趋势，目前随着敏捷开发模式的流行，持续集成和持续交付的开发过程，对于
+                      <a>阅读更多…</a>
+                    </div>
+                    <h5>
+                      zeal 8月前 415次浏览 2个点赞
+                    </h5>
+                  </div>
+                </v-card-title>
+              </v-flex>
+            </v-layout>
+          </v-card>
+          <!-- page分页-->
+          <div class="pagination text-md-center">
+            <v-pagination
+              v-model="pagination.page"
+              circle
+              color="primary"
+              :length="length"
+              @input="search"
+            ></v-pagination>
+          </div>
         </v-flex>
         <v-flex xs4>
-          <v-card>
-            <v-card-title primary-title>
-              <div class="h5">近期文章</div>
+          <v-card class="card">
+            <v-card-title primary-title class="left_list_header">
+              <h4 class="title font-weight-bold">近期文章</h4>
             </v-card-title>
-            <v-content>
+            <v-card-text>
               <v-list>
-                <v-list-tile-content>
-                  <v-list-tile-title>
-                    <a>浅谈自动化测试(二)</a>
-                  </v-list-tile-title>
-                  <v-list-tile-title>
-                    <a>浅谈自动化测试(二)</a>
-                  </v-list-tile-title>
-                </v-list-tile-content>
+                <v-list-tile-title class="left_list_item">
+                  <a>浅谈自动化测试(二)</a>
+                </v-list-tile-title>
+                <v-divider></v-divider>
+                <v-list-tile-title class="left_list_item">
+                  <a>浅谈自动化测试(二)</a>
+                </v-list-tile-title>
+                <v-divider></v-divider>
+                <v-list-tile-title class="left_list_item">
+                  <a>浅谈自动化测试(二)</a>
+                </v-list-tile-title>
+                <v-divider></v-divider>
+                <v-list-tile-title class="left_list_item">
+                  <a>浅谈自动化测试(二)</a>
+                </v-list-tile-title>
               </v-list>
-            </v-content>
+            </v-card-text>
+          </v-card>
+          <v-card class="card">
+            <v-card-title primary-title class="left_list_header">
+              <h4 class="title font-weight-bold">近期评论</h4>
+            </v-card-title>
+            <v-card-text>
+              <v-list>
+                <v-list-tile-title class="left_list_item">
+                  zeal发表在<a>《小石谈记——京津》</a>
+                </v-list-tile-title>
+                <v-divider></v-divider>
+                <v-list-tile-title class="left_list_item">
+                  zeal发表在<a>《小石谈记——京津》</a>
+                </v-list-tile-title>
+                <v-divider></v-divider>
+                <v-list-tile-title class="left_list_item">
+                  zeal发表在<a>《小石谈记——京津》</a>
+                </v-list-tile-title>
+                <v-divider></v-divider>
+                <v-list-tile-title class="left_list_item">
+                  zeal发表在<a>《小石谈记——京津》</a>
+                </v-list-tile-title>
+              </v-list>
+            </v-card-text>
           </v-card>
         </v-flex>
       </v-layout>
-      <div></div>
+
+      <back-to-top :visibility-height="300" :back-position="50" />
       <!-- 页脚 -->
       <div class="footer">
         <core-footer v-if="$route.name !== 'Maps'" />
@@ -120,7 +278,48 @@
 </template>
 
 <script>
-export default {}
+export default {
+  auth: false,
+  data() {
+    return {
+      selected: [],
+      loading: true,
+      desserts: [],
+      pagination: {
+        descending: true,
+        page: 1,
+        rowsPerPage: 10, // -1 for All
+        sortBy: '',
+        totalItems: 2
+      },
+      myBackToTopStyle: {
+        right: '50px',
+        bottom: '50px',
+        width: '40px',
+        height: '40px',
+        'border-radius': '4px',
+        'line-height': '45px', // 请保持与高度一致以垂直居中 Please keep consistent with height to center vertically
+        background: '#e7eaf1' // 按钮的背景颜色 The background color of the button
+      }
+    }
+  },
+  computed: {
+    length: {
+      get: function() {
+        return this.pagination.totalItems
+          ? Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
+          : 0
+      },
+      set: function() {}
+    }
+  },
+  methods: {
+    search() {
+      // eslint-disable-next-line no-console
+      console.log('click search')
+    }
+  }
+}
 </script>
 <style lang="less" scoped>
 .v-toolbar__content {
@@ -167,5 +366,13 @@ export default {}
 }
 .footer {
   margin-top: 300px;
+}
+.left_list_header {
+  h4 {
+    margin: auto;
+  }
+}
+.left_list_item {
+  margin: 0.5rem 1.25rem;
 }
 </style>
