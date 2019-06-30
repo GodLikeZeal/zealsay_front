@@ -270,9 +270,13 @@
 
       <back-to-top :visibility-height="300" :back-position="50" />
       <!-- 页脚 -->
-      <div class="footer">
-        <core-footer v-if="$route.name !== 'Maps'" />
-      </div>
+      <v-layout row>
+        <v-flex>
+          <div class="footer">
+            <core-footer v-if="$route.name !== 'Maps'" />
+          </div>
+        </v-flex>
+      </v-layout>
     </v-container>
   </div>
 </template>

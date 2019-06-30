@@ -3,5 +3,5 @@ export default {
   slider: true,
   theme: 'light',
   color: 'success',
-  image: 'https://pan.zealsay.com/bg-103.jpg'
+  image: 'https://pan.zealsay.com/slider-1.jpg'
 }

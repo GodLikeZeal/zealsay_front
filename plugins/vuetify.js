@@ -10,7 +10,6 @@ import ChartCard from '@/components/material/ChartCard'
 import StatsCard from '@/components/material/StatsCard'
 import Footer from '@/components/core/Footer'
 import BackToTop from '@/components/core/BackToTop'
-import VAvatarUploader from 'vuetify-avatar-uploader'
 
 export default ({ store }) => {
   const val = store.state.app.color
@@ -57,5 +56,4 @@ export default ({ store }) => {
   Vue.component('core-footer', Footer)
   Vue.component('back-to-top', BackToTop)
   Vue.component('avatar', Avatar)
-  Vue.component('v-avatar-uploader', VAvatarUploader)
 }

@@ -113,10 +113,10 @@ export default {
     ...mapState('app', ['slider']),
     colors: ['primary', 'info', 'success', 'warning', 'danger'],
     images: [
-      'https://pan.zealsay.com/340172-106.jpg',
-      'https://pan.zealsay.com/132407-106.jpg',
-      'https://pan.zealsay.com/bg-103.jpg',
-      'https://pan.zealsay.com/298125-106.jpg'
+      'https://pan.zealsay.com/slider-1.jpg',
+      'https://pan.zealsay.com/slider-2.jpg',
+      'https://pan.zealsay.com/slider-3.jpg',
+      'https://pan.zealsay.com/slider-4.jpg'
     ]
   }),
   computed: {

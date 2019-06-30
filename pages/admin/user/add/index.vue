@@ -1,18 +1,57 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-container fill-height fluid grid-list-xl>
     <v-layout justify-center wrap>
       <v-flex xs12 md10>
         <material-card class="v-card-profile">
           <v-card-text class="text-xs-center">
-            <v-avatar-uploader
-              :url="form.avatar"
-              :request="request"
-              :clickable="clickable"
-              :avatar="avatar"
-              :max-size="5120"
-              @success="success"
-              @failed="failed"
-            />
+            <v-dialog v-model="showCropper" persistent width="800px">
+              <template v-slot:activator="{ on }">
+                <label for="uploads">
+                  <a>
+                    <v-avatar size="96">
+                      <img :src="form.avatar" alt="avatar" />
+                    </v-avatar>
+                  </a>
+                </label>
+                <input
+                  id="uploads"
+                  ref="avator"
+                  type="file"
+                  style="display: none;"
+                  accept="image/png, image/jpeg, image/gif, image/jpg"
+                  @change="fileChange($event)"
+                />
+              </template>
+              <v-card>
+                <v-card-title>
+                  <div style="width: 800px;height: 400px;">
+                    <vueCropper
+                      ref="cropper"
+                      style="background-repeat:repeat"
+                      :output-size="option.outputSize"
+                      :output-type="option.outputType"
+                      :info="option.info"
+                      :can-scale="option.canScale"
+                      :can-move-box="option.canMoveBox"
+                      :center-box="option.centerBox"
+                      :auto-crop="option.autoCrop"
+                      :fixed="option.fixed"
+                      :fixed-number="option.fixedNumber"
+                      :img="option.img"
+                    ></vueCropper>
+                  </div>
+                </v-card-title>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="darken-1" outline @click="cropCancel"
+                    >返回</v-btn
+                  >
+                  <v-btn color="primary" outline @click="cropSubmit"
+                    >裁剪</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
             <h6 class="category avator text-gray ffont-weight-light mb-3">
               点击上传用户头像
             </h6>
@@ -83,6 +122,7 @@
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
+                    v-model="form.email"
                     :rules="emailRules"
                     label="Email"
                     class="purple-input"
@@ -185,6 +225,7 @@ export default {
       introduction: '',
       role: ''
     },
+    showCropper: false,
     valid: false,
     clickable: true,
     avatar: {
@@ -215,6 +256,24 @@ export default {
     ],
     emailRules: [v => !v || validateEmail(v) || '不是合法的邮箱']
   }),
+  computed: {
+    option: function() {
+      return {
+        img:
+          this.form.avatar ||
+          'https://pan.zealsay.com/20190317010254129000000.jpg', // 裁剪图片的地址
+        info: true, // 裁剪框的大小信息
+        outputSize: 1, // 裁剪生成图片的质量
+        outputType: 'jpeg', // 裁剪生成图片的格式
+        canScale: true, // 图片是否允许滚轮缩放
+        autoCrop: true, // 是否默认生成截图框
+        canMoveBox: true, // 截图框能否拖动
+        centerBox: true, // 截图框能否拖动
+        fixed: true, // 是否开启截图框宽高固定比例
+        fixedNumber: [4, 4] // 截图框的宽高比例
+      }
+    }
+  },
   async asyncData({ app, query, error }) {
     const resProvince = await app.$axios.$request(getProvinceList())
     let provinces = []
@@ -343,21 +402,73 @@ export default {
           this.loading = false
         })
     },
-    request(form, config) {
-      return this.$axios.$request(uploadImage(form), config)
+    fileChange(e) {
+      // 上传图片
+      // this.option.img
+      const file = e.target.files[0]
+      if (!/\.(gif|jpg|jpeg|png|bmp|GIF|JPG|PNG)$/.test(e.target.value)) {
+        alert('图片类型必须是.gif,jpeg,jpg,png,bmp中的一种')
+        return false
+      }
+      const reader = new FileReader()
+      reader.onload = e => {
+        let data
+        if (typeof e.target.result === 'object') {
+          // 把Array Buffer转化为blob 如果是base64不需要
+          data = window.URL.createObjectURL(new Blob([e.target.result]))
+        } else {
+          data = e.target.result
+        }
+        this.option.img = data
+        this.showCropper = true
+      }
+      // 转化为base64
+      // reader.readAsDataURL(file)
+      // 转化为blob
+      reader.readAsArrayBuffer(file)
     },
-    success(res) {
-      // Update user avatar with the latest
-      this.form.avatar = res.data
+    cropCancel() {
+      this.showCropper = false
+      this.$refs.avator.value = ''
     },
-    failed(error) {
-      this.$swal({
-        text: error.message,
-        type: 'error',
-        toast: true,
-        position: 'top',
-        showConfirmButton: false,
-        timer: 3000
+    cropSubmit() {
+      this.showCropper = false
+      this.request()
+    },
+    request() {
+      // 获取截图的blob数据
+      this.$refs.cropper.getCropBlob(data => {
+        // do something
+        const file = data
+        const param = new FormData()
+        param.append('file', file)
+        this.$axios
+          .$request(uploadImage(param))
+          .then(res => {
+            if (res.code === '200') {
+              this.form.avatar = res.data
+            } else {
+              this.$swal({
+                text: res.message,
+                type: 'error',
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 3000
+              })
+            }
+          })
+          .catch(e => {
+            this.$swal({
+              text: e.message,
+              type: 'error',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3000
+            })
+          })
+          .finally(() => {})
       })
     }
   }

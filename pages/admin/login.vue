@@ -58,6 +58,7 @@
           </v-flex>
         </v-layout>
       </v-container>
+      <bubbly-bg></bubbly-bg>
     </v-content>
   </v-app>
 </template>
@@ -74,8 +75,8 @@ export default {
       msg: 'aa',
       loading: false,
       model: {
-        username: 'zeal',
-        password: '123456'
+        username: 'test',
+        password: 'test123456'
       },
       redirect: undefined,
       visible: false,
@@ -90,6 +91,7 @@ export default {
       immediate: true
     }
   },
+  created() {},
   methods: {
     login() {
       this.loading = true

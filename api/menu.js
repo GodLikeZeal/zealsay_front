@@ -70,26 +70,26 @@ const Menu = [
         href: '/admin/article/label'
       }
     ]
-  },
-  {
-    title: '媒体',
-    group: 'media',
-    icon: 'panorama',
-    items: [
-      {
-        name: 'list',
-        title: '媒体库',
-        component: 'Dashboard',
-        href: '/admin/dashboard'
-      },
-      {
-        name: 'write',
-        title: '添加',
-        component: 'Dashboard',
-        href: '/admin/dashboard'
-      }
-    ]
   }
+  // {
+  //   title: '媒体',
+  //   group: 'media',
+  //   icon: 'panorama',
+  //   items: [
+  //     {
+  //       name: 'list',
+  //       title: '媒体库',
+  //       component: 'Dashboard',
+  //       href: '/admin/dashboard'
+  //     },
+  //     {
+  //       name: 'write',
+  //       title: '添加',
+  //       component: 'Dashboard',
+  //       href: '/admin/dashboard'
+  //     }
+  //   ]
+  // }
 ]
 // reorder menu
 Menu.forEach(item => {

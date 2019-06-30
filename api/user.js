@@ -140,7 +140,10 @@ export function uploadImage(obj) {
   return {
     url: '/api/v1/qiniu/upload',
     method: 'post',
-    data: obj
+    data: obj,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
   }
 }
 /**
@@ -153,6 +156,9 @@ export function uploadImageMultiple(obj) {
   return {
     url: '/api/v1/qiniu/upload/multiple',
     method: 'post',
-    data: obj
+    data: obj,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
   }
 }
