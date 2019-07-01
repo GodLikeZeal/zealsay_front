@@ -15,7 +15,6 @@
   "dependencies": {
     "@nuxtjs/auth": "^4.5.3",
     "@nuxtjs/axios": "^5.3.6",
-    "@nuxtjs/pwa": "^2.6.0",
     "cross-env": "^5.2.0",
     "nuxt": "^2.4.0",
     "vue-sweetalert2": "^2.0.5",

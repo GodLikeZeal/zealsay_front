@@ -15,9 +15,6 @@
                   />
                   <h1 class="flex my-4 primary--text">zealsay 后台系统</h1>
                 </div>
-                <v-alert :value="visible" type="info">
-                  {{ errMsg }}
-                </v-alert>
                 <v-form>
                   <v-text-field
                     v-model="model.username"
@@ -62,6 +59,7 @@
   </v-app>
 </template>
 <script>
+import { loginByUsername } from '@/api/login'
 import qs from 'qs'
 import { mapState } from 'vuex'
 
@@ -77,7 +75,6 @@ export default {
       password: 'test123456'
     },
     redirect: undefined,
-    visible: false,
     errMsg: ''
   }),
   computed: {
@@ -128,10 +125,40 @@ export default {
     }
   },
   methods: {
-    login() {
+    async login() {
       this.loading = true
       // 登录接口待调试
       const data = this.model
+      const code = await this.$axios
+        .$request(loginByUsername(data))
+        .then(res => {
+          if (res.code === '200') {
+            return res.code
+          } else {
+            this.$swal({
+              text: res.message,
+              type: 'error',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3000
+            })
+          }
+        })
+        .catch(err => {
+          this.$swal({
+            text: err.message,
+            type: 'error',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000
+          })
+        })
+      if (!(code === '200')) {
+        this.loading = false
+        return
+      }
       this.$auth
         .loginWith('local', { data: qs.stringify(data) })
         .then(() => {
@@ -142,11 +169,14 @@ export default {
         })
         .catch(err => {
           this.loading = false
-          this.visible = true
-          this.errMsg = err.message
-          setTimeout(() => {
-            this.visible = false
-          }, 3000)
+          this.$swal({
+            text: err.message,
+            type: 'error',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000
+          })
         })
       // this.$store
       //   .dispatch('user/LoginByUsername', this.model)

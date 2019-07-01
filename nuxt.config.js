@@ -65,7 +65,6 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/pwa',
     [
       'vue-sweetalert2/nuxt',
       {

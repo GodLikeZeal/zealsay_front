@@ -21,10 +21,10 @@
             <div class="text-md-center word">
               <h1 class="bracket left">『</h1>
               <h1 class="hitokoto-title">
-                一天吐槽太多次的话，梗也是会用完的。
+                {{ motto.hitokoto }}
               </h1>
               <h1 class="bracket right">』</h1>
-              <h3 class="hitokoto_author">-「小王子」</h3>
+              <h3 class="hitokoto_author">-「{{ motto.creator }}」</h3>
             </div>
           </v-flex>
         </v-layout>
@@ -282,6 +282,7 @@
 </template>
 
 <script>
+import { getHitokoto } from '@/api/service'
 export default {
   auth: false,
   data() {
@@ -315,6 +316,20 @@ export default {
           : 0
       },
       set: function() {}
+    }
+  },
+  async asyncData({ app, query, error }) {
+    const resHitokoto = await app.$axios.$request(getHitokoto())
+    const motto = {}
+    if (resHitokoto.code === '200') {
+      motto.hitokoto = resHitokoto.data.hitokoto
+      motto.creator = resHitokoto.data.creator
+      return { motto: motto }
+    } else {
+      return error({
+        statusCode: resHitokoto.code,
+        message: resHitokoto.message
+      })
     }
   },
   methods: {
