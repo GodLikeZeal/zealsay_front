@@ -1,5 +1,5 @@
 <template>
-  <div id="index">
+  <div v-cloak id="index" class="index">
     <!-- header -->
     <v-card color="primary" height="450">
       <v-toolbar color="primary" dark flat>
@@ -326,6 +326,12 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+[v-cloak] {
+  display: none;
+}
+.index {
+  background: #fafafa;
+}
 .v-toolbar__content {
   margin-left: 1.2em !important;
 }

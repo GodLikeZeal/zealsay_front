@@ -14,7 +14,7 @@ import BackToTop from '@/components/core/BackToTop'
 export default ({ store }) => {
   const val = store.state.app.color
   // eslint-disable-next-line no-console
-  console.log(val)
+  // console.log(val)
   let color
   if (val === 'primary') {
     color = '#9c27b0'

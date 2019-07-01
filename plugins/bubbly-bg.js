@@ -1,4 +1,4 @@
 import Vue from 'vue'
-import BubblyBg from 'bubbly-bg'
+import BubblyBg from 'bubbly-bg/dist/bubbly-bg'
 
-Vue.use('BubblyBg', BubblyBg)
+Vue.use(BubblyBg)

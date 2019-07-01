@@ -1,5 +1,5 @@
 <template>
-  <v-app id="login" class="primary">
+  <v-app id="login">
     <v-content>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
@@ -58,30 +58,30 @@
           </v-flex>
         </v-layout>
       </v-container>
-      <bubbly-bg></bubbly-bg>
     </v-content>
   </v-app>
 </template>
-
 <script>
 import qs from 'qs'
+import { mapState } from 'vuex'
 
 export default {
   layout: 'default',
   auth: false,
-  data() {
-    return {
-      alert: false,
-      msg: 'aa',
-      loading: false,
-      model: {
-        username: 'test',
-        password: 'test123456'
-      },
-      redirect: undefined,
-      visible: false,
-      errMsg: ''
-    }
+  data: () => ({
+    alert: false,
+    msg: 'aa',
+    loading: false,
+    model: {
+      username: 'test',
+      password: 'test123456'
+    },
+    redirect: undefined,
+    visible: false,
+    errMsg: ''
+  }),
+  computed: {
+    ...mapState('app', ['color'])
   },
   watch: {
     $route: {
@@ -91,7 +91,42 @@ export default {
       immediate: true
     }
   },
-  created() {},
+  created() {
+    if (!this.$isServer) {
+      const val = this.color
+      if (val === 'info') {
+        // eslint-disable-next-line nuxt/no-globals-in-created
+        window.bubbly()
+      } else if (val === 'success') {
+        // eslint-disable-next-line nuxt/no-globals-in-created
+        window.bubbly({
+          colorStart: '#fff4e6',
+          colorStop: '#ffe9e4',
+          blur: 1,
+          compose: 'source-over',
+          bubbleFunc: () => `hsla(${Math.random() * 50}, 100%, 50%, .3)`
+        })
+      } else if (val === 'warning') {
+        // eslint-disable-next-line nuxt/no-globals-in-created
+        window.bubbly({
+          colorStart: '#4c004c',
+          colorStop: '#1a001a',
+          bubbleFunc: () =>
+            `hsla(${Math.random() * 360}, 100%, 50%, ${Math.random() * 0.25})`
+        })
+      } else if (val === 'danger') {
+        // eslint-disable-next-line nuxt/no-globals-in-created
+        window.bubbly({
+          colorStart: '#111',
+          colorStop: '#422',
+          bubbleFunc: () => `hsla(0, 100%, 50%, ${Math.random() * 0.25})`
+        })
+      } else {
+        // eslint-disable-next-line nuxt/no-globals-in-created
+        window.bubbly()
+      }
+    }
+  },
   methods: {
     login() {
       this.loading = true
@@ -131,14 +166,15 @@ export default {
   }
 }
 </script>
-<style scoped lang="css">
+<style scoped lang="less">
 #login {
-    height: 50%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    content: "";
-    z-index: 0;
+  height: 0%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  z-index: 0;
+  background: none;
 }
 </style>
