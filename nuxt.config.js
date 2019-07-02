@@ -17,7 +17,7 @@ export default {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '@/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
         href:
@@ -55,6 +55,8 @@ export default {
     { src: '@/plugins/chartist', ssr: true },
     { src: '@/plugins/vue-perfect-scrollbar', ssr: false },
     { src: '@/plugins/vue-mavon-editor', srr: false },
+    { src: '@/plugins/vue-cropper', ssr: false },
+    { src: '@/plugins/bubbly-bg', ssr: false },
     { src: '@/plugins/localStorage.js', ssr: false }
   ],
 
@@ -65,7 +67,6 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/pwa',
     [
       'vue-sweetalert2/nuxt',
       {

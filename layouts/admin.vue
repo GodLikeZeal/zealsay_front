@@ -1,15 +1,17 @@
 <template>
   <div id="appRoot">
     <template>
-      <v-app :dark="$store.state.app.theme === 'dark'">
-        <!--<core-filter/>-->
+      <transition name="fade">
+        <v-app id="app" :dark="$store.state.app.theme === 'dark'">
+          <!--<core-filter/>-->
 
-        <core-toolbar />
+          <core-toolbar />
 
-        <core-drawer />
+          <core-drawer />
 
-        <core-view />
-      </v-app>
+          <core-view />
+        </v-app>
+      </transition>
     </template>
   </div>
 </template>

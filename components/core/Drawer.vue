@@ -101,6 +101,12 @@
                   >
                     <v-list-tile-content>
                       <v-list-tile-title
+                        :class="[
+                          $route.name.replace(/-/g, '/') ===
+                          subItem.href.substring(1)
+                            ? 'primary--text'
+                            : ''
+                        ]"
                         ><span>{{ subItem.title }}</span></v-list-tile-title
                       >
                     </v-list-tile-content>
@@ -164,6 +170,10 @@ export default {
       maxScrollbarLength: 160
     }
   }),
+  created() {
+    // eslint-disable-next-line no-console
+    console.log(this.$route.name.replace(/-/g, '/') === 'admin/user/list')
+  },
   computed: {
     ...mapState('app', ['image', 'color', 'slider']),
     inputValue: {

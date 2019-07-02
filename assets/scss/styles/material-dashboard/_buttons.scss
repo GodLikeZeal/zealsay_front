@@ -15,7 +15,7 @@
   }
 
   &.v-btn--outline {
-    color: $gray-light !important;
+    color: $gray-light;
   }
   &.v-btn-facebook {
     @include social-buttons-color($social-facebook);

@@ -9,12 +9,12 @@ import Card from '@/components/material/Card'
 import ChartCard from '@/components/material/ChartCard'
 import StatsCard from '@/components/material/StatsCard'
 import Footer from '@/components/core/Footer'
-import VAvatarUploader from 'vuetify-avatar-uploader'
+import BackToTop from '@/components/core/BackToTop'
 
 export default ({ store }) => {
   const val = store.state.app.color
   // eslint-disable-next-line no-console
-  console.log(val)
+  // console.log(val)
   let color
   if (val === 'primary') {
     color = '#9c27b0'
@@ -54,6 +54,6 @@ export default ({ store }) => {
   Vue.component('material-chart-card', ChartCard)
   Vue.component('material-stats-card', StatsCard)
   Vue.component('core-footer', Footer)
+  Vue.component('back-to-top', BackToTop)
   Vue.component('avatar', Avatar)
-  Vue.component('v-avatar-uploader', VAvatarUploader)
 }
