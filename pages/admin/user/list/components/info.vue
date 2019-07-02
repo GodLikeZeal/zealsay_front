@@ -5,7 +5,7 @@
         <v-img
           class="white--text"
           height="350"
-          src="https://pan.zealsay.com/info-1.jpg"
+          src="https://pan.zealsay.com/user_info_bg.jpg"
         >
           <v-container fill-height fluid>
             <v-layout fill-height>

@@ -15,7 +15,7 @@ export default {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: 'favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
         href:
@@ -38,21 +38,24 @@ export default {
   css: [
     'material-design-icons-iconfont/dist/material-design-icons.css',
     'vuetify/dist/vuetify.min.css',
-    '~/assets/style/app.styl',
+    '@/assets/style/app.styl',
     'chartist/dist/chartist.min.css',
-    '~/assets/scss/styles/index.scss'
+    '@/assets/scss/styles/index.scss'
   ],
 
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: '~/plugins/vuetify', ssr: true },
-    { src: '~/plugins/axios', ssr: false },
-    { src: '~/plugins/dialog', ssr: false },
-    { src: '~/plugins/chartist', ssr: true },
-    { src: '~/plugins/vue-perfect-scrollbar', ssr: false },
-    { src: '~/plugins/vue-mavon-editor', srr: false }
+    { src: '@/plugins/vuetify', ssr: true },
+    { src: '@/plugins/axios', ssr: false },
+    { src: '@/plugins/dialog', ssr: false },
+    { src: '@/plugins/chartist', ssr: true },
+    { src: '@/plugins/vue-perfect-scrollbar', ssr: false },
+    { src: '@/plugins/vue-mavon-editor', srr: false },
+    { src: '@/plugins/vue-cropper', ssr: false },
+    { src: '@/plugins/bubbly-bg', ssr: false },
+    { src: '@/plugins/localStorage.js', ssr: false }
   ],
 
   /*
@@ -62,7 +65,6 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/pwa',
     [
       'vue-sweetalert2/nuxt',
       {

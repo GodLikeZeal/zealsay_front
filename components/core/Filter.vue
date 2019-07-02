@@ -17,7 +17,7 @@
         <v-layout wrap>
           <v-flex xs12>
             <div class="text-xs-center body-2 text-uppercase sidebar-filter">
-              主题样式设置
+              主题色设置
             </div>
 
             <v-layout justify-center>
@@ -33,10 +33,22 @@
             </v-layout>
             <v-divider class="mt-3" />
           </v-flex>
-          <v-flex xs12>
+          <v-flex xs12 class="align-center">
             <div class="text-xs-center body-2 text-uppercase sidebar-filter">
-              侧边Images
+              开启侧边背景
             </div>
+            <v-switch v-model="slider"></v-switch>
+          </v-flex>
+          <v-flex xs12>
+            <v-layout justify-center>
+              <v-flex xs12>
+                <div
+                  class="text-xs-center body-2 text-uppercase sidebar-filter"
+                >
+                  侧边Images
+                </div>
+              </v-flex>
+            </v-layout>
           </v-flex>
           <v-flex v-for="img in images" :key="img" xs3>
             <v-img
@@ -47,45 +59,35 @@
             />
           </v-flex>
           <v-flex xs12>
-            <v-btn
-              target="_blank"
-              color="success"
-              block
-              @click.native="setImage('')"
-            >
-              No background
-            </v-btn>
-          </v-flex>
-          <v-flex xs12>
-            <v-btn
-              href="https://demos.creative-tim.com/vuetify-material-dashboard/documentation"
-              target="_blank"
-              class="white--text"
-              color="warning"
-              block
-            >
-              Documentation
-            </v-btn>
-          </v-flex>
-          <v-flex xs12>
             <div class="text-xs-center body-2 text-uppercase">
               <div class=" sidebar-filter">
-                Thank You for Sharing!
+                主题模式
               </div>
 
               <div>
                 <v-btn
-                  color="indigo"
-                  class="mr-2 v-btn-facebook"
+                  :color="theme === 'dark' ? '' : 'light-green'"
+                  class="mr-2"
                   fab
                   icon
                   small
                   round
+                  cyan
+                  active
+                  @click.native="setTheme('light')"
                 >
-                  <v-icon>mdi-facebook</v-icon>
+                  <v-icon>mdi-white-balance-sunny</v-icon>
                 </v-btn>
-                <v-btn color="cyan" class="v-btn-twitter" fab icon small round>
-                  <v-icon>mdi-twitter</v-icon>
+                <v-btn
+                  :color="theme === 'dark' ? 'light-green' : ''"
+                  class="mr-2"
+                  fab
+                  icon
+                  small
+                  round
+                  @click.native="setTheme('dark')"
+                >
+                  <v-icon>mdi-weather-night</v-icon>
                 </v-btn>
               </div>
             </div>
@@ -108,20 +110,25 @@ export default {
     }
   },
   data: () => ({
+    ...mapState('app', ['slider']),
     colors: ['primary', 'info', 'success', 'warning', 'danger'],
     images: [
-      'https://pan.zealsay.com/340172-106.jpg',
-      'https://pan.zealsay.com/132407-106.jpg',
-      'https://pan.zealsay.com/318037-106.jpg',
-      'https://pan.zealsay.com/298125-106.jpg'
+      'https://pan.zealsay.com/slider-1.jpg',
+      'https://pan.zealsay.com/slider-2.jpg',
+      'https://pan.zealsay.com/slider-3.jpg',
+      'https://pan.zealsay.com/slider-4.jpg'
     ]
   }),
   computed: {
-    ...mapState('app', ['image', 'color'])
+    ...mapState('app', ['image', 'color', 'theme'])
   },
-
+  watch: {
+    slider: function(newSlider, oldSlider) {
+      this.setSlider(newSlider)
+    }
+  },
   methods: {
-    ...mapMutations('app', ['setImage', 'setColor']),
+    ...mapMutations('app', ['setImage', 'setColor', 'setTheme', 'setSlider']),
     updateColor(val) {
       let color
       if (val === 'primary') {

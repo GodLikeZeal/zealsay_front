@@ -3,13 +3,12 @@
     id="app-drawer"
     v-model="inputValue"
     app
-    dark
     floating
     persistent
     mobile-break-point="991"
     width="260"
   >
-    <v-img :src="image" height="100%">
+    <v-img :src="slider ? image : ''" height="100%">
       <v-layout class="fill-height" tag="v-list" column>
         <v-list-tile avatar>
           <v-list-tile-avatar color="white">
@@ -102,6 +101,12 @@
                   >
                     <v-list-tile-content>
                       <v-list-tile-title
+                        :class="[
+                          $route.name.replace(/-/g, '/') ===
+                          subItem.href.substring(1)
+                            ? 'primary--text'
+                            : ''
+                        ]"
                         ><span>{{ subItem.title }}</span></v-list-tile-title
                       >
                     </v-list-tile-content>
@@ -165,8 +170,12 @@ export default {
       maxScrollbarLength: 160
     }
   }),
+  created() {
+    // eslint-disable-next-line no-console
+    console.log(this.$route.name.replace(/-/g, '/') === 'admin/user/list')
+  },
   computed: {
-    ...mapState('app', ['image', 'color']),
+    ...mapState('app', ['image', 'color', 'slider']),
     inputValue: {
       get() {
         return this.$store.state.app.drawer
@@ -182,7 +191,7 @@ export default {
       return true
     },
     computeLogo() {
-      return '~/static/m.png'
+      return '@/static/m.png'
     },
 
     sideToolbarColor() {

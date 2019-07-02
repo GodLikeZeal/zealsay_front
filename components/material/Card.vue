@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import Offset from '~/components/helper/Offset'
+import Offset from '@/components/helper/Offset'
 export default {
   components: {
     'helper-offset': Offset

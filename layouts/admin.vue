@@ -1,23 +1,25 @@
 <template>
   <div id="appRoot">
     <template>
-      <v-app>
-        <!--<core-filter/>-->
+      <transition name="fade">
+        <v-app id="app" :dark="$store.state.app.theme === 'dark'">
+          <!--<core-filter/>-->
 
-        <core-toolbar />
+          <core-toolbar />
 
-        <core-drawer />
+          <core-drawer />
 
-        <core-view />
-      </v-app>
+          <core-view />
+        </v-app>
+      </transition>
     </template>
   </div>
 </template>
 
 <script>
-import Toolbar from '~/components/core/Toolbar'
-import Drawer from '~/components/core/Drawer'
-import View from '~/components/core/View'
+import Toolbar from '@/components/core/Toolbar'
+import Drawer from '@/components/core/Drawer'
+import View from '@/components/core/View'
 
 export default {
   components: {

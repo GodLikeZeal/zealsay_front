@@ -1,19 +1,18 @@
 <template>
-  <v-toolbar id="core-toolbar" flat prominent style="background: #eee;">
-    <div class="v-toolbar-title">
-      <v-toolbar-title class="tertiary--text font-weight-light">
-        <v-btn
-          v-if="responsive"
-          class="default v-btn--simple"
-          dark
-          icon
-          @click.stop="onClickBtn"
-        >
-          <v-icon>mdi-view-list</v-icon>
-        </v-btn>
-        {{ title }}
-      </v-toolbar-title>
-    </div>
+  <v-toolbar id="core-toolbar" flat prominent>
+    <!--    <div class="v-toolbar-title">-->
+    <!--      <v-toolbar-title class="tertiary&#45;&#45;text font-weight-light">-->
+    <!--        <v-btn-->
+    <!--          v-if="responsive"-->
+    <!--          class="default v-btn&#45;&#45;simple"-->
+    <!--          icon-->
+    <!--          @click.stop="onClickBtn"-->
+    <!--        >-->
+    <!--          <v-icon>mdi-view-list</v-icon>-->
+    <!--        </v-btn>-->
+    <!--        {{ title }}-->
+    <!--      </v-toolbar-title>-->
+    <!--    </div>-->
 
     <v-spacer />
     <v-toolbar-items>
@@ -191,5 +190,8 @@ export default {
 <style scoped>
 #core-toolbar a {
   text-decoration: none;
+}
+#core-toolbar {
+  background: none;
 }
 </style>
