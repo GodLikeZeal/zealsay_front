@@ -189,7 +189,7 @@ export default {
       subheading: '',
       status: 'DRAFT',
       coverImage: 'https://pan.zealsay.com/20190701222747340000000.jpg',
-      label: '',
+      label: [],
       openness: 'ALL',
       contentMd: '',
       contentHtml: ''

@@ -65,13 +65,15 @@
             <v-card v-if="i > 0" :key="item.id" flat class="card">
               <v-layout row>
                 <v-flex xs6>
-                  <v-img
-                    transition="fade-transition"
-                    height="13rem"
-                    class="card elevation-3"
-                    :src="item.coverImage"
-                    contain
-                  ></v-img>
+                  <a>
+                    <v-img
+                      transition="fade-transition"
+                      :aspect-ratio="320 / 200"
+                      class="card elevation-3"
+                      :src="item.coverImage"
+                      contain
+                    ></v-img>
+                  </a>
                 </v-flex>
                 <v-flex xs6>
                   <v-card-title primary-title>

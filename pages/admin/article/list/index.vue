@@ -206,7 +206,9 @@
           <td class="text-xs-right col">
             <div class="limit-width">
               <v-chip
-                v-for="label in props.item.label.split(',')"
+                v-for="label in props.item.label
+                  ? props.item.label.split(',')
+                  : []"
                 :key="label"
                 :color="color[parseInt((label.length * 6) / 6)]"
                 small
