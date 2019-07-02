@@ -34,5 +34,6 @@ export default {
 <style scoped>
 #core-footer {
   z-index: 0;
+  height: 48px !important;
 }
 </style>

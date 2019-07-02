@@ -377,7 +377,7 @@ export default {
               this.loading = false
               this.$swal({
                 title: '保存成功!',
-                text: '不错哟,您已经添加了一篇文章啦',
+                text: '太棒啦,文章已经更新了哦',
                 type: 'success'
               })
             } else {
