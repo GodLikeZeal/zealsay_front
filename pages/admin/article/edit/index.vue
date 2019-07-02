@@ -175,8 +175,9 @@
 <script>
 import { uploadImage, uploadImageMultiple } from '@/api/user'
 import {
+  getArticle,
   getCategoryList,
-  saveArticle,
+  updateArticle,
   getArticleLabelList
 } from '@/api/article'
 
@@ -184,16 +185,6 @@ export default {
   name: 'Add',
   layout: 'admin',
   data: () => ({
-    form: {
-      title: '',
-      subheading: '',
-      status: 'DRAFT',
-      coverImage: 'https://pan.zealsay.com/20190317010254129000000.jpg',
-      label: '',
-      openness: 'ALL',
-      contentMd: '',
-      contentHtml: ''
-    },
     showCropper: false,
     img_file: {},
     valid: false,
@@ -235,6 +226,17 @@ export default {
     }
   },
   async asyncData({ app, query, error }) {
+    const resArticle = await app.$axios.$request(getArticle(query.id))
+    let form = {}
+    if (resArticle.code === '200') {
+      form = resArticle.data
+      form.label = form.label.split(',')
+    } else {
+      return error({
+        statusCode: resArticle.code,
+        message: resArticle.message
+      })
+    }
     const resCategory = await app.$axios.$request(getCategoryList())
     const category = []
     if (resCategory.code === '200') {
@@ -265,6 +267,7 @@ export default {
       })
     }
     return {
+      form: form,
       category: category,
       labels: labels
     }
@@ -310,7 +313,7 @@ export default {
               }
               // 开始提交文章信息
               this.$axios
-                .$request(saveArticle(this.form))
+                .$request(updateArticle(this.form))
                 .then(res => {
                   if (res.code === '200') {
                     this.loading = false
@@ -368,7 +371,7 @@ export default {
       } else {
         // 开始提交文章信息
         this.$axios
-          .$request(saveArticle(this.form))
+          .$request(updateArticle(this.form))
           .then(res => {
             if (res.code === '200') {
               this.loading = false
