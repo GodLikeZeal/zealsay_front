@@ -278,29 +278,7 @@ export default {
       this.previews = data
     },
     changeData(value, render) {
-      const hljs = require('highlight.js') // https://highlightjs.org/
-
-      // Actual default values
-      const markdown = require('markdown-it')({
-        highlight: function(str, lang) {
-          if (lang && hljs.getLanguage(lang)) {
-            try {
-              return (
-                '<pre class="hljs"><code>' +
-                hljs.highlight(lang, str, true).value +
-                '</code></pre>'
-              )
-            } catch (__) {}
-          }
-
-          return (
-            '<pre class="hljs"><code>' +
-            markdown.utils.escapeHtml(str) +
-            '</code></pre>'
-          )
-        }
-      })
-      this.form.contentHtml = markdown.render(render)
+      this.form.contentHtml = render
     },
     // 绑定@imgAdd event
     $imgAdd(pos, $file) {
