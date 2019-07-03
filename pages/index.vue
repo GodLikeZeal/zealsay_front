@@ -7,7 +7,7 @@
 
         <v-spacer></v-spacer>
 
-        <v-toolbar-items class="nav-items">
+        <v-toolbar-items style="margin-right:8rem">
           <v-btn flat>主页</v-btn>
           <v-btn flat>分类</v-btn>
           <v-btn flat>友链</v-btn>
@@ -44,9 +44,9 @@
               <v-container fill-height fluid justify-center>
                 <v-layout fill-height align-center>
                   <v-flex xs12 class="text-md-center">
-                    <span class="font-weight-thin">{{
-                      desserts[0].categoryName
-                    }}</span>
+                    <span class="font-weight-thin">
+                      {{ desserts[0].categoryName }}
+                    </span>
                     <h3 class="font-weight-medium">{{ desserts[0].title }}</h3>
                     <p class="Paragraph">
                       {{ desserts[0].subheading }}
@@ -233,9 +233,6 @@ export default {
 .v-toolbar__content {
   margin-left: 1.2em !important;
 }
-.nav-items {
-  margin-right: 8em;
-}
 .hitokoto-title {
   color: white;
   font-weight: 400 !important;
@@ -282,5 +279,11 @@ export default {
 }
 .left_list_item {
   margin: 0.5rem 1.25rem;
+}
+.elevation-3 {
+  transition: 1s all;
+}
+.elevation-3:hover {
+  transform: scale(1.1);
 }
 </style>
