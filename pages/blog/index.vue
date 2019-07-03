@@ -107,12 +107,6 @@ export default {
 .index {
   background: #fafafa;
 }
-.v-toolbar__content {
-  margin-left: 1.2rem !important;
-}
-/*.nav-items {*/
-/*  margin-right: 8rem;*/
-/*}*/
 .hitokoto-title {
   color: white;
   font-weight: 400 !important;
@@ -121,43 +115,7 @@ export default {
   line-height: 1 !important;
   font-size: 2rem !important;
 }
-.hitokoto_author {
-  color: snow;
-  float: right;
-  margin-top: 3rem;
-}
-.bracket {
-  color: white;
-  font-weight: 400 !important;
-  line-height: 0 !important;
-  font-size: 2rem !important;
-}
-.right {
-  position: relative;
-  right: 0;
-  bottom: 0;
-}
-.left {
-  position: relative;
-  left: 0;
-  top: -2.5rem;
-}
 .word {
   position: relative;
-}
-.card {
-  margin: 1.5em;
-  border-radius: 0.5em;
-}
-.footer {
-  margin-top: 300px;
-}
-.left_list_header {
-  h4 {
-    margin: auto;
-  }
-}
-.left_list_item {
-  margin: 0.5rem 1.25rem;
 }
 </style>
