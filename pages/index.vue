@@ -38,7 +38,7 @@
           <v-card class="card">
             <v-img
               transition="fade-transition"
-              class="white--text"
+              class="white--text cover"
               height="300px"
               width="100%"
               :src="desserts[0].coverImage"
@@ -78,7 +78,7 @@
                     <v-img
                       transition="fade-transition"
                       :aspect-ratio="320 / 200"
-                      class="card elevation-3"
+                      class="card elevation-3 cover"
                       :src="item.coverImage"
                       contain
                     ></v-img>
@@ -290,10 +290,10 @@ export default {
 .left_list_item {
   margin: 0.5rem 1.25rem;
 }
-.elevation-3 {
+.cover {
   transition: 1s all;
 }
-.elevation-3:hover {
+.cover:hover {
   transform: scale(1.1);
 }
 </style>
