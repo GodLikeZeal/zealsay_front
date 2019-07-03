@@ -160,6 +160,7 @@
                 v-model="form.contentMd"
                 style="z-index:0;height: 800px"
                 :ishljs="true"
+                code-style="atelier-plateau-dark"
                 @change="changeData"
                 @imgAdd="$imgAdd"
                 @imgDel="$imgDel"
@@ -230,7 +231,7 @@ export default {
     let form = {}
     if (resArticle.code === '200') {
       form = resArticle.data
-      form.label = form.label.split(',')
+      form.label = form.label ? form.label.split(',') : []
     } else {
       return error({
         statusCode: resArticle.code,

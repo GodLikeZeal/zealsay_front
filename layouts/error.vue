@@ -7,7 +7,7 @@
             <div class="container fluid fill-height">
               <div class="layout align-center justify-center row">
                 <div class="mr-3 hidden-sm-and-down">
-                  <img src="/static/image/gif/NotFound.gif" alt="NotFound" />
+                  <img src="@/static/image/gif/NotFound.gif" alt="NotFound" />
                 </div>
                 <div v-if="error.statusCode === 404" class="text-md-center">
                   <h1>404</h1>
@@ -92,5 +92,9 @@ h1 {
   font-weight: 700;
   color: #252932;
   text-shadow: rgba(61, 61, 61, 0.3) 1px 1px, rgba(61, 61, 61, 0.2) 2px 2px, rgba(61, 61, 61, 0.3) 3px 3px;
+}
+
+.application {
+  background: none !important;
 }
 </style>

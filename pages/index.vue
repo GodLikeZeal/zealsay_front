@@ -1,5 +1,5 @@
 <template>
-  <div v-cloak id="index" class="index">
+  <div id="index" class="index">
     <!-- header -->
     <v-card color="primary" height="450">
       <v-toolbar color="primary" dark flat>
@@ -12,7 +12,9 @@
           <v-btn flat>分类</v-btn>
           <v-btn flat>友链</v-btn>
           <v-btn flat>关于</v-btn>
-          <v-btn flat><v-icon>search</v-icon></v-btn>
+          <v-btn flat>
+            <v-icon>search</v-icon>
+          </v-btn>
         </v-toolbar-items>
       </v-toolbar>
       <v-container>
@@ -24,7 +26,7 @@
                 {{ motto.hitokoto }}
               </h1>
               <h1 class="bracket right">』</h1>
-              <h3 class="hitokoto_author">-「{{ motto.creator }}」</h3>
+              <h3 class="hitokoto_author">-「{{ motto.from }}」</h3>
             </div>
           </v-flex>
         </v-layout>
@@ -51,7 +53,14 @@
                     <p class="Paragraph">
                       {{ desserts[0].subheading }}
                     </p>
-                    <v-btn round color="primary">阅读原文</v-btn>
+                    <v-btn
+                      round
+                      nuxt
+                      color="primary"
+                      :to="'blog?id=' + desserts[0].id"
+                      target="_Blank"
+                      >阅读原文</v-btn
+                    >
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -65,7 +74,7 @@
             <v-card v-if="i > 0" :key="item.id" flat class="card">
               <v-layout row>
                 <v-flex xs6>
-                  <a>
+                  <a :href="'blog?id=' + item.id" target="_Blank">
                     <v-img
                       transition="fade-transition"
                       :aspect-ratio="320 / 200"
@@ -84,7 +93,9 @@
                       <h4>{{ item.title }}</h4>
                       <div class="font-weight-medium">
                         {{ item.subheading }}
-                        <a>阅读更多…</a>
+                        <a :href="'blog?id=' + item.id" target="_Blank"
+                          >阅读更多…</a
+                        >
                       </div>
                       <h5>
                         {{ item.authorName }} {{ item.createDate }} 415次浏览
@@ -175,17 +186,15 @@
 <script>
 import { getHitokoto } from '@/api/service'
 import { getArticlePageList } from '@/api/article'
+
 export default {
   auth: false,
   data: () => ({ loading: true }),
   computed: {
-    length: {
-      get: function() {
-        return this.pagination.totalItems
-          ? Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
-          : 0
-      },
-      set: function() {}
+    length: function() {
+      return this.pagination.totalItems
+        ? Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
+        : 0
     }
   },
   async asyncData({ app, query, error }) {
@@ -194,6 +203,7 @@ export default {
     if (resHitokoto.code === '200') {
       motto.hitokoto = resHitokoto.data.hitokoto
       motto.creator = resHitokoto.data.creator
+      motto.from = resHitokoto.data.from
     } else {
       return error({
         statusCode: resHitokoto.code,
