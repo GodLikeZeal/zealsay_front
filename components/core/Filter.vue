@@ -37,7 +37,7 @@
             <div class="text-xs-center body-2 text-uppercase sidebar-filter">
               开启侧边背景
             </div>
-            <v-switch v-model="slider"></v-switch>
+            <v-switch class="justify-center" v-model="slider"></v-switch>
           </v-flex>
           <v-flex xs12>
             <v-layout justify-center>

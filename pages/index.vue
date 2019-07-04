@@ -1,5 +1,5 @@
 <template>
-  <div v-cloak id="index" class="index">
+  <div id="index" class="index">
     <!-- header -->
     <v-card color="primary" height="450">
       <v-toolbar color="primary" dark flat>
@@ -7,12 +7,14 @@
 
         <v-spacer></v-spacer>
 
-        <v-toolbar-items class="nav-items">
+        <v-toolbar-items style="margin-right:8rem">
           <v-btn flat>主页</v-btn>
           <v-btn flat>分类</v-btn>
           <v-btn flat>友链</v-btn>
           <v-btn flat>关于</v-btn>
-          <v-btn flat><v-icon>search</v-icon></v-btn>
+          <v-btn flat>
+            <v-icon>search</v-icon>
+          </v-btn>
         </v-toolbar-items>
       </v-toolbar>
       <v-container>
@@ -24,7 +26,7 @@
                 {{ motto.hitokoto }}
               </h1>
               <h1 class="bracket right">』</h1>
-              <h3 class="hitokoto_author">-「{{ motto.creator }}」</h3>
+              <h3 class="hitokoto_author">-「{{ motto.from }}」</h3>
             </div>
           </v-flex>
         </v-layout>
@@ -33,30 +35,41 @@
     <v-container>
       <v-layout fill-height>
         <v-flex xs12 md12 sm6>
-          <v-card class="card">
-            <v-img
-              transition="fade-transition"
-              class="white--text"
-              height="300px"
-              width="100%"
-              :src="desserts[0].coverImage"
-            >
-              <v-container fill-height fluid justify-center>
-                <v-layout fill-height align-center>
-                  <v-flex xs12 class="text-md-center">
-                    <span class="font-weight-thin">{{
-                      desserts[0].categoryName
-                    }}</span>
-                    <h3 class="font-weight-medium">{{ desserts[0].title }}</h3>
-                    <p class="Paragraph">
-                      {{ desserts[0].subheading }}
-                    </p>
-                    <v-btn round color="primary">阅读原文</v-btn>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-img>
-          </v-card>
+          <a :herf="'blog?id=' + desserts[0].id" target="_Blank">
+            <v-card class="card">
+              <v-img
+                transition="fade-transition"
+                class="white--text cover"
+                height="300px"
+                width="100%"
+                :src="desserts[0].coverImage"
+              >
+                <v-container fill-height fluid justify-center>
+                  <v-layout fill-height align-center>
+                    <v-flex xs12 class="text-md-center">
+                      <span class="font-weight-thin">
+                        {{ desserts[0].categoryName }}
+                      </span>
+                      <h3 class="font-weight-medium">
+                        {{ desserts[0].title }}
+                      </h3>
+                      <p class="Paragraph">
+                        {{ desserts[0].subheading }}
+                      </p>
+                      <v-btn
+                        round
+                        nuxt
+                        color="primary"
+                        :to="'blog?id=' + desserts[0].id"
+                        target="_Blank"
+                        >阅读原文</v-btn
+                      >
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-img>
+            </v-card>
+          </a>
         </v-flex>
       </v-layout>
       <v-layout>
@@ -65,11 +78,11 @@
             <v-card v-if="i > 0" :key="item.id" flat class="card">
               <v-layout row>
                 <v-flex xs6>
-                  <a>
+                  <a :href="'blog?id=' + item.id" target="_Blank">
                     <v-img
                       transition="fade-transition"
                       :aspect-ratio="320 / 200"
-                      class="card elevation-3"
+                      class="card elevation-3 cover"
                       :src="item.coverImage"
                       contain
                     ></v-img>
@@ -84,7 +97,9 @@
                       <h4>{{ item.title }}</h4>
                       <div class="font-weight-medium">
                         {{ item.subheading }}
-                        <a>阅读更多…</a>
+                        <a :href="'blog?id=' + item.id" target="_Blank"
+                          >阅读更多…</a
+                        >
                       </div>
                       <h5>
                         {{ item.authorName }} {{ item.createDate }} 415次浏览
@@ -175,17 +190,15 @@
 <script>
 import { getHitokoto } from '@/api/service'
 import { getArticlePageList } from '@/api/article'
+
 export default {
   auth: false,
   data: () => ({ loading: true }),
   computed: {
-    length: {
-      get: function() {
-        return this.pagination.totalItems
-          ? Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
-          : 0
-      },
-      set: function() {}
+    length: function() {
+      return this.pagination.totalItems
+        ? Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
+        : 0
     }
   },
   async asyncData({ app, query, error }) {
@@ -194,6 +207,7 @@ export default {
     if (resHitokoto.code === '200') {
       motto.hitokoto = resHitokoto.data.hitokoto
       motto.creator = resHitokoto.data.creator
+      motto.from = resHitokoto.data.from
     } else {
       return error({
         statusCode: resHitokoto.code,
@@ -232,9 +246,6 @@ export default {
 }
 .v-toolbar__content {
   margin-left: 1.2em !important;
-}
-.nav-items {
-  margin-right: 8em;
 }
 .hitokoto-title {
   color: white;
@@ -282,5 +293,11 @@ export default {
 }
 .left_list_item {
   margin: 0.5rem 1.25rem;
+}
+.cover {
+  transition: 1s all;
+}
+.cover:hover {
+  transform: scale(1.1);
 }
 </style>

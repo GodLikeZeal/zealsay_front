@@ -160,6 +160,7 @@
                 v-model="form.contentMd"
                 style="z-index:0;height: 800px"
                 :ishljs="true"
+                code-style="atelier-plateau-dark"
                 @change="changeData"
                 @imgAdd="$imgAdd"
                 @imgDel="$imgDel"
