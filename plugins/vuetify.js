@@ -12,26 +12,9 @@ import Footer from '@/components/core/Footer'
 import BackToTop from '@/components/core/BackToTop'
 
 export default ({ store }) => {
-  const val = store.state.app.color
-  // eslint-disable-next-line no-console
-  // console.log(val)
-  let color
-  if (val === 'primary') {
-    color = '#9c27b0'
-  } else if (val === 'info') {
-    color = '#00bcd4'
-  } else if (val === 'success') {
-    color = '#4caf50'
-  } else if (val === 'warning') {
-    color = '#ff9800'
-  } else if (val === 'danger') {
-    color = '#f44336'
-  } else {
-    color = '#4caf50'
-  }
   Vue.use(Vuetify, {
     theme: {
-      primary: color,
+      primary: '#4caf50',
       secondary: '#4caf50',
       tertiary: '#495057',
       accent: '#82B1FF',

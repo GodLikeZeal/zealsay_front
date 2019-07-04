@@ -26,6 +26,34 @@ export default {
     'core-toolbar': Toolbar,
     'core-drawer': Drawer,
     'core-view': View
+  },
+  created() {
+    let color = '#4caf50'
+    if (!this.$isServer) {
+      const str = localStorage.getItem('vuex')
+      let val
+      if (str) {
+        val = JSON.parse(str).app.color
+      }
+      if (val === 'primary') {
+        color = '#9c27b0'
+      } else if (val === 'info') {
+        color = '#00bcd4'
+      } else if (val === 'success') {
+        color = '#4caf50'
+      } else if (val === 'warning') {
+        color = '#ff9800'
+      } else if (val === 'danger') {
+        color = '#f44336'
+      } else {
+        color = '#4caf50'
+      }
+      // eslint-disable-next-line no-console
+      console.error(color)
+    }
+    setTimeout(() => {
+      this.$vuetify.theme.primary = color
+    }, 0)
   }
 }
 </script>
