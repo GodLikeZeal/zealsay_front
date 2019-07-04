@@ -170,10 +170,6 @@ export default {
       maxScrollbarLength: 160
     }
   }),
-  created() {
-    // eslint-disable-next-line no-console
-    console.log(this.$route.name.replace(/-/g, '/') === 'admin/user/list')
-  },
   computed: {
     ...mapState('app', ['image', 'color', 'slider']),
     inputValue: {

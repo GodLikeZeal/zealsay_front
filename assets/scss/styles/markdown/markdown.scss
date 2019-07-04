@@ -336,6 +336,7 @@
 .markdown-body code {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
   font-size: 12px;
+  color: #7179dc;
 }
 
 .markdown-body pre {
@@ -705,11 +706,11 @@
 
 /* 高亮 */
 .markdown-body .hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  color: #333;
-  background: #f2f3f1
+  //display: block;
+  //overflow-x: auto;
+  //padding: 0.5em;
+  //color: #333;
+  //background: #f2f3f1
 }
 
 .markdown-body .hljs-comment, .hljs-quote {
@@ -718,7 +719,7 @@
 }
 
 .markdown-body .hljs-keyword, .hljs-selector-tag, .hljs-subst {
-  color: #333;
+  color: #D1DC9D;
   font-weight: bold
 }
 

@@ -35,37 +35,41 @@
     <v-container>
       <v-layout fill-height>
         <v-flex xs12 md12 sm6>
-          <v-card class="card">
-            <v-img
-              transition="fade-transition"
-              class="white--text cover"
-              height="300px"
-              width="100%"
-              :src="desserts[0].coverImage"
-            >
-              <v-container fill-height fluid justify-center>
-                <v-layout fill-height align-center>
-                  <v-flex xs12 class="text-md-center">
-                    <span class="font-weight-thin">
-                      {{ desserts[0].categoryName }}
-                    </span>
-                    <h3 class="font-weight-medium">{{ desserts[0].title }}</h3>
-                    <p class="Paragraph">
-                      {{ desserts[0].subheading }}
-                    </p>
-                    <v-btn
-                      round
-                      nuxt
-                      color="primary"
-                      :to="'blog?id=' + desserts[0].id"
-                      target="_Blank"
-                      >阅读原文</v-btn
-                    >
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-img>
-          </v-card>
+          <a :herf="'blog?id=' + desserts[0].id" target="_Blank">
+            <v-card class="card">
+              <v-img
+                transition="fade-transition"
+                class="white--text cover"
+                height="300px"
+                width="100%"
+                :src="desserts[0].coverImage"
+              >
+                <v-container fill-height fluid justify-center>
+                  <v-layout fill-height align-center>
+                    <v-flex xs12 class="text-md-center">
+                      <span class="font-weight-thin">
+                        {{ desserts[0].categoryName }}
+                      </span>
+                      <h3 class="font-weight-medium">
+                        {{ desserts[0].title }}
+                      </h3>
+                      <p class="Paragraph">
+                        {{ desserts[0].subheading }}
+                      </p>
+                      <v-btn
+                        round
+                        nuxt
+                        color="primary"
+                        :to="'blog?id=' + desserts[0].id"
+                        target="_Blank"
+                        >阅读原文</v-btn
+                      >
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-img>
+            </v-card>
+          </a>
         </v-flex>
       </v-layout>
       <v-layout>
