@@ -1,0 +1,8 @@
+.cover {
+  .v-image__image {
+    transition: 1s all;
+  }
+  .v-image__image &:hover {
+    transform: scale(1.1);
+  }
+}

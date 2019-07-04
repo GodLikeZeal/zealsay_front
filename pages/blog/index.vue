@@ -38,7 +38,7 @@
       <v-layout>
         <v-flex xs12 md12>
           <template>
-            <div v-html="article.contentHtml"></div>
+            <div class="markdown-body" v-html="article.contentHtml"></div>
           </template>
         </v-flex>
       </v-layout>
@@ -104,6 +104,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import '../../assets/scss/styles/markdown/markdown';
+@import '../../assets/scss/styles/markdown/github-markdown';
+@import '../../assets/scss/styles/markdown/atelier-plateau-dark';
 .index {
   background: #fafafa;
 }
