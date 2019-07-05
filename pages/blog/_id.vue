@@ -3,12 +3,13 @@
     <!-- header -->
     <v-card color="primary" height="450">
       <v-toolbar color="primary" dark flat>
-        <v-toolbar-title class="white--text">zealsay</v-toolbar-title>
-
+        <nuxt-link to="/">
+          <v-toolbar-title class="white--text">zealsay</v-toolbar-title>
+        </nuxt-link>
         <v-spacer></v-spacer>
 
         <v-toolbar-items class="nav-items">
-          <v-btn flat>主页</v-btn>
+          <v-btn nuxt to="/" flat>主页</v-btn>
           <v-btn flat>分类</v-btn>
           <v-btn flat>友链</v-btn>
           <v-btn flat>关于</v-btn>
@@ -83,8 +84,8 @@ export default {
       ]
     }
   },
-  async asyncData({ app, query, error }) {
-    const resArticle = await app.$axios.$request(getArticle(query.id))
+  async asyncData({ app, params, error }) {
+    const resArticle = await app.$axios.$request(getArticle(params.id))
     let article = {}
     if (resArticle.code === '200') {
       article = resArticle.data

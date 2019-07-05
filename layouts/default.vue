@@ -32,8 +32,6 @@ export default {
       } else {
         color = '#4caf50'
       }
-      // eslint-disable-next-line no-console
-      console.error(color)
     }
     setTimeout(() => {
       this.$vuetify.theme.primary = color

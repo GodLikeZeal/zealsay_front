@@ -3,12 +3,18 @@
     <!-- header -->
     <v-card color="primary" height="450">
       <v-toolbar color="primary" dark flat>
-        <v-toolbar-title class="white--text">zealsay</v-toolbar-title>
-
+        <nuxt-link to="/">
+          <v-avatar tile>
+            <img src="@/static/image/logo/cat.png" alt="logo" />
+          </v-avatar>
+          <v-toolbar-title style="display: inline-flex;" class="white--text"
+            >zealsay</v-toolbar-title
+          >
+        </nuxt-link>
         <v-spacer></v-spacer>
 
         <v-toolbar-items style="margin-right:8rem">
-          <v-btn flat>主页</v-btn>
+          <v-btn nuxt to="/" flat>主页</v-btn>
           <v-btn flat>分类</v-btn>
           <v-btn flat>友链</v-btn>
           <v-btn flat>关于</v-btn>
@@ -35,7 +41,7 @@
     <v-container>
       <v-layout fill-height>
         <v-flex xs12 md12 sm6>
-          <a :herf="'blog?id=' + desserts[0].id" target="_Blank">
+          <a :herf="'blog/' + desserts[0].id" target="_Blank">
             <v-card class="card">
               <v-img
                 transition="fade-transition"
@@ -47,7 +53,7 @@
                 <v-container fill-height fluid justify-center>
                   <v-layout fill-height align-center>
                     <v-flex xs12 class="text-md-center">
-                      <span class="font-weight-thin">
+                      <span class="font-weight">
                         {{ desserts[0].categoryName }}
                       </span>
                       <h3 class="font-weight-medium">
@@ -60,7 +66,7 @@
                         round
                         nuxt
                         color="primary"
-                        :to="'blog?id=' + desserts[0].id"
+                        :to="'blog/' + desserts[0].id"
                         target="_Blank"
                         >阅读原文</v-btn
                       >
@@ -78,7 +84,7 @@
             <v-card v-if="i > 0" :key="item.id" flat class="card">
               <v-layout row>
                 <v-flex xs6>
-                  <a :href="'blog?id=' + item.id" target="_Blank">
+                  <a :href="'blog/' + item.id" target="_Blank">
                     <v-img
                       transition="fade-transition"
                       :aspect-ratio="320 / 200"
@@ -91,7 +97,7 @@
                 <v-flex xs6>
                   <v-card-title primary-title>
                     <div>
-                      <div class="font-weight-thin">
+                      <div class="font-weight">
                         {{ item.categoryName }}
                       </div>
                       <h4>{{ item.title }}</h4>

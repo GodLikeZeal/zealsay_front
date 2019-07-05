@@ -223,11 +223,13 @@
           <td class="text-xs-right">
             <v-layout justify-center class="mb-2">
               <v-btn
+                nuxt
                 icon
                 flat
                 color="primary"
                 title="预览"
-                @click="handleInfo(props.item)"
+                :to="'/blog/' + props.item.id"
+                target="_Blank"
               >
                 <v-icon>portrait</v-icon>
               </v-btn>
