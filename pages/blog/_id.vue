@@ -4,13 +4,33 @@
     <v-card color="primary" height="450">
       <v-toolbar color="primary" dark flat>
         <nuxt-link to="/">
-          <v-toolbar-title class="white--text">zealsay</v-toolbar-title>
+          <v-avatar tile>
+            <img src="@/static/image/logo/cat.png" alt="logo" />
+          </v-avatar>
+          <v-toolbar-title style="display: inline-flex;" class="white--text"
+            >zealsay
+          </v-toolbar-title>
         </nuxt-link>
         <v-spacer></v-spacer>
 
-        <v-toolbar-items class="nav-items">
+        <v-toolbar-items style="margin-right:8rem">
           <v-btn nuxt to="/" flat>主页</v-btn>
-          <v-btn flat>分类</v-btn>
+
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <v-btn flat v-on="on">
+                博客
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-tile v-for="(item, index) in categorys" :key="index">
+                <nuxt-link :to="'/blog/category/' + item.id">
+                  <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                </nuxt-link>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+
           <v-btn flat>友链</v-btn>
           <v-btn flat>关于</v-btn>
           <v-btn flat>
@@ -58,7 +78,7 @@
 </template>
 
 <script>
-import { getArticle } from '@/api/article'
+import { getArticle, getCategoryList } from '@/api/article'
 
 export default {
   auth: false,
@@ -92,8 +112,16 @@ export default {
     } else {
       return error({ statusCode: resArticle.code, message: resArticle.message })
     }
+    const resCategory = await app.$axios.$request(getCategoryList())
+    let categorys = []
+    if (resCategory.code === '200') {
+      categorys = resCategory.data
+    } else {
+      return error({ statusCode: resArticle.code, message: resArticle.message })
+    }
     return {
-      article: article
+      article: article,
+      categorys: categorys
     }
   },
   methods: {

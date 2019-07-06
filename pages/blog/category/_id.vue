@@ -3,7 +3,23 @@
     <!-- header -->
     <v-card color="primary" height="450">
       <blog-nav :category="categorys"></blog-nav>
-      <blog-motto :hitokoto="motto"></blog-motto>
+      <v-container>
+        <v-layout>
+          <v-flex md12>
+            <div class="text-md-center word">
+              <template v-for="item in categorys">
+                <h1
+                  v-if="item.id === $route.params.id"
+                  :key="item.id"
+                  class="hitokoto-title"
+                >
+                  分类：{{ item.name }}
+                </h1>
+              </template>
+            </div>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </v-card>
     <v-container>
       <v-layout fill-height>
@@ -14,16 +30,6 @@
       <v-layout>
         <v-flex xs9>
           <blog-article-list :list="list"></blog-article-list>
-          <!-- page分页-->
-          <div class="pagination text-md-center">
-            <v-pagination
-              v-model="pagination.page"
-              circle
-              color="primary"
-              :length="length"
-              @input="search"
-            ></v-pagination>
-          </div>
         </v-flex>
         <v-flex xs4>
           <!-- 最近评论 -->
@@ -48,32 +54,26 @@
 
 <script>
 import NavBar from '@/components/blog/NavBar'
-import Motto from '@/components/blog/Motto'
-import MainCard from '@/components/blog/MainCard'
 import ArticleList from '@/components/blog/ArticleList'
+import MainCard from '@/components/blog/MainCard'
 import RecentDiscuss from '@/components/blog/RecentDiscuss'
 import LabelCloud from '@/components/blog/LabelCloud'
-import { getHitokoto } from '@/api/service'
 import {
-  getArticleLabelPage,
   getArticlePageListToC,
-  getCategoryList
+  getCategoryList,
+  getArticleLabelPage
 } from '@/api/article'
 
 export default {
   auth: false,
   components: {
     'blog-nav': NavBar,
-    'blog-motto': Motto,
     'blog-main-card': MainCard,
     'blog-article-list': ArticleList,
     'blog-recent-discuss': RecentDiscuss,
     'blog-label-cloud': LabelCloud
   },
-  data: () => ({
-    loading: true,
-    colors: ['primary', 'success', 'info', 'warning', 'danger']
-  }),
+  data: () => ({ loading: true }),
   computed: {
     length: function() {
       return this.pagination.totalItems
@@ -87,19 +87,9 @@ export default {
     }
   },
   async asyncData({ app, params, error }) {
-    const resHitokoto = await app.$axios.$request(getHitokoto())
-    const motto = {}
-    if (resHitokoto.code === '200') {
-      motto.hitokoto = resHitokoto.data.hitokoto
-      motto.creator = resHitokoto.data.creator
-      motto.from = resHitokoto.data.from
-    } else {
-      return error({
-        statusCode: resHitokoto.code,
-        message: resHitokoto.message
-      })
-    }
-    const resArticle = await app.$axios.$request(getArticlePageListToC())
+    const query = {}
+    query.categoryId = params.id
+    const resArticle = await app.$axios.$request(getArticlePageListToC(query))
     const pagination = {}
     if (resArticle.code === '200') {
       pagination.page = resArticle.data.currentPage
@@ -126,7 +116,6 @@ export default {
       })
     }
     return {
-      motto: motto,
       desserts: resArticle.data.records,
       pagination: pagination,
       categorys: categorys,
@@ -154,6 +143,40 @@ export default {
   margin-left: 1.2em !important;
 }
 
+.hitokoto-title {
+  color: white;
+  font-weight: 400 !important;
+  margin-top: 5rem;
+  margin-bottom: 0.6rem;
+  line-height: 1 !important;
+  font-size: 2rem !important;
+}
+
+.hitokoto_author {
+  color: snow;
+  float: right;
+  margin-top: 3rem;
+}
+
+.bracket {
+  color: white;
+  font-weight: 400 !important;
+  line-height: 0 !important;
+  font-size: 2rem !important;
+}
+
+.right {
+  position: relative;
+  right: 0;
+  bottom: 0;
+}
+
+.left {
+  position: relative;
+  left: 0;
+  top: -2.5rem;
+}
+
 .word {
   position: relative;
 }
@@ -175,8 +198,6 @@ export default {
 
 .left_list_item {
   margin: 0.5rem 1.25rem;
-  font-size: small;
-  width: inherit;
 }
 
 .cover {

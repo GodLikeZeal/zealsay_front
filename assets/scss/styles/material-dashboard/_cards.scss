@@ -165,3 +165,16 @@
     background-color: transparent;
   }
 }
+
+.card {
+  margin: 1.5em;
+  border-radius: 0.5em;
+}
+
+.cover {
+  transition: 1s all;
+}
+
+.cover:hover {
+  transform: scale(1.1);
+}

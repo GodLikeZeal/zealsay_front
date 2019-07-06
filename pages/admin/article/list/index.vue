@@ -320,7 +320,7 @@ export default {
       category: [],
       startmenu: false,
       endmenu: false,
-      color: ['info', 'success', 'primary', 'warning', 'error', 'admin.vue']
+      color: ['info', 'success', 'primary', 'warning', 'danger', 'admin.vue']
     }
   },
   computed: {
