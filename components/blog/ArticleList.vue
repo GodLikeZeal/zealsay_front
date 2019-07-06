@@ -29,14 +29,16 @@
                   {{ item.authorName }} {{ item.createDate }} 415次浏览 2个点赞
                 </h5>
                 <div v-if="item.label">
-                  <v-chip
-                    v-for="(label, index) in item.label.split(',')"
-                    :key="index"
-                    :color="colors[parseInt((label.length * 5) / 5)]"
-                    text-color="white"
-                  >
-                    {{ label }}
-                  </v-chip>
+                  <a href="/">
+                    <v-chip
+                      v-for="(label, index) in item.label.split(',')"
+                      :key="index"
+                      :color="colors[parseInt((label.length + 6) % 6)]"
+                      text-color="white"
+                    >
+                      {{ label }}
+                    </v-chip>
+                  </a>
                 </div>
               </div>
             </v-card-title>
@@ -46,7 +48,16 @@
     </template>
   </div>
   <div v-else>
-    <h2>再怎么找也找不到啦</h2>
+    <v-container fluid fill-height>
+      <v-layout align-center justify-center>
+        <div class="mr-3 hidden-sm-and-down">
+          <img src="@/static/image/gif/NotFound.gif" alt="NotFound" />
+        </div>
+        <div class="text-md-center">
+          <h2 class="my-3 headline ">再怎么找也找不到啦!</h2>
+        </div>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
@@ -54,12 +65,12 @@
 export default {
   name: 'ArticleList',
   props: ['list'],
-  data: () => ({
-    colors: ['primary', 'success', 'info', 'warning', 'danger']
-  }),
   computed: {
     desserts: function() {
       return this.list
+    },
+    colors: function() {
+      return ['primary', 'secondary', 'success', 'info', 'warning', 'danger']
     }
   }
 }

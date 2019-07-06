@@ -210,7 +210,7 @@
                   ? props.item.label.split(',')
                   : []"
                 :key="label"
-                :color="color[parseInt((label.length * 6) / 6)]"
+                :color="color[parseInt((label.length + 6) % 6)]"
                 small
               >
                 {{ label }}
@@ -320,7 +320,7 @@ export default {
       category: [],
       startmenu: false,
       endmenu: false,
-      color: ['info', 'success', 'primary', 'warning', 'danger', 'admin.vue']
+      color: ['primary', 'secondary', 'success', 'info', 'warning', 'danger']
     }
   },
   computed: {

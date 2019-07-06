@@ -1,43 +1,8 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <div id="index" class="index">
+  <div id="index">
     <!-- header -->
     <v-card color="primary" height="450">
-      <v-toolbar color="primary" dark flat>
-        <nuxt-link to="/">
-          <v-avatar tile>
-            <img src="@/static/image/logo/cat.png" alt="logo" />
-          </v-avatar>
-          <v-toolbar-title style="display: inline-flex;" class="white--text"
-            >zealsay
-          </v-toolbar-title>
-        </nuxt-link>
-        <v-spacer></v-spacer>
-
-        <v-toolbar-items style="margin-right:8rem">
-          <v-btn nuxt to="/" flat>主页</v-btn>
-
-          <v-menu offset-y>
-            <template v-slot:activator="{ on }">
-              <v-btn flat v-on="on">
-                博客
-              </v-btn>
-            </template>
-            <v-list>
-              <v-list-tile v-for="(item, index) in categorys" :key="index">
-                <nuxt-link :to="'/blog/category/' + item.id">
-                  <v-list-tile-title>{{ item.name }}</v-list-tile-title>
-                </nuxt-link>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
-
-          <v-btn flat>友链</v-btn>
-          <v-btn flat>关于</v-btn>
-          <v-btn flat>
-            <v-icon>search</v-icon>
-          </v-btn>
-        </v-toolbar-items>
-      </v-toolbar>
+      <blog-nav :category="categorys"></blog-nav>
       <v-container>
         <v-layout>
           <v-flex md12>
@@ -78,10 +43,14 @@
 </template>
 
 <script>
+import NavBar from '@/components/blog/NavBar'
 import { getArticle, getCategoryList } from '@/api/article'
 
 export default {
   auth: false,
+  components: {
+    'blog-nav': NavBar
+  },
   data: () => ({ loading: true }),
   computed: {
     breadcrumbs: function() {

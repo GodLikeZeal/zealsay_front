@@ -1,5 +1,5 @@
 <template>
-  <a :herf="'/blog/' + blog.id" target="_Blank">
+  <a v-if="blog" :herf="'/blog/' + blog.id" target="_Blank">
     <v-card class="card">
       <v-img
         transition="fade-transition"
