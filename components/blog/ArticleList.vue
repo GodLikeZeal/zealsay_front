@@ -29,16 +29,20 @@
                   {{ item.authorName }} {{ item.createDate }} 415次浏览 2个点赞
                 </h5>
                 <div v-if="item.label">
-                  <a href="/">
-                    <v-chip
-                      v-for="(label, index) in item.label.split(',')"
-                      :key="index"
-                      :color="colors[parseInt((label.length + 6) % 6)]"
-                      text-color="white"
+                  <v-chip
+                    v-for="(label, index) in item.label.split(',')"
+                    :key="index"
+                    :color="colors[parseInt((label.length + 6) % 6)]"
+                    text-color="white"
+                  >
+                    <a
+                      style="color: white"
+                      :href="'/blog/label/' + label"
+                      target="_Blank"
                     >
-                      {{ label }}
-                    </v-chip>
-                  </a>
+                      {{ label }}</a
+                    >
+                  </v-chip>
                 </div>
               </div>
             </v-card-title>
