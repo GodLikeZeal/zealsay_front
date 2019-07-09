@@ -77,8 +77,8 @@
 </template>
 
 <script>
-import { getArticleLabelPage, deleteArticleLabel } from '@/api/article'
 import addForm from './components/addForm'
+import { getArticleLabelPage, deleteArticleLabel } from '@/api/article'
 
 export default {
   name: 'ArticleLabel',

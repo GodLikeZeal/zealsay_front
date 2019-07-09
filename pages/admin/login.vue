@@ -59,8 +59,8 @@
   </v-app>
 </template>
 <script>
-import { loginByUsername } from '@/api/login'
 import qs from 'qs'
+import { loginByUsername } from '@/api/login'
 
 export default {
   layout: 'default',

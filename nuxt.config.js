@@ -73,9 +73,11 @@ export default {
         buttonsStyling: false,
         heightAuto: false,
         grow: true,
-        confirmButtonClass: 'mx-4 v-btn v-btn--round primary',
+        customClass: {
+          confirmButton: 'mx-4 v-btn v-btn--round primary',
+          cancelButton: 'mx-4 v-btn v-btn--round default'
+        },
         confirmButtonText: '确定',
-        cancelButtonClass: 'mx-4 v-btn v-btn--round default',
         cancelButtonText: '取消'
       }
     ]

@@ -232,6 +232,8 @@
   </div>
 </template>
 <script>
+import forms from './components/form'
+import info from './components/info'
 import {
   getUserList,
   disabeledUser,
@@ -239,8 +241,7 @@ import {
   unsealingUserBatch,
   unsealingUser
 } from '@/api/user'
-import forms from './components/form'
-import info from './components/info'
+
 export default {
   name: 'User',
   layout: 'admin',
