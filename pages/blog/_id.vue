@@ -1,22 +1,8 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <div id="index" class="index">
+  <div id="index">
     <!-- header -->
     <v-card color="primary" height="450">
-      <v-toolbar color="primary" dark flat>
-        <v-toolbar-title class="white--text">zealsay</v-toolbar-title>
-
-        <v-spacer></v-spacer>
-
-        <v-toolbar-items class="nav-items">
-          <v-btn flat>主页</v-btn>
-          <v-btn flat>分类</v-btn>
-          <v-btn flat>友链</v-btn>
-          <v-btn flat>关于</v-btn>
-          <v-btn flat>
-            <v-icon>search</v-icon>
-          </v-btn>
-        </v-toolbar-items>
-      </v-toolbar>
+      <blog-nav :category="categorys"></blog-nav>
       <v-container>
         <v-layout>
           <v-flex md12>
@@ -57,10 +43,14 @@
 </template>
 
 <script>
-import { getArticle } from '@/api/article'
+import NavBar from '@/components/blog/NavBar'
+import { getArticle, getCategoryList } from '@/api/article'
 
 export default {
   auth: false,
+  components: {
+    'blog-nav': NavBar
+  },
   data: () => ({ loading: true }),
   computed: {
     breadcrumbs: function() {
@@ -83,16 +73,24 @@ export default {
       ]
     }
   },
-  async asyncData({ app, query, error }) {
-    const resArticle = await app.$axios.$request(getArticle(query.id))
+  async asyncData({ app, params, error }) {
+    const resArticle = await app.$axios.$request(getArticle(params.id))
     let article = {}
     if (resArticle.code === '200') {
       article = resArticle.data
     } else {
       return error({ statusCode: resArticle.code, message: resArticle.message })
     }
+    const resCategory = await app.$axios.$request(getCategoryList())
+    let categorys = []
+    if (resCategory.code === '200') {
+      categorys = resCategory.data
+    } else {
+      return error({ statusCode: resArticle.code, message: resArticle.message })
+    }
     return {
-      article: article
+      article: article,
+      categorys: categorys
     }
   },
   methods: {

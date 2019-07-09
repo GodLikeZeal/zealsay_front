@@ -20,12 +20,26 @@
 import Toolbar from '@/components/core/Toolbar'
 import Drawer from '@/components/core/Drawer'
 import View from '@/components/core/View'
-
+import { EnumColor } from '@/util/constans'
 export default {
   components: {
     'core-toolbar': Toolbar,
     'core-drawer': Drawer,
     'core-view': View
+  },
+  created() {
+    let color = '#4caf50'
+    if (!this.$isServer) {
+      const str = localStorage.getItem('vuex')
+      let val
+      if (str) {
+        val = JSON.parse(str).app.color
+        color = EnumColor[val]
+      }
+    }
+    setTimeout(() => {
+      this.$vuetify.theme.primary = color
+    }, 0)
   }
 }
 </script>

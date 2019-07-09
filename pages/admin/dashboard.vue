@@ -127,8 +127,8 @@
                 v-text="header.text"
               />
             </template>
-            <template slot="items" slot-scope="{ index, item }">
-              <td>{{ index + 1 }}</td>
+            <template slot="items" slot-scope="{ _id, item }">
+              <td>{{ _id + 1 }}</td>
               <td>{{ item.name }}</td>
               <td class="text-xs-right">{{ item.salary }}</td>
               <td class="text-xs-right">{{ item.country }}</td>

@@ -210,7 +210,7 @@
                   ? props.item.label.split(',')
                   : []"
                 :key="label"
-                :color="color[parseInt((label.length * 6) / 6)]"
+                :color="color[parseInt((label.length + 6) % 6)]"
                 small
               >
                 {{ label }}
@@ -223,11 +223,13 @@
           <td class="text-xs-right">
             <v-layout justify-center class="mb-2">
               <v-btn
+                nuxt
                 icon
                 flat
                 color="primary"
                 title="预览"
-                @click="handleInfo(props.item)"
+                :to="'/blog/' + props.item.id"
+                target="_Blank"
               >
                 <v-icon>portrait</v-icon>
               </v-btn>
@@ -318,7 +320,7 @@ export default {
       category: [],
       startmenu: false,
       endmenu: false,
-      color: ['info', 'success', 'primary', 'warning', 'error', 'admin.vue']
+      color: ['primary', 'secondary', 'success', 'info', 'warning', 'danger']
     }
   },
   computed: {

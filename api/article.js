@@ -109,6 +109,20 @@ export function getArticlePageList(obj) {
 }
 
 /**
+ * 分页查询文章列表.
+ *
+ * @author  zhanglei
+ * @date 2019-03-13  16:13
+ */
+export function getArticlePageListToC(obj) {
+  return {
+    url: '/api/v1/article/c/page',
+    method: 'get',
+    params: obj
+  }
+}
+
+/**
  * 下架文章作品.
  *
  * @author  zhanglei

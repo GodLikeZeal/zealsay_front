@@ -61,7 +61,6 @@
 <script>
 import { loginByUsername } from '@/api/login'
 import qs from 'qs'
-import { mapState } from 'vuex'
 
 export default {
   layout: 'default',
@@ -77,9 +76,6 @@ export default {
     redirect: undefined,
     errMsg: ''
   }),
-  computed: {
-    ...mapState('app', ['color'])
-  },
   watch: {
     $route: {
       handler: function(route) {
@@ -90,7 +86,11 @@ export default {
   },
   created() {
     if (!this.$isServer) {
-      const val = this.color
+      const str = localStorage.getItem('vuex')
+      let val
+      if (str) {
+        val = JSON.parse(str).app.color
+      }
       if (val === 'info') {
         // eslint-disable-next-line nuxt/no-globals-in-created
         window.bubbly()
