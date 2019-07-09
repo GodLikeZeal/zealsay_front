@@ -7,15 +7,9 @@
         <v-layout>
           <v-flex md12>
             <div class="text-md-center word">
-              <template v-for="item in categorys">
-                <h1
-                  v-if="item.id === $route.params.id"
-                  :key="item.id"
-                  class="hitokoto-title"
-                >
-                  分类：{{ item.name }}
-                </h1>
-              </template>
+              <h1 v-if="$route.params.name" class="hitokoto-title">
+                标签：{{ $route.params.name }}
+              </h1>
             </div>
           </v-flex>
         </v-layout>
@@ -58,11 +52,7 @@ import ArticleList from '@/components/blog/ArticleList'
 import MainCard from '@/components/blog/MainCard'
 import RecentDiscuss from '@/components/blog/RecentDiscuss'
 import LabelCloud from '@/components/blog/LabelCloud'
-import {
-  getArticlePageListToC,
-  getCategoryList,
-  getArticleLabelPage
-} from '@/api/article'
+import { getArticlePageListToC, getArticleLabelPage } from '@/api/article'
 
 export default {
   auth: false,
@@ -88,20 +78,13 @@ export default {
   },
   async asyncData({ app, params, error }) {
     const query = {}
-    query.categoryId = params.id
+    query.label = params.name
     const resArticle = await app.$axios.$request(getArticlePageListToC(query))
     const pagination = {}
     if (resArticle.code === '200') {
       pagination.page = resArticle.data.currentPage
       pagination.rowsPerPage = resArticle.data.pageSize
       pagination.totalItems = resArticle.data.total
-    } else {
-      return error({ statusCode: resArticle.code, message: resArticle.message })
-    }
-    const resCategory = await app.$axios.$request(getCategoryList())
-    let categorys = []
-    if (resCategory.code === '200') {
-      categorys = resCategory.data
     } else {
       return error({ statusCode: resArticle.code, message: resArticle.message })
     }
@@ -118,7 +101,6 @@ export default {
     return {
       desserts: resArticle.data.records,
       pagination: pagination,
-      categorys: categorys,
       labels: labels
     }
   },

@@ -5,6 +5,7 @@
     </v-card-title>
     <v-card-text>
       <v-chip
+        small
         v-for="label in labels"
         :key="label.id"
         :color="label.outColor"
@@ -19,7 +20,13 @@
         <v-avatar v-else>
           <v-icon>{{ label.icon }}</v-icon>
         </v-avatar>
-        {{ label.name }}
+        <a
+          style="color: white"
+          :href="'/blog/label/' + label.name"
+          target="_Blank"
+        >
+          {{ label.name }}</a
+        >
       </v-chip>
     </v-card-text>
   </v-card>
