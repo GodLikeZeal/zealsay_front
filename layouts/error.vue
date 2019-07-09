@@ -52,7 +52,7 @@
                 <div v-else class="text-md-center">
                   <h1>500</h1>
                   <h2 class="my-3 headline ">
-                    抱歉, 服务器开小差了，稍后再试试哦!
+                    抱歉, 服务器开小差了,稍后再试试哦!
                   </h2>
                   <div>
                     <button

@@ -127,9 +127,9 @@
   </div>
 </template>
 <script>
-import { getRolePageList, deleteRole, deleteRoleBatch } from '@/api/role'
 import addForm from './components/addForm'
 import editForm from './components/editForm'
+import { getRolePageList, deleteRole, deleteRoleBatch } from '@/api/role'
 
 export default {
   name: 'Role',

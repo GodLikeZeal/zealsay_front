@@ -112,9 +112,9 @@
 </template>
 
 <script>
+import addForm from './components/addForm'
 import { getCategoryList, updateCategory, deleteCategory } from '@/api/article'
 import { validateAlias, validateUsername } from '@/util/validate'
-import addForm from './components/addForm'
 
 export default {
   name: 'Category',
