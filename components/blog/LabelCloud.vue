@@ -5,9 +5,9 @@
     </v-card-title>
     <v-card-text>
       <v-chip
-        small
         v-for="label in labels"
         :key="label.id"
+        small
         :color="label.outColor"
         text-color="white"
       >
