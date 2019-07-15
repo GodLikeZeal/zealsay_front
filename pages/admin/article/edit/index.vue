@@ -189,7 +189,7 @@ export default {
     showCropper: false,
     img_file: {},
     valid: false,
-    image: 'https://pan.zealsay.com/20190317010254129000000.jpg',
+    image: 'https://pan.zealsay.com/20190630225012780000000.jpg',
     clickable: true,
     avatar: {
       size: 192,
@@ -213,7 +213,7 @@ export default {
       return {
         img:
           this.form.coverImage ||
-          'https://pan.zealsay.com/20190317010254129000000.jpg', // 裁剪图片的地址
+          'https://pan.zealsay.com/20190630225012780000000.jpg', // 裁剪图片的地址
         info: true, // 裁剪框的大小信息
         outputSize: 1, // 裁剪生成图片的质量
         outputType: 'jpeg', // 裁剪生成图片的格式
