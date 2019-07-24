@@ -1,10 +1,8 @@
 import Vue from 'vue'
-import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
 import Vuetify from 'vuetify'
 import zhHans from 'vuetify/es5/locale/zh-Hans'
 import '@mdi/font/css/materialdesignicons.css'
 import { Ripple } from 'vuetify/lib/directives'
-import Avatar from 'vue-avatar'
 import Card from '@/components/material/Card'
 import ChartCard from '@/components/material/ChartCard'
 import StatsCard from '@/components/material/StatsCard'
@@ -38,5 +36,4 @@ export default ({ store }) => {
   Vue.component('material-stats-card', StatsCard)
   Vue.component('core-footer', Footer)
   Vue.component('back-to-top', BackToTop)
-  Vue.component('avatar', Avatar)
 }
