@@ -6,6 +6,9 @@ export default {
   server: {
     port: 4000 // default: 3000
   },
+  env: {
+    apiUrl: process.env.API_URL || 'http://localhost:8090'
+  },
   /*
    ** Headers of the page
    */
@@ -124,7 +127,7 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    // baseURL: 'https://api.zealsay.com', // 生产环境打开
+    baseURL: process.env.apiUrl, // 代理请求域名
     // https: true, // 开启https
     prefix: '/app/', // 给路径加个前缀
     proxy: true, // Can be also an object with default options
@@ -136,7 +139,7 @@ export default {
 
   proxy: {
     '/app/': {
-      target: 'https://api.zealsay.com', // 目标接口域名
+      target: process.env.apiUrl, // 目标接口域名
       // target: 'http://localhost:8090', // 目标接口域名
       changeOrigin: true, // 是否跨域
       pathRewrite: { '^/app/': '' } // 把/api 替换成 /
