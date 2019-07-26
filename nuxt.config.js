@@ -136,7 +136,7 @@ export default {
 
   proxy: {
     '/app/': {
-      target: 'http://localhost:8090', // 目标接口域名
+      target: process.env.API_URL || 'http://localhost:8090', // 目标接口域名
       changeOrigin: true, // 是否跨域
       pathRewrite: { '^/app/': '' } // 把/api 替换成 /
     }
@@ -156,7 +156,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend (config, ctx) {
+    extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
