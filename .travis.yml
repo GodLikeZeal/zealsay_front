@@ -31,8 +31,8 @@ addons:
 
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker build  -t zealsay/zealsay_front:$TRAVIS_BRANCH .
-  - docker push zealsay/zealsay_front:$TRAVIS_BRANCH;
+  - docker build  -t zealsay/zealsay_front:latest .
+  - docker push zealsay/zealsay_front:latest;
   - sshpass -p $VPS_PASSWORD ssh -o stricthostkeychecking=no travis@$HOST "/home/zeal/docker/zealsay/deploy.sh"
 
 

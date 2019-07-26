@@ -115,8 +115,8 @@
   </v-navigation-drawer>
 </template>
 <script>
-import menu from '@/api/menu'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import menu from '@/api/menu'
 export default {
   name: 'AppDrawer',
   components: {
