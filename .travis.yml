@@ -8,7 +8,7 @@ sudo: required
 branches:
   only:
   - master
-  - stable
+  - dev
 
 # Travis-CI Caching
 cache:
