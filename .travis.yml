@@ -22,7 +22,6 @@ before_install:
 
 
 script:
-- npm install -g vuepress
 - npm i
 - npm run build
 
