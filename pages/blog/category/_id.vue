@@ -39,7 +39,7 @@
         </v-flex>
       </v-layout>
 
-      <back-to-top :visibility-height="300" :back-position="50" />
+      <back-to-top :visibility-height="300" :back-position="0" />
       <!-- 页脚 -->
       <v-layout row>
         <v-flex>

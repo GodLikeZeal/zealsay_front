@@ -28,7 +28,7 @@
         </v-list>
       </v-menu>
 
-      <v-btn flat>友链</v-btn>
+      <v-btn nuxt to="/blog/friend" flat>友链</v-btn>
       <v-btn flat>关于</v-btn>
       <v-btn flat>
         <v-icon>search</v-icon>

@@ -22,7 +22,7 @@
     "vuetify-loader": "^1.2.1"
   },
   "devDependencies": {
-    "@mdi/font": "^3.7.95",
+    "@mdi/font": "^3.8.95",
     "@nuxtjs/eslint-config": "^0.0.1",
     "babel-eslint": "^10.0.2",
     "bubbly-bg": "^1.0.0",
@@ -51,10 +51,10 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue-avatar": "^2.1.7",
-    "vue-chartist": "^2.2.0",
+    "vue-chartist": "^2.2.1",
     "vue-cropper": "^0.4.9",
     "vue-perfect-scrollbar": "^0.1.0",
-    "vuetify-dialog": "^0.3.7",
+    "vuetify-dialog": "^0.3.8",
     "vuex-persistedstate": "^2.5.4"
   }
 }
