@@ -29,7 +29,7 @@
         </v-flex>
       </v-layout>
 
-      <back-to-top :visibility-height="300" :back-position="50" />
+      <back-to-top :visibility-height="300" :back-position="0" />
       <!-- 页脚 -->
       <v-layout row>
         <v-flex>
@@ -56,19 +56,19 @@ export default {
     breadcrumbs: function() {
       return [
         {
-          text: 'Dashboard',
+          text: 'Home',
           disabled: false,
-          href: 'breadcrumbs_dashboard'
+          href: '/'
         },
         {
-          text: 'Link 1',
+          text: this.article.categoryName,
           disabled: false,
-          href: 'breadcrumbs_link_1'
+          href: '/blog/category/' + this.article.categoryId
         },
         {
-          text: 'Link 2',
+          text: this.article.title,
           disabled: true,
-          href: 'breadcrumbs_link_2'
+          href: '/blog/' + this.article.id
         }
       ]
     }
