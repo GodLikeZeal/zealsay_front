@@ -29,10 +29,10 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: {
-    color: 'pink',
-    height: '4px'
-  },
+  // loading: {
+  //   color: 'pink',
+  //   height: '4px'
+  // },
 
   /*
    ** Global CSS
@@ -130,7 +130,7 @@ export default {
     proxy: true, // Can be also an object with default options
     credentials: true, // 表示跨域请求时候是否需要携带凭证
     retry: { retries: 3 }, // 超时重试3次
-    progress: true, // 请求的时候是否加载loading页面
+    progress: false, // 请求的时候是否加载loading页面
     debug: false // 开启调试，线上关闭
   },
 
