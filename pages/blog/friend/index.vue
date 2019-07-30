@@ -1,9 +1,8 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div id="index">
     <!-- header -->
-    <v-card color="primary" height="450">
+    <v-card color="primary" height="250">
       <blog-nav :category="categorys"></blog-nav>
-      <blog-motto :hitokoto="motto"></blog-motto>
     </v-card>
     <v-container>
       <v-breadcrumbs :items="breadcrumbs">
@@ -14,29 +13,119 @@
       <v-layout fill-height>
         <v-flex xs12 md12 sm6>
           <v-container>
-            <v-layout>
-              <v-flex xs3 md3 sm6>
+            <v-layout justify-space-around>
+              <v-flex md3 sm6 xs12>
                 <v-card>
-                  <v-img
-                    class="white--text"
-                    height="350"
-                    src="https://pan.zealsay.com/user_info_bg.jpg"
-                  >
-                    <v-container fill-height fluid>
-                      <v-layout fill-height>
-                        <v-flex xs12 align-end flexbox>
-                          <v-img
-                            class="avator"
-                            height="100"
-                            width="100"
-                            lazy-src="https://pan.zealsay.com/user_info_bg.jpg"
-                            src="https://pan.zealsay.com/user_info_bg.jpg"
-                          ></v-img>
-                        </v-flex>
-                      </v-layout>
-                    </v-container>
-                  </v-img>
-                  <v-card-title> </v-card-title>
+                  <v-container fill-height fluid class="friend-container">
+                    <v-layout fill-height wrap>
+                      <v-flex xs12 flexbox>
+                        <div class="top-color"></div>
+                        <v-img
+                          class="avator elevation-2"
+                          height="100"
+                          width="100"
+                          lazy-src="https://pan.zealsay.com/20190630223915548000000.jpg"
+                          src="https://pan.zealsay.com/20190630223915548000000.jpg"
+                        ></v-img>
+                        <h2
+                          class="justify-center text-md-center text-xs-center"
+                        >
+                          jinjinyike
+                        </h2>
+                        <p
+                          class="card-description justify-center text-md-center text-xs-center"
+                        >
+                          前端大神萌妹
+                        </p>
+                        <div class="foot-color">
+                          <p
+                            class="foot-text card-description text-md-center text-xs-center"
+                          >
+                            jinjinyike.zealsay.com
+                          </p>
+                          <v-btn class="foot-btn" block color="success"
+                            >访问网站</v-btn
+                          >
+                        </div>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-card>
+              </v-flex>
+              <v-flex md3 sm6 xs12>
+                <v-card>
+                  <v-container fill-height fluid class="friend-container">
+                    <v-layout fill-height wrap>
+                      <v-flex xs12 flexbox>
+                        <div class="top-color"></div>
+                        <v-img
+                          class="avator elevation-2"
+                          height="100"
+                          width="100"
+                          lazy-src="https://pan.zealsay.com/20190630223915548000000.jpg"
+                          src="https://pan.zealsay.com/20190630223915548000000.jpg"
+                        ></v-img>
+                        <h2
+                          class="justify-center text-md-center text-xs-center"
+                        >
+                          jinjinyike
+                        </h2>
+                        <p
+                          class="card-description justify-center text-md-center text-xs-center"
+                        >
+                          前端大神萌妹
+                        </p>
+                        <div class="foot-color">
+                          <p
+                            class="foot-text card-description text-md-center text-xs-center"
+                          >
+                            jinjinyike.zealsay.com
+                          </p>
+                          <v-btn class="foot-btn" block color="success"
+                            >访问网站</v-btn
+                          >
+                        </div>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-card>
+              </v-flex>
+              <v-flex md3 sm6 xs12>
+                <v-card>
+                  <v-container fill-height fluid class="friend-container">
+                    <v-layout fill-height wrap>
+                      <v-flex xs12 flexbox>
+                        <div class="top-color"></div>
+                        <v-img
+                          class="avator elevation-2"
+                          height="100"
+                          width="100"
+                          lazy-src="https://pan.zealsay.com/20190630223915548000000.jpg"
+                          src="https://pan.zealsay.com/20190630223915548000000.jpg"
+                        ></v-img>
+                        <h2
+                          class="justify-center text-md-center text-xs-center"
+                        >
+                          jinjinyike
+                        </h2>
+                        <p
+                          class="card-description justify-center text-md-center text-xs-center"
+                        >
+                          前端大神萌妹
+                        </p>
+                        <div class="foot-color">
+                          <p
+                            class="foot-text card-description text-md-center text-xs-center"
+                          >
+                            jinjinyike.zealsay.com
+                          </p>
+                          <v-btn class="foot-btn" block color="success"
+                            >访问网站</v-btn
+                          >
+                        </div>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
                 </v-card>
               </v-flex>
             </v-layout>
@@ -59,14 +148,12 @@
 
 <script>
 import NavBar from '@/components/blog/NavBar'
-import Motto from '@/components/blog/Motto'
 import { getCategoryList } from '@/api/article'
 
 export default {
   auth: false,
   components: {
-    'blog-nav': NavBar,
-    'blog-motto': Motto
+    'blog-nav': NavBar
   },
   data: () => ({
     loading: true,
@@ -112,10 +199,6 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-[v-cloak] {
-  display: none;
-}
-
 .index {
   background: #fafafa;
 }
@@ -155,5 +238,33 @@ export default {
 
 .cover:hover {
   transform: scale(1.1);
+}
+.top-color {
+  width: 100%;
+  height: 8rem;
+  background-color: teal;
+}
+.foot-color {
+  display: inline-table;
+  width: 100%;
+  height: 2rem;
+  background-color: #fef8f4;
+}
+.foot-btn {
+  width: 80%;
+  margin: 1rem auto;
+}
+.foot-text {
+  margin-top: 1rem;
+}
+.avator {
+  margin: -3rem auto auto;
+  border-radius: 50%;
+}
+.friend-container {
+  padding: 0;
+}
+.center {
+  margin: 0 auto;
 }
 </style>
