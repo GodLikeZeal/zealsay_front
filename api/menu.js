@@ -70,6 +70,57 @@ const Menu = [
         href: '/admin/article/label'
       }
     ]
+  },
+  { header: '站点配置' },
+  {
+    title: '站点主体',
+    group: 'article',
+    icon: 'mdi-home-circle',
+    items: [
+      {
+        name: 'write',
+        title: '基本信息',
+        component: 'articleadd',
+        href: '/admin/article/add'
+      },
+      {
+        name: 'list',
+        title: 'SEO配置',
+        component: 'articlelist',
+        href: '/admin/article/list'
+      },
+      {
+        name: 'write',
+        title: '对象云存储配置',
+        component: 'articleadd',
+        href: '/admin/article/add'
+      },
+      {
+        name: 'write',
+        title: '第三方登录配置',
+        component: 'articleadd',
+        href: '/admin/article/add'
+      }
+    ]
+  },
+  {
+    title: '友链管理',
+    group: 'article',
+    icon: 'mdi-link-variant',
+    items: [
+      {
+        name: 'write',
+        title: '友链列表',
+        component: 'articleadd',
+        href: '/admin/article/add'
+      },
+      {
+        name: 'write',
+        title: '友链添加',
+        component: 'articleadd',
+        href: '/admin/article/add'
+      }
+    ]
   }
   // {
   //   title: '媒体',

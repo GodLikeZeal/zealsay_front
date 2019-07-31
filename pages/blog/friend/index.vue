@@ -15,7 +15,7 @@
           <v-container>
             <v-layout justify-space-around>
               <v-flex md3 sm6 xs12>
-                <v-card>
+                <v-card hover>
                   <v-container fill-height fluid class="friend-container">
                     <v-layout fill-height wrap>
                       <v-flex xs12 flexbox>
@@ -43,7 +43,7 @@
                           >
                             jinjinyike.zealsay.com
                           </p>
-                          <v-btn class="foot-btn" block color="success"
+                          <v-btn class="foot-btn" block color="primary"
                             >访问网站</v-btn
                           >
                         </div>
@@ -53,7 +53,7 @@
                 </v-card>
               </v-flex>
               <v-flex md3 sm6 xs12>
-                <v-card>
+                <v-card hover>
                   <v-container fill-height fluid class="friend-container">
                     <v-layout fill-height wrap>
                       <v-flex xs12 flexbox>
@@ -81,7 +81,7 @@
                           >
                             jinjinyike.zealsay.com
                           </p>
-                          <v-btn class="foot-btn" block color="success"
+                          <v-btn class="foot-btn" block color="primary"
                             >访问网站</v-btn
                           >
                         </div>
@@ -91,7 +91,7 @@
                 </v-card>
               </v-flex>
               <v-flex md3 sm6 xs12>
-                <v-card>
+                <v-card hover>
                   <v-container fill-height fluid class="friend-container">
                     <v-layout fill-height wrap>
                       <v-flex xs12 flexbox>
@@ -119,7 +119,7 @@
                           >
                             jinjinyike.zealsay.com
                           </p>
-                          <v-btn class="foot-btn" block color="success"
+                          <v-btn class="foot-btn" block color="primary"
                             >访问网站</v-btn
                           >
                         </div>
@@ -163,13 +163,13 @@ export default {
     breadcrumbs: function() {
       return [
         {
-          text: 'Home',
+          text: '主页',
           disabled: false,
           href: '/'
         },
         {
           text: '友链',
-          disabled: false,
+          disabled: true,
           href: '/blog/friend'
         }
       ]
