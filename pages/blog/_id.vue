@@ -56,7 +56,7 @@ export default {
     breadcrumbs: function() {
       return [
         {
-          text: 'Home',
+          text: '主页',
           disabled: false,
           href: '/'
         },
