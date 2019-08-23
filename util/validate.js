@@ -14,6 +14,8 @@ const email = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 const value = /^[A-Z_]+$/
 // 小写字母、中划线
 const alias = /^[a-z-]+$/
+// 合法的链接URL
+const url = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~/])+$/
 
 /* 合法username */
 export function validateUsername(textval) {
@@ -53,4 +55,9 @@ export function validateValue(textval) {
 /* 合法category alias */
 export function validateAlias(textval) {
   return alias.test(textval)
+}
+
+/* 合法url链接 */
+export function validateUrl(textval) {
+  return url.test(textval)
 }
