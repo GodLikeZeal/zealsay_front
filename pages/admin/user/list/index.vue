@@ -1,57 +1,59 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div class="con">
-    <v-layout row wrap>
-      <v-flex xs12 sm6 md3>
-        <v-text-field
-          v-model="searchData.name"
-          label="Solo"
-          placeholder="姓名"
-          solo
-        ></v-text-field>
-      </v-flex>
-      <v-flex xs12 sm6 md3>
-        <v-text-field
-          v-model="searchData.phoneNumber"
-          label="Solo"
-          placeholder="手机号码"
-          solo
-        ></v-text-field>
-      </v-flex>
-      <v-flex xs12 sm6 md3>
-        <v-text-field
-          v-model="searchData.email"
-          label="Solo"
-          placeholder="邮箱"
-          solo
-        ></v-text-field>
-      </v-flex>
-      <v-flex xs6 sm2 md1>
-        <v-btn color="info" @click="search(searchData)"
-          >搜索 <br />
-          <v-icon small>search</v-icon>
-        </v-btn>
-      </v-flex>
-      <v-flex xs6 sm2 md1>
-        <v-btn
-          color="success"
-          title="解封"
-          @click="handleUnsealingSelected(selected)"
-        >
-          解封 <br />
-          <v-icon small>how_to_reg</v-icon>
-        </v-btn>
-      </v-flex>
-      <v-flex xs6 sm2 md1>
-        <v-btn
-          color="error"
-          title="禁用"
-          @click="handleDisabledSelected(selected)"
-        >
-          封禁 <br />
-          <v-icon small>fa-ban</v-icon>
-        </v-btn>
-      </v-flex>
-    </v-layout>
+    <v-container>
+      <v-layout row wrap>
+        <v-flex xs12 sm6 md3>
+          <v-text-field
+            v-model="searchData.name"
+            label="Solo"
+            placeholder="姓名"
+            solo
+          ></v-text-field>
+        </v-flex>
+        <v-flex xs12 sm6 md3>
+          <v-text-field
+            v-model="searchData.phoneNumber"
+            label="Solo"
+            placeholder="手机号码"
+            solo
+          ></v-text-field>
+        </v-flex>
+        <v-flex xs12 sm6 md3>
+          <v-text-field
+            v-model="searchData.email"
+            label="Solo"
+            placeholder="邮箱"
+            solo
+          ></v-text-field>
+        </v-flex>
+        <v-flex xs6 sm2 md1>
+          <v-btn color="info" @click="search(searchData)"
+            >搜索 <br />
+            <v-icon small>search</v-icon>
+          </v-btn>
+        </v-flex>
+        <v-flex xs6 sm2 md1>
+          <v-btn
+            color="success"
+            title="解封"
+            @click="handleUnsealingSelected(selected)"
+          >
+            解封 <br />
+            <v-icon small>how_to_reg</v-icon>
+          </v-btn>
+        </v-flex>
+        <v-flex xs6 sm2 md1>
+          <v-btn
+            color="error"
+            title="禁用"
+            @click="handleDisabledSelected(selected)"
+          >
+            封禁 <br />
+            <v-icon small>fa-ban</v-icon>
+          </v-btn>
+        </v-flex>
+      </v-layout>
+    </v-container>
     <v-data-table
       v-model="selected"
       :headers="headers"

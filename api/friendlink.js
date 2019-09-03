@@ -46,8 +46,7 @@ export function updateFriendLinkById(obj) {
  */
 export function deleteFriendLinkById(id) {
   return {
-    url: '/api/v1/friend/link',
-    method: 'delete',
-    params: id
+    url: '/api/v1/friend/link/' + id,
+    method: 'delete'
   }
 }

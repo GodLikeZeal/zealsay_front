@@ -1,108 +1,110 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div class="con">
-    <v-layout row wrap @keyup.enter="search">
-      <v-flex xs12 sm6 md4>
-        <v-text-field
-          v-model="searchData.title"
-          label="Solo"
-          placeholder="文章标题"
-          solo
-        ></v-text-field>
-      </v-flex>
-      <v-flex xs12 sm6 md4>
-        <v-text-field
-          v-model="searchData.label"
-          label="Solo"
-          placeholder="标签关键字"
-          solo
-        ></v-text-field>
-      </v-flex>
-      <v-flex xs12 sm6 md4>
-        <v-text-field
-          v-model="searchData.authorName"
-          label="Solo"
-          placeholder="作者名称"
-          solo
-        ></v-text-field>
-      </v-flex>
-      <v-flex xs12 sm6 md3>
-        <v-menu
-          v-model="startmenu"
-          :close-on-content-click="false"
-          :nudge-right="40"
-          lazy
-          transition="scale-transition"
-          offset-y
-          full-width
-          min-width="290px"
-        >
-          <template v-slot:activator="{ on }">
-            <v-text-field
+    <v-container>
+      <v-layout row wrap @keyup.enter="search">
+        <v-flex xs12 sm6 md4>
+          <v-text-field
+            v-model="searchData.title"
+            label="Solo"
+            placeholder="文章标题"
+            solo
+          ></v-text-field>
+        </v-flex>
+        <v-flex xs12 sm6 md4>
+          <v-text-field
+            v-model="searchData.label"
+            label="Solo"
+            placeholder="标签关键字"
+            solo
+          ></v-text-field>
+        </v-flex>
+        <v-flex xs12 sm6 md4>
+          <v-text-field
+            v-model="searchData.authorName"
+            label="Solo"
+            placeholder="作者名称"
+            solo
+          ></v-text-field>
+        </v-flex>
+        <v-flex xs12 sm6 md3>
+          <v-menu
+            v-model="startmenu"
+            :close-on-content-click="false"
+            :nudge-right="40"
+            lazy
+            transition="scale-transition"
+            offset-y
+            full-width
+            min-width="290px"
+          >
+            <template v-slot:activator="{ on }">
+              <v-text-field
+                v-model="searchData.startDate"
+                label="创建时间检索开始时间"
+                prepend-icon="event"
+                readonly
+                solo
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker
               v-model="searchData.startDate"
-              label="创建时间检索开始时间"
-              prepend-icon="event"
-              readonly
-              solo
-              v-on="on"
-            ></v-text-field>
-          </template>
-          <v-date-picker
-            v-model="searchData.startDate"
-            @input="startmenu = false"
-          ></v-date-picker>
-        </v-menu>
-      </v-flex>
-      <v-flex xs12 sm6 md3>
-        <v-menu
-          v-model="endmenu"
-          :close-on-content-click="false"
-          :nudge-right="40"
-          lazy
-          transition="scale-transition"
-          offset-y
-          full-width
-          min-width="290px"
-        >
-          <template v-slot:activator="{ on }">
-            <v-text-field
+              @input="startmenu = false"
+            ></v-date-picker>
+          </v-menu>
+        </v-flex>
+        <v-flex xs12 sm6 md3>
+          <v-menu
+            v-model="endmenu"
+            :close-on-content-click="false"
+            :nudge-right="40"
+            lazy
+            transition="scale-transition"
+            offset-y
+            full-width
+            min-width="290px"
+          >
+            <template v-slot:activator="{ on }">
+              <v-text-field
+                v-model="searchData.endDate"
+                label="创建时间检索结束时间"
+                prepend-icon="event"
+                readonly
+                solo
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker
               v-model="searchData.endDate"
-              label="创建时间检索结束时间"
-              prepend-icon="event"
-              readonly
-              solo
-              v-on="on"
-            ></v-text-field>
-          </template>
-          <v-date-picker
-            v-model="searchData.endDate"
-            @input="endmenu = false"
-          ></v-date-picker>
-        </v-menu>
-      </v-flex>
-      <v-flex xs12 sm6 md3>
-        <v-select
-          v-model="searchData.categoryId"
-          solo
-          :items="category"
-          item-text="text"
-          item-value="value"
-          label="请选择分类目录"
-          required
-        ></v-select>
-      </v-flex>
-      <v-flex xs6 sm2 md1>
-        <v-btn color="info" @click="search"
-          >搜索 <br />
-          <v-icon small>search</v-icon>
-        </v-btn>
-      </v-flex>
-      <v-flex xs6 sm2 md1>
-        <v-btn color="success" title="添加" @click="handleAdd">
-          添加 <br />
-          <v-icon small>add</v-icon>
-        </v-btn>
-      </v-flex>
-    </v-layout>
+              @input="endmenu = false"
+            ></v-date-picker>
+          </v-menu>
+        </v-flex>
+        <v-flex xs12 sm6 md3>
+          <v-select
+            v-model="searchData.categoryId"
+            solo
+            :items="category"
+            item-text="text"
+            item-value="value"
+            label="请选择分类目录"
+            required
+          ></v-select>
+        </v-flex>
+        <v-flex xs6 sm2 md1>
+          <v-btn color="info" @click="search"
+            >搜索 <br />
+            <v-icon small>search</v-icon>
+          </v-btn>
+        </v-flex>
+        <v-flex xs6 sm2 md1>
+          <v-btn color="success" title="添加" @click="handleAdd">
+            添加 <br />
+            <v-icon small>add</v-icon>
+          </v-btn>
+        </v-flex>
+      </v-layout>
+    </v-container>
     <v-data-table
       v-model="selected"
       :headers="headers"
