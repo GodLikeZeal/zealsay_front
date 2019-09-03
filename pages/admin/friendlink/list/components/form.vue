@@ -1,9 +1,9 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-container fill-height fluid grid-list-xl>
-    <v-layout justify-center wrap>
-      <v-flex xs12 md10>
-        <material-card class="v-card-profile">
-          <v-card-text class="text-xs-center">
+  <v-dialog v-model="dialog" width="600" persistent>
+    <v-card ref="row">
+      <v-container fill-height fluid>
+        <v-layout fill-height class="center">
+          <v-flex xs12 align-center flexbox>
             <v-dialog v-model="showCropper" persistent width="800px">
               <template v-slot:activator="{ on }">
                 <label for="uploads">
@@ -52,98 +52,76 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-            <h6 class="category avator text-gray ffont-weight-light mb-3">
-              点击上传友链头像
-            </h6>
-            <h5 class="card-title font-weight-light">
-              Isn't it a pleasure that a friend comes from a faraway place?
-            </h5>
+            <h6 class="category text-gray ffont-weight-light mb-3">头像预览</h6>
             <p class="card-description font-weight-light">
-              有朋自远方来,不亦说乎？
+              支持JPG、PNG格式图片，不超过5M。拖拽或缩放图中的虚线方格可调整头像
             </p>
-          </v-card-text>
-        </material-card>
-      </v-flex>
-      <v-flex xs12 md10>
-        <material-card
-          color="primary"
-          title="友链详细信息"
-          text="完善友链信息后，点击提交"
+          </v-flex>
+        </v-layout>
+      </v-container>
+      <v-card-title>
+        <v-form ref="form" lazy-validation>
+          <v-container grid-list-md>
+            <v-layout wrap>
+              <v-flex xs12 sm6 md6>
+                <v-text-field
+                  v-model="form.friendName"
+                  hint="友链名不能包含空格和特殊字符"
+                  label="友链名*"
+                  validate-on-blur
+                  :rules="usernameRules"
+                  required
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md6>
+                <v-text-field
+                  v-model="form.color"
+                  label="印象颜色*"
+                  persistent-hint
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm12 md12>
+                <v-text-field
+                  v-model="form.link"
+                  :rules="linkRules"
+                  label="链接*"
+                  hint="链接地址必须以http或者https开头，只能是合法的域名"
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-textarea v-model="form.friendInfo" label="简介"></v-textarea>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-form>
+      </v-card-title>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn outline color="darken-1" @click="handleCancel()">取消</v-btn>
+        <v-btn
+          outline
+          :loading="loading"
+          color="primary darken-1"
+          @click="handleSubmit(form)"
+          >提交</v-btn
         >
-          <v-form ref="form" lazy-validation>
-            <v-container py-0>
-              <v-layout wrap>
-                <v-flex xs12 md4>
-                  <v-text-field
-                    v-model="form.friendName"
-                    :rules="usernameRules"
-                    hint="友链名不能包含空格和特殊字符"
-                    class="purple-input"
-                    label="友链名*"
-                    required
-                  />
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-text-field
-                    v-model="form.link"
-                    :rules="linkRules"
-                    hint="链接地址必须以http或者https开头，只能是合法的域名"
-                    class="purple-input"
-                    label="链接*"
-                    required
-                  />
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-text-field
-                    v-model="form.color"
-                    label="印象颜色*"
-                    class="purple-input"
-                  />
-                </v-flex>
-                <v-flex xs12>
-                  <v-textarea
-                    v-model="form.friendInfo"
-                    class="purple-input"
-                    label="简介"
-                    value="一个喜欢安静的程序员."
-                  />
-                </v-flex>
-                <v-flex xs12 text-xs-center>
-                  <v-btn
-                    round
-                    class="mx-0 font-weight-light"
-                    color="primary"
-                    :loading="loading"
-                    @click="submit()"
-                  >
-                    添加保存
-                  </v-btn>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-form>
-        </material-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
+
 <script>
-import { saveFriendLink } from '@/api/friendlink'
 import { uploadImage } from '@/api/user'
 import { validateUsername, validateUrl } from '@/util/validate'
+import { updateFriendLinkById } from '@/api/friendlink'
 
 export default {
-  name: 'Add',
-  layout: 'admin',
+  name: 'Edit',
+  props: ['row', 'alert'],
   data: () => ({
-    form: {
-      id: '',
-      avatar: 'https://pan.zealsay.com/20190630223915548000000.jpg',
-      friendName: '',
-      friendInfo: '',
-      link: '',
-      color: ''
-    },
+    name: 'edit',
+    loading: false,
+    file: '',
     showCropper: false,
     valid: false,
     clickable: true,
@@ -151,14 +129,6 @@ export default {
       size: 128
     },
     roles: [],
-    province: [],
-    city: [],
-    area: [],
-    provinceLoading: false,
-    cityLoading: false,
-    areaLoading: false,
-    files: [],
-    loading: false,
     usernameRules: [
       v => !!v || '用户名不能为空!',
       v => validateUsername(v) || '必须是中文、英文、数字包括下划线'
@@ -169,6 +139,16 @@ export default {
     ]
   }),
   computed: {
+    form: function() {
+      return {
+        id: this.row.id,
+        avatar: this.row.avatar,
+        friendName: this.row.friendName,
+        friendInfo: this.row.friendInfo,
+        link: this.row.link,
+        color: this.row.color
+      }
+    },
     option: function() {
       return {
         img:
@@ -184,41 +164,50 @@ export default {
         fixed: true, // 是否开启截图框宽高固定比例
         fixedNumber: [4, 4] // 截图框的宽高比例
       }
+    },
+    dialog: function() {
+      return this.alert
     }
   },
   async asyncData({ app, query, error }) {},
+  created() {},
   methods: {
-    submit() {
+    handleCancel() {
+      this.$emit('handleCancel')
+    },
+    handleSubmit(obj) {
       this.loading = true
-      if (this.$refs.form.validate()) {
-        // 校验通过则提交保存
-        this.save()
-      } else {
-        this.loading = false
-      }
+      this.save()
     },
     save() {
       // 开始提交
       this.$axios
-        .$request(saveFriendLink(this.form))
+        .$request(updateFriendLinkById(this.form))
         .then(res => {
-          this.loading = false
           if (res.code === '200' && res.data) {
             this.$swal({
-              title: '添加成功!',
-              text: '您已经成功添加了一名用户',
-              type: 'success'
+              text: '修改成功',
+              type: 'success',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3000
             })
+            this.$parent.search('')
+            this.$emit('handleCancel')
           } else {
+            this.loading = false
             this.$swal({
-              title: '添加失败!',
               text: res.message,
-              type: 'error'
+              type: 'error',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3000
             })
           }
         })
         .catch(e => {
-          this.loading = false
           this.$swal({
             text: e.message,
             type: 'error',
@@ -276,7 +265,7 @@ export default {
           .$request(uploadImage(param))
           .then(res => {
             if (res.code === '200') {
-              this.form.avatar = res.data
+              this.row.avatar = res.data
             } else {
               this.$swal({
                 text: res.message,
@@ -304,8 +293,13 @@ export default {
   }
 }
 </script>
+
 <style lang="less" scoped>
+.center {
+  text-align: center;
+}
+
 .avator {
-  margin-top: 20px;
+  border-radius: 50%;
 }
 </style>

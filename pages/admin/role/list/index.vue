@@ -1,29 +1,31 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div class="con">
-    <v-layout row wrap fill-height justify-end>
-      <v-flex xs6 sm3 md1>
-        <v-btn color="primary" title="刷新" @click="refresh()">
-          刷新 <br />
-          <v-icon small>refresh</v-icon>
-        </v-btn>
-      </v-flex>
-      <v-flex xs6 sm3 md1>
-        <v-btn color="success" title="添加" @click="handleAdd()">
-          添加 <br />
-          <v-icon small>add_circle</v-icon>
-        </v-btn>
-      </v-flex>
-      <v-flex xs6 sm3 md1>
-        <v-btn
-          color="error"
-          title="删除"
-          @click="handleDeleteSelected(selected)"
-        >
-          删除 <br />
-          <v-icon small>remove_circle</v-icon>
-        </v-btn>
-      </v-flex>
-    </v-layout>
+    <v-container>
+      <v-layout row wrap fill-height justify-end>
+        <v-flex xs6 sm3 md1>
+          <v-btn color="primary" title="刷新" @click="refresh()">
+            刷新 <br />
+            <v-icon small>refresh</v-icon>
+          </v-btn>
+        </v-flex>
+        <v-flex xs6 sm3 md1>
+          <v-btn color="success" title="添加" @click="handleAdd()">
+            添加 <br />
+            <v-icon small>add_circle</v-icon>
+          </v-btn>
+        </v-flex>
+        <v-flex xs6 sm3 md1>
+          <v-btn
+            color="error"
+            title="删除"
+            @click="handleDeleteSelected(selected)"
+          >
+            删除 <br />
+            <v-icon small>remove_circle</v-icon>
+          </v-btn>
+        </v-flex>
+      </v-layout>
+    </v-container>
     <v-data-table
       v-model="selected"
       :headers="headers"
@@ -262,7 +264,8 @@ export default {
         showCancelButton: true
       }).then(result => {
         if (result.value) {
-          deleteRole(row.id)
+          this.$axios
+            .$request(deleteRole(row.id))
             .then(res => {
               this.loading = false
               if (res.code === '200' && res.data) {
@@ -304,7 +307,7 @@ export default {
           showCancelButton: true
         }).then(result => {
           if (result.value) {
-            deleteRoleBatch(param).then(res => {
+            this.$axios.$request(deleteRoleBatch(param)).then(res => {
               if (res.code === '200' && res.data) {
                 this.$swal({
                   title: '删除成功',

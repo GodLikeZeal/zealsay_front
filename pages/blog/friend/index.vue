@@ -12,124 +12,73 @@
       </v-breadcrumbs>
       <v-layout fill-height>
         <v-flex xs12 md12 sm6>
-          <v-container>
-            <v-layout justify-space-around>
-              <v-flex md3 sm6 xs12>
-                <v-card hover>
-                  <v-container fill-height fluid class="friend-container">
-                    <v-layout fill-height wrap>
-                      <v-flex xs12 flexbox>
-                        <div class="top-color"></div>
-                        <v-img
-                          class="avator elevation-2"
-                          height="100"
-                          width="100"
-                          lazy-src="https://pan.zealsay.com/20190630223915548000000.jpg"
-                          src="https://pan.zealsay.com/20190630223915548000000.jpg"
-                        ></v-img>
-                        <h2
-                          class="justify-center text-md-center text-xs-center"
-                        >
-                          jinjinyike
-                        </h2>
-                        <p
-                          class="card-description justify-center text-md-center text-xs-center"
-                        >
-                          前端大神萌妹
-                        </p>
-                        <div class="foot-color">
-                          <p
-                            class="foot-text card-description text-md-center text-xs-center"
-                          >
-                            jinjinyike.zealsay.com
-                          </p>
-                          <v-btn class="foot-btn" block color="primary"
-                            >访问网站</v-btn
-                          >
-                        </div>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-card>
-              </v-flex>
-              <v-flex md3 sm6 xs12>
-                <v-card hover>
-                  <v-container fill-height fluid class="friend-container">
-                    <v-layout fill-height wrap>
-                      <v-flex xs12 flexbox>
-                        <div class="top-color"></div>
-                        <v-img
-                          class="avator elevation-2"
-                          height="100"
-                          width="100"
-                          lazy-src="https://pan.zealsay.com/20190630223915548000000.jpg"
-                          src="https://pan.zealsay.com/20190630223915548000000.jpg"
-                        ></v-img>
-                        <h2
-                          class="justify-center text-md-center text-xs-center"
-                        >
-                          jinjinyike
-                        </h2>
-                        <p
-                          class="card-description justify-center text-md-center text-xs-center"
-                        >
-                          前端大神萌妹
-                        </p>
-                        <div class="foot-color">
-                          <p
-                            class="foot-text card-description text-md-center text-xs-center"
-                          >
-                            jinjinyike.zealsay.com
-                          </p>
-                          <v-btn class="foot-btn" block color="primary"
-                            >访问网站</v-btn
-                          >
-                        </div>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-card>
-              </v-flex>
-              <v-flex md3 sm6 xs12>
-                <v-card hover>
-                  <v-container fill-height fluid class="friend-container">
-                    <v-layout fill-height wrap>
-                      <v-flex xs12 flexbox>
-                        <div class="top-color"></div>
-                        <v-img
-                          class="avator elevation-2"
-                          height="100"
-                          width="100"
-                          lazy-src="https://pan.zealsay.com/20190630223915548000000.jpg"
-                          src="https://pan.zealsay.com/20190630223915548000000.jpg"
-                        ></v-img>
-                        <h2
-                          class="justify-center text-md-center text-xs-center"
-                        >
-                          jinjinyike
-                        </h2>
-                        <p
-                          class="card-description justify-center text-md-center text-xs-center"
-                        >
-                          前端大神萌妹
-                        </p>
-                        <div class="foot-color">
-                          <p
-                            class="foot-text card-description text-md-center text-xs-center"
-                          >
-                            jinjinyike.zealsay.com
-                          </p>
-                          <v-btn class="foot-btn" block color="primary"
-                            >访问网站</v-btn
-                          >
-                        </div>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-container>
+          <div v-if="links.length > 0">
+            <v-container>
+              <v-layout justify-space-around>
+                <template v-for="(item, i) in links">
+                  <v-flex :key="i" md3 sm6 xs12>
+                    <v-card hover>
+                      <v-container fill-height fluid class="friend-container">
+                        <v-layout fill-height wrap>
+                          <v-flex xs12 flexbox>
+                            <div
+                              class="top-color"
+                              :style="{ backgroundColor: item.color }"
+                            ></div>
+                            <v-img
+                              class="avator elevation-2"
+                              height="100"
+                              width="100"
+                              :lazy-src="item.avatar"
+                              :src="item.avatar"
+                            ></v-img>
+                            <h2
+                              class="justify-center text-md-center text-xs-center"
+                            >
+                              {{ item.friendName }}
+                            </h2>
+                            <p
+                              class="card-description justify-center text-md-center text-xs-center"
+                            >
+                              {{ item.friendInfo }}
+                            </p>
+                            <div class="foot-color">
+                              <p
+                                class="foot-text card-description text-md-center text-xs-center"
+                              >
+                                {{ item.link }}
+                              </p>
+                              <v-btn
+                                class="foot-btn"
+                                block
+                                color="primary"
+                                target="_Blank"
+                                :href="item.link"
+                                >访问网站
+                              </v-btn>
+                            </div>
+                          </v-flex>
+                        </v-layout>
+                      </v-container>
+                    </v-card>
+                  </v-flex>
+                </template>
+              </v-layout>
+            </v-container>
+          </div>
+          <div v-else>
+            <v-container fluid fill-height>
+              <v-layout align-center justify-center>
+                <div class="mr-3 hidden-sm-and-down">
+                  <img src="@/static/image/gif/NotFound.gif" alt="NotFound" />
+                </div>
+                <div class="text-md-center">
+                  <h2 class="my-3 headline ">一个好友也没有!</h2>
+                  <h2 class="my-3 headline ">我能怎么办?我也很绝望!</h2>
+                </div>
+              </v-layout>
+            </v-container>
+          </div>
         </v-flex>
       </v-layout>
 
@@ -148,6 +97,7 @@
 
 <script>
 import NavBar from '@/components/blog/NavBar'
+import { getFriendLinkList } from '@/api/friendlink'
 import { getCategoryList } from '@/api/article'
 
 export default {
@@ -176,6 +126,16 @@ export default {
     }
   },
   async asyncData({ app, params, error }) {
+    const resLink = await app.$axios.$request(getFriendLinkList())
+    let links = []
+    if (resLink.code === '200') {
+      links = resLink.data
+    } else {
+      return error({
+        statusCode: resLink.code,
+        message: resLink.message
+      })
+    }
     const resCategory = await app.$axios.$request(getCategoryList())
     let categorys = []
     if (resCategory.code === '200') {
@@ -187,6 +147,7 @@ export default {
       })
     }
     return {
+      links: links.records,
       categorys: categorys
     }
   },
@@ -239,31 +200,38 @@ export default {
 .cover:hover {
   transform: scale(1.1);
 }
+
 .top-color {
   width: 100%;
   height: 8rem;
-  background-color: teal;
+  /*background-color: indianred;*/
 }
+
 .foot-color {
   display: inline-table;
   width: 100%;
   height: 2rem;
   background-color: #fef8f4;
 }
+
 .foot-btn {
   width: 80%;
   margin: 1rem auto;
 }
+
 .foot-text {
   margin-top: 1rem;
 }
+
 .avator {
   margin: -3rem auto auto;
   border-radius: 50%;
 }
+
 .friend-container {
   padding: 0;
 }
+
 .center {
   margin: 0 auto;
 }

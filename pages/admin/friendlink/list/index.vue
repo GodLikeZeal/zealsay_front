@@ -1,13 +1,15 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div class="con">
-    <v-layout row wrap fill-height justify-end>
-      <v-flex xs6 sm3 md1>
-        <v-btn color="primary" title="刷新" @click="refresh()">
-          刷新 <br />
-          <v-icon small>refresh</v-icon>
-        </v-btn>
-      </v-flex>
-    </v-layout>
+    <v-container>
+      <v-layout row wrap fill-height justify-end>
+        <v-flex xs6 sm3 md1>
+          <v-btn color="primary" title="刷新" @click="refresh()">
+            刷新 <br />
+            <v-icon small>refresh</v-icon>
+          </v-btn>
+        </v-flex>
+      </v-layout>
+    </v-container>
     <v-data-table
       v-model="selected"
       :headers="headers"
@@ -106,12 +108,6 @@
       ></v-pagination>
     </div>
     <div>
-      <add-form
-        :alert="addFormVisible"
-        @handleCancel="handleCancelAdd"
-      ></add-form>
-    </div>
-    <div>
       <edit-form
         :row="row"
         :alert="editFormVisible"
@@ -121,14 +117,13 @@
   </div>
 </template>
 <script>
-import addForm from './components/addForm'
-import editForm from './components/editForm'
+import editForm from './components/form'
 import { getFriendLinkList, deleteFriendLinkById } from '@/api/friendlink'
 
 export default {
-  name: 'Role',
+  name: 'FriendLink',
   layout: 'admin',
-  components: { addForm, editForm },
+  components: { editForm },
   data() {
     return {
       searchData: {},
@@ -218,7 +213,7 @@ export default {
         })
     },
     refresh(obj) {
-      getFriendLinkList(obj).then(res => {
+      this.$axios.$request(getFriendLinkList(obj)).then(res => {
         this.desserts = res.data.records
         this.pagination.page = res.data.currentPage
         this.pagination.rowsPerPage = res.data.pageSize
@@ -237,14 +232,8 @@ export default {
         this.pagination.descending = false
       }
     },
-    handleCancelAdd() {
-      this.addFormVisible = false
-    },
     handleCancelEdit() {
       this.editFormVisible = false
-    },
-    handleAdd() {
-      this.addFormVisible = true
     },
     handleEdit(row) {
       this.editFormVisible = true
@@ -253,18 +242,19 @@ export default {
     handleDelete(row) {
       this.$swal({
         title: '确定要删除吗？',
-        text: '一旦删除，该角色下的用户都无法使用',
+        text: '友尽了嘛？',
         type: 'warning',
         showCancelButton: true
       }).then(result => {
         if (result.value) {
-          deleteFriendLinkById(row.id)
+          this.$axios
+            .$request(deleteFriendLinkById(row.id))
             .then(res => {
               this.loading = false
               if (res.code === '200' && res.data) {
                 this.$swal({
                   title: '删除成功',
-                  text: '该角色已经安全删除',
+                  text: '该友链已经删除',
                   type: 'success'
                 })
                 this.refresh()
