@@ -38,7 +38,7 @@
       <v-layout row>
         <v-flex>
           <div class="footer">
-            <core-footer v-if="$route.name !== 'Maps'" />
+            <blog-footer v-if="$route.name !== 'Maps'" />
           </div>
         </v-flex>
       </v-layout>
@@ -53,6 +53,7 @@ import MainCard from '@/components/blog/MainCard'
 import ArticleList from '@/components/blog/ArticleList'
 import RecentDiscuss from '@/components/blog/RecentDiscuss'
 import LabelCloud from '@/components/blog/LabelCloud'
+import Footer from '@/components/blog/Footer'
 import { getHitokoto } from '@/api/service'
 import {
   getArticleLabelPage,
@@ -68,7 +69,8 @@ export default {
     'blog-main-card': MainCard,
     'blog-article-list': ArticleList,
     'blog-recent-discuss': RecentDiscuss,
-    'blog-label-cloud': LabelCloud
+    'blog-label-cloud': LabelCloud,
+    'blog-footer': Footer
   },
   data: () => ({
     loading: true,
