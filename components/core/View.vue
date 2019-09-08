@@ -25,6 +25,6 @@ export default {
 
 <style scoped>
 #core-view {
-  padding-bottom: 100px;
+  padding-bottom: 200px;
 }
 </style>

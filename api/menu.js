@@ -111,14 +111,14 @@ const Menu = [
       {
         name: 'write',
         title: '友链列表',
-        component: 'friendlist',
-        href: '/admin/friendlink/list'
+        component: 'articleadd',
+        href: '/admin/article/add'
       },
       {
         name: 'write',
         title: '友链添加',
-        component: 'friendadd',
-        href: '/admin/friendlink/add'
+        component: 'articleadd',
+        href: '/admin/article/add'
       }
     ]
   }

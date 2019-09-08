@@ -19,9 +19,23 @@
         </v-layout>
       </v-card-text>
       <v-card-text>
-        <v-btn v-for="icon in icons" :key="icon" class="mx-3 white--text" icon>
-          <v-icon size="24px">{{ icon }}</v-icon>
-        </v-btn>
+        <i v-for="icon in icons" :key="icon">
+          <template>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  class="mx-3 white--text"
+                  icon
+                  target="_Blank"
+                  :href="icon.url"
+                >
+                  <v-icon size="24px" v-on="on">{{ icon.icon }}</v-icon>
+                </v-btn>
+              </template>
+              {{ icon.info }}
+            </v-tooltip>
+          </template>
+        </i>
       </v-card-text>
 
       <v-card-text class="white--text" style="display: block">
@@ -51,20 +65,19 @@
 <script>
 export default {
   data: () => ({
-    links: [
-      { name: 'Home', Link: '/dashboard' },
-      { name: 'zeal', Link: 'https://www.zealsay.com' },
-      { name: 'About Us', Link: 'https://www.zealsay.com/about/' },
-      { name: 'Blog', Link: 'https://www.zealsay.com/category/it/' }
-    ],
     icons: [
-      'mdi-facebook',
-      'mdi-twitter',
-      'mdi-google-plus',
-      'mdi-linkedin',
-      'mdi-instagram',
-      'mdi-github-circle',
-      'mdi-sina-weibo'
+      { icon: 'mdi-facebook', url: '/', info: 'facebook' },
+      { icon: 'mdi-twitter', url: '/', info: 'twitter' },
+      { icon: 'mdi-google-plus', url: '/', info: 'google' },
+      { icon: 'mdi-linkedin', url: '/', info: 'linkedin' },
+      { icon: 'mdi-instagram', url: '/', info: 'instagram' },
+      {
+        icon: 'mdi-github-circle',
+        url: 'https://github.com/GodLikeZeal',
+        info: 'github'
+      },
+      { icon: 'mdi-sina-weibo', url: '/', info: 'sina' },
+      { icon: 'mdi-login', url: '/admin/login', info: 'admin' }
     ],
     logo: '/image/logo/cat.png'
   })

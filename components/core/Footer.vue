@@ -1,39 +1,78 @@
 <template>
-  <v-footer id="core-footer" absolute>
-    <div class="footer-items">
-      <span v-for="link in links" :key="link.name">
-        <a :href="link.Link" class="tertiary--text footer-links">{{
-          link.name
-        }}</a>
-      </span>
-    </div>
-    <v-spacer />
-    <span class="font-weight-light copyright">
-      &copy;
-      {{ new Date().getFullYear() }}
-      <a href="https://www.creative-tim.com/" target="_blank">zeal</a>, made
-      with love
-      <v-icon color="tertiary" size="17">mdi-heart</v-icon>
-    </span>
+  <v-footer
+    id="blog-footer"
+    style="background-color: initial;height: auto;"
+    absolute
+  >
+    <v-card
+      flat
+      tile
+      class="white accent-4  grey--text text-xs-center"
+      width="100%"
+    >
+      <v-card-text>
+        <i v-for="icon in icons" :key="icon">
+          <template>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  class="mx-3 grey--text"
+                  icon
+                  target="_Blank"
+                  :href="icon.url"
+                >
+                  <v-icon size="24px" v-on="on">{{ icon.icon }}</v-icon>
+                </v-btn>
+              </template>
+              {{ icon.info }}
+            </v-tooltip>
+          </template>
+        </i>
+      </v-card-text>
+
+      <v-divider></v-divider>
+
+      <v-card-text class="grey--text">
+        <p>
+          Copyright &copy; {{ new Date().getFullYear() }} | All right reserved
+        </p>
+        <p>
+          鄂ICP备17008798号 Powered by
+          <a class="pink--text" href="https://blog.zealsay.com/" target="_blank"
+            >zeal</a
+          >, made with love
+          <v-icon color="pink" size="17">mdi-heart</v-icon>
+        </p>
+      </v-card-text>
+    </v-card>
   </v-footer>
 </template>
 
 <script>
 export default {
   data: () => ({
-    links: [
-      { name: 'Home', Link: '/dashboard' },
-      { name: 'zeal', Link: 'https://www.zealsay.com' },
-      { name: 'About Us', Link: 'https://www.zealsay.com/about/' },
-      { name: 'Blog', Link: 'https://www.zealsay.com/category/it/' }
-    ]
+    icons: [
+      { icon: 'mdi-facebook', url: '/', info: 'facebook' },
+      { icon: 'mdi-twitter', url: '/', info: 'twitter' },
+      { icon: 'mdi-google-plus', url: '/', info: 'google' },
+      { icon: 'mdi-linkedin', url: '/', info: 'linkedin' },
+      { icon: 'mdi-instagram', url: '/', info: 'instagram' },
+      {
+        icon: 'mdi-github-circle',
+        url: 'https://github.com/GodLikeZeal',
+        info: 'github'
+      },
+      { icon: 'mdi-sina-weibo', url: '/', info: 'sina' },
+      { icon: 'mdi-home', url: '/', info: 'home' }
+    ],
+    logo: '/image/logo/cat.png'
   })
 }
 </script>
 
 <style scoped>
-#core-footer {
-  z-index: 0;
-  height: 48px !important;
+#blog-footer {
+  background-color: initial;
+  height: auto;
 }
 </style>
