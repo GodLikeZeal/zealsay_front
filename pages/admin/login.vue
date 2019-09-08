@@ -73,7 +73,7 @@ export default {
       username: 'test',
       password: 'test123456'
     },
-    redirect: undefined,
+    redirect: null,
     errMsg: ''
   }),
   watch: {

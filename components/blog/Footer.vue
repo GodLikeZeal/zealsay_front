@@ -1,22 +1,30 @@
 <template>
-  <v-footer
-    id="blog-footer"
-    style="background-color: initial;height: auto;"
-    absolute
-  >
+  <v-footer id="core-footer" absolute>
     <v-card
       flat
       tile
-      class="white accent-4  grey--text text-xs-center"
+      class="green accent-4  white--text text-xs-center"
       width="100%"
     >
+      <v-card-text>
+        <v-layout justify-center>
+          <v-list-tile avatar>
+            <v-list-tile-avatar color="white">
+              <v-img :src="logo" height="34" contain />
+            </v-list-tile-avatar>
+            <v-list-tile-title class="title">
+              zealsay
+            </v-list-tile-title>
+          </v-list-tile>
+        </v-layout>
+      </v-card-text>
       <v-card-text>
         <i v-for="icon in icons" :key="icon">
           <template>
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
                 <v-btn
-                  class="mx-3 grey--text"
+                  class="mx-3 white--text"
                   icon
                   target="_Blank"
                   :href="icon.url"
@@ -30,9 +38,15 @@
         </i>
       </v-card-text>
 
+      <v-card-text class="white--text" style="display: block">
+        <blockquote class="blockquote">
+          勇敢且善良.
+        </blockquote>
+      </v-card-text>
+
       <v-divider></v-divider>
 
-      <v-card-text class="grey--text">
+      <v-card-text class="white--text">
         <p>
           Copyright &copy; {{ new Date().getFullYear() }} | All right reserved
         </p>
@@ -63,7 +77,7 @@ export default {
         info: 'github'
       },
       { icon: 'mdi-sina-weibo', url: '/', info: 'sina' },
-      { icon: 'mdi-home', url: '/', info: 'home' }
+      { icon: 'mdi-login', url: '/admin/login', info: 'admin' }
     ],
     logo: '/image/logo/cat.png'
   })
@@ -71,8 +85,8 @@ export default {
 </script>
 
 <style scoped>
-#blog-footer {
-  background-color: initial;
-  height: auto;
-}
+/*#core-footer {*/
+/*  z-index: 0;*/
+/*  height: 48px !important;*/
+/*}*/
 </style>

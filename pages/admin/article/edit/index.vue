@@ -183,13 +183,12 @@ import {
 } from '@/api/article'
 
 export default {
-  name: 'Add',
+  name: 'Edit',
   layout: 'admin',
   data: () => ({
     showCropper: false,
     img_file: {},
     valid: false,
-    image: 'https://pan.zealsay.com/20190630225012780000000.jpg',
     clickable: true,
     avatar: {
       size: 192,

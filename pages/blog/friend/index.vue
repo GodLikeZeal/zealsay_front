@@ -87,7 +87,7 @@
       <v-layout row>
         <v-flex>
           <div class="footer">
-            <core-footer v-if="$route.name !== 'Maps'" />
+            <blog-footer v-if="$route.name !== 'Maps'" />
           </div>
         </v-flex>
       </v-layout>
