@@ -70,6 +70,10 @@ export default {
     { src: '@/plugins/localStorage.js', ssr: false }
   ],
 
+  /**
+   * 禁用加载进度条
+   */
+  loading: false,
   /*
    ** Nuxt.js modules
    */

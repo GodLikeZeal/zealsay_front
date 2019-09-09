@@ -49,7 +49,7 @@
             @click="handleDisabledSelected(selected)"
           >
             封禁 <br />
-            <v-icon small>fa-ban</v-icon>
+            <v-icon small>mdi-cancel</v-icon>
           </v-btn>
         </v-flex>
       </v-layout>

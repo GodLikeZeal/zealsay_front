@@ -15,7 +15,7 @@
         </v-layout>
       </v-container>
     </v-card>
-    <v-container>
+    <v-container class="my-container">
       <v-breadcrumbs :items="breadcrumbs">
         <template v-slot:divider>
           <v-icon>chevron_right</v-icon>
