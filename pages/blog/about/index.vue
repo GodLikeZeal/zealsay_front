@@ -62,7 +62,7 @@
               <v-flex>
                 <h2 class="font-weight-regular text-gray">个人简介</h2>
                 <blockquote class="blockquote">
-                  一位对代码有洁癖的小哥哥，同时也是小石狗的偶像。
+                  对代码有洁癖的小哥哥，小石狗的偶像。
                 </blockquote>
                 <v-divider></v-divider>
                 <h2 class="font-weight-regular text-gray">资料卡片</h2>
@@ -223,7 +223,7 @@
                   如果你能够看到这个博客，说明我们本身就很有缘分，因为我很懒，很少去宣传，假如能帮到你，那么我就会很开心了。
                 </blockquote>
                 <blockquote class="blockquote">
-                  曾经总觉得，时间过得很慢很慢，好希望快点长大，可是发现十几年走过来，回忆一幕幕，很多的回忆都涌上心头。正如，年少不识曲中意，回首已成曲中人。
+                  曾经总觉得，时间过得很慢很慢，好希望快点长大，可是发现十几年走过来，回忆一幕幕，很多的回忆都涌上心头。
                 </blockquote>
                 <blockquote class="blockquote">
                   正如：年少不识曲中意，回首已成曲中人。
