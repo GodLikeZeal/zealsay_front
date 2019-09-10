@@ -52,7 +52,8 @@ export default {
     'vuetify/dist/vuetify.min.css',
     '@/assets/style/app.styl',
     'chartist/dist/chartist.min.css',
-    '@/assets/scss/styles/index.scss'
+    '@/assets/scss/styles/index.scss',
+    '@/static/live2d/css/live2d.css'
   ],
 
   /*
