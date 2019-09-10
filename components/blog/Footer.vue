@@ -1,11 +1,12 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-footer id="core-footer" absolute>
+  <v-footer id="blog-footer" absolute>
     <v-card
       flat
       tile
       class="green accent-4  white--text text-xs-center"
       width="100%"
     >
+      <live2d></live2d>
       <v-card-text>
         <v-layout justify-center>
           <v-list-tile avatar>
@@ -19,7 +20,7 @@
         </v-layout>
       </v-card-text>
       <v-card-text>
-        <i v-for="icon in icons" :key="icon">
+        <i v-for="icon in icons" :key="icon.id">
           <template>
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
@@ -63,7 +64,11 @@
 </template>
 
 <script>
+import Live2d from '@/components/core/Live2d'
 export default {
+  components: {
+    live2d: Live2d
+  },
   data: () => ({
     icons: [
       { icon: 'mdi-facebook', url: '/', info: 'facebook' },

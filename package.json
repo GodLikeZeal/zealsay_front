@@ -16,6 +16,7 @@
     "@nuxtjs/auth": "^4.8.1",
     "@nuxtjs/axios": "^5.5.4",
     "cross-env": "^5.2.0",
+    "jquery": "^3.4.1",
     "nuxt": "^2.9.2",
     "vue-sweetalert2": "^2.1.1",
     "vuetify": "^1.5.16",

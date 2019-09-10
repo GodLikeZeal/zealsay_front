@@ -52,7 +52,8 @@ export default {
     'vuetify/dist/vuetify.min.css',
     '@/assets/style/app.styl',
     'chartist/dist/chartist.min.css',
-    '@/assets/scss/styles/index.scss'
+    '@/assets/scss/styles/index.scss',
+    '@/static/live2d/css/live2d.css'
   ],
 
   /*
@@ -145,13 +146,13 @@ export default {
     credentials: true, // 表示跨域请求时候是否需要携带凭证
     retry: { retries: 3 }, // 超时重试3次
     progress: false, // 请求的时候是否加载loading页面
-    debug: false // 开启调试，线上关闭
+    debug: true // 开启调试，线上关闭
   },
 
   proxy: {
     '/app/': {
-      target: 'https://dev-api.zealsay.com', // 目标接口域名
-      // target: 'http://localhost:8090', // 目标接口域名
+      // target: 'https://dev-api.zealsay.com', // 目标接口域名
+      target: 'http://localhost:8090', // 目标接口域名
       changeOrigin: true, // 是否跨域
       pathRewrite: { '^/app/': '' } // 把/api 替换成 /
     }
