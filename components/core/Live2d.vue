@@ -2,7 +2,7 @@
   <div>
     <div id="landlord" style="left:5px;bottom:0px;">
       <div class="message" style="opacity:0" />
-      <canvas id="live2d" width="560" height="560" class="live2d" />
+      <canvas id="live2d" width="500" height="560" class="live2d" />
       <div class="live_talk_input_body">
         <div class="live_talk_input_name_body">
           <input

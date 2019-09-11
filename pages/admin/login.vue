@@ -43,7 +43,7 @@
                 <v-btn icon>
                   <v-icon medium color="light-blue">mdi-qqchat</v-icon>
                 </v-btn>
-                <v-btn icon>
+                <v-btn nuxt href="/app/api/v1/oauth/login/github" icon>
                   <v-icon medium color="light-grey">mdi-github-circle</v-icon>
                 </v-btn>
                 <v-spacer></v-spacer>
