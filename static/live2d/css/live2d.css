@@ -188,8 +188,8 @@
   position: absolute;
   width: 15px;
   z-index: 5;
-  right: 0px;
-  bottom: 20px;
+  left: 10px;
+  bottom: 60px;
   opacity: 0.9;
 }
 
