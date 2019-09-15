@@ -43,9 +43,15 @@
         />
         <audio
           id="live2d_bgm"
+          src=""
           style="display:none;"
           data-bgm="0"
           preload="none"
+        ></audio>
+        <input
+          name="live2dBGM"
+          value="https://pan.zealsay.com/music.mp3"
+          type="hidden"
         />
         <input
           name="live2dBGM"
