@@ -9,7 +9,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: 'zealsay小站-为分享快乐而生',
+    title: 'zealsay说你想说-为分享快乐而生',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -17,13 +17,13 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'zealsay小站，是一个关注于互联网、IT技术经验分享的个人独立博客。专注于IT行业最前沿的技术。致力成为互联网上最个性、最极客、具传播力的个人独立博客。'
+          'zealsay说你想说，是一个关注于互联网、IT技术经验分享的个人独立博客。专注于IT行业最前沿的技术。致力成为互联网上最个性、最极客、具传播力的个人独立博客。'
       },
       {
         hid: 'keywords',
         name: 'keywords',
         content:
-          '全栈人生,全栈笔记,全栈工程师,全栈,zealsay,zealsay博客,zealsay说你想说,王者荣耀,游戏,盘点,个人博客,建站系统,生活杂记,随笔,WEB平台,BOX-ROM,BoxMod。'
+          '技术人生,技术笔记,情感交流,技术分享,java,spring boot,vue,nuxt,vuetify,后台,前端,服务器,动漫,程序员,全栈工程师,全栈,zealsay,zealsay博客,zealsay说你想说,王者荣耀,游戏,盘点,个人博客,建站系统,生活杂记,随笔,WEB平台,BOX-ROM,BoxMod。'
       }
     ],
     link: [
@@ -183,6 +183,6 @@ export default {
         })
       }
     },
-    vendor: ['axios']
+    vendor: ['axios', 'vue-cropper']
   }
 }

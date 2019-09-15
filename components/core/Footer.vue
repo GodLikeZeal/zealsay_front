@@ -11,7 +11,7 @@
       width="100%"
     >
       <v-card-text>
-        <i v-for="icon in icons" :key="icon">
+        <i v-for="icon in icons" :key="icon.id">
           <template>
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
