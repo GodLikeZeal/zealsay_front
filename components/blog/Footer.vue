@@ -82,7 +82,7 @@ export default {
         info: 'github'
       },
       { icon: 'mdi-sina-weibo', url: '/', info: 'sina' },
-      { icon: 'mdi-login', url: '/admin/login', info: 'admin' }
+      { icon: 'mdi-login', url: '/admin/dashboard', info: 'admin' }
     ],
     logo: '/image/logo/cat.png'
   })

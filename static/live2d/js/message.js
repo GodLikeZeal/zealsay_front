@@ -1,9 +1,10 @@
 /* eslint-disable */
+var port = document.location.port === ''? document.location.port: ':' + document.location.port
+var base_url = document.location.protocol + '//' + window.document.location.hostname + port + '/'
 var home_Path = document.location.protocol + '//' + window.document.location.hostname + '/'
 var message_Path = '/live2d/'
 var userAgent = window.navigator.userAgent.toLowerCase()
 var talkAPI = 'https://luoyangc.cn/api/talk/'
-console.log()
 console.log(userAgent)
 var norunAI = ['android', 'iphone', 'ipod', 'ipad', 'windows phone', 'mqqbrowser','msie', 'trident/7.0']
 var norunFlag = false
@@ -51,6 +52,7 @@ if (!norunFlag) {
 		};
 
     var re = /x/
+    console.log(re)
 		re.toString = function() {
       showMessage('哈哈，你打开了控制台，是想要看看我的秘密吗？', 5000)
 			return ''
@@ -161,9 +163,9 @@ if (!norunFlag) {
 	function showHitokoto() {
     if (sessionStorage.getItem('Sleepy') !== '1') {
       if (!AITalkFlag) {
-        $.getJSON('https://sslapi.hitokoto.cn/', function(result) {
+        $.getJSON(base_url + 'app/api/v1/service/hitokoto', function(result) {
           talkValTimer()
-					showMessage(result.hitokoto, 0)
+					showMessage(result.data.hitokoto, 0)
 				})
 			}
     } else{
@@ -173,7 +175,7 @@ if (!norunFlag) {
           checkSleep()
 				}, 200)
 			}
-      console.log(sleepTimer_)
+
 		}
   }
 

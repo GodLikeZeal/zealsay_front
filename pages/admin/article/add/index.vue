@@ -38,22 +38,24 @@
                       </template>
                       <v-card>
                         <v-card-title>
-                          <div style="width: 800px;height: 400px;">
-                            <vueCropper
-                              ref="cropper"
-                              style="background-repeat:repeat"
-                              :output-size="option.outputSize"
-                              :output-type="option.outputType"
-                              :info="option.info"
-                              :can-scale="option.canScale"
-                              :can-move-box="option.canMoveBox"
-                              :center-box="option.centerBox"
-                              :auto-crop="option.autoCrop"
-                              :fixed="option.fixed"
-                              :fixed-number="option.fixedNumber"
-                              :img="option.img"
-                            ></vueCropper>
-                          </div>
+                          <no-ssr>
+                            <div style="width: 800px;height: 400px;">
+                              <vueCropper
+                                ref="cropper"
+                                style="background-repeat:repeat"
+                                :output-size="option.outputSize"
+                                :output-type="option.outputType"
+                                :info="option.info"
+                                :can-scale="option.canScale"
+                                :can-move-box="option.canMoveBox"
+                                :center-box="option.centerBox"
+                                :auto-crop="option.autoCrop"
+                                :fixed="option.fixed"
+                                :fixed-number="option.fixedNumber"
+                                :img="option.img"
+                              ></vueCropper>
+                            </div>
+                          </no-ssr>
                         </v-card-title>
                         <v-card-actions>
                           <v-spacer></v-spacer>
@@ -266,8 +268,12 @@ export default {
   methods: {
     submit() {
       this.loading = true
-      this.save()
-      this.loading = false
+      if (this.$refs.form.validate()) {
+        // 校验通过则提交保存
+        this.save()
+      } else {
+        this.loading = false
+      }
     },
     cropImage() {
       // get image data for post processing, e.g. upload or setting image src

@@ -13,7 +13,7 @@
                     width="200"
                     height="150"
                   />
-                  <h1 class="flex my-4 primary--text">zealsay 后台系统</h1>
+                  <h1 class="flex my-4 primary--text">zealsay 说你想说</h1>
                 </div>
                 <v-form>
                   <v-text-field
@@ -31,19 +31,23 @@
                     label="Password"
                     type="password"
                   ></v-text-field>
-                  <v-alert :value="alert" type="error">
-                    {{ msg }}
-                  </v-alert>
+                  <a nuxt href="register">注册账号</a> OR
+                  <a class="right">忘记密码？</a>
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-btn icon>
+                <v-btn title="微信登录" icon>
                   <v-icon medium color="light-green">mdi-wechat </v-icon>
                 </v-btn>
-                <v-btn icon>
+                <v-btn title="QQ登录" icon>
                   <v-icon medium color="light-blue">mdi-qqchat</v-icon>
                 </v-btn>
-                <v-btn nuxt href="/app/api/v1/oauth/login/github" icon>
+                <v-btn
+                  title="github登录"
+                  nuxt
+                  href="/app/api/v1/oauth/login/github"
+                  icon
+                >
                   <v-icon medium color="light-grey">mdi-github-circle</v-icon>
                 </v-btn>
                 <v-spacer></v-spacer>
@@ -67,7 +71,6 @@ export default {
   auth: false,
   data: () => ({
     alert: false,
-    msg: 'aa',
     loading: false,
     model: {
       username: 'test',
@@ -178,20 +181,6 @@ export default {
             timer: 3000
           })
         })
-      // this.$store
-      //   .dispatch('user/LoginByUsername', this.model)
-      //   .then(() => {
-      //     this.loading = false
-      //     this.$router.push({ path: this.redirect || '/admin/Dashboard' })
-      //   })
-      //   .catch(err => {
-      //     this.loading = false
-      //     this.visible = true
-      //     this.errMsg = err.message
-      //     setTimeout(() => {
-      //       this.visible = false
-      //     }, 3000)
-      //   })
     }
   }
 }
