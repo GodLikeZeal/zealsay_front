@@ -61,54 +61,55 @@
                     </v-card-text>
                   </v-window-item>
                 </v-form>
-                <v-window-item :value="2">
-                  <v-card-text>
-                    <v-text-field
-                      :rules="phoneRules"
-                      hint="绑定手机号可以使用手机号加验证码登录，也可以在忘记密码后通过手机号找回密码"
-                      label="手机号"
-                      mask="nnn nnnn nnnn"
-                    ></v-text-field>
-                    <v-layout>
-                      <v-flex md8
-                        ><v-text-field label="验证码"></v-text-field
-                      ></v-flex>
-                      <v-flex md4>
-                        <v-btn
-                          :disabled="!canSend"
-                          color="primary"
-                          @click="send"
-                          >{{ validText }}</v-btn
-                        ></v-flex
+                <v-form ref="form2" lazy-validation>
+                  <v-window-item :value="2">
+                    <v-card-text>
+                      <v-text-field
+                        v-model="form.phoneNumber"
+                        :rules="phoneRules"
+                        hint="绑定手机号可以使用手机号加验证码登录，也可以在忘记密码后通过手机号找回密码"
+                        label="手机号"
+                        mask="nnn nnnn nnnn"
+                      ></v-text-field>
+                      <v-layout>
+                        <v-flex md8
+                          ><v-text-field
+                            v-model="form.validCode"
+                            :rules="validCodeRules"
+                            label="验证码"
+                            required
+                          ></v-text-field
+                        ></v-flex>
+                        <v-flex md4>
+                          <v-btn
+                            :disabled="!canSend"
+                            color="primary"
+                            @click="send"
+                            >{{ validText }}</v-btn
+                          ></v-flex
+                        >
+                      </v-layout>
+                      <span
+                        v-if="validFlag"
+                        class="caption grey--text text--darken-1"
                       >
-                    </v-layout>
-                    <span
-                      v-if="validFlag"
-                      class="caption grey--text text--darken-1"
-                    >
-                      {{ validMsg }}
-                    </span>
-                  </v-card-text>
-                </v-window-item>
+                        {{ validMsg }}
+                      </span>
+                    </v-card-text>
+                  </v-window-item>
+                </v-form>
 
                 <v-window-item :value="3">
                   <div class="pa-3 text-xs-center">
-                    <v-img
-                      class="mb-3"
-                      contain
-                      height="128"
-                      src="https://cdn.vuetifyjs.com/images/logos/v.svg"
-                    ></v-img>
                     <h3 class="title font-weight-light mb-2">
-                      Welcome to Vuetify
+                      注册账号成功!
                     </h3>
                     <span class="caption grey--text"
-                      >Thanks for signing up!</span
+                      >欢迎，点击注册完成按钮，跳转到登录页。</span
                     >
                   </div>
                 </v-window-item>
               </v-window>
-              <v-divider></v-divider>
 
               <v-card-actions v-if="step === 1">
                 <v-spacer></v-spacer>
@@ -128,25 +129,16 @@
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
-                  :disabled="step === 3"
                   color="primary"
                   depressed
-                  @click="step++"
+                  :loading="twoLoading"
+                  @click="twoStep"
                 >
                   提交注册
                 </v-btn>
               </v-card-actions>
               <v-card-actions v-if="step === 3">
-                <v-btn :disabled="step === 1" depressed @click="step--">
-                  返回上一步
-                </v-btn>
-                <v-spacer></v-spacer>
-                <v-btn
-                  :disabled="step === 3"
-                  color="primary"
-                  depressed
-                  @click="step++"
-                >
+                <v-btn color="primary" depressed @click="threeStep">
                   完成注册
                 </v-btn>
               </v-card-actions>
@@ -174,6 +166,7 @@ export default {
     alert: false,
     msg: 'aa',
     oneLoading: false,
+    twoLoading: false,
     model: {
       username: 'test',
       password: 'test123456'
@@ -207,6 +200,10 @@ export default {
     phoneRules: [
       v => !!v || '手机号不能为空!',
       v => validatePhone(v) || '不是合法的手机号'
+    ],
+    validCodeRules: [
+      v => !!v || '验证码不能为空!',
+      v => v.length === 4 || '验证码输入不合法'
     ]
   }),
   computed: {
@@ -275,6 +272,7 @@ export default {
       if (this.$refs.form1.validate()) {
         // 校验通过则提交保存
         if (this.form.passwordConfirm === this.form.password) {
+          // todo 调用后台服务校验是否用户名重复
           this.passwordValid = false
           this.step++
           this.oneLoading = false
@@ -285,6 +283,18 @@ export default {
         }
       } else {
         this.oneLoading = false
+      }
+    },
+    twoStep() {
+      this.twoLoading = true
+      if (this.$refs.form2.validate()) {
+        // 校验通过则提交保存
+        // todo 调用后台服务校验验证码是否正确
+        this.validFlag = false
+        this.step++
+        this.twoLoading = false
+      } else {
+        this.twoLoading = false
       }
     },
     send() {
