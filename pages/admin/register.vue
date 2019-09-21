@@ -63,39 +63,74 @@
                 </v-form>
                 <v-form ref="form2" lazy-validation>
                   <v-window-item :value="2">
-                    <v-card-text>
-                      <v-text-field
-                        v-model="form.phoneNumber"
-                        :rules="phoneRules"
-                        hint="绑定手机号可以使用手机号加验证码登录，也可以在忘记密码后通过手机号找回密码"
-                        label="手机号"
-                        mask="nnn nnnn nnnn"
-                      ></v-text-field>
-                      <v-layout>
-                        <v-flex md8
-                          ><v-text-field
-                            v-model="form.validCode"
-                            :rules="validCodeRules"
-                            label="验证码"
-                            required
-                          ></v-text-field
-                        ></v-flex>
-                        <v-flex md4>
-                          <v-btn
-                            :disabled="!canSend"
-                            color="primary"
-                            @click="send"
-                            >{{ validText }}</v-btn
-                          ></v-flex
-                        >
-                      </v-layout>
-                      <span
-                        v-if="validFlag"
-                        class="caption grey--text text--darken-1"
-                      >
-                        {{ validMsg }}
-                      </span>
-                    </v-card-text>
+                    <v-tabs
+                      centered
+                      icons-and-text
+                      active-class="primary--text"
+                    >
+                      <v-tab href="#tab-1">
+                        绑定电子邮箱
+                        <v-icon>email</v-icon>
+                      </v-tab>
+
+                      <v-tab href="#tab-2">
+                        绑定手机号
+                        <v-icon>phone</v-icon>
+                      </v-tab>
+
+                      <v-tabs-slider></v-tabs-slider>
+                      <v-tab-item value="tab-1">
+                        <v-card-text>
+                          <v-text-field
+                            v-model="form.email"
+                            :rules="emailRules"
+                            hint="绑定邮箱可以使用邮箱登录，也可以在忘记密码后通过邮箱找回密码"
+                            label="电子邮箱"
+                          ></v-text-field>
+                          <span
+                            v-if="validEmailFlag"
+                            class="caption grey--text text--darken-1"
+                          >
+                            {{ validEmailMsg }}
+                          </span>
+                        </v-card-text>
+                      </v-tab-item>
+                      <v-tab-item value="tab-2">
+                        <v-card-text>
+                          <v-text-field
+                            v-model="form.phoneNumber"
+                            :rules="phoneRules"
+                            hint="绑定手机号可以使用手机号加验证码登录，也可以在忘记密码后通过手机号找回密码"
+                            label="手机号"
+                            mask="nnn nnnn nnnn"
+                          ></v-text-field>
+                          <v-layout>
+                            <v-flex md8
+                              ><v-text-field
+                                v-model="form.validCode"
+                                :rules="validCodeRules"
+                                label="验证码"
+                                required
+                              ></v-text-field
+                            ></v-flex>
+                            <v-flex md4>
+                              <v-btn
+                                :disabled="!canSend"
+                                color="primary"
+                                @click="send"
+                                >{{ validText }}</v-btn
+                              ></v-flex
+                            >
+                          </v-layout>
+                          <span
+                            v-if="validFlag"
+                            class="caption grey--text text--darken-1"
+                          >
+                            {{ validMsg }}
+                          </span>
+                        </v-card-text>
+                      </v-tab-item>
+                    </v-tabs>
                   </v-window-item>
                 </v-form>
 
@@ -154,7 +189,8 @@ import qs from 'qs'
 import {
   validatePassword,
   validatePhone,
-  validateUsername
+  validateUsername,
+  validateEmail
 } from '@/util/validate'
 import { loginByUsername } from '@/api/login'
 
@@ -176,11 +212,14 @@ export default {
       password: '',
       passwordConfirm: '',
       phoneNumber: '',
+      email: '',
       validCode: ''
     },
     redirect: null,
     validText: '发送验证码',
     validMsg: '验证码不正确',
+    validEmailFlag: false,
+    validEmailMsg: '',
     validFlag: false,
     canSend: true,
     timer: null,
@@ -204,7 +243,8 @@ export default {
     validCodeRules: [
       v => !!v || '验证码不能为空!',
       v => v.length === 4 || '验证码输入不合法'
-    ]
+    ],
+    emailRules: [v => !v || validateEmail(v) || '不是合法的邮箱']
   }),
   computed: {
     currentTitle() {

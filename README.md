@@ -1,7 +1,7 @@
 <div align=center><img style="width:120px;height:80px" src="https://pan.zealsay.com/2019091615686216710547.png"  alt="真棒" /> </div>
-<center>
+
  ![beta 1.0.0](https://img.shields.io/badge/beta-1.0.0-ff69b4.svg)
- ![License MPL-2.0](https://img.shields.io/badge/license-MPL--2.0-green.svg)  [![Build Status](https://travis-ci.org/GodLikeZeal/zealsay_front.svg?branch=master)](https://travis-ci.org/GodLikeZeal/zealsay_front) [![](https://img.shields.io/docker/stars/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') [![](https://img.shields.io/docker/pulls/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') </center>
+ ![License MPL-2.0](https://img.shields.io/badge/license-MPL--2.0-green.svg)  [![Build Status](https://travis-ci.org/GodLikeZeal/zealsay_front.svg?branch=master)](https://travis-ci.org/GodLikeZeal/zealsay_front) [![](https://img.shields.io/docker/stars/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') [![](https://img.shields.io/docker/pulls/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') 
  ------
 ## 开发指南
 请参考 [开发文档](https://docs.zealsay.com)
