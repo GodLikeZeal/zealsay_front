@@ -61,26 +61,27 @@
                     </v-card-text>
                   </v-window-item>
                 </v-form>
-                <v-form ref="form2" lazy-validation>
-                  <v-window-item :value="2">
-                    <v-tabs
-                      centered
-                      icons-and-text
-                      active-class="primary--text"
-                    >
-                      <v-tab href="#tab-1">
-                        绑定电子邮箱
-                        <v-icon>email</v-icon>
-                      </v-tab>
+                <v-window-item :value="2">
+                  <v-tabs
+                    v-model="tabs"
+                    centered
+                    icons-and-text
+                    active-class="primary--text"
+                  >
+                    <v-tab href="#tab-1">
+                      绑定电子邮箱
+                      <v-icon>email</v-icon>
+                    </v-tab>
 
-                      <v-tab href="#tab-2">
-                        绑定手机号
-                        <v-icon>phone</v-icon>
-                      </v-tab>
+                    <!--                    <v-tab href="#tab-2">-->
+                    <!--                      绑定手机号-->
+                    <!--                      <v-icon>phone</v-icon>-->
+                    <!--                    </v-tab>-->
 
-                      <v-tabs-slider></v-tabs-slider>
-                      <v-tab-item value="tab-1">
-                        <v-card-text>
+                    <v-tabs-slider></v-tabs-slider>
+                    <v-tab-item value="tab-1">
+                      <v-card-text>
+                        <v-form ref="form21" lazy-validation>
                           <v-text-field
                             v-model="form.email"
                             :rules="emailRules"
@@ -93,10 +94,12 @@
                           >
                             {{ validEmailMsg }}
                           </span>
-                        </v-card-text>
-                      </v-tab-item>
-                      <v-tab-item value="tab-2">
-                        <v-card-text>
+                        </v-form>
+                      </v-card-text>
+                    </v-tab-item>
+                    <v-tab-item value="tab-2">
+                      <v-card-text>
+                        <v-form ref="form22" lazy-validation>
                           <v-text-field
                             v-model="form.phoneNumber"
                             :rules="phoneRules"
@@ -128,11 +131,11 @@
                           >
                             {{ validMsg }}
                           </span>
-                        </v-card-text>
-                      </v-tab-item>
-                    </v-tabs>
-                  </v-window-item>
-                </v-form>
+                        </v-form>
+                      </v-card-text>
+                    </v-tab-item>
+                  </v-tabs>
+                </v-window-item>
 
                 <v-window-item :value="3">
                   <div class="pa-3 text-xs-center">
@@ -173,9 +176,13 @@
                 </v-btn>
               </v-card-actions>
               <v-card-actions v-if="step === 3">
-                <v-btn color="primary" depressed @click="threeStep">
-                  完成注册
-                </v-btn>
+                <v-layout justify-center>
+                  <v-flex md3 xs3>
+                    <v-btn color="primary" depressed @click="threeStep">
+                      完成注册
+                    </v-btn>
+                  </v-flex>
+                </v-layout>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -215,6 +222,7 @@ export default {
       email: '',
       validCode: ''
     },
+    tabs: 'tab-1',
     redirect: null,
     validText: '发送验证码',
     validMsg: '验证码不正确',
@@ -327,15 +335,34 @@ export default {
     },
     twoStep() {
       this.twoLoading = true
-      if (this.$refs.form2.validate()) {
-        // 校验通过则提交保存
-        // todo 调用后台服务校验验证码是否正确
-        this.validFlag = false
-        this.step++
-        this.twoLoading = false
-      } else {
-        this.twoLoading = false
+      switch (this.tabs) {
+        case 'tab-1':
+          // 绑定邮箱
+          if (this.$refs.form21.validate()) {
+            // 校验通过则提交保存
+            // todo 调用后台服务校验验证码是否正确
+            this.validFlag = false
+            this.step++
+            this.twoLoading = false
+          }
+          break
+        case 'tab-2':
+          // 绑定手机号
+          if (this.$refs.form22.validate()) {
+            // 校验通过则提交保存
+            // todo 调用后台服务校验验证码是否正确
+            this.validFlag = false
+            this.step++
+            this.twoLoading = false
+          }
+          break
       }
+      this.twoLoading = false
+    },
+    threeStep() {
+      this.$router.push({
+        path: '/admin/login'
+      })
     },
     send() {
       const that = this
