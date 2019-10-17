@@ -61,43 +61,81 @@
                     </v-card-text>
                   </v-window-item>
                 </v-form>
-                <v-form ref="form2" lazy-validation>
-                  <v-window-item :value="2">
-                    <v-card-text>
-                      <v-text-field
-                        v-model="form.phoneNumber"
-                        :rules="phoneRules"
-                        hint="绑定手机号可以使用手机号加验证码登录，也可以在忘记密码后通过手机号找回密码"
-                        label="手机号"
-                        mask="nnn nnnn nnnn"
-                      ></v-text-field>
-                      <v-layout>
-                        <v-flex md8
-                          ><v-text-field
-                            v-model="form.validCode"
-                            :rules="validCodeRules"
-                            label="验证码"
-                            required
-                          ></v-text-field
-                        ></v-flex>
-                        <v-flex md4>
-                          <v-btn
-                            :disabled="!canSend"
-                            color="primary"
-                            @click="send"
-                            >{{ validText }}</v-btn
-                          ></v-flex
-                        >
-                      </v-layout>
-                      <span
-                        v-if="validFlag"
-                        class="caption grey--text text--darken-1"
-                      >
-                        {{ validMsg }}
-                      </span>
-                    </v-card-text>
-                  </v-window-item>
-                </v-form>
+                <v-window-item :value="2">
+                  <v-tabs
+                    v-model="tabs"
+                    centered
+                    icons-and-text
+                    active-class="primary--text"
+                  >
+                    <v-tab href="#tab-1">
+                      绑定电子邮箱
+                      <v-icon>email</v-icon>
+                    </v-tab>
+
+                    <!--                    <v-tab href="#tab-2">-->
+                    <!--                      绑定手机号-->
+                    <!--                      <v-icon>phone</v-icon>-->
+                    <!--                    </v-tab>-->
+
+                    <v-tabs-slider></v-tabs-slider>
+                    <v-tab-item value="tab-1">
+                      <v-card-text>
+                        <v-form ref="form21" lazy-validation>
+                          <v-text-field
+                            v-model="form.email"
+                            :rules="emailRules"
+                            hint="绑定邮箱可以使用邮箱登录，也可以在忘记密码后通过邮箱找回密码"
+                            label="电子邮箱"
+                          ></v-text-field>
+                          <span
+                            v-if="validEmailFlag"
+                            class="caption grey--text text--darken-1"
+                          >
+                            {{ validEmailMsg }}
+                          </span>
+                        </v-form>
+                      </v-card-text>
+                    </v-tab-item>
+                    <v-tab-item value="tab-2">
+                      <v-card-text>
+                        <v-form ref="form22" lazy-validation>
+                          <v-text-field
+                            v-model="form.phoneNumber"
+                            :rules="phoneRules"
+                            hint="绑定手机号可以使用手机号加验证码登录，也可以在忘记密码后通过手机号找回密码"
+                            label="手机号"
+                            mask="nnn nnnn nnnn"
+                          ></v-text-field>
+                          <v-layout>
+                            <v-flex md8
+                              ><v-text-field
+                                v-model="form.validCode"
+                                :rules="validCodeRules"
+                                label="验证码"
+                                required
+                              ></v-text-field
+                            ></v-flex>
+                            <v-flex md4>
+                              <v-btn
+                                :disabled="!canSend"
+                                color="primary"
+                                @click="send"
+                                >{{ validText }}</v-btn
+                              ></v-flex
+                            >
+                          </v-layout>
+                          <span
+                            v-if="validFlag"
+                            class="caption grey--text text--darken-1"
+                          >
+                            {{ validMsg }}
+                          </span>
+                        </v-form>
+                      </v-card-text>
+                    </v-tab-item>
+                  </v-tabs>
+                </v-window-item>
 
                 <v-window-item :value="3">
                   <div class="pa-3 text-xs-center">
@@ -106,6 +144,9 @@
                     </h3>
                     <span class="caption grey--text"
                       >欢迎，点击注册完成按钮，跳转到登录页。</span
+                    >
+                    <span class="caption grey--text"
+                      >系统将会发送一封验证邮件，请按提示完成绑定操作。</span
                     >
                   </div>
                 </v-window-item>
@@ -138,9 +179,13 @@
                 </v-btn>
               </v-card-actions>
               <v-card-actions v-if="step === 3">
-                <v-btn color="primary" depressed @click="threeStep">
-                  完成注册
-                </v-btn>
+                <v-layout justify-center>
+                  <v-flex md3 xs3>
+                    <v-btn color="primary" depressed @click="threeStep">
+                      完成注册
+                    </v-btn>
+                  </v-flex>
+                </v-layout>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -154,9 +199,11 @@ import qs from 'qs'
 import {
   validatePassword,
   validatePhone,
-  validateUsername
+  validateUsername,
+  validateEmail
 } from '@/util/validate'
 import { loginByUsername } from '@/api/login'
+import { getIsInUseByUsername, getIsInUseByEmail, register } from '@/api/user'
 
 export default {
   layout: 'default',
@@ -176,11 +223,15 @@ export default {
       password: '',
       passwordConfirm: '',
       phoneNumber: '',
+      email: '',
       validCode: ''
     },
+    tabs: 'tab-1',
     redirect: null,
     validText: '发送验证码',
     validMsg: '验证码不正确',
+    validEmailFlag: false,
+    validEmailMsg: '',
     validFlag: false,
     canSend: true,
     timer: null,
@@ -204,7 +255,8 @@ export default {
     validCodeRules: [
       v => !!v || '验证码不能为空!',
       v => v.length === 4 || '验证码输入不合法'
-    ]
+    ],
+    emailRules: [v => !v || validateEmail(v) || '不是合法的邮箱']
   }),
   computed: {
     currentTitle() {
@@ -269,13 +321,38 @@ export default {
   methods: {
     oneStep() {
       this.oneLoading = true
+      this.passwordValid = false
       if (this.$refs.form1.validate()) {
-        // 校验通过则提交保存
+        // 校验通过则开始逻辑校验
         if (this.form.passwordConfirm === this.form.password) {
-          // todo 调用后台服务校验是否用户名重复
-          this.passwordValid = false
-          this.step++
-          this.oneLoading = false
+          // 调用后台服务校验是否用户名重复
+          const param = {}
+          param.username = this.form.username
+          this.$axios
+            .$request(getIsInUseByUsername(param))
+            .then(res => {
+              if (res.code === '200' && !res.data) {
+                this.passwordValid = false
+                this.step++
+                this.oneLoading = false
+              } else {
+                this.passwordValid = true
+                this.errMsg = '用户名被别人捷足先登了，换一个试试吧！'
+              }
+            })
+            .catch(e => {
+              this.$swal({
+                text: e.message,
+                type: 'error',
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 3000
+              })
+            })
+            .finally(() => {
+              this.oneLoading = false
+            })
         } else {
           this.errMsg = '请保证两次输入的密码保持一致!'
           this.passwordValid = true
@@ -287,15 +364,87 @@ export default {
     },
     twoStep() {
       this.twoLoading = true
-      if (this.$refs.form2.validate()) {
-        // 校验通过则提交保存
-        // todo 调用后台服务校验验证码是否正确
-        this.validFlag = false
-        this.step++
-        this.twoLoading = false
-      } else {
-        this.twoLoading = false
+      switch (this.tabs) {
+        case 'tab-1':
+          // 绑定邮箱
+          if (this.$refs.form21.validate()) {
+            // 调用后台服务校验验邮箱是否已经被注册了
+            // 调用后台服务校验是否用户名重复
+            const param = {}
+            param.email = this.form.email
+            this.$axios
+              .$request(getIsInUseByEmail(param))
+              .then(res => {
+                if (res.code === '200' && !res.data) {
+                  // 提交后台，执行发送邮件服务
+                  this.$axios
+                    .$request(register(this.form))
+                    .then(res => {
+                      if (res.code === '200' && !res.data) {
+                        this.validFlag = false
+                        this.step++
+                        this.twoLoading = false
+                      } else {
+                        this.$swal({
+                          text: res.message,
+                          type: 'error',
+                          toast: true,
+                          position: 'top',
+                          showConfirmButton: false,
+                          timer: 3000
+                        })
+                      }
+                    })
+                    .catch(e => {
+                      this.$swal({
+                        text: e.message,
+                        type: 'error',
+                        toast: true,
+                        position: 'top',
+                        showConfirmButton: false,
+                        timer: 3000
+                      })
+                    })
+                    .finally(() => {
+                      this.twoLoading = false
+                    })
+                } else {
+                  this.passwordValid = true
+                  this.validEmailMsg = '该邮箱已经绑定过用户了，换一个试试吧！'
+                }
+              })
+              .catch(e => {
+                this.$swal({
+                  text: e.message,
+                  type: 'error',
+                  toast: true,
+                  position: 'top',
+                  showConfirmButton: false,
+                  timer: 3000
+                })
+              })
+              .finally(() => {
+                this.twoLoading = false
+              })
+          }
+          break
+        case 'tab-2':
+          // 绑定手机号
+          if (this.$refs.form22.validate()) {
+            // 校验通过则提交保存
+            // todo 调用后台服务校验验证码是否正确
+            this.validFlag = false
+            this.step++
+            this.twoLoading = false
+          }
+          break
       }
+      this.twoLoading = false
+    },
+    threeStep() {
+      this.$router.push({
+        path: '/admin/login'
+      })
     },
     send() {
       const that = this
