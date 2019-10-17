@@ -89,14 +89,14 @@ export function unsealingUser(obj) {
 }
 
 /**
- * 根据id查询用户名是否被使用.
+ * 查询用户名是否被使用.
  *
  * @author  zhanglei
  * @date 2019-03-13  16:16
  */
 export function getIsInUseByUsername(obj) {
   return {
-    url: '/use/username/' + obj.username,
+    url: '/api/v1/user/use/username/' + obj.username,
     method: 'GET',
     data: obj.id
   }
@@ -110,7 +110,7 @@ export function getIsInUseByUsername(obj) {
  */
 export function getIsInUseByPhone(obj) {
   return {
-    url: '/use/phone/' + obj.phoneNumber,
+    url: '/api/v1/user/use/phone/' + obj.phoneNumber,
     method: 'GET',
     data: obj.id
   }
@@ -124,9 +124,23 @@ export function getIsInUseByPhone(obj) {
  */
 export function getIsInUseByEmail(obj) {
   return {
-    url: '/use/email/' + obj.email,
+    url: '/api/v1/user/use/email/' + obj.email,
     method: 'GET',
     data: obj.id
+  }
+}
+
+/**
+ * 用户注册.
+ *
+ * @author  zhanglei
+ * @date 2019-03-13  16:16
+ */
+export function register(obj) {
+  return {
+    url: '/api/v1/user/register/',
+    method: 'POST',
+    data: obj
   }
 }
 

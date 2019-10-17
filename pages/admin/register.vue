@@ -145,6 +145,9 @@
                     <span class="caption grey--text"
                       >欢迎，点击注册完成按钮，跳转到登录页。</span
                     >
+                    <span class="caption grey--text"
+                      >系统将会发送一封验证邮件，请按提示完成绑定操作。</span
+                    >
                   </div>
                 </v-window-item>
               </v-window>
@@ -200,6 +203,7 @@ import {
   validateEmail
 } from '@/util/validate'
 import { loginByUsername } from '@/api/login'
+import { getIsInUseByUsername, getIsInUseByEmail, register } from '@/api/user'
 
 export default {
   layout: 'default',
@@ -317,13 +321,38 @@ export default {
   methods: {
     oneStep() {
       this.oneLoading = true
+      this.passwordValid = false
       if (this.$refs.form1.validate()) {
-        // 校验通过则提交保存
+        // 校验通过则开始逻辑校验
         if (this.form.passwordConfirm === this.form.password) {
-          // todo 调用后台服务校验是否用户名重复
-          this.passwordValid = false
-          this.step++
-          this.oneLoading = false
+          // 调用后台服务校验是否用户名重复
+          const param = {}
+          param.username = this.form.username
+          this.$axios
+            .$request(getIsInUseByUsername(param))
+            .then(res => {
+              if (res.code === '200' && !res.data) {
+                this.passwordValid = false
+                this.step++
+                this.oneLoading = false
+              } else {
+                this.passwordValid = true
+                this.errMsg = '用户名被别人捷足先登了，换一个试试吧！'
+              }
+            })
+            .catch(e => {
+              this.$swal({
+                text: e.message,
+                type: 'error',
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 3000
+              })
+            })
+            .finally(() => {
+              this.oneLoading = false
+            })
         } else {
           this.errMsg = '请保证两次输入的密码保持一致!'
           this.passwordValid = true
@@ -339,11 +368,64 @@ export default {
         case 'tab-1':
           // 绑定邮箱
           if (this.$refs.form21.validate()) {
-            // 校验通过则提交保存
-            // todo 调用后台服务校验验证码是否正确
-            this.validFlag = false
-            this.step++
-            this.twoLoading = false
+            // 调用后台服务校验验邮箱是否已经被注册了
+            // 调用后台服务校验是否用户名重复
+            const param = {}
+            param.email = this.form.email
+            this.$axios
+              .$request(getIsInUseByEmail(param))
+              .then(res => {
+                if (res.code === '200' && !res.data) {
+                  // 提交后台，执行发送邮件服务
+                  this.$axios
+                    .$request(register(this.form))
+                    .then(res => {
+                      if (res.code === '200' && !res.data) {
+                        this.validFlag = false
+                        this.step++
+                        this.twoLoading = false
+                      } else {
+                        this.$swal({
+                          text: res.message,
+                          type: 'error',
+                          toast: true,
+                          position: 'top',
+                          showConfirmButton: false,
+                          timer: 3000
+                        })
+                      }
+                    })
+                    .catch(e => {
+                      this.$swal({
+                        text: e.message,
+                        type: 'error',
+                        toast: true,
+                        position: 'top',
+                        showConfirmButton: false,
+                        timer: 3000
+                      })
+                    })
+                    .finally(() => {
+                      this.twoLoading = false
+                    })
+                } else {
+                  this.passwordValid = true
+                  this.validEmailMsg = '该邮箱已经绑定过用户了，换一个试试吧！'
+                }
+              })
+              .catch(e => {
+                this.$swal({
+                  text: e.message,
+                  type: 'error',
+                  toast: true,
+                  position: 'top',
+                  showConfirmButton: false,
+                  timer: 3000
+                })
+              })
+              .finally(() => {
+                this.twoLoading = false
+              })
           }
           break
         case 'tab-2':
