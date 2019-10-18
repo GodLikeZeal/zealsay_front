@@ -138,7 +138,7 @@ export function getIsInUseByEmail(obj) {
  */
 export function register(obj) {
   return {
-    url: '/api/v1/user/register/',
+    url: '/api/v1/user/register',
     method: 'POST',
     data: obj
   }

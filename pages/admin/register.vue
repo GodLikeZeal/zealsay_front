@@ -380,7 +380,7 @@ export default {
                   this.$axios
                     .$request(register(this.form))
                     .then(res => {
-                      if (res.code === '200' && !res.data) {
+                      if (res.code === '200' && res.data) {
                         this.validFlag = false
                         this.step++
                         this.twoLoading = false
@@ -422,9 +422,6 @@ export default {
                   showConfirmButton: false,
                   timer: 3000
                 })
-              })
-              .finally(() => {
-                this.twoLoading = false
               })
           }
           break
