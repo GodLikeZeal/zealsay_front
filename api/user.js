@@ -160,6 +160,41 @@ export function uploadImage(obj) {
     }
   }
 }
+
+/**
+ * 头像上传.
+ *
+ * @author  zhanglei
+ * @date 2019-03-13  16:16
+ */
+export function uploadAvatar(obj) {
+  return {
+    url: '/api/v1/qiniu/upload/avatar',
+    method: 'post',
+    data: obj,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  }
+}
+
+/**
+ * 文章图片上传.
+ *
+ * @author  zhanglei
+ * @date 2019-03-13  16:16
+ */
+export function uploadArticle(obj) {
+  return {
+    url: '/api/v1/qiniu/upload/article',
+    method: 'post',
+    data: obj,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  }
+}
+
 /**
  * 图片批量上传.
  *

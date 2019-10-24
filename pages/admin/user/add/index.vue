@@ -199,7 +199,7 @@
   </v-container>
 </template>
 <script>
-import { addUser, uploadImage } from '@/api/user'
+import { addUser, uploadAatar } from '@/api/user'
 import { getProvinceList, getCityList, getAreaList } from '@/api/dict'
 import { getRoleList } from '@/api/role'
 import {
@@ -445,7 +445,7 @@ export default {
         const param = new FormData()
         param.append('file', file)
         this.$axios
-          .$request(uploadImage(param))
+          .$request(uploadAatar(param))
           .then(res => {
             if (res.code === '200') {
               this.form.avatar = res.data
