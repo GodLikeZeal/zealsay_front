@@ -36,12 +36,12 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-btn title="微信登录" icon>
-                  <v-icon medium color="light-green">mdi-wechat </v-icon>
-                </v-btn>
-                <v-btn title="QQ登录" icon>
-                  <v-icon medium color="light-blue">mdi-qqchat</v-icon>
-                </v-btn>
+                <!--                <v-btn title="微信登录" icon>-->
+                <!--                  <v-icon medium color="light-green">mdi-wechat </v-icon>-->
+                <!--                </v-btn>-->
+                <!--                <v-btn title="QQ登录" icon>-->
+                <!--                  <v-icon medium color="light-blue">mdi-qqchat</v-icon>-->
+                <!--                </v-btn>-->
                 <v-btn
                   title="github登录"
                   nuxt

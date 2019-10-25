@@ -145,6 +145,20 @@ export function register(obj) {
 }
 
 /**
+ * 用户注册邮件确认.
+ *
+ * @author  zhanglei
+ * @date 2019-03-13  16:16
+ */
+export function confirmEmail(obj) {
+  return {
+    url: '/api/v1/user/confirm/email',
+    method: 'POST',
+    params: obj
+  }
+}
+
+/**
  * 图片上传.
  *
  * @author  zhanglei
