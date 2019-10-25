@@ -2,8 +2,9 @@
 
 <p align="center">
 
- ![beta 1.0.0](https://img.shields.io/badge/beta-1.0.0-ff69b4.svg)
- ![License MPL-2.0](https://img.shields.io/badge/license-MPL--2.0-green.svg)  [![Build Status](https://travis-ci.org/GodLikeZeal/zealsay_front.svg?branch=master)](https://travis-ci.org/GodLikeZeal/zealsay_front) [![](https://img.shields.io/docker/stars/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') [![](https://img.shields.io/docker/pulls/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') 
+ ![nuxt 2.9.2](https://img.shields.io/badge/nuxt-2.9.2-ff69b4.svg)
+ ![vuetify 1.5.7](https://img.shields.io/badge/vuetify-1.5.7-blueviolet.svg)
+ ![License MPL-2.0](https://img.shields.io/badge/license-MPL--2.0-green.svg)  [![Build Status](https://travis-ci.org/GodLikeZeal/zealsay_front.svg?branch=master)](https://travis-ci.org/GodLikeZeal/zealsay_front) [![](https://img.shields.io/docker/stars/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') [![](https://img.shields.io/docker/pulls/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') [![](https://img.shields.io/github/downloads/GodLikeZeal/zealsay_front/total.svg)](https://img.shields.io/github/downloads/GodLikeZeal/zealsay_front/total 'Github')
  
  </p>
  
