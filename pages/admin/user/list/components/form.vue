@@ -147,7 +147,7 @@
 </template>
 
 <script>
-import { editUser, uploadImage } from '@/api/user'
+import { editUser, uploadAvatar } from '@/api/user'
 import { validateUsername, validatePhone, validateEmail } from '@/util/validate'
 import { getRoleList } from '@/api/role'
 
@@ -349,7 +349,7 @@ export default {
         const param = new FormData()
         param.append('file', file)
         this.$axios
-          .$request(uploadImage(param))
+          .$request(uploadAvatar(param))
           .then(res => {
             if (res.code === '200') {
               this.row.avatar = res.data

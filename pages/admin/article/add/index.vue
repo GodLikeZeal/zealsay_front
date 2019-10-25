@@ -176,7 +176,7 @@
 </template>
 
 <script>
-import { uploadImage, uploadImageMultiple } from '@/api/user'
+import { uploadArticle, uploadImageMultiple } from '@/api/user'
 import {
   getCategoryList,
   saveArticle,
@@ -443,7 +443,7 @@ export default {
         const param = new FormData()
         param.append('file', file)
         this.$axios
-          .$request(uploadImage(param))
+          .$request(uploadArticle(param))
           .then(res => {
             if (res.code === '200') {
               this.form.coverImage = res.data
