@@ -33,17 +33,17 @@
               <h5 class="white--text font-weight-medium text-detail">
                 一个喜欢安静，追求技术的全栈程序猿。
               </h5>
-              <div>
-                <v-btn class="mx-3 white--text" icon target="_Blank">
-                  <v-icon size="24px">mdi-qqchat</v-icon>
-                </v-btn>
-                <v-btn class="mx-3 white--text" icon target="_Blank">
-                  <v-icon size="24px">mdi-wechat</v-icon>
-                </v-btn>
-                <v-btn class="mx-3 white--text" icon target="_Blank">
-                  <v-icon size="24px">mdi-sina-weibo</v-icon>
-                </v-btn>
-              </div>
+              <!--              <div>-->
+              <!--                <v-btn class="mx-3 white&#45;&#45;text" icon target="_Blank">-->
+              <!--                  <v-icon size="24px">mdi-qqchat</v-icon>-->
+              <!--                </v-btn>-->
+              <!--                <v-btn class="mx-3 white&#45;&#45;text" icon target="_Blank">-->
+              <!--                  <v-icon size="24px">mdi-wechat</v-icon>-->
+              <!--                </v-btn>-->
+              <!--                <v-btn class="mx-3 white&#45;&#45;text" icon target="_Blank">-->
+              <!--                  <v-icon size="24px">mdi-sina-weibo</v-icon>-->
+              <!--                </v-btn>-->
+              <!--              </div>-->
             </div>
           </v-flex>
         </v-layout>

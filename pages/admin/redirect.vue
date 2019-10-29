@@ -25,12 +25,8 @@ export default {
   created() {
     if (!this.$isServer) {
       const token = this.$route.query.token
-      // eslint-disable-next-line no-console
-      console.log('token是:' + token)
       const redirect = this.$route.query.redirect
       this.$auth.setUserToken(token).then(() => {
-        // eslint-disable-next-line no-console
-        console.log('跳转啊啊啊啊')
         this.$router.push({
           path: redirect || '/'
         })

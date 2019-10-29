@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-footer
     id="blog-footer"
     style="background-color: initial;height: auto;"
@@ -62,8 +62,7 @@ export default {
         url: 'https://github.com/GodLikeZeal',
         info: 'github'
       },
-      { icon: 'mdi-sina-weibo', url: '/', info: 'sina' },
-      { icon: 'mdi-home', url: '/', info: 'home' }
+      { icon: 'mdi-sina-weibo', url: '/', info: 'sina' }
     ],
     logo: '/image/logo/cat.png'
   })

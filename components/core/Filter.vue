@@ -37,7 +37,7 @@
             <div class="text-xs-center body-2 text-uppercase sidebar-filter">
               开启侧边背景
             </div>
-            <v-switch v-model="slider" class="justify-center"></v-switch>
+            <v-switch v-model="left" class="justify-center"></v-switch>
           </v-flex>
           <v-flex xs12>
             <v-layout justify-center>
@@ -110,7 +110,6 @@ export default {
     }
   },
   data: () => ({
-    ...mapState('app', ['slider']),
     colors: ['primary', 'info', 'success', 'warning', 'danger'],
     images: [
       'https://pan.zealsay.com/slider-1.jpg',
@@ -120,7 +119,17 @@ export default {
     ]
   }),
   computed: {
-    ...mapState('app', ['image', 'color', 'theme'])
+    ...mapState('app', ['image', 'color', 'theme']),
+    left: {
+      get: function() {
+        // eslint-disable-next-line no-console
+        console.log(this)
+        return this.$store.state.app.slider
+      },
+      set: function(newvalue) {
+        this.setSlider(newvalue)
+      }
+    }
   },
   watch: {
     slider: function(newSlider, oldSlider) {

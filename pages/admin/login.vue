@@ -159,7 +159,7 @@ export default {
         .then(() => {
           this.loading = false
           this.$router.push({
-            path: redirect || '/admin/dashboard'
+            path: redirect || '/'
           })
         })
         .catch(err => {
