@@ -68,8 +68,8 @@
           transition="slide-y-transition"
         >
           <v-btn slot="activator" flat icon class="toolbar-items">
-            <v-avatar size="30px">
-              <v-img :src="this.$auth.user.avatar" alt="Michael Wang" />
+            <v-avatar size="35px">
+              <v-img :src="this.$auth.user.avatar" alt="avatar" />
             </v-avatar>
           </v-btn>
           <v-card>
@@ -123,19 +123,19 @@ export default {
       {
         icon: 'mdi-account',
         href: '#',
-        title: 'Profile',
+        title: '我的主页',
         click: e => {}
       },
       {
-        icon: 'settings',
-        href: '#',
-        title: 'Settings',
+        icon: 'mdi-home',
+        href: '/',
+        title: '回到首页',
         click: e => {}
       },
       {
-        icon: 'fullscreen_exit',
+        icon: 'mdi-logout',
         href: '#',
-        title: 'Logout',
+        title: '退出登录',
         click: e => {
           vm.logout()
           // window.getApp.$emit('APP_LOGOUT');

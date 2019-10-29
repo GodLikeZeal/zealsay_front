@@ -17,17 +17,23 @@
           <v-flex xs6>
             <v-card-title primary-title>
               <div>
-                <div class="font-weight">
+                <div
+                  :class="
+                    'font-weight ' + 'text--' + colors[item.categoryId % 6]
+                  "
+                >
                   {{ item.categoryName }}
                 </div>
-                <h4>{{ item.title }}</h4>
-                <div class="font-weight-medium">
+                <h4 class="headline">{{ item.title }}</h4>
+                <div class="subheading">
                   {{ item.subheading }}
                   <a :href="'/blog/' + item.id" target="_Blank">阅读更多…</a>
                 </div>
-                <h5>
-                  {{ item.authorName }} {{ item.createDate }} 415次浏览 2个点赞
-                </h5>
+                <h6 class="caption text-capitalize">
+                  {{ item.authorName }} 发表于
+                  {{ item.createDate | formatDate }}
+                </h6>
+                <h6>{{ item.readNum }}次浏览 {{ item.likeNum }}个点赞</h6>
                 <div v-if="item.label">
                   <v-chip
                     v-for="(label, index) in item.label.split(',')"
@@ -66,8 +72,19 @@
 </template>
 
 <script>
+import Util from '@/util'
+
 export default {
   name: 'ArticleList',
+  filters: {
+    formatDate(time) {
+      if (time != null && time !== '') {
+        return Util.formateDate(time)
+      } else {
+        return ''
+      }
+    }
+  },
   props: ['list'],
   computed: {
     desserts: function() {

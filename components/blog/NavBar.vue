@@ -10,7 +10,7 @@
     </nuxt-link>
     <v-spacer></v-spacer>
 
-    <v-toolbar-items style="margin-right:8rem">
+    <v-toolbar-items style="margin-right:2rem">
       <v-btn nuxt to="/" flat>主页</v-btn>
 
       <v-menu offset-y>
@@ -33,6 +33,47 @@
       <v-btn flat>
         <v-icon>search</v-icon>
       </v-btn>
+
+      <template v-if="loggedIn">
+        <v-menu
+          bottom
+          left
+          content-class="dropdown-menu"
+          offset-y
+          transition="slide-y-transition"
+        >
+          <v-btn slot="activator" flat icon class="toolbar-items">
+            <v-avatar size="35px">
+              <v-img :src="avatar" alt="avatar" />
+            </v-avatar>
+          </v-btn>
+          <v-card>
+            <v-list dense>
+              <v-list-tile
+                v-for="(item, index) in items"
+                :key="index"
+                :to="!item.href ? { name: item.name } : null"
+                :href="item.href"
+                ripple="ripple"
+                :disabled="item.disabled"
+                :target="item.target"
+                rel="noopener"
+                @click="item.click"
+              >
+                <v-list-tile-action v-if="item.icon">
+                  <v-icon>{{ item.icon }}</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </v-list>
+          </v-card>
+        </v-menu>
+      </template>
+      <template v-else>
+        <v-btn nuxt to="/admin/login" flat> 登录 </v-btn>
+      </template>
     </v-toolbar-items>
   </v-toolbar>
 </template>
@@ -41,9 +82,41 @@
 export default {
   name: 'NavBar',
   props: ['category'],
+  data: vm => ({
+    items: [
+      {
+        icon: 'mdi-account',
+        href: '#',
+        title: '我的主页',
+        click: e => {}
+      },
+      {
+        icon: 'mdi-settings',
+        href: '/admin/dashboard',
+        title: '后台管理',
+        click: e => {}
+      },
+      {
+        icon: 'mdi-logout',
+        href: '#',
+        title: '退出登录',
+        click: e => {
+          // vm.logout()
+          vm.$auth.logout('local')
+          // window.getApp.$emit('APP_LOGOUT');
+        }
+      }
+    ]
+  }),
   computed: {
     categorys: function() {
       return this.category
+    },
+    loggedIn: function() {
+      return this.$store.state.auth.loggedIn
+    },
+    avatar: function() {
+      return this.$store.state.auth.user.avatar
     }
   }
 }

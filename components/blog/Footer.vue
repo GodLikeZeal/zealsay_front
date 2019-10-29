@@ -81,8 +81,7 @@ export default {
         url: 'https://github.com/GodLikeZeal',
         info: 'github'
       },
-      { icon: 'mdi-sina-weibo', url: '/', info: 'sina' },
-      { icon: 'mdi-login', url: '/admin/dashboard', info: 'admin' }
+      { icon: 'mdi-sina-weibo', url: '/', info: 'sina' }
     ],
     logo: '/image/logo/cat.png'
   })

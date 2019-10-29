@@ -76,17 +76,8 @@ export default {
       username: 'test',
       password: 'test123456'
     },
-    redirect: null,
     errMsg: ''
   }),
-  watch: {
-    $route: {
-      handler: function(route) {
-        this.redirect = route.query && route.query.redirect
-      },
-      immediate: true
-    }
-  },
   created() {
     if (!this.$isServer) {
       const str = localStorage.getItem('vuex')
@@ -162,12 +153,13 @@ export default {
         this.loading = false
         return
       }
+      const redirect = this.$route.query.redirect
       this.$auth
         .loginWith('local', { data: qs.stringify(data) })
         .then(() => {
           this.loading = false
           this.$router.push({
-            path: this.redirect || '/admin/dashboard'
+            path: redirect || '/'
           })
         })
         .catch(err => {

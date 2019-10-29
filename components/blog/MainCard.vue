@@ -20,6 +20,11 @@
               <p class="Paragraph">
                 {{ blog.subheading }}
               </p>
+              <h6 class="caption text-capitalize">
+                {{ item.authorName }} 发表于
+                {{ item.createDate | formatDate }}
+                {{ item.readNum }}次浏览 {{ item.likeNum }}个点赞
+              </h6>
               <v-btn
                 round
                 nuxt
@@ -37,8 +42,18 @@
 </template>
 
 <script>
+import Util from '@/util'
 export default {
   name: 'MainCard',
+  filters: {
+    formatDate(time) {
+      if (time != null && time !== '') {
+        return Util.formateDate(time)
+      } else {
+        return ''
+      }
+    }
+  },
   props: ['item'],
   computed: {
     blog: function() {
