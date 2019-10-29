@@ -215,3 +215,16 @@ export function deleteArticleLabel(id) {
     method: 'delete'
   }
 }
+
+/**
+ * 阅读数增加1.
+ *
+ * @author  zhanglei
+ * @date 2019-03-13  16:13
+ */
+export function readArticle(id) {
+  return {
+    url: '/api/v1/article/read/' + id,
+    method: 'get'
+  }
+}

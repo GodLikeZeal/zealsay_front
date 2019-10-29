@@ -122,8 +122,6 @@ export default {
     ...mapState('app', ['image', 'color', 'theme']),
     left: {
       get: function() {
-        // eslint-disable-next-line no-console
-        console.log(this)
         return this.$store.state.app.slider
       },
       set: function(newvalue) {

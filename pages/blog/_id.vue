@@ -44,7 +44,7 @@
 
 <script>
 import NavBar from '@/components/blog/NavBar'
-import { getArticle, getCategoryList } from '@/api/article'
+import { getArticle, getCategoryList, readArticle } from '@/api/article'
 
 export default {
   auth: false,
@@ -88,6 +88,7 @@ export default {
     } else {
       return error({ statusCode: resArticle.code, message: resArticle.message })
     }
+    await app.$axios.$request(readArticle(params.id))
     return {
       article: article,
       categorys: categorys
