@@ -29,7 +29,7 @@
                   {{ item.subheading }}
                   <a :href="'/blog/' + item.id" target="_Blank">阅读更多…</a>
                 </div>
-                <h6 class="caption text-capitalize">
+                <h6 class="caption text-none">
                   {{ item.authorName }} 发表于
                   {{ item.createDate | formatDate }}
                 </h6>

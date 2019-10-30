@@ -10,7 +10,39 @@
               <h1 class="hitokoto-title">
                 {{ article.title }}
               </h1>
+              <p
+                class="article-info font-weight-bold text-capitalize white--text"
+              >
+                {{ article.readNum }}次浏览 {{ article.likeNum }}个点赞
+              </p>
+              <div class="author">
+                <v-avatar class="author-avatar" :size="48"
+                  ><img :src="article.authorAvatar" alt="avatar"
+                /></v-avatar>
+                <div class="font-weight-medium white--text author-name">
+                  <p class="author-text">{{ article.authorName }}</p>
+                  <p class="author-text">
+                    {{ article.createDate | formatDate }}
+                    发表于
+                    {{ article.categoryName }}
+                  </p>
+                </div>
+              </div>
             </div>
+
+            <v-tooltip top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  style="float: right;margin-top: 3rem;margin-right: 5rem;"
+                  fab
+                >
+                  <v-icon medium color="pink" v-on="on" @click="like"
+                    >mdi-heart-outline</v-icon
+                  >
+                </v-btn>
+              </template>
+              喜欢这篇文章？那就点个赞吧！
+            </v-tooltip>
           </v-flex>
         </v-layout>
       </v-container>
@@ -43,6 +75,7 @@
 </template>
 
 <script>
+import Util from '@/util'
 import NavBar from '@/components/blog/NavBar'
 import { getArticle, getCategoryList, readArticle } from '@/api/article'
 
@@ -50,6 +83,15 @@ export default {
   auth: false,
   components: {
     'blog-nav': NavBar
+  },
+  filters: {
+    formatDate(time) {
+      if (time != null && time !== '') {
+        return Util.formateDate(time)
+      } else {
+        return ''
+      }
+    }
   },
   data: () => ({ loading: true }),
   computed: {
@@ -98,6 +140,10 @@ export default {
     search() {
       // eslint-disable-next-line no-console
       console.log('click search')
+    },
+    like() {
+      // eslint-disable-next-line no-console
+      console.log('like')
     }
   }
 }
@@ -119,5 +165,21 @@ export default {
 }
 .word {
   position: relative;
+}
+.article-info {
+  margin: 2rem 0;
+}
+.author {
+  display: inline-flex;
+}
+.author-avatar {
+  align-self: center;
+}
+.author-name {
+  text-align: left;
+  margin: 0 1rem;
+}
+.author-text {
+  margin: 0.5rem 0;
 }
 </style>
