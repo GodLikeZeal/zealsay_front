@@ -132,8 +132,7 @@ export default {
       callback: '/login',
       home: '/'
     },
-    watchLoggedIn: true, // 默认为true
-    rewriteRedirects: true
+    watchLoggedIn: true // 默认为true
   },
   /*
    ** Axios module configuration
