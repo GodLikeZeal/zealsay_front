@@ -132,7 +132,8 @@ export default {
       callback: '/login',
       home: '/'
     },
-    watchLoggedIn: true // 默认为true
+    watchLoggedIn: true, // 默认为true
+    rewriteRedirects: true
   },
   /*
    ** Axios module configuration
@@ -151,8 +152,8 @@ export default {
 
   proxy: {
     '/app/': {
-      target: process.env.VUE_APP_API_URL, // 目标接口域名
-      // target: process.env.VUE_APP_API_URL || 'http://localhost:8090', // 目标接口域名
+      // target: process.env.VUE_APP_API_URL, // 目标接口域名
+      target: process.env.VUE_APP_API_URL || 'http://localhost:8090', // 目标接口域名
       changeOrigin: true, // 是否跨域
       pathRewrite: { '^/app/': '' } // 把/api 替换成 /
     }
