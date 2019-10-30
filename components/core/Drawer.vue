@@ -231,6 +231,7 @@ export default {
 
 <style scoped lang="scss">
 #app-drawer {
+  z-index: 0;
   .v-list__tile {
     border-radius: 4px;
 

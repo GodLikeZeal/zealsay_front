@@ -20,7 +20,7 @@
               <p class="Paragraph">
                 {{ blog.subheading }}
               </p>
-              <h6 class="caption text-capitalize">
+              <h6 class="caption text-none">
                 {{ item.authorName }} 发表于
                 {{ item.createDate | formatDate }}
                 {{ item.readNum }}次浏览 {{ item.likeNum }}个点赞
