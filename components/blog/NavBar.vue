@@ -86,7 +86,7 @@ export default {
     items: [
       {
         icon: 'mdi-account',
-        href: '#',
+        href: '',
         title: '我的主页',
         click: e => {}
       },
@@ -98,7 +98,7 @@ export default {
       },
       {
         icon: 'mdi-logout',
-        href: '#',
+        href: '',
         title: '退出登录',
         click: e => {
           // vm.logout()

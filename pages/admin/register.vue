@@ -409,7 +409,7 @@ export default {
                       this.twoLoading = false
                     })
                 } else {
-                  this.passwordValid = true
+                  this.validEmailFlag = true
                   this.validEmailMsg = '该邮箱已经绑定过用户了，换一个试试吧！'
                 }
               })

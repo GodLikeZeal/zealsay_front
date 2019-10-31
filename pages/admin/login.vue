@@ -74,7 +74,7 @@ export default {
     loading: false,
     model: {
       username: 'test',
-      password: 'test123456'
+      password: 'test123'
     },
     errMsg: ''
   }),

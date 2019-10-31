@@ -130,7 +130,7 @@ export default {
     } else {
       return error({ statusCode: resArticle.code, message: resArticle.message })
     }
-    await app.$axios.$request(readArticle(params.id))
+    app.$axios.$request(readArticle(params.id))
     return {
       article: article,
       categorys: categorys
