@@ -1,10 +1,10 @@
 /*!
- 
+
  @Name: 宝塔面板框架主题样式
  @Date: 2017.06.26
  @Author: Qiao
  @WebSite: bt.cn
- 
+
  */
 
 body {
@@ -194,11 +194,11 @@ html {
 }
 
 .ptb10 {
-	padding: 10px 0 
+	padding: 10px 0
 }
 
 .ptb15 {
-	padding: 15px 0 
+	padding: 15px 0
 }
 
 .ptb20 {
@@ -1723,7 +1723,8 @@ html .menu .menu_exit:hover {
 }
 
 .searcTime {
-	position: relative:z-index:999;
+	position: relative;
+  z-index:999;
 	margin-top: 11px
 }
 
@@ -2261,7 +2262,7 @@ html .menu .menu_exit:hover {
 	-moz-transform: scaleX(-1);
 	-webkit-transform: scaleX(-1);
 	-o-transform: scaleX(-1);
-	transform: scaleX(-1)；
+	transform: scaleX(-1);
 }
 
 .changepath .path-top .place {
@@ -4243,7 +4244,7 @@ html .menu .menu_exit:hover {
 }
 .bt-radio:checked + .bt-radioinput:after{
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAKBAMAAAB293L0AAAAA3NCSVQICAjb4U/gAAAAKlBMVEX///////////////////////////////////////////////////////9q+00tAAAADnRSTlMAETNEVWZ3iJmqu93u/wlUiAQAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAWdEVYdENyZWF0aW9uIFRpbWUAMDYvMDIvMTjAxKOiAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAADpJREFUCJljYACDTAjFcgRC+xpAuFcYGCqAtK0DA4P2BAbmq0A2404G3QSQpPTi62BFjGsTIJpEQQQATscJDpRQCfQAAAAASUVORK5CYII=");
-	background-repeat: no-repeat;	
+	background-repeat: no-repeat;
 	border-radius:100%;
 	content:"";
 	display:inline-block;
@@ -4654,7 +4655,7 @@ select[disabled]{
 	line-height:26px;
 }
 .domain-ul-list li .checkbox-text{
-	margin-right:5px; 
+	margin-right:5px;
 	vertical-align:-2px
 }
 .btswitch-btn.bt-waf-firewall{
@@ -4703,7 +4704,7 @@ select[disabled]{
 
 .tab-db-status  .tname{
 	width: 155px;
-	padding-right:10px; 
+	padding-right:10px;
 	height: 30px;
 	line-height: 30px;
 }
@@ -4804,7 +4805,7 @@ select[disabled]{
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	
+
 }
 .bootstrap-select .dropdown-toggle{
 	height: 30px;

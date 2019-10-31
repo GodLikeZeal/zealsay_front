@@ -1,12 +1,12 @@
-<template
-  ><!DOCTYPE html>
+<template>
+  <!DOCTYPE html>
   <!-- saved from url=(0017)http://v.lsuu.cn/ -->
   <html>
     <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
       <title>授权系统</title>
-      <link rel="stylesheet" type="text/css" href="/site.css" />
+      <!--      <link rel="stylesheet" type="text/css" href="/site.css" />-->
       <link rel="stylesheet" type="text/css" href="/login.css" />
       <style type="text/css">
         @media screen and (max-width: 640px) {
@@ -168,6 +168,8 @@
         }
 
         .container {
+          max-width: inherit;
+          max-height: inherit;
           width: 100%;
           height: 100%;
           background-image: radial-gradient(
@@ -227,44 +229,79 @@
       </style>
     </head>
     <body>
-      <!--      <div class="main">-->
-      <!--        <div class="login">-->
-      <!--          <div class="account">-->
-      <!--            <form-->
-      <!--              class="loginform"-->
-      <!--              method="get"-->
-      <!--              action="http://v.lsuu.cn/vip.php"-->
-      <!--            >-->
-      <!--              <div class="rlogo">内部授权系统</div>-->
-
-      <!--              <div class="line">-->
-      <!--                <input-->
-      <!--                  class="inputtxt"-->
-      <!--                  name="vipid"-->
-      <!--                  value=""-->
-      <!--                  datatype="*"-->
-      <!--                  nullmsg="请输入KEY"-->
-      <!--                  errormsg="请输入KEY"-->
-      <!--                  placeholder="请输入提取KEY"-->
-      <!--                  type="password"-->
-      <!--                />-->
-      <!--                <div class="Validform_checktip"></div>-->
-      <!--              </div>-->
-      <!--              <div-->
-      <!--                id="errorStr"-->
-      <!--                style="color: red;position: relative;top: -14px;"-->
-      <!--              ></div>-->
-
-      <!--              <div class="login_btn">-->
-      <!--                <input id="login-button" value="获取授权" type="submit" />-->
-      <!--              </div>-->
-      <!--            </form>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--      </div>-->
+      <div class="main">
+        <v-app id="login">
+          <v-content>
+            <v-container class="form-container" fluid fill-height>
+              <v-layout align-center justify-center>
+                <v-flex xs12 sm8 md4 lg4>
+                  <v-card class="elevation-1 pa-3">
+                    <v-card-text>
+                      <div class="layout column align-center">
+                        <img
+                          src="@/static/image/logo/logo.png"
+                          alt="Zealsay Admin"
+                          width="200"
+                          height="150"
+                        />
+                        <h1 class="flex my-4 primary--text">
+                          zealsay 说你想说
+                        </h1>
+                      </div>
+                      <v-form>
+                        <v-text-field
+                          append-icon="person"
+                          name="login"
+                          label="Login"
+                          type="text"
+                        ></v-text-field>
+                        <v-text-field
+                          id="password"
+                          append-icon="lock"
+                          name="password"
+                          label="Password"
+                          type="password"
+                        ></v-text-field>
+                        <a nuxt href="register">注册账号</a> OR
+                        <a class="right">忘记密码？</a>
+                      </v-form>
+                    </v-card-text>
+                    <v-card-actions>
+                      <!--                <v-btn title="微信登录" icon>-->
+                      <!--                  <v-icon medium color="light-green">mdi-wechat </v-icon>-->
+                      <!--                </v-btn>-->
+                      <!--                <v-btn title="QQ登录" icon>-->
+                      <!--                  <v-icon medium color="light-blue">mdi-qqchat</v-icon>-->
+                      <!--                </v-btn>-->
+                      <v-btn
+                        title="github登录"
+                        nuxt
+                        href="/app/api/v1/oauth/login/github"
+                        icon
+                      >
+                        <v-icon medium color="light-grey"
+                          >mdi-github-circle</v-icon
+                        >
+                      </v-btn>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        block
+                        color="primary"
+                        :loading="loading"
+                        @click="login"
+                        >登 录
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-content>
+        </v-app>
+      </div>
       <div class="container">
         <div class="content">
-          <canvas id="universe" width="1440" height="773"></canvas>
+          <canvas id="universe" width="1707" height="850"></canvas>
 
           <div id="footer">
             <svg id="scene" x="0px" y="0px" width="1600px" height="315px">
@@ -311,7 +348,7 @@
                 d="M697,248.9355c2.0142-0.2021,2.1665-2.0156,1-2.1816s-9.1543,1.8398-5.9937,2.6699S697,248.9355,697,248.9355z"
               ></path>
               <g id="greens" transform="translate(850, 180)">
-                <g transform="skewX(5.41601)">
+                <g transform="skewX(5.07735)">
                   <path
                     d="M36.3877,59.4268C33.0576,18.9482,6.4658,4.522,6.4658,4.522s22.4834,16.1426,24.4414,54.2251
 			C32.8657,96.8311,36.3877,59.4268,36.3877,59.4268z"
@@ -354,7 +391,7 @@
                     repeatCount="indefinite"
                   ></animatemotion>
                 </g>
-                <g transform="skewX(12.0636)">
+                <g transform="skewX(6.62237)">
                   <path
                     d="M34.9995,60.4189C56.0713,30.6665,46.1133,5.4014,46.1133,5.4014S52.2559,29.4746,31.6235,56.79
 			C10.9917,84.1035,34.9995,60.4189,34.9995,60.4189z"
@@ -435,7 +472,7 @@
                   ></path>
                 </g>
                 <g transform="translate(783, 122)">
-                  <g transform="skewX(15.159)">
+                  <g transform="skewX(28.4441)">
                     <path
                       d="M35.3506,17.9644c2.9834-3.71,5.9824-15.2095-3.1846-18.3765c2.668,3.833,1.168,5.6665,1.168,5.6665
 	S32,1.2549,28.666-0.4121c1.5,3.1665,0,5,0,5S20.5,8.9209,24.5,13.2544S35.3506,17.9644,35.3506,17.9644z"
@@ -473,186 +510,193 @@
           </div>
         </div>
       </div>
-
-      <script>
-        window.requestAnimationFrame =
-          window.requestAnimationFrame ||
-          window.mozRequestAnimationFrame ||
-          window.webkitRequestAnimationFrame ||
-          window.msRequestAnimationFrame
-
-        var starDensity = 0.216
-        var speedCoeff = 0.05
-        var width
-        var height
-        var starCount
-        var circleRadius
-        var circleCenter
-        var first = true
-        var giantColor = '180,184,240'
-        var starColor = '226,225,142'
-        var cometColor = '226,225,224'
-        var canva = document.getElementById('universe')
-        var stars = []
-
-        windowResizeHandler()
-        window.addEventListener('resize', windowResizeHandler, false)
-
-        createUniverse()
-
-        function createUniverse() {
-          universe = canva.getContext('2d')
-
-          for (var i = 0; i < starCount; i++) {
-            stars[i] = new Star()
-            stars[i].reset()
-          }
-
-          draw()
-        }
-
-        function draw() {
-          universe.clearRect(0, 0, width, height)
-
-          var starsLength = stars.length
-
-          for (var i = 0; i < starsLength; i++) {
-            var star = stars[i]
-            star.move()
-            star.fadeIn()
-            star.fadeOut()
-            star.draw()
-          }
-
-          window.requestAnimationFrame(draw)
-        }
-
-        function Star() {
-          this.reset = function() {
-            this.giant = getProbability(3)
-            this.comet = this.giant || first ? false : getProbability(10)
-            this.x = getRandInterval(0, width - 10)
-            this.y = getRandInterval(0, height)
-            this.r = getRandInterval(1.1, 2.6)
-            this.dx =
-              getRandInterval(speedCoeff, 6 * speedCoeff) +
-              (this.comet + 1 - 1) * speedCoeff * getRandInterval(50, 120) +
-              speedCoeff * 2
-            this.dy =
-              -getRandInterval(speedCoeff, 6 * speedCoeff) -
-              (this.comet + 1 - 1) * speedCoeff * getRandInterval(50, 120)
-            this.fadingOut = null
-            this.fadingIn = true
-            this.opacity = 0
-            this.opacityTresh = getRandInterval(
-              0.2,
-              1 - (this.comet + 1 - 1) * 0.4
-            )
-            this.do =
-              getRandInterval(0.0005, 0.002) + (this.comet + 1 - 1) * 0.001
-          }
-
-          this.fadeIn = function() {
-            if (this.fadingIn) {
-              this.fadingIn = this.opacity > this.opacityTresh ? false : true
-              this.opacity += this.do
-            }
-          }
-
-          this.fadeOut = function() {
-            if (this.fadingOut) {
-              this.fadingOut = this.opacity < 0 ? false : true
-              this.opacity -= this.do / 2
-              if (this.x > width || this.y < 0) {
-                this.fadingOut = false
-                this.reset()
-              }
-            }
-          }
-
-          this.draw = function() {
-            universe.beginPath()
-
-            if (this.giant) {
-              universe.fillStyle =
-                'rgba(' + giantColor + ',' + this.opacity + ')'
-              universe.arc(this.x, this.y, 2, 0, 2 * Math.PI, false)
-            } else if (this.comet) {
-              universe.fillStyle =
-                'rgba(' + cometColor + ',' + this.opacity + ')'
-              universe.arc(this.x, this.y, 1.5, 0, 2 * Math.PI, false)
-
-              //comet tail
-              for (var i = 0; i < 30; i++) {
-                universe.fillStyle =
-                  'rgba(' +
-                  cometColor +
-                  ',' +
-                  (this.opacity - (this.opacity / 20) * i) +
-                  ')'
-                universe.rect(
-                  this.x - (this.dx / 4) * i,
-                  this.y - (this.dy / 4) * i - 2,
-                  2,
-                  2
-                )
-                universe.fill()
-              }
-            } else {
-              universe.fillStyle =
-                'rgba(' + starColor + ',' + this.opacity + ')'
-              universe.rect(this.x, this.y, this.r, this.r)
-            }
-
-            universe.closePath()
-            universe.fill()
-          }
-
-          this.move = function() {
-            this.x += this.dx
-            this.y += this.dy
-            if (this.fadingOut === false) {
-              this.reset()
-            }
-            if (this.x > width - width / 4 || this.y < 0) {
-              this.fadingOut = true
-            }
-          }
-          ;(function() {
-            setTimeout(function() {
-              first = false
-            }, 50)
-          })()
-        }
-
-        function getProbability(percents) {
-          return Math.floor(Math.random() * 1000) + 1 < percents * 10
-        }
-
-        function getRandInterval(min, max) {
-          return Math.random() * (max - min) + min
-        }
-
-        function windowResizeHandler() {
-          width = window.innerWidth
-          height = window.innerHeight
-          starCount = width * starDensity
-          circleRadius = width > height ? height / 2 : width / 2
-          circleCenter = {
-            x: width / 2,
-            y: height / 2
-          }
-
-          canva.setAttribute('width', width)
-          canva.setAttribute('height', height)
-        }
-      </script>
     </body>
   </html>
 </template>
-<script>
-export default {
-  name: 'Login',
-  auth: false
+<script type="text/javascript">
+if (process.client) {
+  window.requestAnimationFrame =
+    window.requestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.msRequestAnimationFrame
+}
+
+const starDensity = 0.216
+const speedCoeff = 0.05
+let width
+let height
+let starCount
+// eslint-disable-next-line no-unused-vars
+let circleRadius
+// eslint-disable-next-line no-unused-vars
+let circleCenter
+let first = true
+const giantColor = '180,184,240'
+const starColor = '226,225,142'
+const cometColor = '226,225,224'
+let canva
+if (process.client) {
+  canva = document.getElementById('universe')
+}
+const stars = []
+let universe
+
+if (process.client) {
+  windowResizeHandler()
+  window.addEventListener('resize', windowResizeHandler, false)
+
+  createUniverse()
+}
+function createUniverse() {
+  universe = canva.getContext('2d')
+
+  for (let i = 0; i < starCount; i++) {
+    stars[i] = new Star()
+    stars[i].reset()
+  }
+
+  draw()
+}
+
+function draw() {
+  universe.clearRect(0, 0, width, height)
+
+  const starsLength = stars.length
+
+  for (let i = 0; i < starsLength; i++) {
+    const star = stars[i]
+    star.move()
+    star.fadeIn()
+    star.fadeOut()
+    star.draw()
+  }
+
+  window.requestAnimationFrame(draw)
+}
+
+function Star() {
+  this.reset = function() {
+    this.giant = getProbability(3)
+    this.comet = this.giant || first ? false : getProbability(10)
+    this.x = getRandInterval(0, width - 10)
+    this.y = getRandInterval(0, height)
+    this.r = getRandInterval(1.1, 2.6)
+    this.dx =
+      getRandInterval(speedCoeff, 6 * speedCoeff) +
+      (this.comet + 1 - 1) * speedCoeff * getRandInterval(50, 120) +
+      speedCoeff * 2
+    this.dy =
+      -getRandInterval(speedCoeff, 6 * speedCoeff) -
+      (this.comet + 1 - 1) * speedCoeff * getRandInterval(50, 120)
+    this.fadingOut = null
+    this.fadingIn = true
+    this.opacity = 0
+    this.opacityTresh = getRandInterval(0.2, 1 - (this.comet + 1 - 1) * 0.4)
+    this.do = getRandInterval(0.0005, 0.002) + (this.comet + 1 - 1) * 0.001
+  }
+
+  this.fadeIn = function() {
+    if (this.fadingIn) {
+      this.fadingIn = !(this.opacity > this.opacityTresh)
+      this.opacity += this.do
+    }
+  }
+
+  this.fadeOut = function() {
+    if (this.fadingOut) {
+      this.fadingOut = !(this.opacity < 0)
+      this.opacity -= this.do / 2
+      if (this.x > width || this.y < 0) {
+        this.fadingOut = false
+        this.reset()
+      }
+    }
+  }
+
+  this.draw = function() {
+    universe.beginPath()
+
+    if (this.giant) {
+      universe.fillStyle = 'rgba(' + giantColor + ',' + this.opacity + ')'
+      universe.arc(this.x, this.y, 2, 0, 2 * Math.PI, false)
+    } else if (this.comet) {
+      universe.fillStyle = 'rgba(' + cometColor + ',' + this.opacity + ')'
+      universe.arc(this.x, this.y, 1.5, 0, 2 * Math.PI, false)
+
+      // comet tail
+      for (let i = 0; i < 30; i++) {
+        universe.fillStyle =
+          'rgba(' +
+          cometColor +
+          ',' +
+          (this.opacity - (this.opacity / 20) * i) +
+          ')'
+        universe.rect(
+          this.x - (this.dx / 4) * i,
+          this.y - (this.dy / 4) * i - 2,
+          2,
+          2
+        )
+        universe.fill()
+      }
+    } else {
+      universe.fillStyle = 'rgba(' + starColor + ',' + this.opacity + ')'
+      universe.rect(this.x, this.y, this.r, this.r)
+    }
+
+    universe.closePath()
+    universe.fill()
+  }
+
+  this.move = function() {
+    this.x += this.dx
+    this.y += this.dy
+    if (this.fadingOut === false) {
+      this.reset()
+    }
+    if (this.x > width - width / 4 || this.y < 0) {
+      this.fadingOut = true
+    }
+  }
+  ;(function() {
+    setTimeout(function() {
+      first = false
+    }, 50)
+  })()
+}
+
+function getProbability(percents) {
+  return Math.floor(Math.random() * 1000) + 1 < percents * 10
+}
+
+function getRandInterval(min, max) {
+  return Math.random() * (max - min) + min
+}
+
+function windowResizeHandler() {
+  width = window.innerWidth
+  height = window.innerHeight
+  starCount = width * starDensity
+  circleRadius = width > height ? height / 2 : width / 2
+  circleCenter = {
+    x: width / 2,
+    y: height / 2
+  }
+
+  canva.setAttribute('width', width)
+  canva.setAttribute('height', height)
 }
 </script>
+<style scoped lang="less">
+#login {
+  height: 0%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.form-container {
+  background: none;
+}
+</style>
