@@ -1,153 +1,7 @@
 <template>
-  <!DOCTYPE html>
-  <!-- saved from url=(0017)http://v.lsuu.cn/ -->
   <html>
     <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-      <title>授权系统</title>
-      <!--      <link rel="stylesheet" type="text/css" href="/site.css" />-->
-      <link rel="stylesheet" type="text/css" href="/login.css" />
-      <style type="text/css">
-        @media screen and (max-width: 640px) {
-          .scanCode {
-            display: none;
-          }
-
-          .account {
-            display: block !important;
-          }
-
-          .bg_img {
-            display: none;
-          }
-        }
-
-        .bg_img {
-          width: 60px;
-          height: 60px;
-          background-image: url('/static/img/qrCode.png');
-          background-size: 120px 120px;
-          background-repeat: no-repeat;
-          background-position: 0 0;
-          position: absolute;
-          top: 5px;
-          right: 5px;
-        }
-
-        .bg_img:hover {
-          background-position: -60px 0;
-          cursor: pointer;
-          /*transition: all 500ms;*/
-        }
-
-        .bg_img.pc {
-          background-position: 0 -60px;
-        }
-
-        .bg_img.pc:hover {
-          background-position: -60px -60px;
-        }
-
-        .qrCode {
-          text-align: center;
-          padding-top: 20px;
-        }
-
-        .scanCode .titles {
-          font-size: 23px;
-          margin-top: 25px;
-          color: #444;
-          text-align: center;
-        }
-
-        .list_scan {
-          width: 150px;
-          margin: 0 auto;
-          margin-top: 15px;
-        }
-
-        .list_scan > img {
-          width: 40px;
-          height: 40px;
-          float: left;
-          margin-right: 15px;
-        }
-
-        .list_scan span {
-          display: inline-block;
-          font-size: 13px;
-          margin-bottom: 5px;
-        }
-
-        .list_scan a:hover .weChatSamll {
-          display: block;
-        }
-
-        .list_scan .weChatSamll {
-          display: none;
-          width: 150px;
-          height: 150px;
-          position: absolute;
-          border: 1px solid #ececec;
-          border-radius: 5px;
-          bottom: 105px;
-          right: 80px;
-          padding: 20px;
-          background-color: #fff;
-        }
-
-        .list_scan .weChatSamll img {
-          width: 100%;
-        }
-
-        .list_scan .weChatSamll em {
-          position: absolute;
-          border: 7px solid #ececec;
-          border-color: #ececec transparent transparent transparent;
-          width: 0;
-          height: 0;
-          right: 87px;
-          bottom: -14px;
-          margin-left: -6px;
-        }
-
-        .tips {
-          width: 115px;
-          position: absolute;
-          top: 10px;
-          right: 65px;
-          color: rgb(32, 165, 58);
-          background: #dff0d8;
-          padding: 5px 10px;
-          text-align: center;
-          border-radius: 4px;
-        }
-
-        .tips em {
-          position: absolute;
-          border: 6px solid #dff0d8;
-          border-color: transparent transparent transparent #dff0d8;
-          width: 0;
-          height: 0;
-          right: -11px;
-          top: 8px;
-          margin-left: -6px;
-        }
-
-        .tips img {
-          height: 16px;
-          width: 16px;
-          vertical-align: middle;
-          margin-top: -1px;
-          margin-right: 4px;
-        }
-
-        .main .login .rlogo {
-          margin-top: 15px;
-          margin-bottom: 25px;
-        }
-      </style>
       <style type="text/css">
         html,
         body {
@@ -189,18 +43,6 @@
           height: 100%;
         }
 
-        #footerContent {
-          font-family: sans-serif;
-          font-size: 110%;
-          color: rgba(200, 220, 255, 0.3);
-          width: 100%;
-          position: fixed;
-          bottom: 0px;
-          padding: 20px;
-          text-align: center;
-          z-index: 20;
-        }
-
         #footer {
           position: absolute;
           bottom: 0px;
@@ -216,16 +58,16 @@
           margin-left: -800px;
         }
 
-        a {
-          text-decoration: none;
-          color: rgba(200, 220, 255, 1);
-          opacity: 0.4;
-          transition: opacity 0.4s ease;
-        }
+        /*a {*/
+        /*  text-decoration: none;*/
+        /*  color: rgba(200, 220, 255, 1);*/
+        /*  opacity: 0.4;*/
+        /*  transition: opacity 0.4s ease;*/
+        /*}*/
 
-        a:hover {
-          opacity: 1;
-        }
+        /*a:hover {*/
+        /*  opacity: 1;*/
+        /*}*/
       </style>
     </head>
     <body>
@@ -239,14 +81,14 @@
                     <v-card-text>
                       <div class="layout column align-center">
                         <img
+                          width="25%"
+                          height="15%"
                           src="@/static/image/logo/logo.png"
                           alt="Zealsay Admin"
-                          width="200"
-                          height="150"
                         />
-                        <h1 class="flex my-4 primary--text">
+                        <h2 class="flex my-4 primary--text">
                           zealsay 说你想说
-                        </h1>
+                        </h2>
                       </div>
                       <v-form>
                         <v-text-field
