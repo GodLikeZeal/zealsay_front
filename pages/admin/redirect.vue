@@ -26,11 +26,17 @@ export default {
     if (!this.$isServer) {
       const token = this.$route.query.token
       const redirect = this.$route.query.redirect
-      this.$auth.setUserToken(token).then(() => {
+      if (token != null && token !== '') {
+        this.$auth.setUserToken(token).then(() => {
+          this.$router.push({
+            path: redirect || '/'
+          })
+        })
+      } else {
         this.$router.push({
           path: redirect || '/'
         })
-      })
+      }
     }
   }
 }

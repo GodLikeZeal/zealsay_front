@@ -142,10 +142,6 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-[v-cloak] {
-  display: none;
-}
-
 .index {
   background: #fafafa;
 }

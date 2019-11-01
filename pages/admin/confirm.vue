@@ -4,9 +4,13 @@
       <v-layout align-center justify-center row>
         <div class="text-md-center">
           <div v-if="this.activation">
-            <v-icon :size="70" color="green darken-2"
-              >mdi-checkbox-marked-circle-outline</v-icon
-            >
+            <span>
+              <v-icon :size="70" color="green darken-2"
+                >mdi-checkbox-marked-circle-outline</v-icon
+              >
+            </span>
+            <h2>激活成功!</h2>
+            <v-btn color="primary" @click="goHome">回到首页</v-btn>
           </div>
           <div v-else>
             <v-progress-circular
@@ -14,11 +18,8 @@
               color="primary"
               indeterminate
             ></v-progress-circular>
-          </div>
-          <h2 v-if="this.activation">激活成功</h2>
-          <h2 v-else>激活中...请您耐心等待</h2>
-          <div v-if="this.activation">
-            <v-btn color="primary" @click="goHome">回到首页</v-btn>
+
+            <h2>激活中...请您耐心等待</h2>
           </div>
         </div>
       </v-layout>

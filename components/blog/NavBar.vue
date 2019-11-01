@@ -72,7 +72,7 @@
         </v-menu>
       </template>
       <template v-else>
-        <v-btn nuxt to="/admin/login" flat> 登录 </v-btn>
+        <v-btn href="/admin/login" flat> 登录 </v-btn>
       </template>
     </v-toolbar-items>
   </v-toolbar>
@@ -86,7 +86,7 @@ export default {
     items: [
       {
         icon: 'mdi-account',
-        href: '#',
+        href: '',
         title: '我的主页',
         click: e => {}
       },
@@ -98,7 +98,7 @@ export default {
       },
       {
         icon: 'mdi-logout',
-        href: '#',
+        href: '',
         title: '退出登录',
         click: e => {
           // vm.logout()
