@@ -81,8 +81,8 @@
                     <v-card-text>
                       <div class="layout column align-center">
                         <img
-                          width="25%"
-                          height="15%"
+                          width="30%"
+                          height="18%"
                           src="@/static/image/logo/logo.png"
                           alt="Zealsay Admin"
                         />
@@ -128,7 +128,9 @@
                       </v-btn>
                       <v-spacer></v-spacer>
 
-                      <v-btn id="submit" block color="primary">登 录 </v-btn>
+                      <v-btn id="submit" depressed color="primary"
+                        >登 录
+                      </v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-flex>
