@@ -607,7 +607,7 @@ export default {
     },
     threeStep() {
       this.$router.push({
-        path: '/admin/login'
+        path: '/login'
       })
     },
     send() {

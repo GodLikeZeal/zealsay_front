@@ -135,8 +135,38 @@ export default {
   },
   methods: {
     search() {
-      // eslint-disable-next-line no-console
-      console.log('click search')
+      const searchData = {}
+      searchData.pageSize = this.pagination.rowsPerPage
+      searchData.pageNumber = this.pagination.page
+      this.$axios
+        .$request(getArticlePageListToC(searchData))
+        .then(res => {
+          if (res.code === '200') {
+            this.desserts = res.data.records
+            // this.pagination.page = res.data.currentPage;
+            // this.pagination.rowsPerPage = res.data.pageSize;
+            this.pagination.totalItems = res.data.total
+          } else {
+            this.$swal({
+              text: '拉取文章列表失败',
+              type: 'error',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3000
+            })
+          }
+        })
+        .catch(e => {
+          this.$swal({
+            text: e.message,
+            type: 'error',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000
+          })
+        })
     }
   }
 }

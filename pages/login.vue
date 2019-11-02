@@ -106,7 +106,14 @@
                           type="password"
                         ></v-text-field>
                         <a nuxt href="register">注册账号</a> OR
-                        <a class="right">忘记密码？</a>
+                        <a id="lost" class="right">忘记密码？</a>
+                        <transition name="fade">
+                          <p
+                            id="alert"
+                            class="caption amber--text text--darken-1"
+                            style="visibility: hidden"
+                          ></p>
+                        </transition>
                       </v-form>
                     </v-card-text>
                     <v-card-actions>
@@ -379,9 +386,23 @@ let canva
 if (process.client) {
   canva = document.getElementById('universe')
   document.getElementById('submit').onclick = function() {
+    const alert = document.getElementById('alert')
+    alert.style.visibility = 'hidden'
     const data = {}
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
+    if (
+      username == null ||
+      username === undefined ||
+      username === '' ||
+      password == null ||
+      password === undefined ||
+      password === ''
+    ) {
+      alert.innerHTML = '用户名和密码不能为空！'
+      alert.style.visibility = 'visible'
+      return
+    }
     data.username = username
     data.password = password
 
@@ -421,16 +442,25 @@ if (process.client) {
     // 当xmlhttp对象的就绪状态改变时，触发事件onreadystatechange。
     xmlhttp.onreadystatechange = function() {
       // 判断readyState就绪状态是否为4，判断status响应状态码是否为200
+
       if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
         // 获取服务器的响应结果
         const responseText = xmlhttp.responseText
         const res = JSON.parse(responseText)
-        window.location = '/admin/redirect?token=' + res.data.token
-      } else {
-        // eslint-disable-next-line no-console
-        console.log(this)
+        if (res.code === '200' && res.data) {
+          window.location = '/redirect?token=' + res.data.token
+        } else {
+          const alert = document.getElementById('alert')
+          alert.innerHTML = res.message
+          alert.style.visibility = 'visible'
+        }
       }
     }
+  }
+  document.getElementById('lost').onclick = function() {
+    const alert = document.getElementById('alert')
+    alert.innerHTML = '功能开发中,忘记密码我现在也无能为力呀！'
+    alert.style.visibility = 'visible'
   }
 }
 
