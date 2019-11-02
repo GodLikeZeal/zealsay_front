@@ -135,7 +135,7 @@ export default {
   },
   methods: {
     search() {
-      const searchData = this.searchData
+      const searchData = {}
       searchData.pageSize = this.pagination.rowsPerPage
       searchData.pageNumber = this.pagination.page
       this.$axios
