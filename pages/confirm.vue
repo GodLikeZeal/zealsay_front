@@ -40,8 +40,6 @@ export default {
     const obj = {}
     obj.key = this.$route.query.token
     obj.email = this.$route.query.email
-    // eslint-disable-next-line no-console
-    console.log('key为:' + obj.key)
     this.$axios
       .$request(confirmEmail(obj))
       .then(res => {

@@ -72,7 +72,7 @@
         </v-menu>
       </template>
       <template v-else>
-        <v-btn href="/admin/login" flat> 登录 </v-btn>
+        <v-btn href="/login" flat> 登录 </v-btn>
       </template>
     </v-toolbar-items>
   </v-toolbar>
@@ -83,20 +83,23 @@ export default {
   name: 'NavBar',
   props: ['category'],
   data: vm => ({
-    items: [
+    itemsMenu: [
       {
+        all: true,
         icon: 'mdi-account',
         href: '',
         title: '我的主页',
         click: e => {}
       },
       {
-        icon: 'mdi-settings',
+        all: false,
+        icon: 'mdi-cat',
         href: '/admin/dashboard',
         title: '后台管理',
         click: e => {}
       },
       {
+        all: true,
         icon: 'mdi-logout',
         href: '',
         title: '退出登录',
@@ -117,6 +120,14 @@ export default {
     },
     avatar: function() {
       return this.$store.state.auth.user.avatar
+    },
+    role: function() {
+      return this.$store.state.auth.user.roles
+    },
+    items: function() {
+      return this.itemsMenu.filter(
+        s => s.all || this.$store.state.auth.user.roles.indexOf('ADMIN') > -1
+      )
     }
   }
 }
