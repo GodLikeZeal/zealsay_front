@@ -1,22 +1,24 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div :style="customStyle" class="back-to-ceiling">
-    <transition :name="transitionName">
-      <v-tooltip top>
-        <template v-slot:activator="{ on }">
+    <v-tooltip top>
+      <template v-slot:activator="{ on }">
+        <v-fab-transition>
           <v-btn
             v-show="visible"
-            fab
-            dark
             color="primary"
-            v-on="on"
+            dark
+            absolute
+            top
+            right
+            fab
             @click="backToTop"
           >
-            <v-icon dark>keyboard_arrow_up</v-icon>
+            <v-icon>keyboard_arrow_up</v-icon>
           </v-btn>
-        </template>
-        <span>返回顶部</span>
-      </v-tooltip>
-    </transition>
+        </v-fab-transition>
+      </template>
+      <span>返回顶部</span>
+    </v-tooltip>
   </div>
 </template>
 

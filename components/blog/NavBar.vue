@@ -1,19 +1,35 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-toolbar color="primary" dark flat>
     <nuxt-link to="/">
-      <v-avatar tile>
-        <img src="@/static/image/logo/cat.png" alt="logo" />
-      </v-avatar>
-      <v-toolbar-title style="display: inline-flex;" class="white--text"
-        >zealsay
-      </v-toolbar-title>
+      <v-toolbar-title class="white--text">zealsay </v-toolbar-title>
     </nuxt-link>
     <v-spacer></v-spacer>
 
-    <v-toolbar-items style="margin-right:2rem">
+    <v-toolbar-items>
+      <v-menu offset-y transition="slide-y-transition" class="hidden-md-and-up">
+        <template v-slot:activator="{ on }">
+          <v-btn flat class="hidden-md-and-up" v-on="on">
+            <v-icon>mdi-view-sequential</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-tile>
+            <nuxt-link to="/">
+              <v-list-tile-title>主页</v-list-tile-title>
+            </nuxt-link>
+            <nuxt-link to="/blog/friend">
+              <v-list-tile-title>友链</v-list-tile-title>
+            </nuxt-link>
+            <nuxt-link to="/blog/about">
+              <v-list-tile-title>关于</v-list-tile-title>
+            </nuxt-link>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
+    </v-toolbar-items>
+    <v-toolbar-items class="hidden-sm-and-down">
       <v-btn nuxt to="/" flat>主页</v-btn>
-
-      <v-menu offset-y>
+      <v-menu offset-y transition="slide-y-transition">
         <template v-slot:activator="{ on }">
           <v-btn flat v-on="on">
             博客
@@ -31,7 +47,7 @@
       <v-btn nuxt to="/blog/friend" flat>友链</v-btn>
       <v-btn nuxt to="/blog/about" flat>关于</v-btn>
       <v-btn flat>
-        <v-icon>search</v-icon>
+        <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
       <template v-if="loggedIn">

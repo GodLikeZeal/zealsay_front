@@ -77,7 +77,7 @@
             <v-container class="form-container" fluid fill-height>
               <v-layout align-center justify-center>
                 <v-flex xs12 sm8 md4 lg4>
-                  <v-card class="elevation-1 pa-3">
+                  <v-card class="elevation-1 pa-3" style="margin-bottom: 10%">
                     <v-card-text>
                       <div class="layout column align-center">
                         <img
