@@ -4,7 +4,7 @@
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4 lg4>
-            <v-card class="elevation-1 pa-3">
+            <v-card class="elevation-1 pa-3" style="margin-bottom: 10%">
               <!--              <v-card-title-->
               <!--                class="title font-weight-regular justify-space-between"-->
               <!--              >-->
@@ -739,7 +739,7 @@ export default {
 #footer {
   position: absolute;
   bottom: 0px;
-  height: 300px;
+  height: 280px;
   width: 100%;
   pointer-events: none;
 }

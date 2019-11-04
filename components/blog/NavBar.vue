@@ -1,9 +1,6 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-toolbar color="primary" dark flat>
     <nuxt-link to="/">
-      <v-avatar tile>
-        <img src="@/static/image/logo/cat.png" alt="logo" />
-      </v-avatar>
       <v-toolbar-title style="display: inline-flex;" class="white--text"
         >zealsay
       </v-toolbar-title>
