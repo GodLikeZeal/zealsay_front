@@ -17,9 +17,13 @@
             <nuxt-link to="/">
               <v-list-tile-title>主页</v-list-tile-title>
             </nuxt-link>
+          </v-list-tile>
+          <v-list-tile>
             <nuxt-link to="/blog/friend">
               <v-list-tile-title>友链</v-list-tile-title>
             </nuxt-link>
+          </v-list-tile>
+          <v-list-tile>
             <nuxt-link to="/blog/about">
               <v-list-tile-title>关于</v-list-tile-title>
             </nuxt-link>
