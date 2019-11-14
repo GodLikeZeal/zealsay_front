@@ -12,6 +12,18 @@ export function getUserList(obj) {
   }
 }
 /**
+ * 获取用户信息.
+ *
+ * @author  zhanglei
+ * @date 2019-03-13  16:13
+ */
+export function getUserById(id) {
+  return {
+    url: '/api/v1/user/' + id,
+    method: 'GET'
+  }
+}
+/**
  * 后台添加用户.
  *
  * @author  zhanglei
