@@ -107,7 +107,9 @@ export default {
       {
         all: true,
         icon: 'mdi-account',
-        href: '/user/' + vm.$store.state.auth.user.userId,
+        href: vm.$store.state.auth.user
+          ? '/user/' + vm.$store.state.auth.user.userId
+          : '',
         title: '我的主页',
         click: e => {}
       },
