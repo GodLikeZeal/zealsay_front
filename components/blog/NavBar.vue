@@ -102,37 +102,6 @@
 export default {
   name: 'NavBar',
   props: ['category'],
-  data: vm => ({
-    itemsMenu: [
-      {
-        all: true,
-        icon: 'mdi-account',
-        href: vm.$store.state.auth.user
-          ? '/user/' + vm.$store.state.auth.user.userId
-          : '',
-        title: '我的主页',
-        click: e => {}
-      },
-      {
-        all: false,
-        icon: 'mdi-settings',
-        href: '/admin/dashboard',
-        title: '后台管理',
-        click: e => {}
-      },
-      {
-        all: true,
-        icon: 'mdi-logout',
-        href: '',
-        title: '退出登录',
-        click: e => {
-          // vm.logout()
-          vm.$auth.logout('local')
-          // window.getApp.$emit('APP_LOGOUT');
-        }
-      }
-    ]
-  }),
   computed: {
     categorys: function() {
       return this.category
@@ -150,6 +119,37 @@ export default {
       return this.itemsMenu.filter(
         s => s.all || this.$store.state.auth.user.roles.indexOf('ADMIN') > -1
       )
+    },
+    itemsMenu: function() {
+      return [
+        {
+          all: true,
+          icon: 'mdi-account',
+          href: this.$store.state.auth.user
+            ? '/user/' + this.$store.state.auth.user.userId
+            : '',
+          title: '我的主页',
+          click: e => {}
+        },
+        {
+          all: false,
+          icon: 'mdi-settings',
+          href: '/admin/dashboard',
+          title: '后台管理',
+          click: e => {}
+        },
+        {
+          all: true,
+          icon: 'mdi-logout',
+          href: '',
+          title: '退出登录',
+          click: e => {
+            // vm.logout()
+            this.$auth.logout('local')
+            // window.getApp.$emit('APP_LOGOUT');
+          }
+        }
+      ]
     }
   }
 }
