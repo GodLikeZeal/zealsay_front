@@ -237,3 +237,27 @@ export function uploadImageMultiple(obj) {
     }
   }
 }
+/**
+ * 获取当前用户发表的博客.
+ *
+ * @author  zhanglei
+ * @date 2019-03-13  16:13
+ */
+export function getCurrentUserBlog() {
+  return {
+    url: '/api/v1/user/blog',
+    method: 'get'
+  }
+}
+/**
+ * 获取当前用户发表的博客.
+ *
+ * @author  zhanglei
+ * @date 2019-03-13  16:13
+ */
+export function getCurrentUserLikeBlog() {
+  return {
+    url: '/api/v1/user/like',
+    method: 'get'
+  }
+}
