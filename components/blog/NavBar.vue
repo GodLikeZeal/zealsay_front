@@ -113,7 +113,7 @@ export default {
       },
       {
         all: false,
-        icon: 'mdi-cat',
+        icon: 'mdi-settings',
         href: '/admin/dashboard',
         title: '后台管理',
         click: e => {}
