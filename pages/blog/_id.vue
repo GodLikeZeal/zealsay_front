@@ -30,13 +30,26 @@
               </div>
             </div>
 
-            <v-tooltip top>
+            <v-tooltip v-if="like" top>
               <template v-slot:activator="{ on }">
                 <v-btn
                   style="float: right;margin-top: 3rem;margin-right: 5rem;"
                   fab
                 >
-                  <v-icon medium color="pink" v-on="on" @click="like"
+                  <v-icon medium color="pink" v-on="on" @click="dislikeArticle"
+                    >mdi-heart</v-icon
+                  >
+                </v-btn>
+              </template>
+              点击取消喜欢
+            </v-tooltip>
+            <v-tooltip v-else top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  style="float: right;margin-top: 3rem;margin-right: 5rem;"
+                  fab
+                >
+                  <v-icon medium color="pink" v-on="on" @click="likeArticle"
                     >mdi-heart-outline</v-icon
                   >
                 </v-btn>
@@ -77,7 +90,14 @@
 <script>
 import Util from '@/util'
 import NavBar from '@/components/blog/NavBar'
-import { getArticle, getCategoryList, readArticle } from '@/api/article'
+import {
+  getArticle,
+  getCategoryList,
+  readArticle,
+  isLikeArticle,
+  likeArticle,
+  disLikeArticle
+} from '@/api/article'
 
 export default {
   auth: false,
@@ -130,10 +150,22 @@ export default {
     } else {
       return error({ statusCode: resArticle.code, message: resArticle.message })
     }
-    app.$axios.$request(readArticle(params.id))
+    const likeRes = await app.$axios.$request(isLikeArticle(params.id))
+    let like
+    if (likeRes.code === '200') {
+      like = likeRes.data
+    } else {
+      return error({
+        statusCode: likeRes.code,
+        message: likeRes.message
+      })
+    }
+    // 标记阅读数
+    await app.$axios.$request(readArticle(params.id))
     return {
       article: article,
-      categorys: categorys
+      categorys: categorys,
+      like: like
     }
   },
   methods: {
@@ -141,9 +173,61 @@ export default {
       // eslint-disable-next-line no-console
       console.log('click search')
     },
-    like() {
-      // eslint-disable-next-line no-console
-      console.log('like')
+    likeArticle() {
+      this.$axios
+        .$request(likeArticle(this.article.id))
+        .then(res => {
+          if (res.code === '200' && res.data) {
+            this.like = true
+          } else {
+            this.$swal({
+              text: '该文章不让你喜欢它！',
+              type: 'error',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3000
+            })
+          }
+        })
+        .catch(e => {
+          this.$swal({
+            text: e.message,
+            type: 'error',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000
+          })
+        })
+    },
+    dislikeArticle() {
+      this.$axios
+        .$request(disLikeArticle(this.article.id))
+        .then(res => {
+          if (res.code === '200' && res.data) {
+            this.like = false
+          } else {
+            this.$swal({
+              text: '该文章不准你不喜欢它！',
+              type: 'error',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3000
+            })
+          }
+        })
+        .catch(e => {
+          this.$swal({
+            text: e.message,
+            type: 'error',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000
+          })
+        })
     }
   }
 }

@@ -107,13 +107,13 @@ export default {
       {
         all: true,
         icon: 'mdi-account',
-        href: '',
+        href: '/user/' + vm.$store.state.auth.user.userId,
         title: '我的主页',
         click: e => {}
       },
       {
         all: false,
-        icon: 'mdi-cat',
+        icon: 'mdi-settings',
         href: '/admin/dashboard',
         title: '后台管理',
         click: e => {}

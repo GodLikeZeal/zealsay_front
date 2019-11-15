@@ -228,3 +228,40 @@ export function readArticle(id) {
     method: 'get'
   }
 }
+
+/**
+ * 查询是否喜欢过该文章.
+ *
+ * @author  zhanglei
+ * @date 2019-03-13  16:13
+ */
+export function isLikeArticle(id) {
+  return {
+    url: '/api/v1/article/islike/' + id,
+    method: 'get'
+  }
+}
+/**
+ * 喜欢该文章.
+ *
+ * @author  zhanglei
+ * @date 2019-03-13  16:13
+ */
+export function likeArticle(id) {
+  return {
+    url: '/api/v1/article/like/' + id,
+    method: 'get'
+  }
+}
+/**
+ * 取消喜欢该文章.
+ *
+ * @author  zhanglei
+ * @date 2019-03-13  16:13
+ */
+export function disLikeArticle(id) {
+  return {
+    url: '/api/v1/article/dislike/' + id,
+    method: 'get'
+  }
+}
