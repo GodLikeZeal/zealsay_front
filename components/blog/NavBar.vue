@@ -101,7 +101,14 @@
 <script>
 export default {
   name: 'NavBar',
-  props: ['category'],
+  props: {
+    category: {
+      type: Array,
+      default: function() {
+        return []
+      }
+    }
+  },
   computed: {
     categorys: function() {
       return this.category
@@ -136,6 +143,13 @@ export default {
           icon: 'mdi-settings',
           href: '/admin/dashboard',
           title: '后台管理',
+          click: e => {}
+        },
+        {
+          all: true,
+          icon: 'mdi-lead-pencil',
+          href: '/user/blog/add',
+          title: '写篇博客',
           click: e => {}
         },
         {

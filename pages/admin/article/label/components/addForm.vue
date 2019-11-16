@@ -102,7 +102,14 @@ import { addArticleLabel } from '@/api/article'
 
 export default {
   name: 'Add',
-  props: ['alert'],
+  props: {
+    alert: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    }
+  },
   data: () => ({
     name: 'add',
     loading: false,

@@ -95,7 +95,20 @@
 <script>
 export default {
   name: 'Info',
-  props: ['row', 'alert'],
+  props: {
+    alert: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    },
+    row: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    }
+  },
   data: () => ({
     icon: [
       require('@/static/image/food/南瓜.png'),

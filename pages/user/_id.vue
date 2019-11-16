@@ -31,7 +31,7 @@
                 /></span>
                 <span class="white--text font-weight-thin ">|</span>
                 <span class="white--text font-weight-bold text-detail">{{
-                  user.city ? user.sex : '未知地区'
+                  user.cityName ? user.cityName : '未知地区'
                 }}</span>
               </div>
               <h5 class="white--text font-weight-medium text-detail">
@@ -53,7 +53,7 @@
         </v-layout>
       </v-container>
     </v-card>
-    <v-container class="my-container">
+    <v-container class="my-container fill">
       <v-layout>
         <v-flex xs12 md12>
           <v-tabs fixed-tabs>
@@ -64,13 +64,13 @@
             <v-tab-item key="activity">
               <activity></activity>
             </v-tab-item>
-            <v-tab-item key="blog"
-              ><blog
+            <v-tab-item key="blog">
+              <blog
                 :desserts="blogs"
                 :pagination="blogPagination"
                 :category="categorys"
-              ></blog
-            ></v-tab-item>
+              ></blog>
+            </v-tab-item>
             <v-tab-item key="like"
               ><like
                 :desserts="likes"
@@ -78,7 +78,9 @@
                 :category="categorys"
               ></like
             ></v-tab-item>
-            <v-tab-item key="info"><info></info></v-tab-item>
+            <v-tab-item key="info"
+              ><info :form="user" :province="province" :roles="roles"></info
+            ></v-tab-item>
           </v-tabs>
         </v-flex>
       </v-layout>
@@ -102,6 +104,8 @@ import Blog from './blog'
 import Info from './info'
 import NavBar from '@/components/blog/NavBar'
 import { getCategoryList } from '@/api/article'
+import { getProvinceList } from '@/api/dict'
+import { getRoleList } from '@/api/role'
 import {
   getUserById,
   getCurrentUserBlog,
@@ -187,13 +191,42 @@ export default {
         message: resLike.message
       })
     }
+    const resProvince = await app.$axios.$request(getProvinceList())
+    let provinces = []
+    if (resProvince.code === '200') {
+      provinces = resProvince.data.map(r => {
+        return {
+          value: r.code,
+          text: r.name
+        }
+      })
+    } else {
+      return error({
+        statusCode: resProvince.code,
+        message: resProvince.message
+      })
+    }
+    const resRole = await app.$axios.$request(getRoleList())
+    let roles = []
+    if (resRole.code === '200') {
+      roles = resRole.data.map(r => {
+        return {
+          value: r.value,
+          text: r.name
+        }
+      })
+    } else {
+      return error({ statusCode: resRole.code, message: resRole.message })
+    }
     return {
       categorys: categorys,
       user: user,
       blogs: blogs,
       blogPagination: blogPagination,
       likes: likes,
-      likePagination: likePagination
+      likePagination: likePagination,
+      province: provinces,
+      roles: roles
     }
   },
   methods: {
@@ -224,5 +257,8 @@ export default {
 }
 .text-detail {
   margin: 0 1.5rem;
+}
+.fill {
+  max-width: inherit;
 }
 </style>

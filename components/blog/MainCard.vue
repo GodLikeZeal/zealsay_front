@@ -54,7 +54,14 @@ export default {
       }
     }
   },
-  props: ['item'],
+  props: {
+    item: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    }
+  },
   computed: {
     blog: function() {
       return this.item

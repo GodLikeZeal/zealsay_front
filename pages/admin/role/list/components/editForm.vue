@@ -55,7 +55,20 @@ import { updateRole } from '@/api/role'
 
 export default {
   name: 'Edit',
-  props: ['row', 'alert'],
+  props: {
+    alert: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    },
+    row: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    }
+  },
   data: () => ({
     name: 'edit',
     loading: false,

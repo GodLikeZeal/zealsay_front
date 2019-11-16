@@ -3,9 +3,9 @@
     <v-data-table
       v-model="selected"
       :headers="headers"
-      :pagination.sync="paginate"
+      :pagination.sync="pagination"
       :items="desserts"
-      :total-items="paginate.totalItems"
+      :total-items="pagination.totalItems"
       :loading="loading"
       hide-actions
       select-all
@@ -27,8 +27,8 @@
             :key="header.text"
             :class="[
               'column sortable',
-              paginate.descending ? 'desc' : 'asc',
-              header.value === paginate.sortBy ? 'active' : '',
+              pagination.descending ? 'desc' : 'asc',
+              header.value === pagination.sortBy ? 'active' : '',
               header.class
             ]"
             @click="changeSort(header.value)"
@@ -138,24 +138,6 @@
               >
                 <v-icon>create</v-icon>
               </v-btn>
-              <v-btn
-                icon
-                flat
-                color="primary"
-                title="上架"
-                @click="handleUp(props.item)"
-              >
-                <v-icon>trending_up</v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                flat
-                color="primary"
-                title="下架"
-                @click="handleDown(props.item)"
-              >
-                <v-icon>trending_down</v-icon>
-              </v-btn>
             </v-layout>
           </td>
         </tr>
@@ -163,7 +145,7 @@
     </v-data-table>
     <div class="pagination text-md-right">
       <v-pagination
-        v-model="paginate.page"
+        v-model="pagination.page"
         circle
         color="primary"
         :length="length"
@@ -173,15 +155,24 @@
   </div>
 </template>
 <script>
-import {
-  getArticlePageList,
-  markArticleDown,
-  markArticleUp
-} from '@/api/article'
+import { getArticlePageList } from '@/api/article'
 
 export default {
   name: 'Like',
-  props: ['desserts', 'pagination'],
+  props: {
+    pagination: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    },
+    desserts: {
+      type: Array,
+      default: function() {
+        return []
+      }
+    }
+  },
   data() {
     return {
       selected: [],
@@ -214,19 +205,6 @@ export default {
           : 0
       },
       set: function() {}
-    },
-    paginate: function() {
-      return {
-        descending: this.pagination.descending
-          ? this.pagination.descending
-          : true,
-        page: this.pagination.page ? this.pagination.page : 1,
-        rowsPerPage: this.pagination.rowsPerPage
-          ? this.pagination.rowsPerPage
-          : 10, // -1 for All
-        sortBy: this.pagination.sortBy ? this.pagination.sortBy : '',
-        totalItems: this.pagination.totalItems ? this.pagination.totalItems : 2
-      }
     }
   },
   methods: {
@@ -299,60 +277,6 @@ export default {
         type: 'success'
       })
       // this.$dialog.show(info, {row: row, width: 600})
-    },
-    handleDown(row) {
-      this.$swal({
-        title: '确定要下架吗？',
-        text: '一旦下架，用户无法查看到当前文章作品',
-        type: 'warning',
-        showCancelButton: true
-      }).then(result => {
-        if (result.value) {
-          this.$axios.$request(markArticleDown(row.id)).then(res => {
-            if (res.code === '200' && res.data) {
-              this.$swal({
-                title: '操作成功!',
-                text: '该文章作品已经被下架',
-                type: 'success'
-              })
-              this.search('')
-            } else {
-              this.$swal({
-                title: '操作失败!',
-                text: res.message,
-                type: 'error'
-              })
-            }
-          })
-        }
-      })
-    },
-    handleUp(row) {
-      this.$swal({
-        title: '确定要上架吗？',
-        text: '将该资源从下架状态改成正常状态，用户可正常浏览该文章作品',
-        type: 'warning',
-        showCancelButton: true
-      }).then(result => {
-        if (result.value) {
-          markArticleUp(row.id).then(res => {
-            if (res.code === '200' && res.data) {
-              this.$swal({
-                title: '操作成功!',
-                text: '该文章作品已经成功上架',
-                type: 'success'
-              })
-              this.search('')
-            } else {
-              this.$swal({
-                title: '操作失败!',
-                text: res.message,
-                type: 'error'
-              })
-            }
-          })
-        }
-      })
     }
   }
 }

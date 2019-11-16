@@ -63,7 +63,26 @@ import { addCategory } from '@/api/article'
 
 export default {
   name: 'Add',
-  props: ['alert', 'parentId', 'selected'],
+  props: {
+    alert: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    },
+    parentId: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    },
+    selected: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    }
+  },
   data: () => ({
     name: 'add',
     loading: false,
