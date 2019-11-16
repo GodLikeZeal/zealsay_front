@@ -74,7 +74,14 @@
 </template>
 <script>
 export default {
-  props: ['error'],
+  props: {
+    error: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    }
+  },
   methods: {
     goHome() {
       this.$router.push({ path: '/' })

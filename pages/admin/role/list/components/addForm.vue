@@ -55,7 +55,14 @@ import { addRole } from '@/api/role'
 
 export default {
   name: 'Add',
-  props: ['alert'],
+  props: {
+    alert: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    }
+  },
   data: () => ({
     name: 'add',
     loading: false,

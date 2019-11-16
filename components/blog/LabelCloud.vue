@@ -35,7 +35,14 @@
 <script>
 export default {
   name: 'LabelCloud',
-  props: ['items'],
+  props: {
+    items: {
+      type: Array,
+      default: function() {
+        return []
+      }
+    }
+  },
   computed: {
     labels: function() {
       return this.items

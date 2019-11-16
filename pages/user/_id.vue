@@ -31,7 +31,7 @@
                 /></span>
                 <span class="white--text font-weight-thin ">|</span>
                 <span class="white--text font-weight-bold text-detail">{{
-                  user.city ? user.sex : '未知地区'
+                  user.cityName ? user.cityName : '未知地区'
                 }}</span>
               </div>
               <h5 class="white--text font-weight-medium text-detail">
@@ -53,7 +53,7 @@
         </v-layout>
       </v-container>
     </v-card>
-    <v-container class="my-container">
+    <v-container class="my-container fill">
       <v-layout>
         <v-flex xs12 md12>
           <v-tabs fixed-tabs>
@@ -62,44 +62,25 @@
             <v-tab key="like"> 喜欢 </v-tab>
             <v-tab key="info"> 资料 </v-tab>
             <v-tab-item key="activity">
-              <v-container>
-                <v-layout>
-                  <v-flex>
-                    <v-list three-line>
-                      <template v-for="(item, index) in items">
-                        <v-subheader v-if="item.header" :key="item.header">
-                          {{ item.header }}
-                        </v-subheader>
-
-                        <v-divider
-                          v-else-if="item.divider"
-                          :key="index"
-                          :inset="item.inset"
-                        ></v-divider>
-
-                        <v-list-tile v-else :key="item.title" avatar>
-                          <v-list-tile-avatar>
-                            <img :src="item.avatar" />
-                          </v-list-tile-avatar>
-
-                          <v-list-tile-content>
-                            <v-list-tile-title
-                              v-html="item.title"
-                            ></v-list-tile-title>
-                            <v-list-tile-sub-title
-                              v-html="item.subtitle"
-                            ></v-list-tile-sub-title>
-                          </v-list-tile-content>
-                        </v-list-tile>
-                      </template>
-                    </v-list>
-                  </v-flex>
-                </v-layout>
-              </v-container>
+              <activity></activity>
             </v-tab-item>
-            <v-tab-item key="blog">blog</v-tab-item>
-            <v-tab-item key="like">like</v-tab-item>
-            <v-tab-item key="info">info</v-tab-item>
+            <v-tab-item key="blog">
+              <blog
+                :desserts="blogs"
+                :pagination="blogPagination"
+                :category="categorys"
+              ></blog>
+            </v-tab-item>
+            <v-tab-item key="like"
+              ><like
+                :desserts="likes"
+                :pagination="likePagination"
+                :category="categorys"
+              ></like
+            ></v-tab-item>
+            <v-tab-item key="info"
+              ><info :form="user" :province="province" :roles="roles"></info
+            ></v-tab-item>
           </v-tabs>
         </v-flex>
       </v-layout>
@@ -117,53 +98,30 @@
 </template>
 
 <script>
+import Like from './like'
+import Activity from './activity'
+import Blog from './blog'
+import Info from './info'
 import NavBar from '@/components/blog/NavBar'
 import { getCategoryList } from '@/api/article'
-import { getUserById } from '@/api/user'
+import { getProvinceList } from '@/api/dict'
+import { getRoleList } from '@/api/role'
+import {
+  getUserById,
+  getCurrentUserBlog,
+  getCurrentUserLikeBlog
+} from '@/api/user'
 
 export default {
   components: {
-    'blog-nav': NavBar
+    'blog-nav': NavBar,
+    like: Like,
+    activity: Activity,
+    blog: Blog,
+    info: Info
   },
   data: () => ({
-    loading: true,
-    items: [
-      { header: 'Today' },
-      {
-        avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-        title: '胡歌',
-        subtitle:
-          "<span class='text--primary'>评论了</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-      },
-      { divider: true, inset: true },
-      {
-        avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-        title: '张学友 <span class="grey--text text--lighten-1">4</span>',
-        subtitle:
-          "<span class='text--primary'>喜欢了</span> &mdash; Wish I could come, but I'm out of town this weekend."
-      },
-      { divider: true, inset: true },
-      {
-        avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-        title: '杨幂',
-        subtitle:
-          "<span class='text--primary'>发表了</span> &mdash; Do you have Paris recommendations? Have you ever been?"
-      },
-      { divider: true, inset: true },
-      {
-        avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-        title: '刘亦菲',
-        subtitle:
-          "<span class='text--primary'>点赞了</span> &mdash; Have any ideas about what we should get Heidi for her birthday?"
-      },
-      { divider: true, inset: true },
-      {
-        avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-        title: '鲁迅y',
-        subtitle:
-          "<span class='text--primary'>阅读了</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos."
-      }
-    ]
+    loading: true
   }),
   computed: {},
   async asyncData({ app, params, error }) {
@@ -205,9 +163,70 @@ export default {
         message: resUser.message
       })
     }
+    const resBlog = await app.$axios.$request(getCurrentUserBlog())
+    const blogPagination = {}
+    let blogs = []
+    if (resBlog.code === '200') {
+      blogs = resBlog.data.records
+      blogPagination.page = resBlog.data.currentPage
+      blogPagination.rowsPerPage = resBlog.data.pageSize
+      blogPagination.totalItems = resBlog.data.total
+    } else {
+      return error({
+        statusCode: resBlog.code,
+        message: resBlog.message
+      })
+    }
+    const resLike = await app.$axios.$request(getCurrentUserLikeBlog())
+    const likePagination = {}
+    let likes = []
+    if (resLike.code === '200') {
+      likes = resLike.data.records
+      likePagination.page = resLike.data.currentPage
+      likePagination.rowsPerPage = resLike.data.pageSize
+      likePagination.totalItems = resLike.data.total
+    } else {
+      return error({
+        statusCode: resLike.code,
+        message: resLike.message
+      })
+    }
+    const resProvince = await app.$axios.$request(getProvinceList())
+    let provinces = []
+    if (resProvince.code === '200') {
+      provinces = resProvince.data.map(r => {
+        return {
+          value: r.code,
+          text: r.name
+        }
+      })
+    } else {
+      return error({
+        statusCode: resProvince.code,
+        message: resProvince.message
+      })
+    }
+    const resRole = await app.$axios.$request(getRoleList())
+    let roles = []
+    if (resRole.code === '200') {
+      roles = resRole.data.map(r => {
+        return {
+          value: r.value,
+          text: r.name
+        }
+      })
+    } else {
+      return error({ statusCode: resRole.code, message: resRole.message })
+    }
     return {
       categorys: categorys,
-      user: user
+      user: user,
+      blogs: blogs,
+      blogPagination: blogPagination,
+      likes: likes,
+      likePagination: likePagination,
+      province: provinces,
+      roles: roles
     }
   },
   methods: {
@@ -238,5 +257,8 @@ export default {
 }
 .text-detail {
   margin: 0 1.5rem;
+}
+.fill {
+  max-width: inherit;
 }
 </style>

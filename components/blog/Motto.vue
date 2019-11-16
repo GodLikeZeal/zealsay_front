@@ -18,7 +18,14 @@
 <script>
 export default {
   name: 'Motto',
-  props: ['hitokoto'],
+  props: {
+    hitokoto: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    }
+  },
   computed: {
     motto: function() {
       return this.hitokoto

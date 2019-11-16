@@ -85,7 +85,14 @@ export default {
       }
     }
   },
-  props: ['list'],
+  props: {
+    list: {
+      type: Array,
+      default: function() {
+        return []
+      }
+    }
+  },
   computed: {
     desserts: function() {
       return this.list
