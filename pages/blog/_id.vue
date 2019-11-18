@@ -135,7 +135,7 @@ export default {
       ]
     }
   },
-  async asyncData({ app, params, error }) {
+  async asyncData({ app, params, error, store }) {
     const resArticle = await app.$axios.$request(getArticle(params.id))
     let article = {}
     if (resArticle.code === '200') {
@@ -150,15 +150,19 @@ export default {
     } else {
       return error({ statusCode: resArticle.code, message: resArticle.message })
     }
-    const likeRes = await app.$axios.$request(isLikeArticle(params.id))
     let like
-    if (likeRes.code === '200') {
-      like = likeRes.data
+    if (store.auth && store.auth.loggedIn) {
+      const likeRes = await app.$axios.$request(isLikeArticle(params.id))
+      if (likeRes.code === '200') {
+        like = likeRes.data
+      } else {
+        return error({
+          statusCode: likeRes.code,
+          message: likeRes.message
+        })
+      }
     } else {
-      return error({
-        statusCode: likeRes.code,
-        message: likeRes.message
-      })
+      like = false
     }
     // 标记阅读数
     await app.$axios.$request(readArticle(params.id))
@@ -174,60 +178,82 @@ export default {
       console.log('click search')
     },
     likeArticle() {
-      this.$axios
-        .$request(likeArticle(this.article.id))
-        .then(res => {
-          if (res.code === '200' && res.data) {
-            this.like = true
-          } else {
+      if (this.$store.state.auth.loggedIn) {
+        this.$axios
+          .$request(likeArticle(this.article.id))
+          .then(res => {
+            if (res.code === '200' && res.data) {
+              this.like = true
+            } else {
+              this.$swal({
+                text: '该文章不让你喜欢它！',
+                type: 'error',
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 3000
+              })
+            }
+          })
+          .catch(e => {
             this.$swal({
-              text: '该文章不让你喜欢它！',
+              text: e.message,
               type: 'error',
               toast: true,
               position: 'top',
               showConfirmButton: false,
               timer: 3000
             })
-          }
-        })
-        .catch(e => {
-          this.$swal({
-            text: e.message,
-            type: 'error',
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000
           })
+      } else {
+        this.$swal({
+          text: '需要先登录才能进行该操作哦！',
+          type: 'warning',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000
         })
+      }
     },
     dislikeArticle() {
-      this.$axios
-        .$request(disLikeArticle(this.article.id))
-        .then(res => {
-          if (res.code === '200' && res.data) {
-            this.like = false
-          } else {
+      if (this.$store.state.auth.loggedIn) {
+        this.$axios
+          .$request(disLikeArticle(this.article.id))
+          .then(res => {
+            if (res.code === '200' && res.data) {
+              this.like = false
+            } else {
+              this.$swal({
+                text: '该文章不准你不喜欢它！',
+                type: 'error',
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 3000
+              })
+            }
+          })
+          .catch(e => {
             this.$swal({
-              text: '该文章不准你不喜欢它！',
+              text: e.message,
               type: 'error',
               toast: true,
               position: 'top',
               showConfirmButton: false,
               timer: 3000
             })
-          }
-        })
-        .catch(e => {
-          this.$swal({
-            text: e.message,
-            type: 'error',
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000
           })
+      } else {
+        this.$swal({
+          text: '需要先登录才能进行该操作哦！',
+          type: 'warning',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000
         })
+      }
     }
   }
 }
