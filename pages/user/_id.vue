@@ -163,7 +163,10 @@ export default {
         message: resUser.message
       })
     }
-    const resBlog = await app.$axios.$request(getCurrentUserBlog())
+    const objBlog = {}
+    objBlog.pageNumber = 1
+    objBlog.pageSize = 12
+    const resBlog = await app.$axios.$request(getCurrentUserBlog(objBlog))
     const blogPagination = {}
     let blogs = []
     if (resBlog.code === '200') {
@@ -177,7 +180,10 @@ export default {
         message: resBlog.message
       })
     }
-    const resLike = await app.$axios.$request(getCurrentUserLikeBlog())
+    const objLike = {}
+    objLike.pageNumber = 1
+    objLike.pageSize = 12
+    const resLike = await app.$axios.$request(getCurrentUserLikeBlog(objLike))
     const likePagination = {}
     let likes = []
     if (resLike.code === '200') {

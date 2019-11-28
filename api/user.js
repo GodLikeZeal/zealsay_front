@@ -243,10 +243,11 @@ export function uploadImageMultiple(obj) {
  * @author  zhanglei
  * @date 2019-03-13  16:13
  */
-export function getCurrentUserBlog() {
+export function getCurrentUserBlog(obj) {
   return {
     url: '/api/v1/user/blog',
-    method: 'get'
+    method: 'get',
+    params: obj
   }
 }
 /**
@@ -255,9 +256,10 @@ export function getCurrentUserBlog() {
  * @author  zhanglei
  * @date 2019-03-13  16:13
  */
-export function getCurrentUserLikeBlog() {
+export function getCurrentUserLikeBlog(obj) {
   return {
     url: '/api/v1/user/like',
-    method: 'get'
+    method: 'get',
+    params: obj
   }
 }
