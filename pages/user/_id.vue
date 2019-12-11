@@ -65,18 +65,10 @@
               <activity></activity>
             </v-tab-item>
             <v-tab-item key="blog">
-              <blog
-                :desserts="blogs"
-                :pagination="blogPagination"
-                :category="categorys"
-              ></blog>
+              <blog :desserts="blogs" :category="categorys"></blog>
             </v-tab-item>
             <v-tab-item key="like"
-              ><like
-                :desserts="likes"
-                :pagination="likePagination"
-                :category="categorys"
-              ></like
+              ><like :desserts="likes" :category="categorys"></like
             ></v-tab-item>
             <v-tab-item key="info"
               ><info :form="user" :province="province" :roles="roles"></info
@@ -123,7 +115,18 @@ export default {
   data: () => ({
     loading: true
   }),
-  computed: {},
+  computed: {
+    like: {
+      get: function() {
+        return {
+          page: 1,
+          rowsPerPage: 12,
+          totalItems: 1
+        }
+      },
+      set: function() {}
+    }
+  },
   async asyncData({ app, params, error }) {
     if (
       params.id == null ||
@@ -163,28 +166,26 @@ export default {
         message: resUser.message
       })
     }
-    const resBlog = await app.$axios.$request(getCurrentUserBlog())
-    const blogPagination = {}
+    const objBlog = {}
+    objBlog.pageNumber = 1
+    objBlog.pageSize = 12
+    const resBlog = await app.$axios.$request(getCurrentUserBlog(objBlog))
     let blogs = []
     if (resBlog.code === '200') {
       blogs = resBlog.data.records
-      blogPagination.page = resBlog.data.currentPage
-      blogPagination.rowsPerPage = resBlog.data.pageSize
-      blogPagination.totalItems = resBlog.data.total
     } else {
       return error({
         statusCode: resBlog.code,
         message: resBlog.message
       })
     }
-    const resLike = await app.$axios.$request(getCurrentUserLikeBlog())
-    const likePagination = {}
+    const objLike = {}
+    objLike.pageNumber = 1
+    objLike.pageSize = 12
+    const resLike = await app.$axios.$request(getCurrentUserLikeBlog(objLike))
     let likes = []
     if (resLike.code === '200') {
       likes = resLike.data.records
-      likePagination.page = resLike.data.currentPage
-      likePagination.rowsPerPage = resLike.data.pageSize
-      likePagination.totalItems = resLike.data.total
     } else {
       return error({
         statusCode: resLike.code,
@@ -222,9 +223,7 @@ export default {
       categorys: categorys,
       user: user,
       blogs: blogs,
-      blogPagination: blogPagination,
       likes: likes,
-      likePagination: likePagination,
       province: provinces,
       roles: roles
     }
