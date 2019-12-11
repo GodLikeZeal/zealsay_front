@@ -45,10 +45,7 @@
             </v-tooltip>
             <v-tooltip v-else top>
               <template v-slot:activator="{ on }">
-                <v-btn
-                  style="float: right;margin-top: 3rem;margin-right: 5rem;"
-                  fab
-                >
+                <v-btn class="icon-like" fab>
                   <v-icon medium color="pink" v-on="on" @click="likeArticle"
                     >mdi-heart-outline</v-icon
                   >
@@ -264,6 +261,11 @@ export default {
 @import '../../assets/scss/styles/markdown/atelier-plateau-dark';
 .index {
   background: #fafafa;
+}
+.icon-like {
+  float: right;
+  margin-top: 3rem;
+  margin-right: 5rem;
 }
 .hitokoto-title {
   color: white;

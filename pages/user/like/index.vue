@@ -1,29 +1,30 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-container>
     <v-layout row wrap>
       <v-flex v-for="card in desserts" :key="card.id" xs6 sm3 md4>
         <v-card class="card" hover>
           <v-img :src="card.coverImage" height="200px"> </v-img>
 
-          <v-card-title primary-title>
-            <div class="subheading text-truncate text-title">
-              {{ card.title }}
+          <v-card-title>
+            <div>
+              <div class="subheading text-truncate text-title">
+                {{ card.title }}
+              </div>
+              <h6 class="grey--text text-truncate">
+                {{ card.subheading }}
+              </h6>
             </div>
-            <h6 class="grey--text text-truncate">
-              {{ card.subheading }}
-            </h6>
           </v-card-title>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn icon>
-              <v-icon>favorite</v-icon>
-            </v-btn>
-            <v-btn icon>
-              <v-icon>bookmark</v-icon>
-            </v-btn>
-            <v-btn icon>
-              <v-icon>share</v-icon>
-            </v-btn>
+            <v-tooltip top>
+              <template v-slot:activator="{ on }">
+                <v-btn icon @click="handleDel(card)">
+                  <v-icon medium v-on="on">delete_outline</v-icon>
+                </v-btn>
+              </template>
+              不再喜欢
+            </v-tooltip>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -31,6 +32,7 @@
   </v-container>
 </template>
 <script>
+import { disLikeArticle } from '@/api/article'
 export default {
   name: 'Like',
   props: {
@@ -47,24 +49,42 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      color: ['primary', 'secondary', 'success', 'info', 'warning', 'danger']
-    }
-  },
-  computed: {},
   methods: {
-    handleEdit(row) {
-      this.$router.push({ path: '/user/blog/edit', query: { id: row.id } })
-    },
-    handleInfo(row) {
-      this.row = { ...row }
-      this.$swal({
-        title: '操作成功!',
-        text: '预览功能正在开发中，别急嘛',
-        type: 'success'
-      })
-      // this.$dialog.show(info, {row: row, width: 600})
+    handleDel(row) {
+      this.$axios
+        .$request(disLikeArticle(row.id))
+        .then(res => {
+          if (res.code === '200' && res.data) {
+            location.reload()
+            this.$swal({
+              text: '已经从喜欢列表移除！',
+              type: 'success',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3000
+            })
+          } else {
+            this.$swal({
+              text: res.message,
+              type: 'error',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3000
+            })
+          }
+        })
+        .catch(e => {
+          this.$swal({
+            text: e.message,
+            type: 'error',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000
+          })
+        })
     }
   }
 }
