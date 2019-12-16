@@ -148,7 +148,7 @@ export default {
       return error({ statusCode: resArticle.code, message: resArticle.message })
     }
     let like
-    if (store.auth && store.auth.loggedIn) {
+    if (store.$auth && store.$auth.$state && store.$auth.$state.loggedIn) {
       const likeRes = await app.$axios.$request(isLikeArticle(params.id))
       if (likeRes.code === '200') {
         like = likeRes.data

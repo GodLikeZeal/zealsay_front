@@ -68,14 +68,14 @@
                     :items="roles"
                     item-text="text"
                     item-value="value"
-                    label="角色*"
+                    label="角色"
                     disabled
                     required
                   ></v-select>
                 </v-flex>
                 <v-flex xs12 md6>
                   <v-text-field
-                    v-model="form.adrress"
+                    v-model="form.address"
                     label="详细住址"
                     class="purple-input"
                   />
