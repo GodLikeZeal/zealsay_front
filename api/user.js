@@ -263,3 +263,15 @@ export function getCurrentUserLikeBlog(obj) {
     params: obj
   }
 }
+/**
+ * 获取当前用户所.
+ *
+ * @author  zhanglei
+ * @date 2019-03-13  16:13
+ */
+export function getCurrentUserActions() {
+  return {
+    url: '/api/v1/user/action/timelines',
+    method: 'get'
+  }
+}

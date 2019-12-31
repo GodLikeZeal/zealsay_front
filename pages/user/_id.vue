@@ -62,7 +62,7 @@
             <v-tab key="like"> 喜欢 </v-tab>
             <v-tab key="info"> 资料 </v-tab>
             <v-tab-item key="activity">
-              <activity></activity>
+              <activity :actions="actions"></activity>
             </v-tab-item>
             <v-tab-item key="blog">
               <blog :desserts="blogs" :category="categorys"></blog>
@@ -101,7 +101,8 @@ import { getRoleList } from '@/api/role'
 import {
   getUserById,
   getCurrentUserBlog,
-  getCurrentUserLikeBlog
+  getCurrentUserLikeBlog,
+  getCurrentUserActions
 } from '@/api/user'
 
 export default {
@@ -192,6 +193,16 @@ export default {
         message: resLike.message
       })
     }
+    let actions = []
+    const resActions = await app.$axios.$request(getCurrentUserActions())
+    if (resActions.code === '200') {
+      actions = resActions.data
+    } else {
+      return error({
+        statusCode: resActions.code,
+        message: resActions.message
+      })
+    }
     const resProvince = await app.$axios.$request(getProvinceList())
     let provinces = []
     if (resProvince.code === '200') {
@@ -224,6 +235,7 @@ export default {
       user: user,
       blogs: blogs,
       likes: likes,
+      actions: actions,
       province: provinces,
       roles: roles
     }

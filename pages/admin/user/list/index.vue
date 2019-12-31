@@ -59,6 +59,7 @@
       :headers="headers"
       :pagination.sync="pagination"
       :items="desserts"
+      :total-items="pagination.totalItems"
       :loading="loading"
       hide-actions
       select-all

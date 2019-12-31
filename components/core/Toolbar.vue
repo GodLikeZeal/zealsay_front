@@ -122,7 +122,9 @@ export default {
     items: [
       {
         icon: 'mdi-account',
-        href: '#',
+        href: vm.$store.state.auth.user
+          ? '/user/' + vm.$store.state.auth.user.userId
+          : '',
         title: '我的主页',
         click: e => {}
       },
@@ -137,7 +139,7 @@ export default {
         href: '#',
         title: '退出登录',
         click: e => {
-          vm.logout()
+          this.$auth.logout('local')
           // window.getApp.$emit('APP_LOGOUT');
         }
       }
