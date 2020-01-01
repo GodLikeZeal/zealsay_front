@@ -13,13 +13,13 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@nuxtjs/auth": "^4.8.1",
-    "@nuxtjs/axios": "^5.5.4",
-    "cross-env": "^5.2.0",
-    "nuxt": "^2.9.2",
-    "vue-sweetalert2": "^2.1.1",
-    "vuetify": "^1.5.16",
-    "vuetify-loader": "^1.2.1"
+    "@nuxtjs/auth": "^4.8.5",
+    "@nuxtjs/axios": "^5.9.0",
+    "cross-env": "^5.2.1",
+    "nuxt": "^2.11.0",
+    "vue-sweetalert2": "^2.1.5",
+    "vuetify": "^1.5.22",
+    "vuetify-loader": "^1.4.3"
   },
   "devDependencies": {
     "@mdi/font": "^3.8.95",

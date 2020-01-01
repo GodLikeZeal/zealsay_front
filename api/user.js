@@ -8,7 +8,7 @@ export function getUserList(obj) {
   return {
     url: '/api/v1/user/page',
     method: 'GET',
-    data: obj
+    params: obj
   }
 }
 /**
