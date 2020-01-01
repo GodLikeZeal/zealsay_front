@@ -306,6 +306,8 @@ export default {
       const searchData = this.searchData
       searchData.pageSize = this.pagination.rowsPerPage
       searchData.pageNumber = this.pagination.page
+      // eslint-disable-next-line no-console
+      console.log(searchData)
       this.$axios
         .$request(getUserList(searchData))
         .then(res => {
