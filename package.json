@@ -15,11 +15,10 @@
   "dependencies": {
     "@nuxtjs/auth": "^4.8.5",
     "@nuxtjs/axios": "^5.9.0",
+    "@nuxtjs/vuetify": "^1.9.1",
     "cross-env": "^5.2.1",
     "nuxt": "^2.11.0",
-    "vue-sweetalert2": "^2.1.5",
-    "vuetify": "^1.5.22",
-    "vuetify-loader": "^1.4.3"
+    "vue-sweetalert2": "^2.1.5"
   },
   "devDependencies": {
     "@mdi/font": "^3.8.95",
@@ -42,11 +41,9 @@
     "less-loader": "^5.0.0",
     "material-design-icons-iconfont": "^5.0.1",
     "mavon-editor": "^2.7.5",
-    "node-sass": "^4.13.0",
     "nodemon": "^1.18.9",
     "prettier": "^1.18.2",
     "qs": "^6.7.0",
-    "sass-loader": "^7.1.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue-avatar": "^2.1.7",

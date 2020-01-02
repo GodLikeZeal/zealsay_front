@@ -50,7 +50,6 @@ export default {
   css: [
     'material-design-icons-iconfont/dist/material-design-icons.css',
     'vuetify/dist/vuetify.min.css',
-    '@/assets/style/app.styl',
     'chartist/dist/chartist.min.css',
     '@/assets/scss/styles/index.scss',
     '@/static/live2d/css/live2d.css'
@@ -157,7 +156,26 @@ export default {
       pathRewrite: { '^/app/': '' } // 把/api 替换成 /
     }
   },
-
+  /**
+   * vuetify 2.0
+   */
+  buildModules: [
+    // Simple usage
+    '@nuxtjs/vuetify'
+  ],
+  /**
+   * vuetify 设置.
+   */
+  vuetify: {
+    // customVariables: ['~/assets/scss/app/variables.scss'],
+    defaultAssets: {
+      font: {
+        family: 'Roboto'
+      },
+      icons: 'mdi'
+    },
+    optionsPath: './plugins/vuetify/options.js'
+  },
   /*
    ** Build configuration
    */
@@ -166,7 +184,7 @@ export default {
     plugins: [new VuetifyLoaderPlugin()],
     loaders: {
       stylus: {
-        import: ['~assets/style/variables.styl']
+        import: ['~vuetify/src/styles/styles.sass']
       }
     },
     /*
