@@ -26,7 +26,7 @@
                 {{ item.readNum }}次浏览 {{ item.likeNum }}个点赞
               </h6>
               <v-btn
-                round
+                rounded
                 nuxt
                 color="primary"
                 :to="'/blog/' + blog.id"

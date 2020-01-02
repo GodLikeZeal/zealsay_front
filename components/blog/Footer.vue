@@ -9,14 +9,14 @@
       <live2d></live2d>
       <v-card-text>
         <v-layout justify-center>
-          <v-list-tile avatar>
-            <v-list-tile-avatar color="white">
+          <v-list-item-title avatar>
+            <v-list-item-avatar color="white">
               <v-img :src="logo" height="34" contain />
-            </v-list-tile-avatar>
-            <v-list-tile-title class="title">
+            </v-list-item-avatar>
+            <v-list-item-title class="title">
               zealsay
-            </v-list-tile-title>
-          </v-list-tile>
+            </v-list-item-title>
+          </v-list-item-title>
         </v-layout>
       </v-card-text>
       <v-card-text>

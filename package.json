@@ -15,7 +15,6 @@
   "dependencies": {
     "@nuxtjs/auth": "^4.8.5",
     "@nuxtjs/axios": "^5.9.0",
-    "@nuxtjs/vuetify": "^1.9.1",
     "cross-env": "^5.2.1",
     "nuxt": "^2.11.0",
     "vue-sweetalert2": "^2.1.5"
@@ -23,6 +22,7 @@
   "devDependencies": {
     "@mdi/font": "^3.8.95",
     "@nuxtjs/eslint-config": "^0.0.1",
+    "@nuxtjs/vuetify": "^1.9.1",
     "babel-eslint": "^10.0.2",
     "eslint": "^5.15.1",
     "eslint-config-prettier": "^4.1.0",

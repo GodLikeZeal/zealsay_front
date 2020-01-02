@@ -5,21 +5,21 @@
     </v-card-title>
     <v-card-text>
       <v-list>
-        <v-list-tile-title class="left_list_item text-truncate">
+        <v-list-item-title class="left_list_item text-truncate">
           zeal发表在 <a>消息系统设计与实现「下篇」</a>
-        </v-list-tile-title>
+        </v-list-item-title>
         <v-divider></v-divider>
-        <v-list-tile-title class="left_list_item text-truncate">
+        <v-list-item-title class="left_list_item text-truncate">
           zeal发表在 <a>消息系统设计与实现「下篇」</a>
-        </v-list-tile-title>
+        </v-list-item-title>
         <v-divider></v-divider>
-        <v-list-tile-title class="left_list_item text-truncate">
+        <v-list-item-title class="left_list_item text-truncate">
           zeal发表在 <a>消息系统设计与实现「下篇」</a>
-        </v-list-tile-title>
+        </v-list-item-title>
         <v-divider></v-divider>
-        <v-list-tile-title class="left_list_item text-truncate">
+        <v-list-item-title class="left_list_item text-truncate">
           zeal发表在 <a>消息系统设计与实现「下篇」</a>
-        </v-list-tile-title>
+        </v-list-item-title>
       </v-list>
     </v-card-text>
   </v-card>

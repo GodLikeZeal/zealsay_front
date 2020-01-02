@@ -1,4 +1,4 @@
-import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
+// import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
 
 export default {
   mode: 'universal',
@@ -59,7 +59,6 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: '@/plugins/vuetify', ssr: true },
     { src: '@/plugins/axios', ssr: false },
     { src: '@/plugins/dialog', ssr: false },
     { src: '@/plugins/chartist', ssr: true },
@@ -67,7 +66,8 @@ export default {
     { src: '@/plugins/vue-mavon-editor', srr: false },
     { src: '@/plugins/vue-cropper', ssr: false },
     // { src: '@/plugins/bubbly-bg', ssr: false },
-    { src: '@/plugins/localStorage.js', ssr: false }
+    { src: '@/plugins/localStorage.js', ssr: false },
+    { src: '@/plugins/material.js', ssr: false }
   ],
 
   /**
@@ -166,27 +166,27 @@ export default {
   /**
    * vuetify 设置.
    */
-  vuetify: {
-    // customVariables: ['~/assets/scss/app/variables.scss'],
-    defaultAssets: {
-      font: {
-        family: 'Roboto'
-      },
-      icons: 'mdi'
-    },
-    optionsPath: './plugins/vuetify/options.js'
-  },
+  // vuetify: {
+  //   // customVariables: ['~/assets/scss/app/variables.scss'],
+  //   defaultAssets: {
+  //     font: {
+  //       family: 'Roboto'
+  //     },
+  //     icons: 'mdi'
+  //   },
+  //   optionsPath: '/plugins/vuetify/options.js'
+  // },
   /*
    ** Build configuration
    */
   build: {
-    transpile: ['vuetify/lib'],
-    plugins: [new VuetifyLoaderPlugin()],
-    loaders: {
-      stylus: {
-        import: ['~vuetify/src/styles/styles.sass']
-      }
-    },
+    // transpile: ['vuetify/lib'],
+    // plugins: [new VuetifyLoaderPlugin()],
+    // loaders: {
+    //   stylus: {
+    //     import: ['~vuetify/src/styles/styles.sass']
+    //   }
+    // },
     /*
      ** You can extend webpack config here
      */

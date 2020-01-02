@@ -1,4 +1,4 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<template>
   <v-toolbar color="primary" dark flat>
     <nuxt-link to="/">
       <v-toolbar-title class="white--text">zealsay </v-toolbar-title>
@@ -32,13 +32,8 @@
       </v-menu>
     </v-toolbar-items>
     <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn nuxt to="/" flat>主页</v-btn>
+      <v-btn nuxt to="/" text>主页</v-btn>
       <v-menu offset-y transition="slide-y-transition">
-        <template v-slot:activator="{ on }">
-          <v-btn flat v-on="on">
-            博客
-          </v-btn>
-        </template>
         <v-list>
           <v-list-tile v-for="(item, index) in categorys" :key="index">
             <nuxt-link :to="'/blog/category/' + item.id">
@@ -48,9 +43,9 @@
         </v-list>
       </v-menu>
 
-      <v-btn nuxt to="/blog/friend" flat>友链</v-btn>
-      <v-btn nuxt to="/blog/about" flat>关于</v-btn>
-      <v-btn flat>
+      <v-btn nuxt to="/blog/friend" text>友链</v-btn>
+      <v-btn nuxt to="/blog/about" text>关于</v-btn>
+      <v-btn text>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
@@ -62,7 +57,7 @@
           offset-y
           transition="slide-y-transition"
         >
-          <v-btn slot="activator" flat icon class="toolbar-items">
+          <v-btn text icon class="toolbar-items">
             <v-avatar size="35px">
               <v-img :src="avatar" alt="avatar" />
             </v-avatar>
@@ -92,7 +87,7 @@
         </v-menu>
       </template>
       <template v-else>
-        <v-btn href="/login" flat> 登录 </v-btn>
+        <v-btn href="/login" text> 登录 </v-btn>
       </template>
     </v-toolbar-items>
   </v-toolbar>

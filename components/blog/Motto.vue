@@ -45,7 +45,6 @@ export default {
 .hitokoto-title {
   color: white;
   font-weight: 400 !important;
-  margin-top: 5rem;
   margin-bottom: 0.6rem;
   line-height: 1 !important;
   font-size: 2rem !important;
@@ -54,22 +53,24 @@ export default {
 .hitokoto_author {
   color: snow;
   float: right;
-  margin-top: 3rem;
+  margin-top: 6rem;
 }
 
 .right {
-  position: relative;
+  position: absolute;
   right: 0;
-  bottom: 0;
+  margin-right: -5rem;
 }
 
 .left {
-  position: relative;
+  position: absolute;
   left: 0;
   top: -2.5rem;
+  margin-left: -5rem;
 }
 
 .word {
   position: relative;
+  margin: 5rem 0;
 }
 </style>

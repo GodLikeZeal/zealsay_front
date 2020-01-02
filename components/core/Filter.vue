@@ -9,7 +9,7 @@
     offset-x
     transition="slide-y-transition"
   >
-    <v-btn slot="activator" flat icon class="toolbar-items">
+    <v-btn slot="activator" text icon class="toolbar-items">
       <v-icon color="tertiary">mdi-settings</v-icon>
     </v-btn>
     <v-card>
