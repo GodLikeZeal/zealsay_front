@@ -22,7 +22,7 @@
           </v-container>
         </v-img>
         <v-card-title>
-          <div class="row center">
+          <div class="text-center">
             <span class="indigo--text text-detail">{{ row.age }} 岁</span>
             <span v-if="row.sex == 1" class="text-detail" title="男"
               ><img width="15px" src="~/static/image/sex/boy.png"

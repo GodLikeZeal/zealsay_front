@@ -16,7 +16,6 @@
       :pagination.sync="pagination"
       :items="desserts"
       :loading="loading"
-      hide-actions
       select-all
       class="elevation-1"
     >

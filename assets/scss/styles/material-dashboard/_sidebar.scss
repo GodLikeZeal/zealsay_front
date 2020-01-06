@@ -6,9 +6,9 @@
     padding: 0;
 
     .v-list-item {
-      &:not(:nth-child(3)){
-        margin: $margin-small $margin-general 0;
-      }
+      //&:not(:nth-child(3)){
+      //  margin: $margin-small $margin-general 0;
+      //}
 
       &:nth-child(3) {
         margin: 0 $margin-general;

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
 import '@mdi/font/css/materialdesignicons.css'
-import Avatar from 'vue-avatar'
 import Card from '@/components/material/Card'
 import ChartCard from '@/components/material/ChartCard'
 import StatsCard from '@/components/material/StatsCard'
@@ -15,4 +14,3 @@ Vue.component('material-stats-card', StatsCard)
 Vue.component('core-footer', Footer)
 Vue.component('blog-footer', BFooter)
 Vue.component('back-to-top', BackToTop)
-Vue.component('avatar', Avatar)

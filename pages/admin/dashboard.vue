@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-container fill-height fluid grid-list-xl>
     <v-layout wrap>
       <v-flex md12 sm12 lg4>
@@ -120,7 +120,7 @@
           title="活跃排行榜"
           text="最后更新于5分钟前"
         >
-          <v-data-table :headers="headers" :items="items" hide-actions>
+          <v-data-table :headers="headers" :items="items">
             <template slot="headerCell" slot-scope="{ header }">
               <span
                 class="font-weight-light text-warning text--darken-3"
@@ -140,7 +140,7 @@
       <v-flex md12 lg6>
         <material-card class="card-tabs" color="green">
           <v-flex slot="header">
-            <v-tabs v-model="tabs" color="transparent" slider-color="white">
+            <v-tabs v-model="tabs" background-color="transparent">
               <span
                 class="subheading font-weight-light mr-3"
                 style="align-self: center"
@@ -163,106 +163,145 @@
 
           <v-tabs-items v-model="tabs">
             <v-tab-item v-for="n in 3" :key="n">
-              <v-list three-line>
-                <v-list-tile @click="complete(0)">
-                  <v-list-tile-action>
-                    <v-checkbox :value="list[0]" color="green" />
-                  </v-list-tile-action>
-                  <v-list-tile-title>
-                    [refactor]首页展示优化
-                  </v-list-tile-title>
-                  <div class="d-flex">
-                    <v-tooltip top content-class="top">
-                      <v-btn
-                        slot="activator"
-                        class="v-btn--simple"
-                        color="success"
-                        icon
-                      >
-                        <v-icon color="primary">mdi-pencil</v-icon>
-                      </v-btn>
-                      <span>Edit</span>
-                    </v-tooltip>
-                    <v-tooltip top content-class="top">
-                      <v-btn
-                        slot="activator"
-                        class="v-btn--simple"
-                        color="danger"
-                        icon
-                      >
-                        <v-icon color="error">mdi-close</v-icon>
-                      </v-btn>
-                      <span>Close</span>
-                    </v-tooltip>
-                  </div>
-                </v-list-tile>
-                <v-divider />
-                <v-list-tile @click="complete(1)">
-                  <v-list-tile-action>
-                    <v-checkbox :value="list[1]" color="success" />
-                  </v-list-tile-action>
-                  <v-list-tile-title>
-                    [feat]增加评论系统
-                  </v-list-tile-title>
-                  <div class="d-flex">
-                    <v-tooltip top content-class="top">
-                      <v-btn
-                        slot="activator"
-                        class="v-btn--simple"
-                        color="success"
-                        icon
-                      >
-                        <v-icon color="primary">mdi-pencil</v-icon>
-                      </v-btn>
-                      <span>Edit</span>
-                    </v-tooltip>
+              <v-list two-line>
+                <v-list-item-group multiple>
+                  <v-list-item>
+                    <template v-slot:default="{ active, toggle }">
+                      <v-list-item-action>
+                        <v-checkbox
+                          v-model="active"
+                          color="primary"
+                          @click="toggle"
+                        />
+                      </v-list-item-action>
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          [refactor]首页展示优化
+                        </v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-tooltip top content-class="top">
-                      <v-btn
-                        slot="activator"
-                        class="v-btn--simple"
-                        color="danger"
-                        icon
-                      >
-                        <v-icon color="error">mdi-close</v-icon>
-                      </v-btn>
-                      <span>Close</span>
-                    </v-tooltip>
-                  </div>
-                </v-list-tile>
-                <v-divider />
-                <v-list-tile @click="complete(2)">
-                  <v-list-tile-action>
-                    <v-checkbox :value="list[2]" color="success" />
-                  </v-list-tile-action>
-                  <v-list-tile-title>
-                    [fix]: 修复alert弹窗在移动端展示异常
-                  </v-list-tile-title>
-                  <div class="d-flex">
-                    <v-tooltip top content-class="top">
-                      <v-btn
-                        slot="activator"
-                        class="v-btn--simple"
-                        color="success"
-                        icon
-                      >
-                        <v-icon color="primary">mdi-pencil</v-icon>
-                      </v-btn>
-                      <span>Edit</span>
-                    </v-tooltip>
-                    <v-tooltip top content-class="top">
-                      <v-btn
-                        slot="activator"
-                        class="v-btn--simple"
-                        color="danger"
-                        icon
-                      >
-                        <v-icon color="error">mdi-close</v-icon>
-                      </v-btn>
-                      <span>Close</span>
-                    </v-tooltip>
-                  </div>
-                </v-list-tile>
+                      <div class="d-flex">
+                        <v-tooltip top content-class="top">
+                          <template v-slot:activator="{ on }">
+                            <v-btn
+                              class="v-btn--simple"
+                              color="success"
+                              icon
+                              v-on="on"
+                            >
+                              <v-icon color="primary">mdi-pencil</v-icon>
+                            </v-btn>
+                          </template>
+                          <span>Edit</span>
+                        </v-tooltip>
+
+                        <v-tooltip top content-class="top">
+                          <template v-slot:activator="{ on }">
+                            <v-btn
+                              class="v-btn--simple"
+                              color="danger"
+                              icon
+                              v-on="on"
+                            >
+                              <v-icon color="error">mdi-close</v-icon>
+                            </v-btn>
+                          </template>
+                          <span>Close</span>
+                        </v-tooltip>
+                      </div>
+                    </template>
+                  </v-list-item>
+                  <v-divider />
+                  <v-list-item>
+                    <template v-slot:default="{ active, toggle }">
+                      <v-list-item-action>
+                        <v-checkbox
+                          v-model="active"
+                          color="primary"
+                          @click="toggle"
+                        />
+                      </v-list-item-action>
+                      <v-list-item-title>
+                        [feat]增加评论系统
+                      </v-list-item-title>
+
+                      <div class="d-flex">
+                        <v-tooltip top content-class="top">
+                          <template v-slot:activator="{ on }">
+                            <v-btn
+                              class="v-btn--simple"
+                              color="success"
+                              icon
+                              v-on="on"
+                            >
+                              <v-icon color="primary">mdi-pencil</v-icon>
+                            </v-btn>
+                          </template>
+                          <span>Edit</span>
+                        </v-tooltip>
+
+                        <v-tooltip top content-class="top">
+                          <template v-slot:activator="{ on }">
+                            <v-btn
+                              class="v-btn--simple"
+                              color="danger"
+                              icon
+                              v-on="on"
+                            >
+                              <v-icon color="error">mdi-close</v-icon>
+                            </v-btn>
+                          </template>
+                          <span>Close</span>
+                        </v-tooltip>
+                      </div>
+                    </template>
+                  </v-list-item>
+                  <v-divider />
+                  <v-list-item @click="complete(2)">
+                    <template v-slot:default="{ active, toggle }">
+                      <v-list-item-action>
+                        <v-checkbox
+                          v-model="active"
+                          color="primary"
+                          @click="toggle"
+                        />
+                      </v-list-item-action>
+                      <v-list-item-title>
+                        [fix]: 修复alert弹窗在移动端展示异常
+                      </v-list-item-title>
+
+                      <div class="d-flex">
+                        <v-tooltip top content-class="top">
+                          <template v-slot:activator="{ on }">
+                            <v-btn
+                              class="v-btn--simple"
+                              color="success"
+                              icon
+                              v-on="on"
+                            >
+                              <v-icon color="primary">mdi-pencil</v-icon>
+                            </v-btn>
+                          </template>
+                          <span>Edit</span>
+                        </v-tooltip>
+
+                        <v-tooltip top content-class="top">
+                          <template v-slot:activator="{ on }">
+                            <v-btn
+                              class="v-btn--simple"
+                              color="danger"
+                              icon
+                              v-on="on"
+                            >
+                              <v-icon color="error">mdi-close</v-icon>
+                            </v-btn>
+                          </template>
+                          <span>Close</span>
+                        </v-tooltip>
+                      </div>
+                    </template>
+                  </v-list-item>
+                </v-list-item-group>
               </v-list>
             </v-tab-item>
           </v-tabs-items>
@@ -392,30 +431,35 @@ export default {
       ],
       items: [
         {
+          id: '001',
           name: 'zeal',
           country: '中国',
           city: '北京',
           salary: '$35,738'
         },
         {
+          id: '002',
           name: 'editor',
           country: '中国',
           city: '天津',
           salary: '$23,738'
         },
         {
+          id: '003',
           name: '小明',
           country: '中国',
           city: '上海',
           salary: '$56,142'
         },
         {
+          id: '004',
           name: '桔梗',
           country: '日本',
           city: '大阪',
           salary: '$38,735'
         },
         {
+          id: '005',
           name: '山的那边',
           country: '中国',
           city: '武汉',

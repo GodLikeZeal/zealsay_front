@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-menu
     :close-on-content-click="false"
     bottom
@@ -9,14 +9,16 @@
     offset-x
     transition="slide-y-transition"
   >
-    <v-btn slot="activator" text icon class="toolbar-items">
-      <v-icon color="tertiary">mdi-settings</v-icon>
-    </v-btn>
+    <template v-slot:activator="{ on }">
+      <v-btn text icon class="toolbar-items" v-on="on">
+        <v-icon color="tertiary">mdi-settings</v-icon>
+      </v-btn>
+    </template>
     <v-card>
-      <v-container grid-list-xl>
+      <v-container>
         <v-layout wrap>
           <v-flex xs12>
-            <div class="text-xs-center body-2 text-uppercase sidebar-filter">
+            <div class="select-title caption text-uppercase sidebar-filter">
               主题色设置
             </div>
 
@@ -33,18 +35,18 @@
             </v-layout>
             <v-divider class="mt-3" />
           </v-flex>
-          <v-flex xs12 class="align-center">
-            <div class="text-xs-center body-2 text-uppercase sidebar-filter">
+          <v-flex xs12>
+            <div class="select-title caption text-uppercase sidebar-filter">
               开启侧边背景
             </div>
-            <v-switch v-model="left" class="justify-center"></v-switch>
+            <div class="d-flex justify-center">
+              <v-switch v-model="left"></v-switch>
+            </div>
           </v-flex>
           <v-flex xs12>
             <v-layout justify-center>
               <v-flex xs12>
-                <div
-                  class="text-xs-center body-2 text-uppercase sidebar-filter"
-                >
+                <div class="select-title caption text-uppercase sidebar-filter">
                   侧边Images
                 </div>
               </v-flex>
@@ -59,19 +61,19 @@
             />
           </v-flex>
           <v-flex xs12>
-            <div class="text-xs-center body-2 text-uppercase">
-              <div class=" sidebar-filter">
+            <div>
+              <div class="select-title caption text-uppercase sidebar-filter">
                 主题模式
               </div>
 
-              <div>
+              <div class="d-flex justify-center">
                 <v-btn
                   :color="theme === 'dark' ? '' : 'light-green'"
                   class="mr-2"
                   fab
                   icon
                   small
-                  round
+                  rounded
                   cyan
                   active
                   @click.native="setTheme('light')"
@@ -84,7 +86,7 @@
                   fab
                   icon
                   small
-                  round
+                  rounded
                   @click.native="setTheme('dark')"
                 >
                   <v-icon>mdi-weather-night</v-icon>
@@ -164,5 +166,9 @@ export default {
 .v-avatar,
 .v-responsive {
   cursor: pointer;
+}
+.select-title {
+  text-align: center;
+  margin-top: 1rem;
 }
 </style>

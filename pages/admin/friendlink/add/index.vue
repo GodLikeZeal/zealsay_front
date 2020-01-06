@@ -24,7 +24,7 @@
               </template>
               <v-card>
                 <v-card-title>
-                  <no-ssr>
+                  <client-only>
                     <div style="width: 800px;height: 400px;">
                       <vueCropper
                         ref="cropper"
@@ -41,7 +41,7 @@
                         :img="option.img"
                       ></vueCropper>
                     </div>
-                  </no-ssr>
+                  </client-only>
                 </v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>

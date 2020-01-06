@@ -49,7 +49,7 @@ export default {
    */
   css: [
     'material-design-icons-iconfont/dist/material-design-icons.css',
-    'vuetify/dist/vuetify.min.css',
+    // 'vuetify/dist/vuetify.min.css',
     'chartist/dist/chartist.min.css',
     '@/assets/scss/styles/index.scss',
     '@/static/live2d/css/live2d.css'
@@ -171,6 +171,7 @@ export default {
   //   defaultAssets: {
   //     font: {
   //       family: 'Roboto'
+  //
   //     },
   //     icons: 'mdi'
   //   },

@@ -38,7 +38,7 @@
                       </template>
                       <v-card>
                         <v-card-title>
-                          <no-ssr>
+                          <client-only>
                             <div style="width: 800px;height: 400px;">
                               <vueCropper
                                 ref="cropper"
@@ -55,7 +55,7 @@
                                 :img="option.img"
                               ></vueCropper>
                             </div>
-                          </no-ssr>
+                          </client-only>
                         </v-card-title>
                         <v-card-actions>
                           <v-spacer></v-spacer>
@@ -156,7 +156,7 @@
           text="支持使用markdown语法"
         >
           <div id="editor" class="mavonEditor">
-            <no-ssr>
+            <client-only>
               <mavon-editor
                 ref="md"
                 v-model="form.contentMd"
@@ -167,7 +167,7 @@
                 @imgAdd="$imgAdd"
                 @imgDel="$imgDel"
               />
-            </no-ssr>
+            </client-only>
           </div>
         </material-card>
       </v-flex>

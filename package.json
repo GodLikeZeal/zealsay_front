@@ -46,7 +46,6 @@
     "qs": "^6.7.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "vue-avatar": "^2.1.7",
     "vue-chartist": "^2.2.1",
     "vue-cropper": "^0.4.9",
     "vue-perfect-scrollbar": "^0.1.0",

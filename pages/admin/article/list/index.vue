@@ -112,7 +112,6 @@
       :items="desserts"
       :total-items="pagination.totalItems"
       :loading="loading"
-      hide-actions
       select-all
       class="elevation-1"
     >

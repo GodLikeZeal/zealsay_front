@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-toolbar id="core-toolbar" flat prominent>
     <!--    <div class="v-toolbar-title">-->
     <!--      <v-toolbar-title class="tertiary&#45;&#45;text font-weight-light">-->
@@ -34,19 +34,21 @@
           offset-y
           transition="slide-y-transition"
         >
-          <router-link
-            slot="activator"
-            v-ripple
-            class="toolbar-items"
-            to="/dashboard"
-          >
-            <v-badge color="error" overlap>
-              <template slot="badge">
-                {{ notifications.length }}
-              </template>
-              <v-icon color="tertiary">mdi-bell</v-icon>
-            </v-badge>
-          </router-link>
+          <template v-slot:activator="{ on }">
+            <router-link
+              v-ripple
+              class="toolbar-items"
+              to="/dashboard"
+              v-on="on"
+            >
+              <v-badge color="error" overlap>
+                <template slot="badge">
+                  {{ notifications.length }}
+                </template>
+                <v-icon color="tertiary">mdi-bell</v-icon>
+              </v-badge>
+            </router-link>
+          </template>
           <v-card>
             <v-list dense>
               <v-list-tile
@@ -67,14 +69,16 @@
           offset-y
           transition="slide-y-transition"
         >
-          <v-btn slot="activator" flat icon class="toolbar-items">
-            <v-avatar size="35px">
-              <v-img :src="this.$auth.user.avatar" alt="avatar" />
-            </v-avatar>
-          </v-btn>
+          <template v-slot:activator="{ on }">
+            <v-btn text icon class="toolbar-items" v-on="on">
+              <v-avatar size="35px">
+                <v-img :src="avatar" alt="avatar" />
+              </v-avatar>
+            </v-btn>
+          </template>
           <v-card>
             <v-list dense>
-              <v-list-tile
+              <v-list-item
                 v-for="(item, index) in items"
                 :key="index"
                 :to="!item.href ? { name: item.name } : null"
@@ -85,13 +89,13 @@
                 rel="noopener"
                 @click="item.click"
               >
-                <v-list-tile-action v-if="item.icon">
+                <v-list-item-action v-if="item.icon">
                   <v-icon>{{ item.icon }}</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
             </v-list>
           </v-card>
         </v-menu>
@@ -119,6 +123,7 @@ export default {
     title: null,
     responsive: false,
     responsiveInput: false,
+    avatar: vm.$store.state.auth.user ? vm.$store.state.auth.user.avatar : '',
     items: [
       {
         icon: 'mdi-account',

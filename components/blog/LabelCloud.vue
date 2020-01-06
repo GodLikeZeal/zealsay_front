@@ -10,6 +10,7 @@
         small
         :color="label.outColor"
         text-color="white"
+        class="chip-label"
       >
         <v-avatar v-if="label.icon.startsWith('http')">
           <img :src="label.icon" alt="trevor" />
@@ -62,5 +63,8 @@ export default {
   margin: 0.5rem 1.25rem;
   font-size: small;
   width: inherit;
+}
+.chip-label {
+  margin: 0.2rem;
 }
 </style>

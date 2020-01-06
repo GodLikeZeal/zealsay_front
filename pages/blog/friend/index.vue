@@ -22,7 +22,7 @@
                         <v-layout fill-height wrap>
                           <v-flex xs12 flexbox>
                             <div
-                              class="top-color"
+                              class="top-color radius"
                               :style="{ backgroundColor: item.color }"
                             ></div>
                             <v-img
@@ -49,8 +49,7 @@
                                 {{ item.link }}
                               </p>
                               <v-btn
-                                class="foot-btn"
-                                block
+                                class="foot-btn d-flex justify-center"
                                 color="primary"
                                 target="_Blank"
                                 :href="item.link"
@@ -83,15 +82,15 @@
       </v-layout>
 
       <back-to-top :visibility-height="300" :back-position="0" />
-      <!-- 页脚 -->
-      <v-layout row>
-        <v-flex>
-          <div class="footer">
-            <blog-footer v-if="$route.name !== 'Maps'" />
-          </div>
-        </v-flex>
-      </v-layout>
     </v-container>
+    <!-- 页脚 -->
+    <v-layout row>
+      <v-flex>
+        <div class="footer">
+          <blog-footer v-if="$route.name !== 'Maps'" />
+        </div>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
@@ -234,5 +233,10 @@ export default {
 
 .center {
   margin: 0 auto;
+}
+.radius {
+  -webkit-border-radius: 0.1rem;
+  -moz-border-radius: 0.1rem;
+  border-radius: 0.1rem;
 }
 </style>

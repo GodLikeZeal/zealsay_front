@@ -1,51 +1,56 @@
-<template>
-  <v-toolbar color="primary" dark flat>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+  <v-toolbar color="primary" flat>
     <nuxt-link to="/">
-      <v-toolbar-title class="white--text">zealsay </v-toolbar-title>
+      <v-toolbar-title class="white--text title">zealsay </v-toolbar-title>
     </nuxt-link>
     <v-spacer></v-spacer>
 
-    <v-toolbar-items>
+    <v-toolbar-items class="white--text">
       <v-menu offset-y transition="slide-y-transition" class="hidden-md-and-up">
         <template v-slot:activator="{ on }">
-          <v-btn flat class="hidden-md-and-up" v-on="on">
+          <v-btn text class="hidden-md-and-up white--text" v-on="on">
             <v-icon>mdi-view-sequential</v-icon>
           </v-btn>
         </template>
         <v-list>
           <v-list-tile>
             <nuxt-link to="/">
-              <v-list-tile-title>主页</v-list-tile-title>
+              <v-list-tile-title class="white--text">主页</v-list-tile-title>
             </nuxt-link>
           </v-list-tile>
           <v-list-tile>
             <nuxt-link to="/blog/friend">
-              <v-list-tile-title>友链</v-list-tile-title>
+              <v-list-tile-title class="white--text">友链</v-list-tile-title>
             </nuxt-link>
           </v-list-tile>
           <v-list-tile>
             <nuxt-link to="/blog/about">
-              <v-list-tile-title>关于</v-list-tile-title>
+              <v-list-tile-title class="white--text">关于</v-list-tile-title>
             </nuxt-link>
           </v-list-tile>
         </v-list>
       </v-menu>
     </v-toolbar-items>
     <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn nuxt to="/" text>主页</v-btn>
+      <v-btn class="white--text" nuxt to="/" text>主页</v-btn>
       <v-menu offset-y transition="slide-y-transition">
+        <template v-slot:activator="{ on }">
+          <v-btn class="white--text" text v-on="on">
+            博客
+          </v-btn>
+        </template>
         <v-list>
-          <v-list-tile v-for="(item, index) in categorys" :key="index">
+          <v-list-item v-for="(item, index) in categorys" :key="index">
             <nuxt-link :to="'/blog/category/' + item.id">
-              <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+              <v-list-item-title>{{ item.name }}</v-list-item-title>
             </nuxt-link>
-          </v-list-tile>
+          </v-list-item>
         </v-list>
       </v-menu>
 
-      <v-btn nuxt to="/blog/friend" text>友链</v-btn>
-      <v-btn nuxt to="/blog/about" text>关于</v-btn>
-      <v-btn text>
+      <v-btn class="white--text" nuxt to="/blog/friend" text>友链</v-btn>
+      <v-btn class="white--text" nuxt to="/blog/about" text>关于</v-btn>
+      <v-btn class="white--text" text>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
@@ -57,14 +62,16 @@
           offset-y
           transition="slide-y-transition"
         >
-          <v-btn text icon class="toolbar-items">
-            <v-avatar size="35px">
-              <v-img :src="avatar" alt="avatar" />
-            </v-avatar>
-          </v-btn>
+          <template v-slot:activator="{ on }">
+            <v-btn text icon class="toolbar-items" v-on="on">
+              <v-avatar size="35px">
+                <v-img :src="avatar" alt="avatar" />
+              </v-avatar>
+            </v-btn>
+          </template>
           <v-card>
             <v-list dense>
-              <v-list-tile
+              <v-list-item
                 v-for="(item, index) in items"
                 :key="index"
                 :to="!item.href ? { name: item.name } : null"
@@ -75,13 +82,13 @@
                 rel="noopener"
                 @click="item.click"
               >
-                <v-list-tile-action v-if="item.icon">
+                <v-list-item-action v-if="item.icon">
                   <v-icon>{{ item.icon }}</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
             </v-list>
           </v-card>
         </v-menu>

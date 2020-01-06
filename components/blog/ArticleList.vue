@@ -25,7 +25,7 @@
                   {{ item.categoryName }}
                 </div>
                 <h4 class="headline">{{ item.title }}</h4>
-                <div class="subheading">
+                <div class="subtitle-1">
                   {{ item.subheading }}
                   <a :href="'/blog/' + item.id" target="_Blank">阅读更多…</a>
                 </div>
@@ -38,6 +38,7 @@
                   <v-chip
                     v-for="(label, index) in item.label.split(',')"
                     :key="index"
+                    class="chip-label"
                     :color="colors[parseInt((label.length + 6) % 6)]"
                     text-color="white"
                   >
@@ -104,4 +105,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.chip-label {
+  margin: 0.3rem;
+}
+</style>

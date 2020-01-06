@@ -57,12 +57,12 @@
     <v-data-table
       v-model="selected"
       :headers="headers"
-      :pagination.sync="pagination"
+      :page.sync="pagination.page"
+      :items-per-page="pagination.rowsPerPage"
       :items="desserts"
-      :total-items="pagination.totalItems"
-      :loading="loading"
-      hide-actions
-      select-all
+      :server-items-length="pagination.totalItems"
+      show-select
+      hide-default-footer
       class="elevation-1"
     >
       <template v-slot:no-data>
@@ -71,149 +71,99 @@
           已经找遍了，再怎么找也找不到啦！
         </p>
       </template>
-      <template v-slot:headers="props">
-        <tr>
-          <th>
-            <v-checkbox
-              :input-value="props.all"
-              :indeterminate="props.indeterminate"
-              primary
-              hide-details
-              @click.stop="toggleAll"
-            ></v-checkbox>
-          </th>
-          <th
-            v-for="header in props.headers"
-            :key="header.text"
-            :class="[
-              'column sortable',
-              pagination.descending ? 'desc' : 'asc',
-              header.value === pagination.sortBy ? 'active' : ''
-            ]"
-            @click="changeSort(header.value)"
-          >
-            <v-icon small>arrow_upward</v-icon>
-            {{ header.text }}
-          </th>
-        </tr>
+      <template v-slot:item.avatar="{ item }">
+        <v-avatar size="32px" color="grey lighten-4">
+          <img :src="item.avatar" alt="avatar" />
+        </v-avatar>
       </template>
-      <template slot="items" slot-scope="props">
-        <tr :active="props.selected">
-          <td class="text-xs-right" @click="props.selected = !props.selected">
-            <v-checkbox
-              :input-value="props.selected"
-              primary
-              hide-details
-            ></v-checkbox>
-          </td>
-          <td class="text-xs-right">
-            <v-avatar size="32px" color="grey lighten-4">
-              <v-img
-                :lazy-src="props.item.avatar"
-                :src="props.item.avatar"
-                alt="avatar"
-              ></v-img>
-            </v-avatar>
-          </td>
-          <td class="text-xs-right">{{ props.item.username }}</td>
-          <td class="text-xs-right">{{ props.item.name }}</td>
-          <td class="text-xs-right">
-            <img
-              v-if="props.item.sex == 1"
-              width="24px"
-              src="@/static/image/sex/boy.png"
-            />
-            <img
-              v-if="props.item.sex == 0"
-              width="24px"
-              src="@/static/image/sex/girl.png"
-            />
-          </td>
-          <td class="text-xs-right">{{ props.item.age }}</td>
-          <td class="text-xs-right">{{ props.item.phoneNumber }}</td>
-          <td class="text-xs-right">{{ props.item.email }}</td>
-          <td class="text-xs-right">
-            <span v-if="props.item.status == 'NORMAL'">
-              正常<v-icon color="success" small
-                >mdi-emoticon-excited-outline</v-icon
+      <template v-slot:item.sex="{ item }">
+        <img
+          v-if="item.sex == 1"
+          width="24px"
+          src="@/static/image/sex/boy.png"
+        />
+        <img
+          v-if="item.sex == 0"
+          width="24px"
+          src="@/static/image/sex/girl.png"
+        />
+      </template>
+      <template v-slot:item.status="{ item }">
+        <span v-if="item.status == 'NORMAL'">
+          正常<v-icon color="success" small
+            >mdi-emoticon-excited-outline</v-icon
+          >
+        </span>
+        <span v-if="item.status == 'DISABLED'">
+          封禁<v-icon color="error" small>mdi-emoticon-devil-outline</v-icon>
+        </span>
+        <span v-if="item.status == 'LOCK'">
+          锁定<v-icon color="warning" small>mdi-emoticon-dead-outline</v-icon>
+        </span>
+      </template>
+      <template v-slot:item.command="{ item }">
+        <v-layout justify-center class="mb-2">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                icon
+                text
+                color="primary"
+                title="详情"
+                v-on="on"
+                @click="handleInfo(item)"
               >
-            </span>
-            <span v-if="props.item.status == 'DISABLED'">
-              封禁<v-icon color="error" small
-                >mdi-emoticon-devil-outline</v-icon
+                <v-icon>portrait</v-icon>
+              </v-btn>
+            </template>
+            <span>详情</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                icon
+                text
+                color="primary"
+                title="编辑"
+                v-on="on"
+                @click="handleEdit(item)"
               >
-            </span>
-            <span v-if="props.item.status == 'LOCK'">
-              锁定<v-icon color="warning" small
-                >mdi-emoticon-dead-outline</v-icon
+                <v-icon>create</v-icon>
+              </v-btn>
+            </template>
+            <span>编辑</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                icon
+                text
+                color="primary"
+                title="解封"
+                v-on="on"
+                @click="handleUnsealing(item)"
               >
-            </span>
-          </td>
-          <td class="text-xs-right">
-            <v-layout justify-center class="mb-2">
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    icon
-                    flat
-                    color="primary"
-                    title="详情"
-                    v-on="on"
-                    @click="handleInfo(props.item)"
-                  >
-                    <v-icon>portrait</v-icon>
-                  </v-btn>
-                </template>
-                <span>详情</span>
-              </v-tooltip>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    icon
-                    flat
-                    color="primary"
-                    title="编辑"
-                    v-on="on"
-                    @click="handleEdit(props.item)"
-                  >
-                    <v-icon>create</v-icon>
-                  </v-btn>
-                </template>
-                <span>编辑</span>
-              </v-tooltip>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    icon
-                    flat
-                    color="primary"
-                    title="解封"
-                    v-on="on"
-                    @click="handleUnsealing(props.item)"
-                  >
-                    <v-icon>how_to_reg</v-icon>
-                  </v-btn>
-                </template>
-                <span>解封</span>
-              </v-tooltip>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    icon
-                    flat
-                    color="primary"
-                    title="封禁"
-                    v-on="on"
-                    @click="handleDisabled(props.item)"
-                  >
-                    <v-icon>remove_circle</v-icon>
-                  </v-btn>
-                </template>
-                <span>封禁</span>
-              </v-tooltip>
-            </v-layout>
-          </td>
-        </tr>
+                <v-icon>how_to_reg</v-icon>
+              </v-btn>
+            </template>
+            <span>解封</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                icon
+                text
+                color="primary"
+                title="封禁"
+                v-on="on"
+                @click="handleDisabled(item)"
+              >
+                <v-icon>remove_circle</v-icon>
+              </v-btn>
+            </template>
+            <span>封禁</span>
+          </v-tooltip>
+        </v-layout>
       </template>
     </v-data-table>
     <div class="pagination text-md-right">
@@ -261,9 +211,9 @@ export default {
         { text: '性别', value: 'sex' },
         { text: '年龄', value: 'age' },
         { text: '手机号', value: 'phoneNumber' },
-        { text: '邮箱', value: 'email' },
+        { text: '邮箱', value: 'email', align: 'center' },
         { text: '状态', value: 'status' },
-        { text: '操作', value: '' }
+        { text: '操作', value: 'command', align: 'center' }
       ],
       desserts: [],
       pagination: {
