@@ -59,10 +59,10 @@
                         </v-card-title>
                         <v-card-actions>
                           <v-spacer></v-spacer>
-                          <v-btn color="darken-1" outline @click="cropCancel"
+                          <v-btn color="darken-1" outlined @click="cropCancel"
                             >返回</v-btn
                           >
-                          <v-btn color="primary" outline @click="cropSubmit"
+                          <v-btn color="primary" outlined @click="cropSubmit"
                             >裁剪</v-btn
                           >
                         </v-card-actions>
@@ -85,8 +85,8 @@
                     </v-flex>
                     <v-flex xs12 md12>
                       <v-radio-group v-model="form.status" row label="状 态">
-                        <v-radio label="草稿" value="DRAFT"></v-radio>
-                        <v-radio label="发布" value="FORMAL"></v-radio>
+                        <v-radio label="草 稿" value="DRAFT"></v-radio>
+                        <v-radio label="发 布" value="FORMAL"></v-radio>
                       </v-radio-group>
                     </v-flex>
                     <v-flex xs12 md12>
@@ -133,9 +133,9 @@
                     required
                   />
                 </v-flex>
-                <v-flex xs12 text-xs-center>
+                <v-flex xs12 text-center>
                   <v-btn
-                    round
+                    rounded
                     class="font-weight-light"
                     color="primary"
                     :loading="loading"

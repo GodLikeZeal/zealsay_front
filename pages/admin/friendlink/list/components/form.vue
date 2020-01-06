@@ -121,7 +121,7 @@ export default {
   name: 'Edit',
   props: {
     alert: {
-      type: Object,
+      type: Boolean,
       default: function() {
         return {}
       }

@@ -36,7 +36,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn outline color="darken-1" @click="handleCancel">取消</v-btn>
+        <v-btn outlined color="darken-1" @click="handleCancel">取消</v-btn>
         <v-btn
           outlined
           :loading="loading"

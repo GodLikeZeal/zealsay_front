@@ -20,7 +20,6 @@
     "vue-sweetalert2": "^2.1.5"
   },
   "devDependencies": {
-    "@mdi/font": "^3.8.95",
     "@nuxtjs/eslint-config": "^0.0.1",
     "@nuxtjs/vuetify": "^1.9.1",
     "babel-eslint": "^10.0.2",

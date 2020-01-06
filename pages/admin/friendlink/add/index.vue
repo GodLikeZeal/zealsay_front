@@ -3,7 +3,7 @@
     <v-layout justify-center wrap>
       <v-flex xs12 md10>
         <material-card class="v-card-profile">
-          <v-card-text class="text-xs-center">
+          <v-card-text class="text-center">
             <v-dialog v-model="showCropper" persistent width="800px">
               <template v-slot:activator="{ on }">
                 <label for="uploads">
@@ -45,10 +45,10 @@
                 </v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="darken-1" outline @click="cropCancel"
+                  <v-btn color="darken-1" outlined @click="cropCancel"
                     >返回</v-btn
                   >
-                  <v-btn color="primary" outline @click="cropSubmit"
+                  <v-btn color="primary" outlined @click="cropSubmit"
                     >裁剪</v-btn
                   >
                 </v-card-actions>
@@ -110,9 +110,9 @@
                     value="一个喜欢安静的程序员."
                   />
                 </v-flex>
-                <v-flex xs12 text-xs-center>
+                <v-flex xs12 text-center>
                   <v-btn
-                    round
+                    rounded
                     class="mx-0 font-weight-light"
                     color="primary"
                     :loading="loading"

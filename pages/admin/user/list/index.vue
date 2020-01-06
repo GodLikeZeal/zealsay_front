@@ -73,7 +73,7 @@
       </template>
       <template v-slot:item.avatar="{ item }">
         <v-avatar size="32px" color="grey lighten-4">
-          <img :src="item.avatar" alt="avatar" />
+          <img :src="item.avatar" :lazy-src="item.avatar" alt="avatar" />
         </v-avatar>
       </template>
       <template v-slot:item.sex="{ item }">
@@ -166,7 +166,7 @@
         </v-layout>
       </template>
     </v-data-table>
-    <div class="pagination text-md-right">
+    <div class="pagination">
       <v-pagination
         v-model="pagination.page"
         circle

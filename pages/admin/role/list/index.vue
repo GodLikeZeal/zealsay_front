@@ -185,7 +185,7 @@ export default {
         })
     },
     refresh(obj) {
-      getRolePageList(obj).then(res => {
+      this.$axios.$request(getRolePageList(obj)).then(res => {
         this.desserts = res.data.records
         this.pagination.page = res.data.currentPage
         this.pagination.rowsPerPage = res.data.pageSize
