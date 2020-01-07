@@ -36,9 +36,9 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn outline color="darken-1" @click="handleCancel">取消</v-btn>
+        <v-btn outlined color="darken-1" @click="handleCancel">取消</v-btn>
         <v-btn
-          outline
+          outlined
           :loading="loading"
           color="primary darken-1"
           @click="handleSubmit"
@@ -57,7 +57,7 @@ export default {
   name: 'Add',
   props: {
     alert: {
-      type: Object,
+      type: Boolean,
       default: function() {
         return {}
       }

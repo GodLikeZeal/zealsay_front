@@ -1,7 +1,7 @@
 export default {
   drawer: true,
   slider: true,
-  theme: 'light',
+  dark: false,
   color: 'success',
   image: 'https://pan.zealsay.com/slider-1.jpg'
 }

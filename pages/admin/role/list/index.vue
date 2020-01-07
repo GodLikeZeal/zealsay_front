@@ -29,11 +29,12 @@
     <v-data-table
       v-model="selected"
       :headers="headers"
-      :pagination.sync="pagination"
+      :page.sync="pagination.page"
+      :items-per-page="pagination.rowsPerPage"
       :items="desserts"
-      :loading="loading"
-      hide-actions
-      select-all
+      :server-items-length="pagination.totalItems"
+      show-select
+      hide-default-footer
       class="elevation-1"
     >
       <template v-slot:no-data>
@@ -41,67 +42,27 @@
           已经找遍了，再怎么找也找不到啦！
         </p>
       </template>
-      <template v-slot:headers="props">
-        <tr>
-          <th>
-            <v-checkbox
-              :input-value="props.all"
-              :indeterminate="props.indeterminate"
-              primary
-              hide-details
-              @click.stop="toggleAll"
-            ></v-checkbox>
-          </th>
-          <th
-            v-for="header in props.headers"
-            :key="header.text"
-            :class="[
-              'column sortable',
-              pagination.descending ? 'desc' : 'asc',
-              header.value === pagination.sortBy ? 'active' : ''
-            ]"
-            @click="changeSort(header.value)"
+      <template v-slot:item.command="{ item }">
+        <v-layout justify-center class="mb-2">
+          <v-btn
+            icon
+            text
+            color="primary"
+            title="编辑"
+            @click="handleEdit(item)"
           >
-            <v-icon small>arrow_upward</v-icon>
-            {{ header.text }}
-          </th>
-        </tr>
-      </template>
-      <template slot="items" slot-scope="props">
-        <tr :active="props.selected">
-          <td class="text-xs-center" @click="props.selected = !props.selected">
-            <v-checkbox
-              :input-value="props.selected"
-              primary
-              hide-details
-            ></v-checkbox>
-          </td>
-          <td class="text-xs-center">{{ props.item.name }}</td>
-          <td class="text-xs-center">{{ props.item.value }}</td>
-          <td class="text-xs-center">{{ props.item.description }}</td>
-          <td class="text-xs-center">
-            <v-layout justify-center class="mb-2">
-              <v-btn
-                icon
-                flat
-                color="primary"
-                title="编辑"
-                @click="handleEdit(props.item)"
-              >
-                <v-icon>create</v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                flat
-                color="primary"
-                title="删除"
-                @click="handleDelete(props.item)"
-              >
-                <v-icon>remove_circle</v-icon>
-              </v-btn>
-            </v-layout>
-          </td>
-        </tr>
+            <v-icon>create</v-icon>
+          </v-btn>
+          <v-btn
+            icon
+            text
+            color="primary"
+            title="删除"
+            @click="handleDelete(item)"
+          >
+            <v-icon>remove_circle</v-icon>
+          </v-btn>
+        </v-layout>
       </template>
     </v-data-table>
     <div class="pagination text-md-right">
@@ -146,7 +107,7 @@ export default {
         { text: '名称', value: 'name' },
         { text: 'VALUE', value: 'value' },
         { text: '功能描述', value: 'description' },
-        { text: '操作', value: '' }
+        { text: '操作', value: 'command' }
       ],
       desserts: [],
       pagination: {
@@ -224,7 +185,7 @@ export default {
         })
     },
     refresh(obj) {
-      getRolePageList(obj).then(res => {
+      this.$axios.$request(getRolePageList(obj)).then(res => {
         this.desserts = res.data.records
         this.pagination.page = res.data.currentPage
         this.pagination.rowsPerPage = res.data.pageSize

@@ -105,7 +105,10 @@
                           placeholder="登录密码"
                           type="password"
                         ></v-text-field>
-                        <a nuxt href="register">注册账号</a> OR
+                        <a nuxt class="primary--text" href="register"
+                          >注册账号</a
+                        >
+                        OR
                         <a id="lost" class="right">忘记密码？</a>
                         <transition name="fade">
                           <p
@@ -135,7 +138,11 @@
                       </v-btn>
                       <v-spacer></v-spacer>
 
-                      <v-btn id="submit" depressed color="primary"
+                      <v-btn
+                        id="submit"
+                        depressed
+                        class="btn-primary"
+                        color="primary"
                         >登 录
                       </v-btn>
                     </v-card-actions>
@@ -623,5 +630,12 @@ function windowResizeHandler() {
 }
 .form-container {
   background: none;
+}
+.btn-primary {
+  background-color: #1976d2 !important;
+  border-color: #1976d2 !important;
+}
+.primary--text {
+  color: #1976d2 !important;
 }
 </style>

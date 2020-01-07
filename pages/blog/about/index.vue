@@ -15,7 +15,7 @@
                   />
                 </v-avatar>
               </h1>
-              <div class="row center">
+              <div class="justify-center center">
                 <span class="white--text font-weight-bold text-detail"
                   >zeal</span
                 >
@@ -30,7 +30,7 @@
                   >天蝎座</span
                 >
               </div>
-              <h5 class="white--text font-weight-medium text-detail">
+              <h5 class="white--text font-weight-medium">
                 一个喜欢安静，追求技术的全栈程序猿。
               </h5>
               <!--              <div>-->
@@ -246,15 +246,15 @@
       </v-layout>
 
       <back-to-top :visibility-height="300" :back-position="0" />
-      <!-- 页脚 -->
-      <v-layout row>
-        <v-flex>
-          <div class="footer">
-            <blog-footer v-if="$route.name !== 'Maps'" />
-          </div>
-        </v-flex>
-      </v-layout>
     </v-container>
+    <!-- 页脚 -->
+    <v-layout row>
+      <v-flex>
+        <div class="footer">
+          <blog-footer v-if="$route.name !== 'Maps'" />
+        </div>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
@@ -324,8 +324,5 @@ export default {
 }
 .center {
   margin: 2rem auto 1rem auto;
-}
-.text-detail {
-  margin: 0 1.5rem;
 }
 </style>

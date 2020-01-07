@@ -1,23 +1,21 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-footer id="blog-footer" absolute>
+  <v-footer id="blog-footer" padless>
     <v-card
       flat
       tile
-      class="green accent-4  white--text text-xs-center"
+      class="primary accent-4  white--text text-center"
       width="100%"
     >
       <live2d></live2d>
       <v-card-text>
-        <v-layout justify-center>
-          <v-list-tile avatar>
-            <v-list-tile-avatar color="white">
-              <v-img :src="logo" height="34" contain />
-            </v-list-tile-avatar>
-            <v-list-tile-title class="title">
-              zealsay
-            </v-list-tile-title>
-          </v-list-tile>
-        </v-layout>
+        <v-list-item-title avatar>
+          <v-list-item-avatar color="white" class="avatar">
+            <v-img :src="logo" height="34" contain />
+          </v-list-item-avatar>
+          <v-list-item-title class="title white--text">
+            zealsay
+          </v-list-item-title>
+        </v-list-item-title>
       </v-card-text>
       <v-card-text>
         <i v-for="icon in icons" :key="icon.id">
@@ -40,9 +38,9 @@
       </v-card-text>
 
       <v-card-text class="white--text" style="display: block">
-        <blockquote class="blockquote">
+        <p class="title font-weight-light">
           勇敢且善良.
-        </blockquote>
+        </p>
       </v-card-text>
 
       <v-divider></v-divider>
@@ -89,8 +87,7 @@ export default {
 </script>
 
 <style scoped>
-/*#core-footer {*/
-/*  z-index: 0;*/
-/*  height: 48px !important;*/
-/*}*/
+.avatar {
+  margin-right: 0 !important;
+}
 </style>

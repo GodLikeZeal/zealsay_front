@@ -31,10 +31,8 @@
             v-model="startmenu"
             :close-on-content-click="false"
             :nudge-right="40"
-            lazy
             transition="scale-transition"
             offset-y
-            full-width
             min-width="290px"
           >
             <template v-slot:activator="{ on }">
@@ -58,10 +56,8 @@
             v-model="endmenu"
             :close-on-content-click="false"
             :nudge-right="40"
-            lazy
             transition="scale-transition"
             offset-y
-            full-width
             min-width="290px"
           >
             <template v-slot:activator="{ on }">
@@ -108,166 +104,129 @@
     <v-data-table
       v-model="selected"
       :headers="headers"
-      :pagination.sync="pagination"
+      :page.sync="pagination.page"
+      :items-per-page="pagination.rowsPerPage"
       :items="desserts"
-      :total-items="pagination.totalItems"
-      :loading="loading"
-      hide-actions
-      select-all
+      :server-items-length="pagination.totalItems"
+      show-select
+      hide-default-footer
       class="elevation-1"
     >
-      <template v-slot:headers="props">
-        <tr>
-          <th>
-            <v-checkbox
-              :input-value="props.all"
-              :indeterminate="props.indeterminate"
-              primary
-              hide-details
-              @click.stop="toggleAll"
-            ></v-checkbox>
-          </th>
-          <th
-            v-for="header in props.headers"
-            :key="header.text"
-            :class="[
-              'column sortable',
-              pagination.descending ? 'desc' : 'asc',
-              header.value === pagination.sortBy ? 'active' : '',
-              header.class
-            ]"
-            @click="changeSort(header.value)"
-          >
-            <v-icon small>arrow_upward</v-icon>
-            {{ header.text }}
-          </th>
-        </tr>
-      </template>
       <template v-slot:no-data>
         <p class="text-md-center teal--text">
           <v-icon>sentiment_satisfied_alt</v-icon>
           已经找遍了，再怎么找也找不到啦！
         </p>
       </template>
-      <template slot="items" slot-scope="props">
-        <tr :active="props.selected">
-          <td class="text-xs-right" @click="props.selected = !props.selected">
-            <v-checkbox
-              :input-value="props.selected"
-              primary
-              hide-details
-            ></v-checkbox>
-          </td>
-          <td class="text-xs-right">
-            <v-img
-              height="32px"
-              width="32px"
-              aspect-ratio="1.0"
-              :lazy-src="props.item.coverImage"
-              :src="props.item.coverImage"
-              alt="avatar"
-            ></v-img>
-          </td>
-          <td class="text-xs-right text-truncate">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <div class="limit-width" v-on="on">{{ props.item.title }}</div>
-              </template>
-              {{ props.item.title }}
-            </v-tooltip>
-          </td>
-          <td class="text-xs-right text-truncate">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <div class="limit-width" v-on="on">
-                  {{ props.item.subheading }}
-                </div>
-              </template>
-              {{ props.item.subheading }}
-            </v-tooltip>
-          </td>
-          <td class="text-xs-right col">
-            <span v-if="props.item.status == 'FORMAL'" class="text-success">
-              发布 <v-icon color="success" small>important_devices</v-icon>
-            </span>
-            <span v-if="props.item.status == 'DRAFT'" class="text-warning">
-              草稿 <v-icon color="warning" small>speaker_notes</v-icon>
-            </span>
-            <span v-if="props.item.status == 'DOWN'" class="text-error">
-              下架<v-icon color="error" small>trending_down</v-icon>
-            </span>
-          </td>
-          <td class="text-xs-right col">
-            <span v-if="props.item.openness == 'ALL'" class="text-success">
-              所有人 <v-icon color="success" small>visibility</v-icon>
-            </span>
-            <span v-if="props.item.openness == 'SELFONLY'" class="text-info">
-              仅自己 <v-icon color="info" small>visibility_off</v-icon>
-            </span>
-          </td>
-          <td class="text-xs-right col">
-            <div class="limit-width">
-              <v-chip
-                v-for="label in props.item.label
-                  ? props.item.label.split(',')
-                  : []"
-                :key="label"
-                :color="color[parseInt((label.length + 6) % 6)]"
-                small
-              >
-                {{ label }}
-              </v-chip>
+      <template v-slot:item.coverImage="{ item }">
+        <v-img
+          height="32px"
+          width="32px"
+          aspect-ratio="1.0"
+          :lazy-src="item.coverImage"
+          :src="item.coverImage"
+          alt="avatar"
+        ></v-img>
+      </template>
+      <template v-slot:item.title="{ item }">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <div class="limit-width" v-on="on">{{ item.title }}</div>
+          </template>
+          {{ item.title }}
+        </v-tooltip>
+      </template>
+      <template v-slot:item.subheading="{ item }">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <div class="limit-width" v-on="on">
+              {{ item.subheading }}
             </div>
-          </td>
-          <td class="text-xs-right">{{ props.item.categoryName }}</td>
-          <td class="text-xs-right">{{ props.item.authorName }}</td>
-          <td class="text-xs-right col">{{ props.item.createDate }}</td>
-          <td class="text-xs-right">
-            <v-layout justify-center class="mb-2">
-              <v-btn
-                nuxt
-                icon
-                flat
-                color="primary"
-                title="预览"
-                :to="'/blog/' + props.item.id"
-                target="_Blank"
-              >
-                <v-icon>portrait</v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                flat
-                color="primary"
-                title="编辑"
-                @click="handleEdit(props.item)"
-              >
-                <v-icon>create</v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                flat
-                color="primary"
-                title="上架"
-                @click="handleUp(props.item)"
-              >
-                <v-icon>trending_up</v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                flat
-                color="primary"
-                title="下架"
-                @click="handleDown(props.item)"
-              >
-                <v-icon>trending_down</v-icon>
-              </v-btn>
-            </v-layout>
-          </td>
-        </tr>
+          </template>
+          {{ item.subheading }}
+        </v-tooltip>
+      </template>
+      <template v-slot:item.status="{ item }">
+        <span v-if="item.status == 'FORMAL'" class="text-success">
+          发布 <v-icon color="success" small>important_devices</v-icon>
+        </span>
+        <span v-if="item.status == 'DRAFT'" class="text-warning">
+          草稿 <v-icon color="warning" small>speaker_notes</v-icon>
+        </span>
+        <span v-if="item.status == 'DOWN'" class="text-error">
+          下架<v-icon color="error" small>trending_down</v-icon>
+        </span>
+      </template>
+      <template v-slot:item.openness="{ item }">
+        <span v-if="item.openness == 'ALL'" class="text-success">
+          所有人 <v-icon color="success" small>visibility</v-icon>
+        </span>
+        <span v-if="item.openness == 'SELFONLY'" class="text-info">
+          仅自己 <v-icon color="info" small>visibility_off</v-icon>
+        </span>
+      </template>
+      <template v-slot:item.label="{ item }">
+        <div class="limit-width">
+          <v-chip
+            v-for="label in item.label ? item.label.split(',') : []"
+            :key="label"
+            :color="color[parseInt((label.length + 6) % 6)]"
+            small
+          >
+            {{ label }}
+          </v-chip>
+        </div>
+      </template>
+      <template v-slot:item.label="{ item }">
+        <div class="limit-width">
+          <v-chip
+            v-for="label in item.label ? item.label.split(',') : []"
+            :key="label"
+            :color="color[parseInt((label.length + 6) % 6)]"
+            small
+          >
+            {{ label }}
+          </v-chip>
+        </div>
+      </template>
+      <template v-slot:item.command="{ item }">
+        <v-layout justify-center class="mb-2">
+          <v-btn
+            nuxt
+            icon
+            text
+            color="primary"
+            title="预览"
+            :to="'/blog/' + item.id"
+            target="_Blank"
+          >
+            <v-icon>portrait</v-icon>
+          </v-btn>
+          <v-btn
+            icon
+            text
+            color="primary"
+            title="编辑"
+            @click="handleEdit(item)"
+          >
+            <v-icon>create</v-icon>
+          </v-btn>
+          <v-btn icon text color="primary" title="上架" @click="handleUp(item)">
+            <v-icon>trending_up</v-icon>
+          </v-btn>
+          <v-btn
+            icon
+            text
+            color="primary"
+            title="下架"
+            @click="handleDown(item)"
+          >
+            <v-icon>trending_down</v-icon>
+          </v-btn>
+        </v-layout>
       </template>
     </v-data-table>
-    <div class="pagination text-md-right">
+    <div class="pagination">
       <v-pagination
         v-model="pagination.page"
         circle
@@ -304,7 +263,7 @@ export default {
         { text: '分类目录', value: 'categoryName' },
         { text: '作者', value: 'authorName' },
         { text: '创建时间', value: 'createDate' },
-        { text: '操作', value: '' }
+        { text: '操作', value: 'command' }
       ],
       desserts: [],
       pagination: {
@@ -423,7 +382,7 @@ export default {
       }
     },
     handleAdd() {
-      this.$router.push({ path: '/article/add' })
+      this.$router.push({ path: '/admin/article/add' })
     },
     handleEdit(row) {
       this.formVisible = true
@@ -554,6 +513,6 @@ export default {
   width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
-  word-wrap: wrap;
+  word-wrap: initial;
 }
 </style>

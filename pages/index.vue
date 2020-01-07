@@ -1,7 +1,7 @@
 <template>
   <div id="index">
     <!-- header -->
-    <v-card color="primary" height="450">
+    <v-card tile flat color="primary" height="450">
       <blog-nav :category="categorys"></blog-nav>
       <blog-motto :hitokoto="motto"></blog-motto>
     </v-card>
@@ -34,15 +34,15 @@
       </v-layout>
 
       <back-to-top :visibility-height="300" :back-position="0" />
-      <!-- 页脚 -->
-      <v-layout row>
-        <v-flex>
-          <div class="footer">
-            <blog-footer v-if="$route.name !== 'Maps'" />
-          </div>
-        </v-flex>
-      </v-layout>
     </v-container>
+    <!-- 页脚 -->
+    <v-layout row>
+      <v-flex>
+        <div class="footer">
+          <blog-footer v-if="$route.name !== 'Maps'" />
+        </div>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
@@ -187,10 +187,6 @@ export default {
 .card {
   margin: 1.5em;
   border-radius: 0.5em;
-}
-
-.footer {
-  margin-top: 300px;
 }
 
 .left_list_header {

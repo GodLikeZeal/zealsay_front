@@ -65,7 +65,7 @@ export default {
   name: 'Add',
   props: {
     alert: {
-      type: Object,
+      type: Boolean,
       default: function() {
         return {}
       }

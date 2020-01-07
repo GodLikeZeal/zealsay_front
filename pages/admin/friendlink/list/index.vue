@@ -13,11 +13,12 @@
     <v-data-table
       v-model="selected"
       :headers="headers"
-      :pagination.sync="pagination"
+      :page.sync="pagination.page"
+      :items-per-page="pagination.rowsPerPage"
       :items="desserts"
-      :loading="loading"
-      hide-actions
-      select-all
+      :server-items-length="pagination.totalItems"
+      show-select
+      hide-default-footer
       class="elevation-1"
     >
       <template v-slot:no-data>
@@ -25,77 +26,36 @@
           已经找遍了，再怎么找也找不到啦！
         </p>
       </template>
-      <template v-slot:headers="props">
-        <tr>
-          <th>
-            <v-checkbox
-              :input-value="props.all"
-              :indeterminate="props.indeterminate"
-              primary
-              hide-details
-              @click.stop="toggleAll"
-            ></v-checkbox>
-          </th>
-          <th
-            v-for="header in props.headers"
-            :key="header.text"
-            :class="[
-              'column sortable',
-              pagination.descending ? 'desc' : 'asc',
-              header.value === pagination.sortBy ? 'active' : ''
-            ]"
-            @click="changeSort(header.value)"
-          >
-            <v-icon small>arrow_upward</v-icon>
-            {{ header.text }}
-          </th>
-        </tr>
+      <template v-slot:item.avatar="{ item }">
+        <v-avatar size="32px" color="grey lighten-4">
+          <v-img
+            :lazy-src="item.avatar"
+            :src="item.avatar"
+            alt="avatar"
+          ></v-img>
+        </v-avatar>
       </template>
-      <template slot="items" slot-scope="props">
-        <tr :active="props.selected">
-          <td class="text-xs-center" @click="props.selected = !props.selected">
-            <v-checkbox
-              :input-value="props.selected"
-              primary
-              hide-details
-            ></v-checkbox>
-          </td>
-          <td class="text-xs-center">
-            <v-avatar size="32px" color="grey lighten-4">
-              <v-img
-                :lazy-src="props.item.avatar"
-                :src="props.item.avatar"
-                alt="avatar"
-              ></v-img>
-            </v-avatar>
-          </td>
-          <td class="text-xs-center">{{ props.item.friendName }}</td>
-          <td class="text-xs-center">{{ props.item.link }}</td>
-          <td class="text-xs-center">{{ props.item.friendInfo }}</td>
-          <td class="text-xs-center">{{ props.item.color }}</td>
-          <td class="text-xs-center">
-            <v-layout justify-center class="mb-2">
-              <v-btn
-                icon
-                flat
-                color="primary"
-                title="编辑"
-                @click="handleEdit(props.item)"
-              >
-                <v-icon>create</v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                flat
-                color="primary"
-                title="删除"
-                @click="handleDelete(props.item)"
-              >
-                <v-icon>remove_circle</v-icon>
-              </v-btn>
-            </v-layout>
-          </td>
-        </tr>
+      <template v-slot:item.command="{ item }">
+        <v-layout justify-center class="mb-2">
+          <v-btn
+            icon
+            text
+            color="primary"
+            title="编辑"
+            @click="handleEdit(item)"
+          >
+            <v-icon>create</v-icon>
+          </v-btn>
+          <v-btn
+            icon
+            text
+            color="primary"
+            title="删除"
+            @click="handleDelete(item)"
+          >
+            <v-icon>remove_circle</v-icon>
+          </v-btn>
+        </v-layout>
       </template>
     </v-data-table>
     <div class="pagination text-md-right">
@@ -132,10 +92,10 @@ export default {
       headers: [
         { text: '头像', value: 'avatar' },
         { text: '名称', value: 'friendName' },
-        { text: '链接', value: 'link' },
-        { text: '介绍', value: 'friendInfo' },
+        { text: '链接', value: 'link', align: 'center' },
+        { text: '介绍', value: 'friendInfo', align: 'center' },
         { text: '风格', value: 'color' },
-        { text: '操作', value: '' }
+        { text: '操作', value: 'command', align: 'center' }
       ],
       desserts: [],
       pagination: {

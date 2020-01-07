@@ -38,7 +38,7 @@
                       </template>
                       <v-card>
                         <v-card-title>
-                          <no-ssr>
+                          <client-only>
                             <div style="width: 800px;height: 400px;">
                               <vueCropper
                                 ref="cropper"
@@ -55,14 +55,14 @@
                                 :img="option.img"
                               ></vueCropper>
                             </div>
-                          </no-ssr>
+                          </client-only>
                         </v-card-title>
                         <v-card-actions>
                           <v-spacer></v-spacer>
-                          <v-btn color="darken-1" outline @click="cropCancel"
+                          <v-btn color="darken-1" outlined @click="cropCancel"
                             >返回</v-btn
                           >
-                          <v-btn color="primary" outline @click="cropSubmit"
+                          <v-btn color="primary" outlined @click="cropSubmit"
                             >裁剪</v-btn
                           >
                         </v-card-actions>
@@ -85,8 +85,8 @@
                     </v-flex>
                     <v-flex xs12 md12>
                       <v-radio-group v-model="form.status" row label="状 态">
-                        <v-radio label="草稿" value="DRAFT"></v-radio>
-                        <v-radio label="发布" value="FORMAL"></v-radio>
+                        <v-radio label="草 稿" value="DRAFT"></v-radio>
+                        <v-radio label="发 布" value="FORMAL"></v-radio>
                       </v-radio-group>
                     </v-flex>
                     <v-flex xs12 md12>
@@ -133,9 +133,9 @@
                     required
                   />
                 </v-flex>
-                <v-flex xs12 text-xs-center>
+                <v-flex xs12 text-center>
                   <v-btn
-                    round
+                    rounded
                     class="font-weight-light"
                     color="primary"
                     :loading="loading"
@@ -156,18 +156,18 @@
           text="支持使用markdown语法"
         >
           <div id="editor" class="mavonEditor">
-            <no-ssr>
+            <client-only>
               <mavon-editor
                 ref="md"
                 v-model="form.contentMd"
                 style="min-height: 800px"
                 :ishljs="true"
-                code-style="atelier-plateau-dark"
+                codeStyle="atelier-plateau-dark"
                 @change="changeData"
                 @imgAdd="$imgAdd"
                 @imgDel="$imgDel"
               />
-            </no-ssr>
+            </client-only>
           </div>
         </material-card>
       </v-flex>

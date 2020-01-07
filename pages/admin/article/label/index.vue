@@ -1,7 +1,7 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-container fill-height fluid grid-list-xl>
-    <v-layout wrap justify-center>
-      <v-flex xs12 md10>
+    <v-row class="justify-center">
+      <v-col cols="10">
         <material-card
           color="primary"
           title="标签云管理"
@@ -14,13 +14,13 @@
               clear-icon="close"
               clearable
               type="text"
-              color="purple"
+              color="primary"
               @keyup.enter="search"
             >
               <template v-slot:prepend>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <v-btn flat icon color="primary" @click="add">
+                    <v-btn text icon color="primary" @click="add">
                       <v-icon v-on="on">add</v-icon>
                     </v-btn>
                   </template>
@@ -30,7 +30,7 @@
               <template v-slot:append-outer>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <v-btn flat icon color="primary" @click="search">
+                    <v-btn text icon color="primary" @click="search">
                       <v-icon v-on="on">search</v-icon>
                     </v-btn>
                   </template>
@@ -46,6 +46,7 @@
               close
               :color="label.outColor"
               text-color="white"
+              class="chip-label"
               @input="remove(label.id)"
             >
               <v-avatar v-if="label.icon.startsWith('http')">
@@ -71,8 +72,8 @@
             @handleCancelAdd="handleCancelAdd"
           ></add-form>
         </div>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -175,4 +176,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.chip-label {
+  margin: 0.2rem;
+}
+</style>

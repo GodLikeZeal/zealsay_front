@@ -24,7 +24,7 @@
               </template>
               <v-card>
                 <v-card-title>
-                  <no-ssr>
+                  <client-only>
                     <div style="width: 800px;height: 400px;">
                       <vueCropper
                         ref="cropper"
@@ -41,7 +41,7 @@
                         :img="option.img"
                       ></vueCropper>
                     </div>
-                  </no-ssr>
+                  </client-only>
                 </v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -133,9 +133,9 @@
       </v-card-title>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn outline color="darken-1" @click="handleCancel()">取消</v-btn>
+        <v-btn outlined color="darken-1" @click="handleCancel()">取消</v-btn>
         <v-btn
-          outline
+          outlined
           :loading="loading"
           color="primary darken-1"
           @click="handleSubmit(form)"

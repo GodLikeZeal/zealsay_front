@@ -1,4 +1,4 @@
-import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
+// import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
 
 export default {
   mode: 'universal',
@@ -49,8 +49,7 @@ export default {
    */
   css: [
     'material-design-icons-iconfont/dist/material-design-icons.css',
-    'vuetify/dist/vuetify.min.css',
-    '@/assets/style/app.styl',
+    // 'vuetify/dist/vuetify.min.css',
     'chartist/dist/chartist.min.css',
     '@/assets/scss/styles/index.scss',
     '@/static/live2d/css/live2d.css'
@@ -60,15 +59,15 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: '@/plugins/vuetify', ssr: true },
     { src: '@/plugins/axios', ssr: false },
-    { src: '@/plugins/dialog', ssr: false },
     { src: '@/plugins/chartist', ssr: true },
+    { src: '@/plugins/sweetalert2', ssr: false },
     { src: '@/plugins/vue-perfect-scrollbar', ssr: false },
     { src: '@/plugins/vue-mavon-editor', srr: false },
     { src: '@/plugins/vue-cropper', ssr: false },
     // { src: '@/plugins/bubbly-bg', ssr: false },
-    { src: '@/plugins/localStorage.js', ssr: false }
+    { src: '@/plugins/localStorage.js', ssr: false },
+    { src: '@/plugins/material.js', ssr: false }
   ],
 
   /**
@@ -81,21 +80,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/auth',
-    [
-      'vue-sweetalert2/nuxt',
-      {
-        buttonsStyling: false,
-        heightAuto: false,
-        grow: true,
-        customClass: {
-          confirmButton: 'mx-4 v-btn v-btn--round primary',
-          cancelButton: 'mx-4 v-btn v-btn--round default'
-        },
-        confirmButtonText: '确定',
-        cancelButtonText: '取消'
-      }
-    ]
+    '@nuxtjs/auth'
   ],
   /*
    ** auth middleware
@@ -157,18 +142,30 @@ export default {
       pathRewrite: { '^/app/': '' } // 把/api 替换成 /
     }
   },
-
+  /**
+   * vuetify 2.0
+   */
+  buildModules: [
+    // Simple usage
+    '@nuxtjs/vuetify'
+  ],
+  /**
+   * vuetify 设置.
+   */
+  vuetify: {
+    optionsPath: '@/plugins/vuetify/options.js'
+  },
   /*
    ** Build configuration
    */
   build: {
-    transpile: ['vuetify/lib'],
-    plugins: [new VuetifyLoaderPlugin()],
-    loaders: {
-      stylus: {
-        import: ['~assets/style/variables.styl']
-      }
-    },
+    // transpile: ['vuetify/lib'],
+    // plugins: [new VuetifyLoaderPlugin()],
+    // loaders: {
+    //   stylus: {
+    //     import: ['~vuetify/src/styles/styles.sass']
+    //   }
+    // },
     /*
      ** You can extend webpack config here
      */

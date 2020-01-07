@@ -3,7 +3,7 @@
     <v-layout justify-center wrap>
       <v-flex xs12 md10>
         <material-card class="v-card-profile">
-          <v-card-text class="text-xs-center">
+          <v-card-text class="text-center">
             <v-dialog v-model="showCropper" persistent width="800px">
               <template v-slot:activator="{ on }">
                 <label for="uploads">
@@ -24,7 +24,7 @@
               </template>
               <v-card>
                 <v-card-title>
-                  <no-ssr>
+                  <client-only>
                     <div style="width: 800px;height: 400px;">
                       <vueCropper
                         ref="cropper"
@@ -41,7 +41,7 @@
                         :img="option.img"
                       ></vueCropper>
                     </div>
-                  </no-ssr>
+                  </client-only>
                 </v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -179,10 +179,10 @@
                     value="一个喜欢安静的程序员."
                   />
                 </v-flex>
-                <v-flex xs12 text-xs-center>
+                <v-flex xs12 text-center>
                   <v-btn
-                    round
-                    class="mx-0 font-weight-light"
+                    rounded
+                    class="mx-0"
                     color="primary"
                     :loading="loading"
                     @click="submit()"

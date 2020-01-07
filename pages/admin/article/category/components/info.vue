@@ -97,7 +97,7 @@ export default {
   name: 'Info',
   props: {
     alert: {
-      type: Object,
+      type: Boolean,
       default: function() {
         return {}
       }

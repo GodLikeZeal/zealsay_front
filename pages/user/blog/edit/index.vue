@@ -11,7 +11,7 @@
             <v-container py-0>
               <v-layout wrap>
                 <v-flex xs6 md6>
-                  <v-card-text class="text-xs-center">
+                  <v-card-text class="text-center">
                     <v-dialog v-model="showCropper" persistent width="800px">
                       <template v-slot:activator="{ on }">
                         <label for="uploads">
@@ -38,7 +38,7 @@
                       </template>
                       <v-card>
                         <v-card-title>
-                          <no-ssr>
+                          <client-only>
                             <div style="width: 800px;height: 400px;">
                               <vueCropper
                                 ref="cropper"
@@ -55,7 +55,7 @@
                                 :img="option.img"
                               ></vueCropper>
                             </div>
-                          </no-ssr>
+                          </client-only>
                         </v-card-title>
                         <v-card-actions>
                           <v-spacer></v-spacer>
@@ -133,10 +133,9 @@
                     required
                   />
                 </v-flex>
-                <v-flex xs12 text-xs-center>
+                <v-flex xs12 text-center>
                   <v-btn
-                    round
-                    class="font-weight-light"
+                    rounded
                     color="primary"
                     :loading="loading"
                     @click="submit()"
@@ -156,18 +155,18 @@
           text="支持使用markdown语法"
         >
           <div id="editor" class="mavonEditor">
-            <no-ssr>
+            <client-only>
               <mavon-editor
                 ref="md"
                 v-model="form.contentMd"
                 style="z-index:0;height: 800px"
                 :ishljs="true"
-                code-style="atelier-plateau-dark"
+                codeStyle="atelier-plateau-dark"
                 @change="changeData"
                 @imgAdd="$imgAdd"
                 @imgDel="$imgDel"
               />
-            </no-ssr>
+            </client-only>
           </div>
         </material-card>
       </v-flex>

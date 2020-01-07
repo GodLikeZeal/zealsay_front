@@ -1,33 +1,15 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-footer
-    id="blog-footer"
-    style="background-color: initial;height: auto;"
-    absolute
-  >
-    <v-card
-      flat
-      tile
-      class="white accent-4  grey--text text-xs-center"
-      width="100%"
-    >
+  <v-footer id="blog-footer">
+    <v-card flat tile class=" accent-4  grey--text text-center" width="100%">
       <v-card-text>
-        <i v-for="icon in icons" :key="icon.id">
-          <template>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  class="mx-3 grey--text"
-                  icon
-                  target="_Blank"
-                  :href="icon.url"
-                >
-                  <v-icon size="24px" v-on="on">{{ icon.icon }}</v-icon>
-                </v-btn>
-              </template>
-              {{ icon.info }}
-            </v-tooltip>
-          </template>
-        </i>
+        <v-list-item-title avatar>
+          <v-list-item-avatar class="avatar">
+            <v-img :src="logo" height="34" contain />
+          </v-list-item-avatar>
+          <v-list-item-title class="title">
+            zealsay
+          </v-list-item-title>
+        </v-list-item-title>
       </v-card-text>
 
       <v-divider></v-divider>
@@ -73,5 +55,8 @@ export default {
 #blog-footer {
   background-color: initial;
   height: auto;
+}
+.avatar {
+  margin-right: 0 !important;
 }
 </style>

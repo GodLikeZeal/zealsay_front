@@ -34,15 +34,15 @@
       </v-layout>
 
       <back-to-top :visibility-height="300" :back-position="0" />
-      <!-- 页脚 -->
-      <v-layout row>
-        <v-flex>
-          <div class="footer">
-            <blog-footer v-if="$route.name !== 'Maps'" />
-          </div>
-        </v-flex>
-      </v-layout>
     </v-container>
+    <!-- 页脚 -->
+    <v-layout row>
+      <v-flex>
+        <div class="footer">
+          <blog-footer v-if="$route.name !== 'Maps'" />
+        </div>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
