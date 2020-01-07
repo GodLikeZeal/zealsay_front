@@ -49,7 +49,7 @@
         </v-layout>
       </v-container>
     </v-card>
-    <v-container class="my-container">
+    <v-container>
       <v-breadcrumbs :items="breadcrumbs">
         <template v-slot:divider>
           <v-icon>chevron_right</v-icon>

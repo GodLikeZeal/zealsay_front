@@ -6,13 +6,13 @@
       <v-container>
         <v-layout>
           <v-flex md12>
-            <div class="text-md-center word">
+            <div class="text-center word">
               <h1 class="hitokoto-title">
                 <v-avatar size="120">
                   <img :src="user.avatar" alt="avatar" />
                 </v-avatar>
               </h1>
-              <div class="row center">
+              <div class="row justify-center center">
                 <span class="white--text font-weight-bold text-detail">{{
                   user.username
                 }}</span>
@@ -53,14 +53,15 @@
         </v-layout>
       </v-container>
     </v-card>
-    <v-container class="my-container fill">
-      <v-layout>
-        <v-flex xs12 md12>
-          <v-tabs fixed-tabs>
+    <v-container class="fill">
+      <v-row>
+        <v-col cols="12">
+          <v-tabs centered>
             <v-tab key="activity"> 动态 </v-tab>
             <v-tab key="blog"> 博客 </v-tab>
             <v-tab key="like"> 喜欢 </v-tab>
             <v-tab key="info"> 资料 </v-tab>
+
             <v-tab-item key="activity">
               <activity :actions="actions"></activity>
             </v-tab-item>
@@ -74,8 +75,8 @@
               ><info :form="user" :province="province" :roles="roles"></info
             ></v-tab-item>
           </v-tabs>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
       <back-to-top :visibility-height="300" :back-position="0" />
     </v-container>
     <!-- 页脚 -->
