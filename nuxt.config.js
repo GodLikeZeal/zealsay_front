@@ -1,4 +1,4 @@
-// import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
+import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
 
 export default {
   mode: 'universal',
@@ -159,13 +159,13 @@ export default {
    ** Build configuration
    */
   build: {
-    // transpile: ['vuetify/lib'],
-    // plugins: [new VuetifyLoaderPlugin()],
-    // loaders: {
-    //   stylus: {
-    //     import: ['~vuetify/src/styles/styles.sass']
-    //   }
-    // },
+    transpile: ['vuetify/lib'],
+    plugins: [new VuetifyLoaderPlugin()],
+    loaders: {
+      stylus: {
+        import: ['~vuetify/src/styles/styles.sass']
+      }
+    },
     /*
      ** You can extend webpack config here
      */
