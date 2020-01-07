@@ -1,4 +1,4 @@
-// import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
+import vuetifyOptions from './plugins/vuetify/options.js'
 
 export default {
   mode: 'universal',
@@ -147,28 +147,23 @@ export default {
    */
   buildModules: [
     // Simple usage
-    '@nuxtjs/vuetify'
+    ['@nuxtjs/vuetify', vuetifyOptions]
   ],
   /**
    * vuetify 设置.
    */
   // vuetify: {
+  //   treeShake: {
+  //     loaderOptions: {
+  //       // vuetify-loader options (match function)
+  //     }
+  //   },
   //   optionsPath: '@/plugins/vuetify/options.js'
   // },
   /*
    ** Build configuration
    */
   build: {
-    // transpile: ['vuetify/lib'],
-    // plugins: [new VuetifyLoaderPlugin()],
-    // loaders: {
-    //   stylus: {
-    //     import: ['~vuetify/src/styles/styles.sass']
-    //   }
-    // },
-    /*
-     ** You can extend webpack config here
-     */
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
@@ -180,6 +175,17 @@ export default {
         })
       }
     },
+    // transpile: ['vuetify/lib'],
+    // plugins: [new VuetifyLoaderPlugin()],
+    // loaders: {
+    //   stylus: {
+    //     import: ['~vuetify/src/styles/styles.sass']
+    //   }
+    // },
+    /*
+     ** You can extend webpack config here
+     */
+
     vendor: ['axios', 'vue-cropper']
   }
 }

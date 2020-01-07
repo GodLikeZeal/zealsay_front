@@ -38,11 +38,11 @@
             :prepend-icon="item.icon"
             no-action="no-action"
           >
-            <v-list-item slot="activator" class="group-item" ripple="ripple">
-              <v-list-item-content>
+            <template>
+              <v-list-item slot="activator" class="group-item" ripple="ripple">
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
+              </v-list-item>
+            </template>
             <template v-for="(subItem, t) in item.items">
               <!--sub group-->
               <v-list-group
