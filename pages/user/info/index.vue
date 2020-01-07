@@ -87,10 +87,9 @@
                     label="简介"
                   />
                 </v-flex>
-                <v-flex xs12 text-xs-center>
+                <v-flex xs12 text-center>
                   <v-btn
-                    round
-                    class="mx-0 font-weight-light"
+                    rounded
                     color="primary"
                     :loading="loading"
                     @click="submit()"
