@@ -7,14 +7,13 @@ export default function({ app }) {
     //   t: (key, ...params) => app.i18n.t(key, params)
     // },
     theme: {
-      primary: '#4caf50',
-      secondary: '#4caf50',
-      tertiary: '#495057',
-      accent: '#82B1FF',
-      error: '#f55a4e',
-      info: '#00d3ee',
-      success: '#5cb860',
-      warning: '#ffa21a'
+      primary: '#1976d2',
+      secondary: '#ffc6bf',
+      accent: '#816ad6',
+      error: '#f375b5',
+      info: '#00cec9',
+      success: '#00b894',
+      warning: '#fcd783'
     },
     lang: {
       locales: { zhHans },

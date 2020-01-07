@@ -38,7 +38,7 @@
             :prepend-icon="item.icon"
             no-action="no-action"
           >
-            <v-list-item slot="activator" ripple="ripple">
+            <v-list-item slot="activator" class="group-item" ripple="ripple">
               <v-list-item-content>
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item-content>
@@ -85,8 +85,8 @@
                     :class="[
                       $route.name.replace(/-/g, '/') ===
                       subItem.href.substring(1)
-                        ? 'primary--text'
-                        : ''
+                        ? 'primary--text child-item'
+                        : 'child-item'
                     ]"
                     ><span>{{ subItem.title }}</span></v-list-item-title
                   >
@@ -230,6 +230,12 @@ export default {
     padding-left: 15px;
     padding-right: 15px;
   }
+}
+.group-item {
+  padding: 0;
+}
+.child-item {
+  padding: 0 1rem;
 }
 #core-view {
   padding-bottom: 100px;

@@ -157,7 +157,7 @@ export default {
         {
           all: true,
           icon: 'mdi-logout',
-          href: '',
+          href: '#',
           title: '退出登录',
           click: e => {
             // vm.logout()

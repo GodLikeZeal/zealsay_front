@@ -39,16 +39,13 @@
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
     "material-design-icons-iconfont": "^5.0.1",
-    "mavon-editor": "^2.7.5",
+    "mavon-editor": "^2.7.7",
     "nodemon": "^1.18.9",
     "prettier": "^1.18.2",
     "qs": "^6.7.0",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2",
     "vue-chartist": "^2.2.1",
     "vue-cropper": "^0.4.9",
     "vue-perfect-scrollbar": "^0.1.0",
-    "vuetify-dialog": "^0.3.8",
     "vuex-persistedstate": "^2.5.4"
   }
 }

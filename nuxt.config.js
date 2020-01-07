@@ -60,8 +60,8 @@ export default {
    */
   plugins: [
     { src: '@/plugins/axios', ssr: false },
-    { src: '@/plugins/dialog', ssr: false },
     { src: '@/plugins/chartist', ssr: true },
+    { src: '@/plugins/sweetalert2', ssr: false },
     { src: '@/plugins/vue-perfect-scrollbar', ssr: false },
     { src: '@/plugins/vue-mavon-editor', srr: false },
     { src: '@/plugins/vue-cropper', ssr: false },
@@ -80,21 +80,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/auth',
-    [
-      'vue-sweetalert2/nuxt',
-      {
-        buttonsStyling: false,
-        heightAuto: false,
-        grow: true,
-        customClass: {
-          confirmButton: 'mx-4 v-btn v-btn--round primary',
-          cancelButton: 'mx-4 v-btn v-btn--round default'
-        },
-        confirmButtonText: '确定',
-        cancelButtonText: '取消'
-      }
-    ]
+    '@nuxtjs/auth'
   ],
   /*
    ** auth middleware
@@ -166,17 +152,9 @@ export default {
   /**
    * vuetify 设置.
    */
-  // vuetify: {
-  //   // customVariables: ['~/assets/scss/app/variables.scss'],
-  //   defaultAssets: {
-  //     font: {
-  //       family: 'Roboto'
-  //
-  //     },
-  //     icons: 'mdi'
-  //   },
-  //   optionsPath: '/plugins/vuetify/options.js'
-  // },
+  vuetify: {
+    optionsPath: '@/plugins/vuetify/options.js'
+  },
   /*
    ** Build configuration
    */

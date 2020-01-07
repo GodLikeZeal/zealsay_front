@@ -26,9 +26,7 @@
               <v-avatar
                 v-for="c in colors"
                 :key="c"
-                :class="[
-                  c === color ? 'color-active color-' + c : 'color-' + c
-                ]"
+                :class="[c === color ? 'color-active my-' + c : 'my-' + c]"
                 size="23"
                 @click="updateColor(c)"
               />
@@ -68,7 +66,7 @@
 
               <div class="d-flex justify-center">
                 <v-btn
-                  :color="theme === 'dark' ? '' : 'light-green'"
+                  :color="dark ? '' : 'light-green'"
                   class="mr-2"
                   fab
                   icon
@@ -76,18 +74,18 @@
                   rounded
                   cyan
                   active
-                  @click.native="setTheme('light')"
+                  @click.native="updateTheme(false)"
                 >
                   <v-icon>mdi-white-balance-sunny</v-icon>
                 </v-btn>
                 <v-btn
-                  :color="theme === 'dark' ? 'light-green' : ''"
+                  :color="dark ? 'light-green' : ''"
                   class="mr-2"
                   fab
                   icon
                   small
                   rounded
-                  @click.native="setTheme('dark')"
+                  @click.native="updateTheme(true)"
                 >
                   <v-icon>mdi-weather-night</v-icon>
                 </v-btn>
@@ -112,7 +110,15 @@ export default {
     }
   },
   data: () => ({
-    colors: ['primary', 'info', 'success', 'warning', 'danger'],
+    colors: [
+      'primary',
+      'secondary',
+      'accent',
+      'info',
+      'success',
+      'warning',
+      'danger'
+    ],
     images: [
       'https://pan.zealsay.com/slider-1.jpg',
       'https://pan.zealsay.com/slider-2.jpg',
@@ -121,7 +127,7 @@ export default {
     ]
   }),
   computed: {
-    ...mapState('app', ['image', 'color', 'theme']),
+    ...mapState('app', ['image', 'color', 'dark']),
     left: {
       get: function() {
         return this.$store.state.app.slider
@@ -137,26 +143,37 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('app', ['setImage', 'setColor', 'setTheme', 'setSlider']),
+    ...mapMutations('app', ['setImage', 'setColor', 'setDark', 'setSlider']),
     updateColor(val) {
       let color
       if (val === 'primary') {
-        color = '#9c27b0'
+        color = '#1976d2'
+      }
+      if (val === 'secondary') {
+        color = '#ffc6bf'
+      }
+      if (val === 'accent') {
+        color = '#816ad6'
       }
       if (val === 'info') {
-        color = '#00bcd4'
+        color = '#00cec9'
       }
       if (val === 'success') {
-        color = '#4caf50'
+        color = '#00b894'
       }
       if (val === 'warning') {
-        color = '#ff9800'
+        color = '#fcd783'
       }
       if (val === 'danger') {
-        color = '#f44336'
+        color = '#f375b5'
       }
-      this.$vuetify.theme.primary = color
+      this.$vuetify.theme.themes.light.primary = color
+      this.$vuetify.theme.themes.dark.primary = color
       this.setColor(val)
+    },
+    updateTheme(val) {
+      this.setDark(val)
+      this.$vuetify.theme.dark = val
     }
   }
 }
@@ -170,5 +187,33 @@ export default {
 .select-title {
   text-align: center;
   margin-top: 1rem;
+}
+.my-primary {
+  background-color: #1976d2;
+  border-color: #1976d2;
+}
+.my-secondary {
+  background-color: #ffc6bf;
+  border-color: #ffc6bf;
+}
+.my-accent {
+  background-color: #816ad6;
+  border-color: #816ad6;
+}
+.my-danger {
+  background-color: #f375b5;
+  border-color: #f375b5;
+}
+.my-info {
+  background-color: #00cec9;
+  border-color: #00cec9;
+}
+.my-success {
+  background-color: #00b894;
+  border-color: #00b894;
+}
+.my-warning {
+  background-color: #fcd783;
+  border-color: #fcd783;
 }
 </style>

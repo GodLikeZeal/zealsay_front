@@ -141,7 +141,7 @@ export default {
       },
       {
         icon: 'mdi-logout',
-        href: '#',
+        href: '',
         title: '退出登录',
         click: e => {
           this.$auth.logout('local')

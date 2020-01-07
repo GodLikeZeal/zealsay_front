@@ -1,6 +1,6 @@
 <template>
   <div id="appRoot">
-    <v-app id="app" :dark="$store.state.app.theme === 'dark'">
+    <v-app id="app">
       <transition name="fade" mode="out-in" appear>
         <keep-alive>
           <nuxt />
@@ -15,16 +15,20 @@ import { EnumColor } from '@/util/constans'
 export default {
   created() {
     let color = '#4caf50'
+    // let dark = false
     if (!this.$isServer) {
       const str = localStorage.getItem('vuex')
       let val
       if (str) {
         val = JSON.parse(str).app.color
+        // dark = JSON.parse(str).app.dark
         color = EnumColor[val]
       }
     }
     setTimeout(() => {
-      this.$vuetify.theme.primary = color
+      this.$vuetify.theme.themes.light.primary = color
+      this.$vuetify.theme.themes.dark.primary = color
+      // this.$vuetify.theme.dark = dark
     }, 0)
   }
 }

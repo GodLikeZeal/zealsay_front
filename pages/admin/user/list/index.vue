@@ -103,21 +103,161 @@
       </template>
       <template v-slot:item.command="{ item }">
         <v-layout justify-center class="mb-2">
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on }">
-              <v-btn
-                icon
-                text
-                color="primary"
-                title="详情"
-                v-on="on"
-                @click="handleInfo(item)"
-              >
-                <v-icon>portrait</v-icon>
-              </v-btn>
-            </template>
-            <span>详情</span>
-          </v-tooltip>
+          <template>
+            <div class="text-center">
+              <v-dialog width="800">
+                <template v-slot:activator="{ on }">
+                  <v-btn icon text color="primary" title="详情" v-on="on">
+                    <v-icon>portrait</v-icon>
+                  </v-btn>
+                </template>
+
+                <v-card>
+                  <v-img
+                    class="white--text"
+                    height="270"
+                    src="https://pan.zealsay.com/user_info_bg.jpg"
+                  >
+                    <v-container fill-height fluid>
+                      <v-layout fill-height>
+                        <v-flex xs12 align-end flexbox>
+                          <v-img
+                            class="avator"
+                            height="100"
+                            width="100"
+                            :lazy-src="item.avatar"
+                            :src="item.avatar"
+                          ></v-img>
+                        </v-flex>
+                      </v-layout>
+                    </v-container>
+                  </v-img>
+                  <v-card-title>
+                    <v-card-text>
+                      <v-row>
+                        <v-col cols="6">
+                          <span class="text-detail grey--text"
+                            >用户名 ：{{ item.username }}</span
+                          >
+                        </v-col>
+                        <v-col cols="6">
+                          <span class="text-detail grey--text"
+                            >姓名 ：{{ item.name }}</span
+                          >
+                        </v-col>
+                        <v-col cols="6">
+                          <span
+                            v-if="item.sex == 1"
+                            class="text-detail grey--text"
+                            title="男"
+                            >性别 ：<img
+                              width="15px"
+                              src="~/static/image/sex/boy.png"
+                          /></span>
+                          <span
+                            v-if="item.sex == 0"
+                            class="text-detail grey--text"
+                            title="女"
+                            >性别 ：<img
+                              width="15px"
+                              src="~/static/image/sex/girl.png"
+                          /></span>
+                        </v-col>
+                        <v-col cols="6">
+                          <span class="text-detail grey--text"
+                            >城市：{{
+                              item.cityName ? item.cityName : '暂无'
+                            }}</span
+                          >
+                        </v-col>
+                        <v-col cols="6">
+                          <span class="text-detail grey--text"
+                            >年龄：{{ item.age ? item.age : '未知' }}</span
+                          >
+                        </v-col>
+                        <v-col cols="6">
+                          <span class="text-detail grey--text"
+                            >注册于：{{ item.registerAt }}</span
+                          >
+                        </v-col>
+                        <v-col cols="12">
+                          <span v-if="item.phoneNumber">
+                            <span class="text-detail grey--text"
+                              >手机号 ：{{ item.phoneNumber }}</span
+                            >
+                            <v-icon small color="success">
+                              mdi-checkbox-marked-circle</v-icon
+                            >
+                            <span class="green--text"> 已绑定</span>
+                          </span>
+                          <span v-else>
+                            <span class="text-detail grey--text"
+                              >手机号 ：无</span
+                            >
+                            <v-icon small color="warning">
+                              mdi-exclamation</v-icon
+                            >
+                            <span class="orange--text"> 未绑定</span>
+                          </span>
+                        </v-col>
+                        <v-col cols="12">
+                          <span v-if="item.email">
+                            <span class="text-detail grey--text"
+                              >邮 箱 ：{{ item.email }}</span
+                            >
+                            <v-icon small color="success">
+                              mdi-checkbox-marked-circle</v-icon
+                            >
+                            <span class="green--text"> 已绑定</span>
+                          </span>
+                          <span v-else>
+                            <span class="text-detail grey--text"
+                              >邮 箱 ：无</span
+                            >
+                            <v-icon small color="warning">
+                              mdi-exclamation</v-icon
+                            >
+                            <span class="orange--text"> 未绑定</span>
+                          </span>
+                        </v-col>
+                        <v-col cols="12">
+                          <p class="grey--text">
+                            <span class="text-detail"
+                              >地址 ：{{
+                                item.address ? item.address : '无'
+                              }}</span
+                            >
+                          </p>
+                        </v-col>
+                        <v-col cols="12">
+                          <span v-if="item.label" class=" grey--text">
+                            <span class="text-detail">TA的标签</span>
+                            <v-chip
+                              v-for="label in item.label.split(',')"
+                              :key="label"
+                              :color="color[parseInt(Math.random() * 6, 10)]"
+                              small
+                            >
+                              <v-avatar>
+                                <v-img
+                                  :src="icon[parseInt(Math.random() * 20, 10)]"
+                                  :lazy-src="
+                                    icon[parseInt(Math.random() * 20, 10)]
+                                  "
+                                  alt="label"
+                                />
+                              </v-avatar>
+                              {{ label }}
+                            </v-chip>
+                          </span>
+                        </v-col>
+                      </v-row>
+                    </v-card-text>
+                  </v-card-title>
+                </v-card>
+              </v-dialog>
+            </div>
+          </template>
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
               <v-btn
@@ -226,7 +366,30 @@ export default {
       row: {},
       dialogVisible: false,
       formVisible: false,
-      title: ''
+      title: '',
+      icon: [
+        require('@/static/image/food/南瓜.png'),
+        require('@/static/image/food/吐司.png'),
+        require('@/static/image/food/夏威夷果.png'),
+        require('@/static/image/food/山楂片.png'),
+        require('@/static/image/food/开心果.png'),
+        require('@/static/image/food/抹茶麻薯.png'),
+        require('@/static/image/food/杏仁.png'),
+        require('@/static/image/food/板栗.png'),
+        require('@/static/image/food/柠檬干.png'),
+        require('@/static/image/food/炭烤肠.png'),
+        require('@/static/image/food/猪肉铺.png'),
+        require('@/static/image/food/瓜子.png'),
+        require('@/static/image/food/芒果干.png'),
+        require('@/static/image/food/花生.png'),
+        require('@/static/image/food/草莓干.png'),
+        require('@/static/image/food/蒸蛋糕.png'),
+        require('@/static/image/food/蚕豆.png'),
+        require('@/static/image/food/蛋黄酥.png'),
+        require('@/static/image/food/辣条.png'),
+        require('@/static/image/food/鱿鱼仔.png')
+      ],
+      color: ['info', 'success', 'primary', 'warning', 'error', 'admin.vue']
     }
   },
   computed: {
@@ -489,5 +652,17 @@ export default {
 
 .pagination {
   margin: 20px;
+}
+.avator {
+  margin: 90px auto auto;
+  border-radius: 50%;
+}
+
+.center {
+  margin: 0 auto;
+}
+
+.text-detail {
+  margin: 0 15px;
 }
 </style>

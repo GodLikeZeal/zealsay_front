@@ -11,7 +11,7 @@
             <v-container py-0>
               <v-layout wrap>
                 <v-flex xs6 md6>
-                  <v-card-text class="text-xs-center">
+                  <v-card-text class="text-center">
                     <v-dialog v-model="showCropper" persistent width="800px">
                       <template v-slot:activator="{ on }">
                         <label for="uploads">
@@ -133,10 +133,9 @@
                     required
                   />
                 </v-flex>
-                <v-flex xs12 text-xs-center>
+                <v-flex xs12 text-center>
                   <v-btn
-                    round
-                    class="font-weight-light"
+                    rounded
                     color="primary"
                     :loading="loading"
                     @click="submit()"
@@ -162,7 +161,7 @@
                 v-model="form.contentMd"
                 style="z-index:0;height: 800px"
                 :ishljs="true"
-                code-style="atelier-plateau-dark"
+                codeStyle="atelier-plateau-dark"
                 @change="changeData"
                 @imgAdd="$imgAdd"
                 @imgDel="$imgDel"

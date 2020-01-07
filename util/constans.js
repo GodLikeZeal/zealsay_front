@@ -1,7 +1,9 @@
 export const EnumColor = {
-  info: '#00bcd4',
-  success: '#4caf50',
-  warning: '#ff9800',
-  danger: '#f44336',
-  primary: '#9c27b0'
+  primary: '#1976d2',
+  secondary: '#ffc6bf',
+  accent: '#816ad6',
+  danger: '#f375b5',
+  info: '#00cec9',
+  success: '#00b894',
+  warning: '#fcd783'
 }

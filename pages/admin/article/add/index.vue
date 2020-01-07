@@ -162,7 +162,7 @@
                 v-model="form.contentMd"
                 style="min-height: 800px"
                 :ishljs="true"
-                code-style="atelier-plateau-dark"
+                codeStyle="atelier-plateau-dark"
                 @change="changeData"
                 @imgAdd="$imgAdd"
                 @imgDel="$imgDel"
