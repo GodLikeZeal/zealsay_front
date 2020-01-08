@@ -1,6 +1,6 @@
 <template>
   <div id="appRoot">
-    <v-app id="app" :dark="$store.state.app.theme === 'dark'">
+    <v-app id="app">
       <transition name="fade">
         <keep-alive>
           <nuxt />

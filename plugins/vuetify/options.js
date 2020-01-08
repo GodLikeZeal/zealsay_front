@@ -1,23 +1,34 @@
 // vuetify.options.js
 import zhHans from 'vuetify/es5/locale/zh-Hans'
 
-export default function({ app }) {
-  return {
-    // lang: {
-    //   t: (key, ...params) => app.i18n.t(key, params)
-    // },
-    theme: {
-      primary: '#1976d2',
-      secondary: '#ffc6bf',
-      accent: '#816ad6',
-      error: '#f375b5',
-      info: '#00cec9',
-      success: '#00b894',
-      warning: '#fcd783'
-    },
-    lang: {
-      locales: { zhHans },
-      current: 'zh-Hans'
+import colors from 'vuetify/es5/util/colors'
+
+const options = {
+  theme: {
+    themes: {
+      light: {
+        primary: colors.blue.darken2,
+        accent: colors.grey.darken3,
+        secondary: colors.amber.darken3,
+        info: colors.lightBlue.lighten1,
+        warning: colors.amber.base,
+        error: colors.deepOrange.accent4,
+        success: colors.green.accent3
+      },
+      dark: {
+        primary: colors.blue.darken4,
+        accent: colors.grey.darken4,
+        secondary: colors.amber.darken4,
+        info: colors.lightBlue.darken3,
+        warning: colors.amber.darken4,
+        error: colors.deepOrange.darken4,
+        success: colors.green.darken4
+      },
+      lang: {
+        locales: { zhHans },
+        current: 'zh-Hans'
+      }
     }
   }
 }
+export default options

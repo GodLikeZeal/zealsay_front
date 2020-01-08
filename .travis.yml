@@ -23,6 +23,7 @@ before_install:
 
 script:
 - npm i
+- npm audit fix
 - npm run build
 
 addons:
