@@ -8,4 +8,4 @@ EXPOSE 4000
 #RUN npm config set registry https://registry.npm.taobao.org
 RUN npm install
 RUN npm run build
-CMD ["npm", "dev"]
+CMD ["npm", "start"]

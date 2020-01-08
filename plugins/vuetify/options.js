@@ -27,8 +27,7 @@ const options = {
       lang: {
         locales: { zhHans },
         current: 'zh-Hans'
-      },
-      treeShake: false
+      }
     }
   }
 }
