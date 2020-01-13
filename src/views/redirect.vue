@@ -18,19 +18,19 @@
 </template>
 
 <script>
+import { getToken, setToken } from "@/util/auth";
 export default {
   name: "Redirect",
   auth: false,
   // eslint-disable-next-line require-await
   created() {
-    if (!this.$isServer) {
+    if (!getToken) {
       const token = this.$route.query.token;
       const redirect = this.$route.query.redirect;
       if (token != null && token !== "") {
-        this.$auth.setUserToken(token).then(() => {
-          this.$router.push({
-            path: redirect || "/"
-          });
+        setToken(token);
+        this.$router.push({
+          path: redirect || "/"
         });
       } else {
         this.$router.push({

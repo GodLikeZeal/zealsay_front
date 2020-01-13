@@ -816,8 +816,7 @@ export default {
       this.loading = true;
       // 登录接口待调试
       const data = this.model;
-      const code = await this.$axios
-        .$request(loginByUsername(data))
+      const code = loginByUsername(data)
         .then(res => {
           if (res.code === "200") {
             return res.code;
