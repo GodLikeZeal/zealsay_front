@@ -55,7 +55,6 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
-    console.log(to.path);
     /* has no token */
     if (whiteList.indexOf(to.path) !== -1 || to.meta.public) {
       // 在免登录白名单，直接进入
