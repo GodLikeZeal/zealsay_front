@@ -86,7 +86,7 @@
                       ></v-text-field>
                       <span
                         v-if="validEmailFlag"
-                        class="caption grey--text text--darken-1"
+                        class="caption error--text text--darken-1"
                       >
                         {{ validEmailMsg }}
                       </span>
@@ -672,8 +672,7 @@ export default {
           // 调用后台服务校验是否用户名重复
           const param = {};
           param.username = this.form.username;
-          this.$axios
-            .$request(getIsInUseByUsername(param))
+          getIsInUseByUsername(param)
             .then(res => {
               if (res.code === "200" && !res.data) {
                 this.passwordValid = false;
@@ -716,13 +715,11 @@ export default {
             // 调用后台服务校验是否用户名重复
             const param = {};
             param.email = this.form.email;
-            this.$axios
-              .$request(getIsInUseByEmail(param))
+            getIsInUseByEmail(param)
               .then(res => {
                 if (res.code === "200" && !res.data) {
                   // 提交后台，执行发送邮件服务
-                  this.$axios
-                    .$request(register(this.form))
+                  register(this.form)
                     .then(res => {
                       if (res.code === "200" && res.data) {
                         this.validFlag = false;
@@ -841,7 +838,7 @@ export default {
             timer: 3000
           });
         });
-      if (!(code === "200")) {
+      if (code !== "200") {
         this.loading = false;
         return;
       }
@@ -922,7 +919,7 @@ export default {
 #footer {
   position: absolute;
   bottom: 0px;
-  height: 300px;
+  height: 280px;
   width: 100%;
   pointer-events: none;
 }

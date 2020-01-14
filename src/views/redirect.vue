@@ -21,7 +21,6 @@
 import { getToken, setToken } from "@/util/auth";
 export default {
   name: "Redirect",
-  auth: false,
   // eslint-disable-next-line require-await
   created() {
     if (!getToken) {

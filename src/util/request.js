@@ -4,11 +4,11 @@ import store from "@/store";
 // import cloneDeep from "lodash.clonedeep";
 // import { createRequestToken } from "@/util/auth";
 
-console.log(process.env.VUE_APP_BASE_URL);
+// console.log(process.env.VUE_APP_BASE_URL);
 const request = axios.create({
   // 设置超时时间
   timeout: 60000,
-  baseURL: process.env.VUE_APP_BASE_URL
+  baseURL: process.env.VUE_APP_API_URL
 });
 // post请求的时候，我们需要加上一个请求头，所以可以在这里进行一个默认的设置
 // 即设置post的请求头为application/x-www-form-urlencoded;charset=UTF-8

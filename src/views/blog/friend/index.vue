@@ -100,7 +100,6 @@ import { getFriendLinkList } from "@/api/friendlink";
 import { getCategoryList } from "@/api/article";
 
 export default {
-  auth: false,
   components: {
     "blog-nav": NavBar
   },

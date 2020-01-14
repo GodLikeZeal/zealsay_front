@@ -4,7 +4,6 @@ export default {
   id: "",
   username: "",
   status: "",
-  code: "",
   token: getToken(),
   name: "",
   avatar: "",

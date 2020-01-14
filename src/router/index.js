@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import paths from "./paths";
-import NProgress from "nprogress";
+// import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import Meta from "vue-meta";
 import VueAnalytics from "vue-analytics";
@@ -25,13 +25,13 @@ const router = new Router({
 });
 // router gards
 router.beforeEach((to, from, next) => {
-  NProgress.start();
+  // NProgress.start();
   next();
 });
 
 router.afterEach(() => {
   // ...
-  NProgress.done();
+  // NProgress.done();
 });
 
 // Bootstrap Analytics

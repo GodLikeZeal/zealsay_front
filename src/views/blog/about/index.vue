@@ -263,7 +263,6 @@ import NavBar from "@/components/blog/NavBar";
 import { getCategoryList } from "@/api/article";
 
 export default {
-  auth: false,
   components: {
     "blog-nav": NavBar
   },

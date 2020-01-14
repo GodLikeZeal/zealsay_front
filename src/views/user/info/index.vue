@@ -10,7 +10,7 @@
           <v-form ref="form" lazy-validation>
             <v-container py-0>
               <v-layout wrap>
-                <v-flex xs12 md6>
+                <v-flex xs12 md4>
                   <v-text-field
                     v-model="form.username"
                     :rules="usernameRules"
@@ -20,12 +20,22 @@
                     required
                   />
                 </v-flex>
-                <v-flex xs12 md6>
+                <v-flex xs12 md4>
                   <v-text-field
                     v-model="form.name"
                     label="真实姓名"
                     class="purple-input"
                   />
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-select
+                    v-model="form.sex"
+                    :items="sex"
+                    item-text="text"
+                    item-value="value"
+                    item-avatar="avatar"
+                    label="性别"
+                  ></v-select>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-select
@@ -144,6 +154,11 @@ export default {
     avatar: {
       size: 128
     },
+    sex: [
+      { value: "", text: "请选择性别" },
+      { value: 1, text: "男" },
+      { value: 0, text: "女" }
+    ],
     city: [],
     area: [],
     provinceLoading: false,

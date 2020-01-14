@@ -65,7 +65,6 @@ import {
 } from "@/api/article";
 
 export default {
-  auth: false,
   components: {
     "blog-nav": NavBar,
     "blog-main-card": MainCard,

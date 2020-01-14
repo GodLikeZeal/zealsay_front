@@ -35,7 +35,7 @@ export default {
             reject("error");
           }
           const data = response.data;
-          commit("SET_ID", data.userId);
+          commit("SET_ID", data.id);
           commit("SET_USERNAME", data.username);
           commit("SET_ROLE", data.role);
           commit("SET_STATUS", data.status);
@@ -70,6 +70,12 @@ export default {
         .then(() => {
           commit("SET_TOKEN", "");
           commit("SET_ROLE", "");
+          commit("SET_USERNAME", "");
+          commit("SET_ID", "");
+          commit("SET_NAME", "");
+          commit("SET_AVATAR", "");
+          commit("SET_SETTING", "");
+          commit("SET_INTRODUCTION", "");
           removeToken();
           resolve();
         })

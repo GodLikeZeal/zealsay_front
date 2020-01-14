@@ -32,7 +32,6 @@ import { confirmEmail } from "@/api/user";
 
 export default {
   name: "Confirm",
-  auth: false,
   data: () => ({
     activation: false
   }),
@@ -40,8 +39,7 @@ export default {
     const obj = {};
     obj.key = this.$route.query.token;
     obj.email = this.$route.query.email;
-    this.$axios
-      .$request(confirmEmail(obj))
+    confirmEmail(obj)
       .then(res => {
         if (res.code === "200" && res.data) {
           this.activation = true;

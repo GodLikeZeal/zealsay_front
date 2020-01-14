@@ -33,7 +33,7 @@
         </v-flex>
       </v-layout>
 
-      <back-to-top :visibility-height="300" :back-position="0" />
+      <core-back-to-top :visibility-height="300" :back-position="0" />
     </v-container>
     <!-- 页脚 -->
     <v-layout row>
@@ -55,7 +55,6 @@ import LabelCloud from "@/components/blog/LabelCloud";
 import { getArticlePageListToC, getArticleLabelPage } from "@/api/article";
 
 export default {
-  auth: false,
   components: {
     "blog-nav": NavBar,
     "blog-main-card": MainCard,

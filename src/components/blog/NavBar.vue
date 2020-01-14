@@ -161,8 +161,9 @@ export default {
           title: "退出登录",
           click: () => {
             // vm.logout()
-            this.$store.dispatch("user/LogOut").then(() => {
-              location.reload(); // In order to re-instantiate the vue-router object to avoid bugs
+            this.$store.dispatch("user/LogOut").then(vm => {
+              // location.reload(); // In order to re-instantiate the vue-router object to avoid bugs
+              vm.$router.push("/");
             });
           }
         }

@@ -2,11 +2,14 @@
 @import "colors";
 
 //  Brand Colors
-$brand-primary:                    $purple !default;
+$brand-primary:                    $blue !default;
 $brand-success:                    $green !default;
 $brand-danger:                     $red !default;
 $brand-warning:                    $orange !default;
 $brand-info:                       $cyan !default;
+$brand-error:                      $pink !default;
+$brand-secondary:                  $amber !default;
+$brand-accent:                     $grey !default;
 
 // Paddings
 $padding-logo:                      15px !default;

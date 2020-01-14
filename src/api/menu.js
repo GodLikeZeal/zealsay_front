@@ -1,12 +1,12 @@
 const Menu = [
-  { header: "看板动态" },
+  { header: "看板" },
   {
     title: "桌面看板",
     group: "apps",
     icon: "mdi-monitor-dashboard",
     href: "/admin/dashboard"
   },
-  { header: "用户权限" },
+  { header: "用户" },
   {
     title: "用户管理",
     group: "user",
@@ -39,7 +39,7 @@ const Menu = [
       }
     ]
   },
-  { header: "站点资源" },
+  { header: "资源" },
   {
     title: "文章",
     group: "article",
@@ -71,7 +71,7 @@ const Menu = [
       }
     ]
   },
-  { header: "站点配置" },
+  { header: "配置" },
   {
     title: "站点主体",
     group: "article",

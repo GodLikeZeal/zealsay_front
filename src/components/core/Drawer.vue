@@ -18,7 +18,9 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>zealsay后台管理</v-list-item-title>
+          <v-list-item-title class="font-weight-medium"
+            >zealsay后台管理</v-list-item-title
+          >
         </v-list-item-content>
 
         <v-btn icon @click.stop="mini = !mini">
@@ -28,7 +30,7 @@
 
       <v-divider></v-divider>
 
-      <v-list dense expand>
+      <v-list>
         <template v-for="(item, i) in menus">
           <!--group with subitems-->
           <v-list-group
@@ -38,10 +40,10 @@
             :prepend-icon="item.icon"
             no-action="no-action"
           >
-            <template>
-              <v-list-item slot="activator" class="group-item" ripple="ripple">
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item>
+            <template v-slot:activator>
+              <v-list-item-title class="font-weight-regular">{{
+                item.title
+              }}</v-list-item-title>
             </template>
             <template v-for="(subItem, t) in item.items">
               <!--sub group-->
@@ -50,10 +52,13 @@
                 :key="subItem.name"
                 :group="subItem.group"
                 sub-group="sub-group"
+                class="title"
               >
                 <v-list-item slot="activator" ripple="ripple">
                   <v-list-item-content>
-                    <v-list-item-title>{{ subItem.title }}</v-list-item-title>
+                    <v-list-item-title class="font-weight-regular">{{
+                      subItem.title
+                    }}</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item
@@ -79,7 +84,12 @@
                 ripple="ripple"
               >
                 <v-list-item-content>
-                  <v-list-item-title class="child-item"
+                  <v-list-item-title
+                    :class="[
+                      $route.path === subItem.href
+                        ? 'primary--text font-weight-regular'
+                        : 'font-weight-regular'
+                    ]"
                     ><span>{{ subItem.title }}</span></v-list-item-title
                   >
                 </v-list-item-content>
@@ -107,16 +117,18 @@
             :target="item.target"
             rel="noopener"
           >
-            <v-list-item-action v-if="item.icon">
+            <v-list-item-icon v-if="item.icon">
               <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
+            </v-list-item-icon>
+
+            <v-list-item-title class="font-weight-regular">{{
+              item.title
+            }}</v-list-item-title>
+
             <!-- <v-circle class="white--text pa-0 chip--x-small" v-if="item.badge" :color="item.color || 'primary'" disabled="disabled">{{ item.badge }}</v-circle> -->
-            <v-list-item-action v-if="item.subAction">
+            <v-list-item-icon v-if="item.subAction">
               <v-icon class="success--text">{{ item.subAction }}</v-icon>
-            </v-list-item-action>
+            </v-list-item-icon>
             <!-- <v-circle class="caption blue lighten-2 white--text mx-0" v-else-if="item.chip" label="label" small="small">{{ item.chip }}</v-circle> -->
           </v-list-item>
         </template>
@@ -139,14 +151,13 @@ export default {
     logo: "/cat.png",
     menus: menu,
     responsive: false,
-    slider: false,
     mini: false,
     scrollSettings: {
       maxScrollbarLength: 160
     }
   }),
   computed: {
-    ...mapState("app", ["image", "color"]),
+    ...mapState("app", ["image", "color", "slider"]),
     inputValue: {
       get() {
         return this.$store.state.app.drawer;
@@ -177,7 +188,7 @@ export default {
     window.removeEventListener("resize", this.onResponsiveInverted);
   },
   methods: {
-    ...mapMutations("app", ["setDrawer", "toggleDrawer"]),
+    ...mapMutations("app", ["setDrawer", "toggleDrawer", "setSlider"]),
     onResponsiveInverted() {
       if (window.innerWidth < 991) {
         this.responsive = true;

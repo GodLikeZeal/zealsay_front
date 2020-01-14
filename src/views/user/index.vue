@@ -2,7 +2,7 @@
   <div id="index">
     <!-- header -->
     <v-card color="primary" height="450">
-      <blog-nav :category="categorys"></blog-nav>
+      <blog-nav :category="category"></blog-nav>
       <v-container>
         <v-layout>
           <v-flex md12>
@@ -66,10 +66,10 @@
               <activity :actions="actions"></activity>
             </v-tab-item>
             <v-tab-item key="blog">
-              <blog :desserts="blogs" :category="categorys"></blog>
+              <blog :desserts="blogs" :category="category"></blog>
             </v-tab-item>
             <v-tab-item key="like"
-              ><like :desserts="likes" :category="categorys"></like
+              ><like :desserts="likes" :category="category"></like
             ></v-tab-item>
             <v-tab-item key="info"
               ><info :form="user" :province="provinces" :roles="roles"></info
@@ -77,7 +77,7 @@
           </v-tabs>
         </v-col>
       </v-row>
-      <back-to-top :visibility-height="300" :back-position="0" />
+      <core-back-to-top :visibility-height="300" :back-position="0" />
     </v-container>
     <!-- 页脚 -->
     <v-layout row>
@@ -116,27 +116,16 @@ export default {
   },
   data: () => ({
     loading: true,
-    categorys: [],
+    category: [],
     blogs: [],
     likes: [],
     actions: [],
     roles: [],
     provinces: [],
-    user: ""
+    user: {}
   }),
   computed: {
-    ...mapState("user", [
-      "id",
-      "username",
-      "avatar",
-      "age",
-      "sex",
-      "role",
-      "province",
-      "city",
-      "area",
-      "introduction"
-    ]),
+    ...mapState("user", ["id"]),
     like: {
       get: function() {
         return {
@@ -153,7 +142,8 @@ export default {
       this.$route.params.id == null ||
       this.$route.params.id === "" ||
       this.$route.params.id === undefined ||
-      this.$route.params.id === "undefined"
+      this.$route.params.id === "undefined" ||
+      this.$route.params.id !== this.id
     ) {
       this.$router.push("/404");
     }
@@ -268,7 +258,7 @@ export default {
           timer: 3000
         });
       });
-    getCurrentUserActions()
+    getRoleList()
       .then(res => {
         if (res.code === "200") {
           this.roles = res.data.map(r => {
@@ -328,118 +318,31 @@ export default {
           timer: 3000
         });
       });
-  },
-  async asyncData({ app, params, error }) {
-    if (
-      params.id == null ||
-      params.id === "" ||
-      params.id === undefined ||
-      params.id === "undefined"
-    ) {
-      return error({
-        statusCode: 404,
-        message: "该页面不存在"
-      });
-    }
-    const resCategory = await app.$axios.$request(getCategoryList());
-    let categorys = [];
-    if (resCategory.code === "200") {
-      categorys = resCategory.data;
-    } else {
-      return error({
-        statusCode: resCategory.code,
-        message: resCategory.message
-      });
-    }
-    const resUser = await app.$axios.$request(getUserById(params.id));
-    let user = {};
-    if (resUser.code === "200") {
-      if (resUser.data) {
-        user = resUser.data;
-      } else {
-        return error({
-          statusCode: 404,
-          message: "该页面不存在"
+    getUserById(this.$route.params.id)
+      .then(res => {
+        if (res.code === "200") {
+          this.user = res.data;
+        } else {
+          this.$swal({
+            text: res.message,
+            type: "error",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 3000
+          });
+        }
+      })
+      .catch(() => {
+        this.$swal({
+          text: "拉取省份失败",
+          type: "error",
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 3000
         });
-      }
-    } else {
-      return error({
-        statusCode: resUser.code,
-        message: resUser.message
       });
-    }
-    const objBlog = {};
-    objBlog.pageNumber = 1;
-    objBlog.pageSize = 12;
-    const resBlog = await app.$axios.$request(getCurrentUserBlog(objBlog));
-    let blogs = [];
-    if (resBlog.code === "200") {
-      blogs = resBlog.data.records;
-    } else {
-      return error({
-        statusCode: resBlog.code,
-        message: resBlog.message
-      });
-    }
-    const objLike = {};
-    objLike.pageNumber = 1;
-    objLike.pageSize = 12;
-    const resLike = await app.$axios.$request(getCurrentUserLikeBlog(objLike));
-    let likes = [];
-    if (resLike.code === "200") {
-      likes = resLike.data.records;
-    } else {
-      return error({
-        statusCode: resLike.code,
-        message: resLike.message
-      });
-    }
-    let actions = [];
-    const resActions = await app.$axios.$request(getCurrentUserActions());
-    if (resActions.code === "200") {
-      actions = resActions.data;
-    } else {
-      return error({
-        statusCode: resActions.code,
-        message: resActions.message
-      });
-    }
-    const resProvince = await app.$axios.$request(getProvinceList());
-    let provinces = [];
-    if (resProvince.code === "200") {
-      provinces = resProvince.data.map(r => {
-        return {
-          value: r.code,
-          text: r.name
-        };
-      });
-    } else {
-      return error({
-        statusCode: resProvince.code,
-        message: resProvince.message
-      });
-    }
-    const resRole = await app.$axios.$request(getRoleList());
-    let roles = [];
-    if (resRole.code === "200") {
-      roles = resRole.data.map(r => {
-        return {
-          value: r.value,
-          text: r.name
-        };
-      });
-    } else {
-      return error({ statusCode: resRole.code, message: resRole.message });
-    }
-    return {
-      categorys: categorys,
-      user: user,
-      blogs: blogs,
-      likes: likes,
-      actions: actions,
-      province: provinces,
-      roles: roles
-    };
   },
   methods: {
     search() {

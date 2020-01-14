@@ -1,7 +1,6 @@
 import { set } from "@/util/vuex";
 
 export default {
-  SET_CODE: set("code"),
   SET_TOKEN: set("token"),
   SET_INTRODUCTION: set("introduction"),
   SET_SETTING: set("setting"),
