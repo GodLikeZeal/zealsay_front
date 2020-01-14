@@ -22,40 +22,34 @@ router.beforeEach((to, from, next) => {
     // determine if there has token
     /* has token */
     if (to.path === "/login") {
-      console.log("login啊");
       next({ path: "/" });
       // if current page is dashboard will not trigger	afterEach hook, so manually handle it
       NProgress.done();
     } else {
       if (!store.state.user.role) {
         // 判断当前用户是否已拉取完user_info信息
-        console.log("拉取角色信息");
         store
           .dispatch("user/GetUserInfo")
-          .then(res => {
+          .then(() => {
             // 拉取user_info
-            const role = res.data.role; // note: roles must be a array! such as: ['editor','develop']
-            console.log(role);
+            // const role = res.data.role; // note: roles must be a array! such as: ['editor','develop']
             // store.dispatch('GenerateRoutes', { roles }).then(() => { // 根据roles权限生成可访问的路由表
             //   router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
             next({ ...to, replace: true }); // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
             // })
           })
-          .catch(error => {
+          .catch(() => {
             store.dispatch("user/FedLogOut").then(() => {
               // Message.error(err || 'Verification failed, please login again')
-              console.log(error);
               next({ path: "/" });
             });
           });
       } else {
         // 没有动态改变权限的需求可直接next() 删除下方权限判断 ↓
         if (hasPermission(store.state.user.role, to.meta.roles)) {
-          console.log("判断角色信息");
           next();
           // NProgress.done()
         } else {
-          console.log("没有权限403");
           next({ path: "/403", replace: true, query: { noGoBack: true } });
         }
       }

@@ -295,8 +295,7 @@ export default {
           });
         }
       })
-      .catch(e => {
-        console.log(e);
+      .catch(() => {
         this.$swal({
           text: "拉取省份信息失败!",
           type: "error",

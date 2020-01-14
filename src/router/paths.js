@@ -31,7 +31,7 @@ export default [
       import(
         /* webpackChunkName: "routes" */
         /* webpackMode: "lazy-once" */
-        `@/views/Deny.vue`
+        `@/views/403.vue`
       )
   },
   {
