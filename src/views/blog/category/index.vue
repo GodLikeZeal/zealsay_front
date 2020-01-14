@@ -100,7 +100,6 @@ export default {
   created() {
     let query = {};
     query.categoryId = this.$route.params.id;
-    console.log(query);
     getArticlePageListToC(query)
       .then(res => {
         if (res.code === "200") {
