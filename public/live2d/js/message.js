@@ -163,7 +163,7 @@ if (!norunFlag) {
 	function showHitokoto() {
     if (sessionStorage.getItem('Sleepy') !== '1') {
       if (!AITalkFlag) {
-        $.getJSON(base_url + 'app/api/v1/service/hitokoto', function(result) {
+        $.getJSON(base_url + 'api/v1/service/hitokoto', function(result) {
           talkValTimer()
 					showMessage(result.data.hitokoto, 0)
 				})
