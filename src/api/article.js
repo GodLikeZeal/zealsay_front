@@ -106,7 +106,7 @@ export function getArticlePageList(obj) {
   return request({
     url: "/api/v1/article/page",
     method: "get",
-    data: obj
+    params: obj
   });
 }
 
@@ -120,7 +120,7 @@ export function getArticlePageListToC(obj) {
   return request({
     url: "/api/v1/article/c/page",
     method: "get",
-    data: obj
+    params: obj
   });
 }
 
