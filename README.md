@@ -61,12 +61,12 @@
 ```javascript
   devServer: {
     proxy: {
-      "/app": {
-        target: "http://localhost:8090", //填写你开发环境后台的服务器url
+      "/api": {
+        target: "http://localhost:8090",
         changeOrigin: true,
         ws: true,
         pathRewrite: {
-          "^/app": ""
+          "^/api": "api"
         }
       }
     }
