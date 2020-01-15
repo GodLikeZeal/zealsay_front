@@ -10,6 +10,20 @@ module.exports = {
       );
       return args;
     });
+    // 压缩代码
+    config.optimization.minimize(true);
+    // 分割代码
+    config.optimization.splitChunks({
+      chunks: "all"
+    });
+    // 用cdn方式引入
+    config.externals({
+      vue: "Vue",
+      vuex: "Vuex",
+      "vue-router": "VueRouter",
+      vuetify: "Vuetify", // 需用Vuetify
+      axios: "axios"
+    });
     if (process.env.NODE_ENV === "production") {
       // #region 启用GZip压缩
       config
@@ -52,7 +66,7 @@ module.exports = {
   runtimeCompiler: true,
 
   css: {
-    extract: false
+    extract: true
   },
 
   publicPath: undefined,
