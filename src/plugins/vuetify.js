@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Vuetify from "vuetify/lib";
 import colors from "vuetify/es5/util/colors";
-// import "@mdi/font/css/materialdesignicons.css";
-// import "material-design-icons-iconfont/dist/material-design-icons.css"; // Ensure you are using css-loader
+import "@mdi/font/css/materialdesignicons.css";
+import "material-design-icons-iconfont/dist/material-design-icons.css"; // Ensure you are using css-loader
 import zhHans from "vuetify/es5/locale/zh-Hans";
 
 Vue.use(Vuetify);
