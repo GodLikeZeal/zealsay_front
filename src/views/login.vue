@@ -21,7 +21,7 @@
                 v-model="form.username"
                 append-icon="person"
                 :rules="usernameRules"
-                label="输入用户名或邮箱"
+                placeholder="输入用户名或邮箱"
                 type="text"
               ></v-text-field>
               <v-text-field
@@ -29,7 +29,7 @@
                 append-icon="lock"
                 v-model="form.password"
                 :rules="passwordRules"
-                label="登录密码"
+                placeholder="登录密码"
                 type="password"
               ></v-text-field>
               <a class="primary--text" href="register">注册账号</a>
@@ -49,12 +49,7 @@
             <!--                <v-btn title="QQ登录" icon>-->
             <!--                  <v-icon medium color="light-blue">mdi-qqchat</v-icon>-->
             <!--                </v-btn>-->
-            <v-btn
-              title="github登录"
-              nuxt
-              href="/api/v1/oauth/login/github"
-              icon
-            >
+            <v-btn title="github登录" nuxt :href="github" icon>
               <v-icon medium color="light-grey">mdi-github-circle</v-icon>
             </v-btn>
             <v-spacer></v-spacer>
@@ -319,6 +314,9 @@ export default {
   computed: {
     canva: function() {
       return this.$refs.universe;
+    },
+    github: function() {
+      return process.env.VUE_APP_API_URL + "/api/v1/oauth/login/github";
     }
   },
   watch: {
