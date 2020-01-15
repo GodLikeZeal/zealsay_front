@@ -171,7 +171,7 @@ export default {
     },
     logout() {
       this.$store.dispatch("user/LogOut").then(() => {
-        // location.reload(); // In order to re-instantiate the vue-router object to avoid bugs
+        location.reload(); // In order to re-instantiate the vue-router object to avoid bugs
       });
     }
   }
