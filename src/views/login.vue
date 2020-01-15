@@ -294,8 +294,8 @@ export default {
     msg: "aa",
     loading: false,
     form: {
-      username: "zeal",
-      password: "123456"
+      username: "",
+      password: ""
     },
     redirect: undefined,
     visible: false,
