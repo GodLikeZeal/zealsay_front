@@ -8,7 +8,7 @@ import request from "@/util/request";
  */
 export function getHitokoto(obj) {
   return request({
-    url: "/app/api/v1/service/hitokoto",
+    url: "/api/v1/service/hitokoto",
     method: "get",
     data: obj
   });

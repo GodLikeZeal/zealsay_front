@@ -8,7 +8,7 @@ import request from "@/util/request";
  */
 export function getFriendLinkList() {
   return request({
-    url: "/app/api/v1/friend/link/page",
+    url: "/api/v1/friend/link/page",
     method: "get"
   });
 }
@@ -21,7 +21,7 @@ export function getFriendLinkList() {
  */
 export function saveFriendLink(obj) {
   return request({
-    url: "/app/api/v1/friend/link",
+    url: "/api/v1/friend/link",
     method: "post",
     data: obj
   });
@@ -35,7 +35,7 @@ export function saveFriendLink(obj) {
  */
 export function updateFriendLinkById(obj) {
   return request({
-    url: "/app/api/v1/friend/link",
+    url: "/api/v1/friend/link",
     method: "put",
     data: obj
   });
@@ -48,7 +48,7 @@ export function updateFriendLinkById(obj) {
  */
 export function deleteFriendLinkById(id) {
   return request({
-    url: "/app/api/v1/friend/link/" + id,
+    url: "/api/v1/friend/link/" + id,
     method: "delete"
   });
 }

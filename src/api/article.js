@@ -8,7 +8,7 @@ import request from "@/util/request";
  */
 export function getCategoryList(obj) {
   return request({
-    url: "/app/api/v1/article/category",
+    url: "/api/v1/article/category",
     method: "get",
     data: obj
   });
@@ -22,7 +22,7 @@ export function getCategoryList(obj) {
  */
 export function addCategory(obj) {
   return request({
-    url: "/app/api/v1/article/category",
+    url: "/api/v1/article/category",
     method: "post",
     data: obj
   });
@@ -36,7 +36,7 @@ export function addCategory(obj) {
  */
 export function updateCategory(obj) {
   return request({
-    url: "/app/api/v1/article/category",
+    url: "/api/v1/article/category",
     method: "put",
     data: obj
   });
@@ -50,7 +50,7 @@ export function updateCategory(obj) {
  */
 export function deleteCategory(id) {
   return request({
-    url: "/app/api/v1/article/category/" + id,
+    url: "/api/v1/article/category/" + id,
     method: "delete"
   });
 }
@@ -63,7 +63,7 @@ export function deleteCategory(id) {
  */
 export function getArticle(id) {
   return request({
-    url: "/app/api/v1/article/" + id,
+    url: "/api/v1/article/" + id,
     method: "get"
   });
 }
@@ -76,7 +76,7 @@ export function getArticle(id) {
  */
 export function saveArticle(obj) {
   return request({
-    url: "/app/api/v1/article",
+    url: "/api/v1/article",
     method: "post",
     data: obj
   });
@@ -90,7 +90,7 @@ export function saveArticle(obj) {
  */
 export function updateArticle(obj) {
   return request({
-    url: "/app/api/v1/article",
+    url: "/api/v1/article",
     method: "put",
     data: obj
   });
@@ -104,7 +104,7 @@ export function updateArticle(obj) {
  */
 export function getArticlePageList(obj) {
   return request({
-    url: "/app/api/v1/article/page",
+    url: "/api/v1/article/page",
     method: "get",
     data: obj
   });
@@ -118,7 +118,7 @@ export function getArticlePageList(obj) {
  */
 export function getArticlePageListToC(obj) {
   return request({
-    url: "/app/api/v1/article/c/page",
+    url: "/api/v1/article/c/page",
     method: "get",
     data: obj
   });
@@ -132,7 +132,7 @@ export function getArticlePageListToC(obj) {
  */
 export function markArticleDown(id) {
   return request({
-    url: "/app/api/v1/article/down/" + id,
+    url: "/api/v1/article/down/" + id,
     method: "put"
   });
 }
@@ -145,7 +145,7 @@ export function markArticleDown(id) {
  */
 export function markArticleUp(id) {
   return request({
-    url: "/app/api/v1/article/up/" + id,
+    url: "/api/v1/article/up/" + id,
     method: "put"
   });
 }
@@ -158,7 +158,7 @@ export function markArticleUp(id) {
  */
 export function getArticleLabelPage(obj) {
   return request({
-    url: "/app/api/v1/article/label/page",
+    url: "/api/v1/article/label/page",
     method: "get",
     params: obj
   });
@@ -172,7 +172,7 @@ export function getArticleLabelPage(obj) {
  */
 export function getArticleLabelList() {
   return request({
-    url: "/app/api/v1/article/label",
+    url: "/api/v1/article/label",
     method: "get"
   });
 }
@@ -185,7 +185,7 @@ export function getArticleLabelList() {
  */
 export function addArticleLabel(obj) {
   return request({
-    url: "/app/api/v1/article/label",
+    url: "/api/v1/article/label",
     method: "post",
     data: obj
   });
@@ -199,7 +199,7 @@ export function addArticleLabel(obj) {
  */
 export function updateArticleLabel(obj) {
   return request({
-    url: "/app/api/v1/article/label",
+    url: "/api/v1/article/label",
     method: "put",
     data: obj
   });
@@ -213,7 +213,7 @@ export function updateArticleLabel(obj) {
  */
 export function deleteArticleLabel(id) {
   return request({
-    url: "/app/api/v1/article/label/" + id,
+    url: "/api/v1/article/label/" + id,
     method: "delete"
   });
 }
@@ -226,7 +226,7 @@ export function deleteArticleLabel(id) {
  */
 export function readArticle(id) {
   return request({
-    url: "/app/api/v1/article/read/" + id,
+    url: "/api/v1/article/read/" + id,
     method: "get"
   });
 }
@@ -239,7 +239,7 @@ export function readArticle(id) {
  */
 export function isLikeArticle(id) {
   return request({
-    url: "/app/api/v1/article/islike/" + id,
+    url: "/api/v1/article/islike/" + id,
     method: "get"
   });
 }
@@ -251,7 +251,7 @@ export function isLikeArticle(id) {
  */
 export function likeArticle(id) {
   return request({
-    url: "/app/api/v1/article/like/" + id,
+    url: "/api/v1/article/like/" + id,
     method: "get"
   });
 }
@@ -263,7 +263,7 @@ export function likeArticle(id) {
  */
 export function disLikeArticle(id) {
   return request({
-    url: "/app/api/v1/article/dislike/" + id,
+    url: "/api/v1/article/dislike/" + id,
     method: "get"
   });
 }

@@ -8,7 +8,7 @@ import request from "@/util/request";
  */
 export function getRoleList(obj) {
   return request({
-    url: "/app/api/v1/role",
+    url: "/api/v1/role",
     method: "get",
     data: obj
   });
@@ -21,7 +21,7 @@ export function getRoleList(obj) {
  */
 export function getRolePageList(obj) {
   return request({
-    url: "/app/api/v1/role/page",
+    url: "/api/v1/role/page",
     method: "get",
     data: obj
   });
@@ -34,7 +34,7 @@ export function getRolePageList(obj) {
  */
 export function addRole(obj) {
   return request({
-    url: "/app/api/v1/role",
+    url: "/api/v1/role",
     method: "post",
     data: obj
   });
@@ -47,7 +47,7 @@ export function addRole(obj) {
  */
 export function updateRole(obj) {
   return request({
-    url: "/app/api/v1/role",
+    url: "/api/v1/role",
     method: "put",
     data: obj
   });
@@ -60,7 +60,7 @@ export function updateRole(obj) {
  */
 export function deleteRole(obj) {
   return request({
-    url: "/app/api/v1/role/" + obj,
+    url: "/api/v1/role/" + obj,
     method: "delete"
   });
 }
@@ -72,7 +72,7 @@ export function deleteRole(obj) {
  */
 export function deleteRoleBatch(obj) {
   return request({
-    url: "/app/api/v1/role/batch",
+    url: "/api/v1/role/batch",
     method: "delete",
     data: obj
   });
