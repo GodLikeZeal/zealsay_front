@@ -10,7 +10,7 @@ export function getRoleList(obj) {
   return request({
     url: "/api/v1/role",
     method: "get",
-    data: obj
+    params: obj
   });
 }
 /**
@@ -23,7 +23,7 @@ export function getRolePageList(obj) {
   return request({
     url: "/api/v1/role/page",
     method: "get",
-    data: obj
+    params: obj
   });
 }
 /**

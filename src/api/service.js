@@ -10,6 +10,6 @@ export function getHitokoto(obj) {
   return request({
     url: "/api/v1/service/hitokoto",
     method: "get",
-    data: obj
+    params: obj
   });
 }
