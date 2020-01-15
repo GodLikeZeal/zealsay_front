@@ -52,7 +52,7 @@
             <v-btn
               title="github登录"
               nuxt
-              href="/app/api/v1/oauth/login/github"
+              href="/api/v1/oauth/login/github"
               icon
             >
               <v-icon medium color="light-grey">mdi-github-circle</v-icon>
@@ -346,7 +346,11 @@ export default {
         .dispatch("user/LoginByUsername", this.form)
         .then(() => {
           this.loading = false;
-          this.$router.push({ path: this.redirect || "/" });
+          if (this.redirect) {
+            this.$router.push({ path: this.redirect });
+          } else {
+            this.$router.push({ path: "/" });
+          }
         })
         .catch(err => {
           this.loading = false;

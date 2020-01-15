@@ -1,11 +1,11 @@
 const CompressionPlugin = require("compression-webpack-plugin");
-const webpack = require("webpack");
+// const webpack = require("webpack");
 
 // 是否为生产环境
 const isProduction = process.env.NODE_ENV === "production";
 
 // 本地环境是否需要使用cdn
-const devNeedCdn = true;
+const devNeedCdn = false;
 
 // cdn链接
 const cdn = {
@@ -57,7 +57,7 @@ module.exports = {
     // ============注入cdn start============
     config.plugin("html").tap(args => {
       // 生产环境或本地需要cdn时，才注入cdn
-      if (isProduction || devNeedCdn) args[0].cdn = cdn;
+      if (isProduction && devNeedCdn) args[0].cdn = cdn;
       return args;
     });
     // ============注入cdn start============
