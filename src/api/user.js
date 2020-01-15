@@ -8,7 +8,7 @@ import request from "@/util/request";
  */
 export function getUserList(obj) {
   return request({
-    url: "/app/api/v1/user/page",
+    url: "/api/v1/user/page",
     method: "GET",
     data: obj
   });
@@ -21,7 +21,7 @@ export function getUserList(obj) {
  */
 export function getUserById(id) {
   return request({
-    url: "/app/api/v1/user/" + id,
+    url: "/api/v1/user/" + id,
     method: "GET"
   });
 }
@@ -33,7 +33,7 @@ export function getUserById(id) {
  */
 export function addUser(obj) {
   return request({
-    url: "/app/api/v1/user",
+    url: "/api/v1/user",
     method: "POST",
     data: obj
   });
@@ -46,7 +46,7 @@ export function addUser(obj) {
  */
 export function editUser(obj) {
   return request({
-    url: "/app/api/v1/user",
+    url: "/api/v1/user",
     method: "PUT",
     data: obj
   });
@@ -59,7 +59,7 @@ export function editUser(obj) {
  */
 export function disabeledUserBatch(obj) {
   return request({
-    url: "/app/api/v1/user/disable/batch",
+    url: "/api/v1/user/disable/batch",
     method: "PUT",
     data: obj
   });
@@ -72,7 +72,7 @@ export function disabeledUserBatch(obj) {
  */
 export function unsealingUserBatch(obj) {
   return request({
-    url: "/app/api/v1/user/unsealing/batch",
+    url: "/api/v1/user/unsealing/batch",
     method: "PUT",
     data: obj
   });
@@ -85,7 +85,7 @@ export function unsealingUserBatch(obj) {
  */
 export function disabeledUser(obj) {
   return request({
-    url: "/app/api/v1/user/disable/" + obj,
+    url: "/api/v1/user/disable/" + obj,
     method: "PUT"
   });
 }
@@ -97,7 +97,7 @@ export function disabeledUser(obj) {
  */
 export function unsealingUser(obj) {
   return request({
-    url: "/app/api/v1/user/unsealing/" + obj,
+    url: "/api/v1/user/unsealing/" + obj,
     method: "PUT"
   });
 }
@@ -110,7 +110,7 @@ export function unsealingUser(obj) {
  */
 export function getIsInUseByUsername(obj) {
   return request({
-    url: "/app/api/v1/user/use/username/" + obj.username,
+    url: "/api/v1/user/use/username/" + obj.username,
     method: "GET",
     data: obj.id
   });
@@ -124,7 +124,7 @@ export function getIsInUseByUsername(obj) {
  */
 export function getIsInUseByPhone(obj) {
   return request({
-    url: "/app/api/v1/user/use/phone/" + obj.phoneNumber,
+    url: "/api/v1/user/use/phone/" + obj.phoneNumber,
     method: "GET",
     data: obj.id
   });
@@ -138,7 +138,7 @@ export function getIsInUseByPhone(obj) {
  */
 export function getIsInUseByEmail(obj) {
   return request({
-    url: "/app/api/v1/user/use/email/" + obj.email,
+    url: "/api/v1/user/use/email/" + obj.email,
     method: "GET",
     data: obj.id
   });
@@ -152,7 +152,7 @@ export function getIsInUseByEmail(obj) {
  */
 export function register(obj) {
   return request({
-    url: "/app/api/v1/user/register",
+    url: "/api/v1/user/register",
     method: "POST",
     data: obj
   });
@@ -166,7 +166,7 @@ export function register(obj) {
  */
 export function confirmEmail(obj) {
   return request({
-    url: "/app/api/v1/user/confirm/email",
+    url: "/api/v1/user/confirm/email",
     method: "POST",
     params: obj
   });
@@ -180,7 +180,7 @@ export function confirmEmail(obj) {
  */
 export function uploadImage(obj) {
   return request({
-    url: "/app/api/v1/qiniu/upload",
+    url: "/api/v1/qiniu/upload",
     method: "post",
     data: obj,
     headers: {
@@ -197,7 +197,7 @@ export function uploadImage(obj) {
  */
 export function uploadAvatar(obj) {
   return request({
-    url: "/app/api/v1/qiniu/upload/avatar",
+    url: "/api/v1/qiniu/upload/avatar",
     method: "post",
     data: obj,
     headers: {
@@ -214,7 +214,7 @@ export function uploadAvatar(obj) {
  */
 export function uploadArticle(obj) {
   return request({
-    url: "/app/api/v1/qiniu/upload/article",
+    url: "/api/v1/qiniu/upload/article",
     method: "post",
     data: obj,
     headers: {
@@ -231,7 +231,7 @@ export function uploadArticle(obj) {
  */
 export function uploadImageMultiple(obj) {
   return request({
-    url: "/app/api/v1/qiniu/upload/multiple",
+    url: "/api/v1/qiniu/upload/multiple",
     method: "post",
     data: obj,
     headers: {
@@ -247,7 +247,7 @@ export function uploadImageMultiple(obj) {
  */
 export function getCurrentUserBlog(obj) {
   return request({
-    url: "/app/api/v1/user/blog",
+    url: "/api/v1/user/blog",
     method: "get",
     params: obj
   });
@@ -260,7 +260,7 @@ export function getCurrentUserBlog(obj) {
  */
 export function getCurrentUserLikeBlog(obj) {
   return request({
-    url: "/app/api/v1/user/like",
+    url: "/api/v1/user/like",
     method: "get",
     params: obj
   });
@@ -273,7 +273,7 @@ export function getCurrentUserLikeBlog(obj) {
  */
 export function getCurrentUserActions() {
   return request({
-    url: "/app/api/v1/user/action/timelines",
+    url: "/api/v1/user/action/timelines",
     method: "get"
   });
 }
