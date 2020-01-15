@@ -15,21 +15,21 @@
                 zealsay 说你想说
               </h2>
             </div>
-            <v-form id="form">
+            <v-form id="form" ref="form" lazy-validation>
               <v-text-field
                 id="username"
                 v-model="form.username"
                 append-icon="person"
-                name="username"
-                placeholder="用户名/邮箱"
+                :rules="usernameRules"
+                label="输入用户名或邮箱"
                 type="text"
               ></v-text-field>
               <v-text-field
                 id="password"
                 append-icon="lock"
                 v-model="form.password"
-                name="password"
-                placeholder="登录密码"
+                :rules="passwordRules"
+                label="登录密码"
                 type="password"
               ></v-text-field>
               <a class="primary--text" href="register">注册账号</a>
@@ -300,6 +300,8 @@ export default {
     redirect: undefined,
     visible: false,
     errMsg: "",
+    usernameRules: [v => !!v || "用户名或邮箱不能为空!"],
+    passwordRules: [v => !!v || "密码不能为空!"],
     starDensity: 0.216,
     speedCoeff: 0.05,
     width: "",
@@ -342,24 +344,26 @@ export default {
       this.loading = true;
       this.visible = false;
       // 登录接口待调试
-      this.$store
-        .dispatch("user/LoginByUsername", this.form)
-        .then(() => {
-          this.loading = false;
-          if (this.redirect) {
-            this.$router.push({ path: this.redirect });
-          } else {
-            this.$router.push({ path: "/" });
-          }
-        })
-        .catch(err => {
-          this.loading = false;
-          this.visible = true;
-          this.errMsg = err.message;
-          setTimeout(() => {
-            this.visible = false;
-          }, 5000);
-        });
+      if (this.$refs.form.validate()) {
+        this.$store
+          .dispatch("user/LoginByUsername", this.form)
+          .then(() => {
+            this.loading = false;
+            if (this.redirect) {
+              this.$router.push({ path: this.redirect });
+            } else {
+              this.$router.push({ path: "/" });
+            }
+          })
+          .catch(err => {
+            this.loading = false;
+            this.visible = true;
+            this.errMsg = err.message;
+            setTimeout(() => {
+              this.visible = false;
+            }, 5000);
+          });
+      }
     },
     windowResizeHandler() {
       this.width = window.innerWidth;
