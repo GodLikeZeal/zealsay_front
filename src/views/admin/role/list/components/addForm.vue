@@ -96,7 +96,7 @@ export default {
           .then(res => {
             this.loading = false;
             if (res.code === "200" && res.data) {
-              this.$swal({
+              this.$swal.fire({
                 text: "添加成功",
                 type: "success",
                 toast: true,
@@ -107,7 +107,7 @@ export default {
               this.$parent.refresh();
               this.$emit("handleCancel");
             } else {
-              this.$swal({
+              this.$swal.fire({
                 text: res.message,
                 type: "error",
                 toast: true,
@@ -119,7 +119,7 @@ export default {
           })
           .catch(e => {
             this.loading = false;
-            this.$swal({
+            this.$swal.fire({
               text: e.message,
               type: "error",
               toast: true,

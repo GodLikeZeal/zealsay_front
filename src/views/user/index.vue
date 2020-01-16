@@ -122,7 +122,7 @@ export default {
         if (res.code === "200") {
           this.user = res.data;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
             type: "error",
             toast: true,
@@ -133,7 +133,7 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取省份失败",
           type: "error",
           toast: true,

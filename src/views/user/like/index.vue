@@ -45,9 +45,9 @@ export default {
         if (res.code === "200") {
           this.desserts = res.data.records;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -56,9 +56,9 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取文章失败",
-          type: "error",
+          icon: "error",
           toast: true,
           position: "top",
           showConfirmButton: false,
@@ -72,18 +72,18 @@ export default {
         .then(res => {
           if (res.code === "200" && res.data) {
             location.reload();
-            this.$swal({
+            this.$swal.fire({
               text: "已经从喜欢列表移除！",
-              type: "success",
+              icon: "success",
               toast: true,
               position: "top",
               showConfirmButton: false,
               timer: 3000
             });
           } else {
-            this.$swal({
+            this.$swal.fire({
               text: res.message,
-              type: "error",
+              icon: "error",
               toast: true,
               position: "top",
               showConfirmButton: false,
@@ -92,9 +92,9 @@ export default {
           }
         })
         .catch(e => {
-          this.$swal({
+          this.$swal.fire({
             text: e.message,
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,

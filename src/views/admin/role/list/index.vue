@@ -150,9 +150,9 @@ export default {
             this.pagination.rowsPerPage = res.data.pageSize;
             this.pagination.totalItems = res.data.total;
           } else {
-            this.$swal({
+            this.$swal.fire({
               text: "拉取角色列表失败",
-              type: "error",
+              icon: "error",
               toast: true,
               position: "top",
               showConfirmButton: false,
@@ -161,9 +161,9 @@ export default {
           }
         })
         .catch(e => {
-          this.$swal({
+          this.$swal.fire({
             text: e.message,
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -208,79 +208,83 @@ export default {
       this.row = { ...row };
     },
     handleDelete(row) {
-      this.$swal({
-        title: "确定要删除吗？",
-        text: "一旦删除，该角色下的用户都无法使用",
-        type: "warning",
-        showCancelButton: true
-      }).then(result => {
-        if (result.value) {
-          this.$axios
-            .$request(deleteRole(row.id))
-            .then(res => {
-              this.loading = false;
-              if (res.code === "200" && res.data) {
-                this.$swal({
-                  title: "删除成功",
-                  text: "该角色已经安全删除",
-                  type: "success"
+      this.$swal
+        .fire({
+          title: "确定要删除吗？",
+          text: "一旦删除，该角色下的用户都无法使用",
+          icon: "warning",
+          showCancelButton: true
+        })
+        .then(result => {
+          if (result.value) {
+            this.$axios
+              .$request(deleteRole(row.id))
+              .then(res => {
+                this.loading = false;
+                if (res.code === "200" && res.data) {
+                  this.$swal.fire({
+                    title: "删除成功",
+                    text: "该角色已经安全删除",
+                    icon: "success"
+                  });
+                  this.refresh();
+                } else {
+                  this.$swal.fire({
+                    title: "删除失败",
+                    text: res.message,
+                    icon: "error"
+                  });
+                }
+              })
+              .catch(e => {
+                this.loading = false;
+                this.$swal.fire({
+                  text: e.message,
+                  icon: "error",
+                  toast: true,
+                  position: "top",
+                  showConfirmButton: false,
+                  timer: 3000
                 });
-                this.refresh();
-              } else {
-                this.$swal({
-                  title: "删除失败",
-                  text: res.message,
-                  type: "error"
-                });
-              }
-            })
-            .catch(e => {
-              this.loading = false;
-              this.$swal({
-                text: e.message,
-                type: "error",
-                toast: true,
-                position: "top",
-                showConfirmButton: false,
-                timer: 3000
               });
-            });
-        }
-      });
+          }
+        });
     },
     handleDeleteSelected(selected) {
       const param = selected.map(s => s.id);
       if (param.length > 0) {
-        this.$swal({
-          title: "确定要删除吗？",
-          text: "一旦删除，所选角色下的用户都无法使用",
-          type: "warning",
-          showCancelButton: true
-        }).then(result => {
-          if (result.value) {
-            this.$axios.$request(deleteRoleBatch(param)).then(res => {
-              if (res.code === "200" && res.data) {
-                this.$swal({
-                  title: "删除成功",
-                  text: "所选用户已经被封禁",
-                  type: "success"
-                });
-                this.refresh();
-              } else {
-                this.$swal({
-                  title: "删除失败",
-                  text: res.message,
-                  type: "error"
-                });
-              }
-            });
-          }
-        });
+        this.$swal
+          .fire({
+            title: "确定要删除吗？",
+            text: "一旦删除，所选角色下的用户都无法使用",
+            icon: "warning",
+            showCancelButton: true
+          })
+          .then(result => {
+            if (result.value) {
+              this.$axios.$request(deleteRoleBatch(param)).then(res => {
+                if (res.code === "200" && res.data) {
+                  this.$swal.fire({
+                    title: "删除成功",
+                    text: "所选用户已经被封禁",
+                    icon: "success"
+                  });
+                  this.refresh();
+                } else {
+                  this.$swal.fire({
+                    title: "删除失败",
+                    text: res.message,
+                    icon: "error"
+                  });
+                }
+              });
+            }
+          });
       } else {
-        this.$swal({
+        this.$swal.fire({
           title: "无法删除！",
           text: "请至少选择一条需要删除的角色！",
-          type: "warning"
+          icon: "warning"
         });
       }
     }

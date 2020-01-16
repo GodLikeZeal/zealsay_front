@@ -83,7 +83,7 @@ export default {
         if (res.code === "200") {
           this.desserts = res.data.records;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
             type: "error",
             toast: true,
@@ -94,7 +94,7 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取文章失败",
           type: "error",
           toast: true,

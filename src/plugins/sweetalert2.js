@@ -1,8 +1,7 @@
 import Vue from "vue";
-import VueSweetalert2 from "vue-sweetalert2";
+import Swal from "sweetalert2";
 
-Vue.use(VueSweetalert2, {
-  buttonsStyling: false,
+Swal.argsToParams({
   heightAuto: false,
   grow: true,
   confirmButtonClass:
@@ -12,3 +11,8 @@ Vue.use(VueSweetalert2, {
     "v-btn btn-alert v-btn--depressed v-btn--flat v-btn--outlined v-btn--round theme--light v-size--small darken-1--text",
   cancelButtonText: "取消"
 });
+
+Vue.swal = Swal;
+// 添加实例方法
+Vue.prototype.$swal = Swal;
+// Vue.use();

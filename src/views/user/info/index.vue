@@ -205,7 +205,7 @@ export default {
             };
           });
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: "拉取省市区信息失败!",
             type: "error",
             toast: true,
@@ -230,7 +230,7 @@ export default {
             };
           });
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: "拉取省市区信息失败!",
             type: "error",
             toast: true,
@@ -254,7 +254,7 @@ export default {
             };
           });
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
             type: "error",
             toast: true,
@@ -265,7 +265,7 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取角色失败",
           type: "error",
           toast: true,
@@ -284,7 +284,7 @@ export default {
             };
           });
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
             type: "error",
             toast: true,
@@ -295,7 +295,7 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取省份失败",
           type: "error",
           toast: true,
@@ -309,7 +309,7 @@ export default {
         if (res.code === "200") {
           this.form = res.data;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
             type: "error",
             toast: true,
@@ -320,7 +320,7 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取省份失败",
           type: "error",
           toast: true,
@@ -344,7 +344,7 @@ export default {
             };
           });
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: "拉取省市区信息失败!",
             type: "error",
             toast: true,
@@ -369,7 +369,7 @@ export default {
             };
           });
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: "拉取省市区信息失败!",
             type: "error",
             toast: true,
@@ -395,7 +395,7 @@ export default {
       editUser(this.form)
         .then(res => {
           if (res.code === "200" && res.data) {
-            this.$swal({
+            this.$swal.fire({
               text: "修改成功",
               type: "success",
               toast: true,
@@ -405,7 +405,7 @@ export default {
             });
           } else {
             this.loading = false;
-            this.$swal({
+            this.$swal.fire({
               text: res.message,
               type: "error",
               toast: true,
@@ -416,7 +416,7 @@ export default {
           }
         })
         .catch(e => {
-          this.$swal({
+          this.$swal.fire({
             text: e.message,
             type: "error",
             toast: true,
@@ -474,7 +474,7 @@ export default {
             if (res.code === "200") {
               this.form.avatar = res.data;
             } else {
-              this.$swal({
+              this.$swal.fire({
                 text: res.message,
                 type: "error",
                 toast: true,
@@ -485,7 +485,7 @@ export default {
             }
           })
           .catch(e => {
-            this.$swal({
+            this.$swal.fire({
               text: e.message,
               type: "error",
               toast: true,

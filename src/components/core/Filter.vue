@@ -120,10 +120,10 @@ export default {
       "danger"
     ],
     images: [
-      'https://pan.zealsay.com/slider-1.jpg',
-      'https://pan.zealsay.com/slider-2.jpg',
-      'https://pan.zealsay.com/slider-3.jpg',
-      'https://pan.zealsay.com/slider-4.jpg'
+      "https://pan.zealsay.com/slider-1.jpg",
+      "https://pan.zealsay.com/slider-2.jpg",
+      "https://pan.zealsay.com/slider-3.jpg",
+      "https://pan.zealsay.com/slider-4.jpg"
     ]
   }),
   computed: {

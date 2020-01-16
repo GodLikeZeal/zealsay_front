@@ -137,9 +137,9 @@ export default {
         if (res.code === "200") {
           this.article = res.data;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -148,9 +148,9 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取博客失败",
-          type: "error",
+          icon: "error",
           toast: true,
           position: "top",
           showConfirmButton: false,
@@ -164,9 +164,9 @@ export default {
         if (res.code === "200") {
           this.categorys = res.data;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -175,9 +175,9 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取内容失败",
-          type: "error",
+          icon: "error",
           toast: true,
           position: "top",
           showConfirmButton: false,
@@ -190,9 +190,9 @@ export default {
           if (res.code === "200") {
             this.like = res.data;
           } else {
-            this.$swal({
+            this.$swal.fire({
               text: res.message,
-              type: "error",
+              icon: "error",
               toast: true,
               position: "top",
               showConfirmButton: false,
@@ -201,9 +201,9 @@ export default {
           }
         })
         .catch(() => {
-          this.$swal({
+          this.$swal.fire({
             text: "拉取内容失败",
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -224,9 +224,9 @@ export default {
             if (res.code === "200" && res.data) {
               this.like = true;
             } else {
-              this.$swal({
+              this.$swal.fire({
                 text: "该文章不让你喜欢它！",
-                type: "error",
+                icon: "error",
                 toast: true,
                 position: "top",
                 showConfirmButton: false,
@@ -235,9 +235,9 @@ export default {
             }
           })
           .catch(e => {
-            this.$swal({
+            this.$swal.fire({
               text: e.message,
-              type: "error",
+              icon: "error",
               toast: true,
               position: "top",
               showConfirmButton: false,
@@ -245,9 +245,9 @@ export default {
             });
           });
       } else {
-        this.$swal({
+        this.$swal.fire({
           text: "需要先登录才能进行该操作哦！",
-          type: "warning",
+          icon: "warning",
           toast: true,
           position: "top",
           showConfirmButton: false,
@@ -262,9 +262,9 @@ export default {
             if (res.code === "200" && res.data) {
               this.like = false;
             } else {
-              this.$swal({
+              this.$swal.fire({
                 text: "该文章不准你不喜欢它！",
-                type: "error",
+                icon: "error",
                 toast: true,
                 position: "top",
                 showConfirmButton: false,
@@ -273,9 +273,9 @@ export default {
             }
           })
           .catch(e => {
-            this.$swal({
+            this.$swal.fire({
               text: e.message,
-              type: "error",
+              icon: "error",
               toast: true,
               position: "top",
               showConfirmButton: false,
@@ -283,9 +283,9 @@ export default {
             });
           });
       } else {
-        this.$swal({
+        this.$swal.fire({
           text: "需要先登录才能进行该操作哦！",
-          type: "warning",
+          icon: "warning",
           toast: true,
           position: "top",
           showConfirmButton: false,

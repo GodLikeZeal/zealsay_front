@@ -184,7 +184,7 @@ export default {
             };
           });
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: "拉取角色信息失败",
             type: "error",
             toast: true,
@@ -216,7 +216,7 @@ export default {
                   .then(res => {
                     this.loading = false;
                     if (res.code === "200" && res.data) {
-                      this.$swal({
+                      this.$swal.fire({
                         text: "修改成功",
                         type: "success",
                         toast: true,
@@ -227,7 +227,7 @@ export default {
                       this.$parent.search("");
                       this.$emit("handleCancel");
                     } else {
-                      this.$swal({
+                      this.$swal.fire({
                         text: res.message,
                         type: "error",
                         toast: true,
@@ -239,7 +239,7 @@ export default {
                   })
                   .catch(e => {
                     this.loading = false;
-                    this.$swal({
+                    this.$swal.fire({
                       text: e.message,
                       type: "error",
                       toast: true,
@@ -250,7 +250,7 @@ export default {
                   });
               } else {
                 this.loading = false;
-                this.$swal({
+                this.$swal.fire({
                   text: res.message,
                   type: "error",
                   toast: true,
@@ -262,7 +262,7 @@ export default {
             })
             .catch(e => {
               this.loading = false;
-              this.$swal({
+              this.$swal.fire({
                 text: e.message,
                 type: "error",
                 toast: true,
@@ -277,7 +277,7 @@ export default {
           .then(res => {
             if (res.code === "200" && res.data) {
               this.loading = false;
-              this.$swal({
+              this.$swal.fire({
                 text: "修改成功",
                 type: "success",
                 toast: true,
@@ -289,7 +289,7 @@ export default {
               this.$emit("handleCancel");
             } else {
               this.loading = false;
-              this.$swal({
+              this.$swal.fire({
                 text: res.message,
                 type: "error",
                 toast: true,
@@ -301,7 +301,7 @@ export default {
           })
           .catch(e => {
             this.loading = false;
-            this.$swal({
+            this.$swal.fire({
               text: e.message,
               type: "error",
               toast: true,

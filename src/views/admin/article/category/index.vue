@@ -178,7 +178,7 @@ export default {
         if (res.code === "200") {
           this.categorys = res.data;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
             type: "error",
             toast: true,
@@ -189,7 +189,7 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取文章分类失败",
           type: "error",
           toast: true,
@@ -207,7 +207,7 @@ export default {
           if (res.code === "200" && res.data) {
             this.categorys = res.data;
           } else {
-            this.$swal({
+            this.$swal.fire({
               text: res.message,
               type: "error",
               toast: true,
@@ -218,7 +218,7 @@ export default {
           }
         })
         .catch(e => {
-          this.$swal({
+          this.$swal.fire({
             text: e.message,
             type: "error",
             toast: true,
@@ -234,7 +234,7 @@ export default {
           .$request(updateCategory(obj))
           .then(res => {
             if (res.code === "200" && res.data) {
-              this.$swal({
+              this.$swal.fire({
                 text: "修改成功",
                 type: "success",
                 toast: true,
@@ -243,7 +243,7 @@ export default {
                 timer: 3000
               });
             } else {
-              this.$swal({
+              this.$swal.fire({
                 text: res.message,
                 type: "error",
                 toast: true,
@@ -254,7 +254,7 @@ export default {
             }
           })
           .catch(e => {
-            this.$swal({
+            this.$swal.fire({
               text: e.message,
               type: "error",
               toast: true,
@@ -269,7 +269,7 @@ export default {
       if (this.$refs.form.validate()) {
         const id = obj.id;
         if (id === undefined) {
-          this.$swal({
+          this.$swal.fire({
             text: "根目录无法删除",
             type: "error",
             toast: true,
@@ -283,7 +283,7 @@ export default {
           .$request(deleteCategory(id))
           .then(res => {
             if (res.code === "200" && res.data) {
-              this.$swal({
+              this.$swal.fire({
                 text: "删除成功",
                 type: "success",
                 toast: true,
@@ -293,7 +293,7 @@ export default {
               });
               this.refresh();
             } else {
-              this.$swal({
+              this.$swal.fire({
                 text: res.message,
                 type: "error",
                 toast: true,
@@ -304,7 +304,7 @@ export default {
             }
           })
           .catch(e => {
-            this.$swal({
+            this.$swal.fire({
               text: e.message,
               type: "error",
               toast: true,
