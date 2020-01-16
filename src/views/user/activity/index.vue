@@ -73,17 +73,11 @@
 </template>
 
 <script>
+import { getCurrentUserActions } from "@/api/user";
 export default {
   name: "Activity",
-  props: {
-    actions: {
-      type: Array,
-      default: function() {
-        return [];
-      }
-    }
-  },
   data: () => ({
+    actions: [],
     color: [
       "red",
       "pink",
@@ -139,7 +133,34 @@ export default {
         title: "您成为了系统的用户"
       }
     ]
-  })
+  }),
+  created() {
+    getCurrentUserActions()
+      .then(res => {
+        if (res.code === "200") {
+          this.actions = res.data;
+        } else {
+          this.$swal({
+            text: res.message,
+            type: "error",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 3000
+          });
+        }
+      })
+      .catch(() => {
+        this.$swal({
+          text: "拉取文章失败",
+          type: "error",
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 3000
+        });
+      });
+  }
 };
 </script>
 

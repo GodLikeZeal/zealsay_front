@@ -101,20 +101,14 @@
 </template>
 
 <script>
+import { getCategoryList } from "@/api/article";
+
 export default {
   name: "NavBar",
-  props: {
-    category: {
-      type: Array,
-      default: function() {
-        return [];
-      }
-    }
-  },
+  data: () => ({
+    categorys: []
+  }),
   computed: {
-    categorys: function() {
-      return this.category;
-    },
     loggedIn: function() {
       return this.$store.state.user.token;
     },
@@ -169,6 +163,33 @@ export default {
         }
       ];
     }
+  },
+  created() {
+    getCategoryList()
+      .then(res => {
+        if (res.code === "200") {
+          this.categorys = res.data;
+        } else {
+          this.$swal({
+            text: res.message,
+            type: "error",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 3000
+          });
+        }
+      })
+      .catch(() => {
+        this.$swal({
+          text: "拉取内容失败",
+          type: "error",
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 3000
+        });
+      });
   }
 };
 </script>

@@ -43,7 +43,7 @@
         </p>
       </v-card-text>
 
-      <v-divider></v-divider>
+      <v-divider class="divider"></v-divider>
 
       <v-card-text class="white--text">
         <p>
@@ -90,5 +90,8 @@ export default {
 <style scoped>
 .avatar {
   margin-right: 0 !important;
+}
+.divider {
+  border-color: #aaa;
 }
 </style>

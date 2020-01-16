@@ -71,21 +71,38 @@
   </v-container>
 </template>
 <script>
+import { getCurrentUserBlog } from "@/api/user";
 export default {
   name: "Blog",
-  props: {
-    pagination: {
-      type: Object,
-      default: function() {
-        return {};
-      }
-    },
-    desserts: {
-      type: Array,
-      default: function() {
-        return [];
-      }
-    }
+  data: () => ({
+    desserts: []
+  }),
+  created() {
+    getCurrentUserBlog()
+      .then(res => {
+        if (res.code === "200") {
+          this.desserts = res.data.records;
+        } else {
+          this.$swal({
+            text: res.message,
+            type: "error",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 3000
+          });
+        }
+      })
+      .catch(() => {
+        this.$swal({
+          text: "拉取文章失败",
+          type: "error",
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 3000
+        });
+      });
   }
 };
 </script>

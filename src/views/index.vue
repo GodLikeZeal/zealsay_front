@@ -2,8 +2,8 @@
   <div id="index">
     <!-- header -->
     <v-card tile flat color="primary" height="450">
-      <blog-nav :category="categorys"></blog-nav>
-      <blog-motto :hitokoto="motto"></blog-motto>
+      <blog-nav></blog-nav>
+      <blog-motto></blog-motto>
     </v-card>
     <v-container>
       <v-layout fill-height>
@@ -29,7 +29,7 @@
           <!-- 最近评论 -->
           <blog-recent-discuss></blog-recent-discuss>
           <!-- 标签云 -->
-          <blog-label-cloud :items="labels"></blog-label-cloud>
+          <blog-label-cloud></blog-label-cloud>
         </v-flex>
       </v-layout>
 
@@ -53,12 +53,7 @@ import MainCard from "@/components/blog/MainCard";
 import ArticleList from "@/components/blog/ArticleList";
 import RecentDiscuss from "@/components/blog/RecentDiscuss";
 import LabelCloud from "@/components/blog/LabelCloud";
-import { getHitokoto } from "@/api/service";
-import {
-  getArticleLabelPage,
-  getArticlePageListToC,
-  getCategoryList
-} from "@/api/article";
+import { getArticlePageListToC } from "@/api/article";
 
 export default {
   components: {
@@ -79,13 +74,6 @@ export default {
       sortBy: "",
       totalItems: 2
     },
-    motto: {
-      hitokoto: "",
-      creator: "",
-      from: ""
-    },
-    categorys: [],
-    labels: [],
     desserts: []
   }),
   computed: {
@@ -102,83 +90,6 @@ export default {
   },
   created() {
     this.search();
-    getHitokoto()
-      .then(res => {
-        if (res.code === "200") {
-          this.motto.hitokoto = res.data.hitokoto;
-          this.motto.creator = res.data.creator;
-          this.motto.from = res.data.from;
-        } else {
-          this.$swal({
-            text: res.message,
-            type: "error",
-            toast: true,
-            position: "top",
-            showConfirmButton: false,
-            timer: 3000
-          });
-        }
-      })
-      .catch(() => {
-        this.$swal({
-          text: "拉取内容失败",
-          type: "error",
-          toast: true,
-          position: "top",
-          showConfirmButton: false,
-          timer: 3000
-        });
-      });
-    getCategoryList()
-      .then(res => {
-        if (res.code === "200") {
-          this.categorys = res.data;
-        } else {
-          this.$swal({
-            text: res.message,
-            type: "error",
-            toast: true,
-            position: "top",
-            showConfirmButton: false,
-            timer: 3000
-          });
-        }
-      })
-      .catch(() => {
-        this.$swal({
-          text: "拉取内容失败",
-          type: "error",
-          toast: true,
-          position: "top",
-          showConfirmButton: false,
-          timer: 3000
-        });
-      });
-    getArticleLabelPage()
-      .then(res => {
-        if (res.code === "200") {
-          this.labels = res.data.records;
-        } else {
-          this.$swal({
-            text: res.message,
-            type: "error",
-            toast: true,
-            position: "top",
-            showConfirmButton: false,
-            timer: 3000
-          });
-        }
-      })
-      .catch(() => {
-        this.$swal({
-          text: "拉取文章标签失败",
-          type: "error",
-          toast: true,
-          position: "top",
-          showConfirmButton: false,
-          timer: 3000
-        });
-      });
   },
   methods: {
     search() {

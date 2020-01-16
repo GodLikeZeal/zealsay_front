@@ -2,7 +2,7 @@
   <div id="index">
     <!-- header -->
     <v-card color="primary" height="450">
-      <blog-nav :category="category"></blog-nav>
+      <blog-nav></blog-nav>
       <v-container>
         <v-layout>
           <v-flex md12>
@@ -62,18 +62,10 @@
             <v-tab key="like"> 喜欢 </v-tab>
             <v-tab key="info"> 资料 </v-tab>
 
-            <v-tab-item key="activity">
-              <activity :actions="actions"></activity>
-            </v-tab-item>
-            <v-tab-item key="blog">
-              <blog :desserts="blogs" :category="category"></blog>
-            </v-tab-item>
-            <v-tab-item key="like"
-              ><like :desserts="likes" :category="category"></like
-            ></v-tab-item>
-            <v-tab-item key="info"
-              ><info :form="user" :province="provinces" :roles="roles"></info
-            ></v-tab-item>
+            <v-tab-item key="activity"><activity></activity></v-tab-item>
+            <v-tab-item key="blog"><blog></blog></v-tab-item>
+            <v-tab-item key="like"><like></like></v-tab-item>
+            <v-tab-item key="info"><info></info></v-tab-item>
           </v-tabs>
         </v-col>
       </v-row>
@@ -96,15 +88,9 @@ import Activity from "./activity";
 import Blog from "./blog";
 import Info from "./info";
 import NavBar from "@/components/blog/NavBar";
-import { getCategoryList } from "@/api/article";
-import { getProvinceList } from "@/api/dict";
-import { getRoleList } from "@/api/role";
-import {
-  getUserById,
-  getCurrentUserBlog,
-  getCurrentUserLikeBlog,
-  getCurrentUserActions
-} from "@/api/user";
+
+import { getUserById } from "@/api/user";
+
 import { mapState } from "vuex";
 export default {
   components: {
@@ -116,26 +102,10 @@ export default {
   },
   data: () => ({
     loading: true,
-    category: [],
-    blogs: [],
-    likes: [],
-    actions: [],
-    roles: [],
-    provinces: [],
     user: {}
   }),
   computed: {
-    ...mapState("user", ["id"]),
-    like: {
-      get: function() {
-        return {
-          page: 1,
-          rowsPerPage: 12,
-          totalItems: 1
-        };
-      },
-      set: function() {}
-    }
+    ...mapState("user", ["id"])
   },
   created() {
     if (
@@ -147,177 +117,6 @@ export default {
     ) {
       this.$router.push("/404");
     }
-    getCategoryList()
-      .then(res => {
-        if (res.code === "200") {
-          let categorys = [];
-          const de = {};
-          de.text = "请选择分类目录";
-          de.value = "";
-          categorys.push(de);
-          for (let i = 0; i < res.data.length; i++) {
-            const re = {};
-            re.text = res.data[i].name;
-            re.value = res.data[i].id;
-            categorys.push(re);
-          }
-          this.category = categorys;
-        } else {
-          this.$swal({
-            text: res.message,
-            type: "error",
-            toast: true,
-            position: "top",
-            showConfirmButton: false,
-            timer: 3000
-          });
-        }
-      })
-      .catch(() => {
-        this.$swal({
-          text: "拉取文章分类失败",
-          type: "error",
-          toast: true,
-          position: "top",
-          showConfirmButton: false,
-          timer: 3000
-        });
-      });
-    getCurrentUserBlog()
-      .then(res => {
-        if (res.code === "200") {
-          this.blogs = res.data.records;
-        } else {
-          this.$swal({
-            text: res.message,
-            type: "error",
-            toast: true,
-            position: "top",
-            showConfirmButton: false,
-            timer: 3000
-          });
-        }
-      })
-      .catch(() => {
-        this.$swal({
-          text: "拉取文章失败",
-          type: "error",
-          toast: true,
-          position: "top",
-          showConfirmButton: false,
-          timer: 3000
-        });
-      });
-    getCurrentUserLikeBlog()
-      .then(res => {
-        if (res.code === "200") {
-          this.likes = res.data.records;
-        } else {
-          this.$swal({
-            text: res.message,
-            type: "error",
-            toast: true,
-            position: "top",
-            showConfirmButton: false,
-            timer: 3000
-          });
-        }
-      })
-      .catch(() => {
-        this.$swal({
-          text: "拉取文章失败",
-          type: "error",
-          toast: true,
-          position: "top",
-          showConfirmButton: false,
-          timer: 3000
-        });
-      });
-    getCurrentUserActions()
-      .then(res => {
-        if (res.code === "200") {
-          this.actions = res.data;
-        } else {
-          this.$swal({
-            text: res.message,
-            type: "error",
-            toast: true,
-            position: "top",
-            showConfirmButton: false,
-            timer: 3000
-          });
-        }
-      })
-      .catch(() => {
-        this.$swal({
-          text: "拉取文章失败",
-          type: "error",
-          toast: true,
-          position: "top",
-          showConfirmButton: false,
-          timer: 3000
-        });
-      });
-    getRoleList()
-      .then(res => {
-        if (res.code === "200") {
-          this.roles = res.data.map(r => {
-            return {
-              value: r.value,
-              text: r.name
-            };
-          });
-        } else {
-          this.$swal({
-            text: res.message,
-            type: "error",
-            toast: true,
-            position: "top",
-            showConfirmButton: false,
-            timer: 3000
-          });
-        }
-      })
-      .catch(() => {
-        this.$swal({
-          text: "拉取角色失败",
-          type: "error",
-          toast: true,
-          position: "top",
-          showConfirmButton: false,
-          timer: 3000
-        });
-      });
-    getProvinceList()
-      .then(res => {
-        if (res.code === "200") {
-          this.provinces = res.data.map(r => {
-            return {
-              value: r.code,
-              text: r.name
-            };
-          });
-        } else {
-          this.$swal({
-            text: res.message,
-            type: "error",
-            toast: true,
-            position: "top",
-            showConfirmButton: false,
-            timer: 3000
-          });
-        }
-      })
-      .catch(() => {
-        this.$swal({
-          text: "拉取省份失败",
-          type: "error",
-          toast: true,
-          position: "top",
-          showConfirmButton: false,
-          timer: 3000
-        });
-      });
     getUserById(this.$route.params.id)
       .then(res => {
         if (res.code === "200") {

@@ -34,20 +34,40 @@
 </template>
 
 <script>
+import { getArticleLabelPage } from "@/api/article";
 export default {
   name: "LabelCloud",
-  props: {
-    items: {
-      type: Array,
-      default: function() {
-        return [];
-      }
-    }
-  },
-  computed: {
-    labels: function() {
-      return this.items;
-    }
+
+  data: () => ({
+    labels: []
+  }),
+
+  created() {
+    getArticleLabelPage()
+      .then(res => {
+        if (res.code === "200") {
+          this.labels = res.data.records;
+        } else {
+          this.$swal({
+            text: res.message,
+            type: "error",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 3000
+          });
+        }
+      })
+      .catch(() => {
+        this.$swal({
+          text: "拉取文章标签失败",
+          type: "error",
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 3000
+        });
+      });
   }
 };
 </script>

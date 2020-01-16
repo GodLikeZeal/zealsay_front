@@ -16,20 +16,45 @@
 </template>
 
 <script>
+import { getHitokoto } from "@/api/service";
 export default {
   name: "Motto",
-  props: {
-    hitokoto: {
-      type: Object,
-      default: function() {
-        return {};
-      }
+  data: () => ({
+    motto: {
+      hitokoto:
+        "有人住高楼，有人在深沟，有人光万丈，有人一身锈，世人万千种，浮云莫去求，斯人若彩虹，遇上方知有。",
+      creator: "",
+      from: "zeal"
     }
-  },
-  computed: {
-    motto: function() {
-      return this.hitokoto;
-    }
+  }),
+  created() {
+    getHitokoto()
+      .then(res => {
+        if (res.code === "200") {
+          this.motto.hitokoto = res.data.hitokoto;
+          this.motto.creator = res.data.creator;
+          this.motto.from = res.data.from;
+        } else {
+          this.$swal({
+            text: res.message,
+            type: "error",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 3000
+          });
+        }
+      })
+      .catch(() => {
+        this.$swal({
+          text: "拉取内容失败",
+          type: "error",
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 3000
+        });
+      });
   }
 };
 </script>
