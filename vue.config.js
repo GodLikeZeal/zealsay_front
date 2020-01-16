@@ -145,10 +145,8 @@ module.exports = {
             test: new RegExp(
               "\\.(" + productionGzipExtensions.join("|") + ")$"
             ),
-            algorithm: "gzip",
             threshold: 10240,
-            minRatio: 0.8,
-            cache: true
+            minRatio: 0.8
           })
         );
       }
