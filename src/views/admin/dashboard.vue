@@ -1,76 +1,76 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-container fill-height fluid grid-list-xl>
     <v-layout wrap>
-      <v-flex md12 sm12 lg4>
-        <material-chart-card
-          :data="dailySalesChart.data"
-          :options="dailySalesChart.options"
-          color="info"
-          type="Line"
-        >
-          <h4 class="title font-weight-light">日活跃用户</h4>
-          <p class="category d-inline-flex font-weight-light">
-            <v-icon color="green" small>
-              mdi-arrow-up
-            </v-icon>
-            <span class="green--text">55%</span>&nbsp; 相比较昨天
-          </p>
+      <!--      <v-flex md12 sm12 lg4>-->
+      <!--        <material-chart-card-->
+      <!--          :data="dailySalesChart.data"-->
+      <!--          :options="dailySalesChart.options"-->
+      <!--          color="info"-->
+      <!--          type="Line"-->
+      <!--        >-->
+      <!--          <h4 class="title font-weight-light">日活跃用户</h4>-->
+      <!--          <p class="category d-inline-flex font-weight-light">-->
+      <!--            <v-icon color="green" small>-->
+      <!--              mdi-arrow-up-->
+      <!--            </v-icon>-->
+      <!--            <span class="green&#45;&#45;text">55%</span>&nbsp; 相比较昨天-->
+      <!--          </p>-->
 
-          <template slot="actions">
-            <v-icon class="mr-2" small>
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light"
-              >最后更新于4分钟前</span
-            >
-          </template>
-        </material-chart-card>
-      </v-flex>
-      <v-flex md12 sm12 lg4>
-        <material-chart-card
-          :data="emailsSubscriptionChart.data"
-          :options="emailsSubscriptionChart.options"
-          :responsive-options="emailsSubscriptionChart.responsiveOptions"
-          color="red"
-          type="Bar"
-        >
-          <h4 class="title font-weight-light">网站浏览量</h4>
-          <p class="category d-inline-flex font-weight-light">
-            本周数据一览
-          </p>
+      <!--          <template slot="actions">-->
+      <!--            <v-icon class="mr-2" small>-->
+      <!--              mdi-clock-outline-->
+      <!--            </v-icon>-->
+      <!--            <span class="caption grey&#45;&#45;text font-weight-light"-->
+      <!--              >最后更新于4分钟前</span-->
+      <!--            >-->
+      <!--          </template>-->
+      <!--        </material-chart-card>-->
+      <!--      </v-flex>-->
+      <!--      <v-flex md12 sm12 lg4>-->
+      <!--        <material-chart-card-->
+      <!--          :data="emailsSubscriptionChart.data"-->
+      <!--          :options="emailsSubscriptionChart.options"-->
+      <!--          :responsive-options="emailsSubscriptionChart.responsiveOptions"-->
+      <!--          color="red"-->
+      <!--          type="Bar"-->
+      <!--        >-->
+      <!--          <h4 class="title font-weight-light">网站浏览量</h4>-->
+      <!--          <p class="category d-inline-flex font-weight-light">-->
+      <!--            本周数据一览-->
+      <!--          </p>-->
 
-          <template slot="actions">
-            <v-icon class="mr-2" small>
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light"
-              >最后更新10分钟前</span
-            >
-          </template>
-        </material-chart-card>
-      </v-flex>
-      <v-flex md12 sm12 lg4>
-        <material-chart-card
-          :data="dataCompletedTasksChart.data"
-          :options="dataCompletedTasksChart.options"
-          color="green"
-          type="Line"
-        >
-          <h3 class="title font-weight-light">文章新增量</h3>
-          <p class="category d-inline-flex font-weight-light">
-            上周数据展示
-          </p>
+      <!--          <template slot="actions">-->
+      <!--            <v-icon class="mr-2" small>-->
+      <!--              mdi-clock-outline-->
+      <!--            </v-icon>-->
+      <!--            <span class="caption grey&#45;&#45;text font-weight-light"-->
+      <!--              >最后更新10分钟前</span-->
+      <!--            >-->
+      <!--          </template>-->
+      <!--        </material-chart-card>-->
+      <!--      </v-flex>-->
+      <!--      <v-flex md12 sm12 lg4>-->
+      <!--        <material-chart-card-->
+      <!--          :data="dataCompletedTasksChart.data"-->
+      <!--          :options="dataCompletedTasksChart.options"-->
+      <!--          color="green"-->
+      <!--          type="Line"-->
+      <!--        >-->
+      <!--          <h3 class="title font-weight-light">文章新增量</h3>-->
+      <!--          <p class="category d-inline-flex font-weight-light">-->
+      <!--            上周数据展示-->
+      <!--          </p>-->
 
-          <template slot="actions">
-            <v-icon class="mr-2" small>
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light"
-              >最后更新于26分钟之前</span
-            >
-          </template>
-        </material-chart-card>
-      </v-flex>
+      <!--          <template slot="actions">-->
+      <!--            <v-icon class="mr-2" small>-->
+      <!--              mdi-clock-outline-->
+      <!--            </v-icon>-->
+      <!--            <span class="caption grey&#45;&#45;text font-weight-light"-->
+      <!--              >最后更新于26分钟之前</span-->
+      <!--            >-->
+      <!--          </template>-->
+      <!--        </material-chart-card>-->
+      <!--      </v-flex>-->
       <v-flex sm6 xs12 md6 lg3>
         <material-stats-card
           color="green"
