@@ -237,7 +237,7 @@ export default {
             re.value = res.data[i].id;
             categorys.push(re);
           }
-          this.category = categorys;
+          this.categorys = categorys;
         } else {
           this.$swal.fire({
             text: res.message,
