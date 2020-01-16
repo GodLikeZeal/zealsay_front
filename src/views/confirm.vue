@@ -44,9 +44,9 @@ export default {
         if (res.code === "200" && res.data) {
           this.activation = true;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -56,9 +56,9 @@ export default {
       })
       .catch(e => {
         this.loading = false;
-        this.$swal({
+        this.$swal.fire({
           text: e.message,
-          type: "error",
+          icon: "error",
           toast: true,
           position: "top",
           showConfirmButton: false,

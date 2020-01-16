@@ -97,9 +97,9 @@ export default {
           this.pagination.rowsPerPage = res.data.pageSize;
           this.pagination.totalItems = res.data.total;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: "拉取文章列表失败",
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -108,9 +108,9 @@ export default {
         }
       })
       .catch(e => {
-        this.$swal({
+        this.$swal.fire({
           text: e.message,
-          type: "error",
+          icon: "error",
           toast: true,
           position: "top",
           showConfirmButton: false,
@@ -122,9 +122,9 @@ export default {
         if (res.code === "200") {
           this.labels = res.data.records;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -133,9 +133,9 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取文章标签失败",
-          type: "error",
+          icon: "error",
           toast: true,
           position: "top",
           showConfirmButton: false,

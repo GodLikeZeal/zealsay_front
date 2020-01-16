@@ -416,9 +416,9 @@ export default {
             this.pagination.rowsPerPage = res.data.pageSize;
             this.pagination.totalItems = res.data.total;
           } else {
-            this.$swal({
+            this.$swal.fire({
               text: "拉取用户列表失败",
-              type: "error",
+              icon: "error",
               toast: true,
               position: "top",
               showConfirmButton: false,
@@ -427,7 +427,7 @@ export default {
           }
         })
         .catch(e => {
-          this.$swal({
+          this.$swal.fire({
             text: e.message,
             type: "error",
             toast: true,
@@ -465,79 +465,25 @@ export default {
     },
 
     handleDisabled(row) {
-      this.$swal({
-        title: "确定要封禁吗？",
-        text: "一旦封禁，该用户无法登录系统",
-        type: "warning",
-        showCancelButton: true
-      }).then(result => {
-        if (result.value) {
-          this.$axios.$request(disabeledUser(row.id)).then(res => {
-            if (res.code === "200" && res.data) {
-              this.$swal({
-                title: "操作成功!",
-                text: "该用户已经被封禁",
-                type: "success"
-              });
-              this.search("");
-            } else {
-              this.$swal({
-                title: "操作失败!",
-                text: res.message,
-                type: "error"
-              });
-            }
-          });
-        }
-      });
-    },
-    handleUnsealing(row) {
-      this.$swal({
-        title: "确定要解封吗？",
-        text: "将该用户从封禁状态改成正常状态，该用户可正常使用系统",
-        type: "warning",
-        showCancelButton: true
-      }).then(result => {
-        if (result.value) {
-          this.$axios.$request(unsealingUser(row.id)).then(res => {
-            if (res.code === "200" && res.data) {
-              this.$swal({
-                title: "操作成功!",
-                text: "该用户已经成功解封",
-                type: "success"
-              });
-              this.search("");
-            } else {
-              this.$swal({
-                title: "操作失败!",
-                text: res.message,
-                type: "error"
-              });
-            }
-          });
-        }
-      });
-    },
-    handleDisabledSelected(selected) {
-      const param = selected.map(s => s.id);
-      if (param.length > 0) {
-        this.$swal({
+      this.$swal
+        .fire({
           title: "确定要封禁吗？",
-          text: "一旦封禁，所选用户无法登录系统",
+          text: "一旦封禁，该用户无法登录系统",
           type: "warning",
           showCancelButton: true
-        }).then(result => {
+        })
+        .then(result => {
           if (result.value) {
-            this.$axios.$request(disabeledUserBatch(param)).then(res => {
+            disabeledUser(row.id).then(res => {
               if (res.code === "200" && res.data) {
-                this.$swal({
+                this.$swal.fire({
                   title: "操作成功!",
-                  text: "所选用户已经被封禁",
+                  text: "该用户已经被封禁",
                   type: "success"
                 });
                 this.search("");
               } else {
-                this.$swal({
+                this.$swal.fire({
                   title: "操作失败!",
                   text: res.message,
                   type: "error"
@@ -546,8 +492,68 @@ export default {
             });
           }
         });
+    },
+    handleUnsealing(row) {
+      this.$swal
+        .fire({
+          title: "确定要解封吗？",
+          text: "将该用户从封禁状态改成正常状态，该用户可正常使用系统",
+          type: "warning",
+          showCancelButton: true
+        })
+        .then(result => {
+          if (result.value) {
+            unsealingUser(row.id).then(res => {
+              if (res.code === "200" && res.data) {
+                this.$swal.fire({
+                  title: "操作成功!",
+                  text: "该用户已经成功解封",
+                  type: "success"
+                });
+                this.search("");
+              } else {
+                this.$swal.fire({
+                  title: "操作失败!",
+                  text: res.message,
+                  type: "error"
+                });
+              }
+            });
+          }
+        });
+    },
+    handleDisabledSelected(selected) {
+      const param = selected.map(s => s.id);
+      if (param.length > 0) {
+        this.$swal
+          .fire({
+            title: "确定要封禁吗？",
+            text: "一旦封禁，所选用户无法登录系统",
+            type: "warning",
+            showCancelButton: true
+          })
+          .then(result => {
+            if (result.value) {
+              disabeledUserBatch(param).then(res => {
+                if (res.code === "200" && res.data) {
+                  this.$swal.fire({
+                    title: "操作成功!",
+                    text: "所选用户已经被封禁",
+                    type: "success"
+                  });
+                  this.search("");
+                } else {
+                  this.$swal.fire({
+                    title: "操作失败!",
+                    text: res.message,
+                    type: "error"
+                  });
+                }
+              });
+            }
+          });
       } else {
-        this.$swal({
+        this.$swal.fire({
           title: "无法封禁！",
           text: "请至少选择一条需要封禁的用户！",
           type: "warning"
@@ -557,33 +563,35 @@ export default {
     handleUnsealingSelected(selected) {
       const param = selected.map(s => s.id);
       if (param.length > 0) {
-        this.$swal({
-          title: "确定要解封吗？",
-          text: "将所选用户从封禁状态改成正常状态，该用户可正常使用系统",
-          type: "warning",
-          showCancelButton: true
-        }).then(result => {
-          if (result.value) {
-            this.$axios.$request(unsealingUserBatch(param)).then(res => {
-              if (res.code === "200" && res.data) {
-                this.$swal({
-                  title: "操作成功!",
-                  text: "所选用户已经成功解封",
-                  type: "success"
-                });
-                this.search("");
-              } else {
-                this.$swal({
-                  title: "操作失败!",
-                  text: res.message,
-                  type: "error"
-                });
-              }
-            });
-          }
-        });
+        this.$swal
+          .fire({
+            title: "确定要解封吗？",
+            text: "将所选用户从封禁状态改成正常状态，该用户可正常使用系统",
+            type: "warning",
+            showCancelButton: true
+          })
+          .then(result => {
+            if (result.value) {
+              unsealingUserBatch(param).then(res => {
+                if (res.code === "200" && res.data) {
+                  this.$swal.fire({
+                    title: "操作成功!",
+                    text: "所选用户已经成功解封",
+                    type: "success"
+                  });
+                  this.search("");
+                } else {
+                  this.$swal.fire({
+                    title: "操作失败!",
+                    text: res.message,
+                    type: "error"
+                  });
+                }
+              });
+            }
+          });
       } else {
-        this.$swal({
+        this.$swal.fire({
           title: "无法封禁！",
           text: "请至少选择一条需要解封的用户！",
           type: "warning"

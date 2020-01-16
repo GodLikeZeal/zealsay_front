@@ -322,7 +322,7 @@ export default {
           }
           this.category = categorys;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
             type: "error",
             toast: true,
@@ -333,7 +333,7 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取文章分类失败",
           type: "error",
           toast: true,
@@ -360,7 +360,7 @@ export default {
             this.pagination.rowsPerPage = res.data.pageSize;
             this.pagination.totalItems = res.data.total;
           } else {
-            this.$swal({
+            this.$swal.fire({
               text: "拉取文章列表失败",
               type: "error",
               toast: true,
@@ -372,7 +372,7 @@ export default {
         })
         .catch(e => {
           this.categoryLoading = false;
-          this.$swal({
+          this.$swal.fire({
             text: e.message,
             type: "error",
             toast: true,
@@ -409,7 +409,7 @@ export default {
     },
     handleInfo(row) {
       this.row = { ...row };
-      this.$swal({
+      this.$swal.fire({
         title: "操作成功!",
         text: "预览功能正在开发中，别急嘛",
         type: "success"
@@ -417,58 +417,62 @@ export default {
       // this.$dialog.show(info, {row: row, width: 600})
     },
     handleDown(row) {
-      this.$swal({
-        title: "确定要下架吗？",
-        text: "一旦下架，用户无法查看到当前文章作品",
-        type: "warning",
-        showCancelButton: true
-      }).then(result => {
-        if (result.value) {
-          markArticleDown(row.id).then(res => {
-            if (res.code === "200" && res.data) {
-              this.$swal({
-                title: "操作成功!",
-                text: "该文章作品已经被下架",
-                type: "success"
-              });
-              this.search("");
-            } else {
-              this.$swal({
-                title: "操作失败!",
-                text: res.message,
-                type: "error"
-              });
-            }
-          });
-        }
-      });
+      this.$swal
+        .fire({
+          title: "确定要下架吗？",
+          text: "一旦下架，用户无法查看到当前文章作品",
+          type: "warning",
+          showCancelButton: true
+        })
+        .then(result => {
+          if (result.value) {
+            markArticleDown(row.id).then(res => {
+              if (res.code === "200" && res.data) {
+                this.$swal.fire({
+                  title: "操作成功!",
+                  text: "该文章作品已经被下架",
+                  type: "success"
+                });
+                this.search("");
+              } else {
+                this.$swal.fire({
+                  title: "操作失败!",
+                  text: res.message,
+                  type: "error"
+                });
+              }
+            });
+          }
+        });
     },
     handleUp(row) {
-      this.$swal({
-        title: "确定要上架吗？",
-        text: "将该资源从下架状态改成正常状态，用户可正常浏览该文章作品",
-        type: "warning",
-        showCancelButton: true
-      }).then(result => {
-        if (result.value) {
-          markArticleUp(row.id).then(res => {
-            if (res.code === "200" && res.data) {
-              this.$swal({
-                title: "操作成功!",
-                text: "该文章作品已经成功上架",
-                type: "success"
-              });
-              this.search("");
-            } else {
-              this.$swal({
-                title: "操作失败!",
-                text: res.message,
-                type: "error"
-              });
-            }
-          });
-        }
-      });
+      this.$swal
+        .fire({
+          title: "确定要上架吗？",
+          text: "将该资源从下架状态改成正常状态，用户可正常浏览该文章作品",
+          type: "warning",
+          showCancelButton: true
+        })
+        .then(result => {
+          if (result.value) {
+            markArticleUp(row.id).then(res => {
+              if (res.code === "200" && res.data) {
+                this.$swal.fire({
+                  title: "操作成功!",
+                  text: "该文章作品已经成功上架",
+                  type: "success"
+                });
+                this.search("");
+              } else {
+                this.$swal.fire({
+                  title: "操作失败!",
+                  text: res.message,
+                  type: "error"
+                });
+              }
+            });
+          }
+        });
     }
   }
 };

@@ -104,7 +104,7 @@ export default {
             this.pagination.rowsPerPage = res.data.pageSize;
             this.pagination.totalItems = res.data.total;
           } else {
-            this.$swal({
+            this.$swal.fire({
               text: "拉取文章列表失败",
               type: "error",
               toast: true,
@@ -115,7 +115,7 @@ export default {
           }
         })
         .catch(e => {
-          this.$swal({
+          this.$swal.fire({
             text: e.message,
             type: "error",
             toast: true,

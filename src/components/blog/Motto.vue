@@ -35,7 +35,7 @@ export default {
           this.motto.creator = res.data.creator;
           this.motto.from = res.data.from;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
             type: "error",
             toast: true,
@@ -46,7 +46,7 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取内容失败",
           type: "error",
           toast: true,

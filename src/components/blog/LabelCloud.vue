@@ -48,7 +48,7 @@ export default {
         if (res.code === "200") {
           this.labels = res.data.records;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
             type: "error",
             toast: true,
@@ -59,7 +59,7 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取文章标签失败",
           type: "error",
           toast: true,

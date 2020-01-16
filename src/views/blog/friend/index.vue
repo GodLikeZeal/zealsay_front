@@ -131,9 +131,9 @@ export default {
         if (res.code === "200") {
           this.links = res.data.records;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -142,9 +142,9 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取友链失败",
-          type: "error",
+          icon: "error",
           toast: true,
           position: "top",
           showConfirmButton: false,
@@ -156,9 +156,9 @@ export default {
         if (res.code === "200") {
           this.categorys = res.data;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -167,9 +167,9 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取内容失败",
-          type: "error",
+          icon: "error",
           toast: true,
           position: "top",
           showConfirmButton: false,

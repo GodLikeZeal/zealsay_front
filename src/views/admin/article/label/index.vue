@@ -99,7 +99,7 @@ export default {
           this.labels = res.data.records;
           this.total = res.data.total;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
             type: "error",
             toast: true,
@@ -110,7 +110,7 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取文章标签失败",
           type: "error",
           toast: true,
@@ -130,7 +130,7 @@ export default {
             this.labels = res.data.records;
             this.total = res.data.total;
           } else {
-            this.$swal({
+            this.$swal.fire({
               text: "拉取标签失败",
               type: "error",
               toast: true,
@@ -141,7 +141,7 @@ export default {
           }
         })
         .catch(e => {
-          this.$swal({
+          this.$swal.fire({
             text: e.message,
             type: "error",
             toast: true,
@@ -164,7 +164,7 @@ export default {
           if (res.code === "200") {
             this.search();
           } else {
-            this.$swal({
+            this.$swal.fire({
               text: "删除标签失败",
               type: "error",
               toast: true,
@@ -175,7 +175,7 @@ export default {
           }
         })
         .catch(e => {
-          this.$swal({
+          this.$swal.fire({
             text: e.message,
             type: "error",
             toast: true,

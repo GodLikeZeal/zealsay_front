@@ -285,9 +285,9 @@ export default {
             };
           });
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -296,9 +296,9 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取省份信息失败!",
-          type: "error",
+          icon: "error",
           toast: true,
           position: "top",
           showConfirmButton: false,
@@ -315,9 +315,9 @@ export default {
             };
           });
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -326,9 +326,9 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取角色信息失败!",
-          type: "error",
+          icon: "error",
           toast: true,
           position: "top",
           showConfirmButton: false,
@@ -350,9 +350,9 @@ export default {
             };
           });
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: "拉取省市区信息失败!",
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -375,9 +375,9 @@ export default {
             };
           });
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: "拉取省市区信息失败!",
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -403,24 +403,24 @@ export default {
         .then(res => {
           this.loading = false;
           if (res.code === "200" && res.data) {
-            this.$swal({
+            this.$swal.fire({
               title: "添加成功!",
               text: "您已经成功添加了一名用户",
-              type: "success"
+              icon: "success"
             });
           } else {
-            this.$swal({
+            this.$swal.fire({
               title: "添加失败!",
               text: res.message,
-              type: "error"
+              icon: "error"
             });
           }
         })
         .catch(e => {
           this.loading = false;
-          this.$swal({
+          this.$swal.fire({
             text: e.message,
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -477,7 +477,7 @@ export default {
             if (res.code === "200") {
               this.form.avatar = res.data;
             } else {
-              this.$swal({
+              this.$swal.fire({
                 text: res.message,
                 type: "error",
                 toast: true,
@@ -488,7 +488,7 @@ export default {
             }
           })
           .catch(e => {
-            this.$swal({
+            this.$swal.fire({
               text: e.message,
               type: "error",
               toast: true,

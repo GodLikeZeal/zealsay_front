@@ -239,9 +239,9 @@ export default {
           }
           this.category = categorys;
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -250,9 +250,9 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取文章分类失败",
-          type: "error",
+          icon: "error",
           toast: true,
           position: "top",
           showConfirmButton: false,
@@ -264,9 +264,9 @@ export default {
         if (res.code === "200") {
           this.labels = res.data.map(r => r.name);
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -275,9 +275,9 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取标签失败",
-          type: "error",
+          icon: "error",
           toast: true,
           position: "top",
           showConfirmButton: false,
@@ -290,9 +290,9 @@ export default {
           this.form = res.data;
           this.form.label = this.form.label ? this.form.label.split(",") : [];
         } else {
-          this.$swal({
+          this.$swal.fire({
             text: res.message,
-            type: "error",
+            icon: "error",
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -301,9 +301,9 @@ export default {
         }
       })
       .catch(() => {
-        this.$swal({
+        this.$swal.fire({
           text: "拉取文章失败",
-          type: "error",
+          icon: "error",
           toast: true,
           position: "top",
           showConfirmButton: false,
@@ -354,16 +354,16 @@ export default {
                 .then(res => {
                   if (res.code === "200") {
                     this.loading = false;
-                    this.$swal({
+                    this.$swal.fire({
                       title: "保存成功!",
                       text: "不错哟,您已经添加了一篇文章啦",
-                      type: "success"
+                      icon: "success"
                     });
                   } else {
                     this.loading = false;
-                    this.$swal({
+                    this.$swal.fire({
                       text: res.message,
-                      type: "error",
+                      icon: "error",
                       toast: true,
                       position: "top",
                       showConfirmButton: false,
@@ -373,9 +373,9 @@ export default {
                 })
                 .catch(e => {
                   this.loading = false;
-                  this.$swal({
+                  this.$swal.fire({
                     text: e.message,
-                    type: "error",
+                    icon: "error",
                     toast: true,
                     position: "top",
                     showConfirmButton: false,
@@ -384,9 +384,9 @@ export default {
                 });
             } else {
               this.loading = false;
-              this.$swal({
+              this.$swal.fire({
                 text: res.message,
-                type: "error",
+                icon: "error",
                 toast: true,
                 position: "top",
                 showConfirmButton: false,
@@ -396,7 +396,7 @@ export default {
           })
           .catch(() => {
             this.loading = false;
-            // this.$swal({
+            // this.$swal.fire({
             //     text: e.message,
             //     type: 'error',
             //     toast: true,
@@ -411,16 +411,16 @@ export default {
           .then(res => {
             if (res.code === "200") {
               this.loading = false;
-              this.$swal({
+              this.$swal.fire({
                 title: "保存成功!",
                 text: "太棒啦,文章已经更新了哦",
-                type: "success"
+                icon: "success"
               });
             } else {
               this.loading = false;
-              this.$swal({
+              this.$swal.fire({
                 text: res.message,
-                type: "error",
+                icon: "error",
                 toast: true,
                 position: "top",
                 showConfirmButton: false,
@@ -430,9 +430,9 @@ export default {
           })
           .catch(e => {
             this.loading = false;
-            this.$swal({
+            this.$swal.fire({
               text: e.message,
-              type: "error",
+              icon: "error",
               toast: true,
               position: "top",
               showConfirmButton: false,
@@ -486,9 +486,9 @@ export default {
             if (res.code === "200") {
               this.form.coverImage = res.data;
             } else {
-              this.$swal({
+              this.$swal.fire({
                 text: res.message,
-                type: "error",
+                icon: "error",
                 toast: true,
                 position: "top",
                 showConfirmButton: false,
@@ -497,9 +497,9 @@ export default {
             }
           })
           .catch(e => {
-            this.$swal({
+            this.$swal.fire({
               text: e.message,
-              type: "error",
+              icon: "error",
               toast: true,
               position: "top",
               showConfirmButton: false,

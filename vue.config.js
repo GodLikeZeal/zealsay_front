@@ -32,6 +32,7 @@ const cdn = {
       "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900",
       "https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css",
       "https://cdn.jsdelivr.net/npm/vuetify@2.2.4/dist/vuetify.min.css",
+      "https://cdn.jsdelivr.net/npm/sweetalert2@9.6.0/dist/sweetalert2.min.css",
       "https://cdn.jsdelivr.net/npm/mavon-editor@2.7.7/dist/css/index.css"
     ],
     // cdn的js链接
@@ -43,7 +44,7 @@ const cdn = {
       "https://cdn.jsdelivr.net/npm/vuetify@2.2.4/dist/vuetify.min.js",
       "https://cdn.jsdelivr.net/npm/mavon-editor@2.7.7/dist/mavon-editor.min.js",
       "https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js",
-      "https://cdn.jsdelivr.net/npm/vue-sweetalert2@3.0.1/dist/index.min.js"
+      "https://cdn.jsdelivr.net/npm/sweetalert2@9.6.0/dist/sweetalert2.all.min.js"
     ]
   }
 };
