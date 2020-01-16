@@ -14,7 +14,7 @@ const externals = {
   vuex: "Vuex",
   axios: "axios",
   vuetify: "Vuetify",
-  "mavon-editor": "mavonEditor",
+  "mavon-editor": "MavonEditor",
   "vue-sweetalert2": "Swal",
   jquery: "$"
 };
@@ -42,7 +42,7 @@ const cdn = {
       "https://cdn.jsdelivr.net/npm/vue-router@3.1.5/dist/vue-router.min.js",
       "https://cdn.jsdelivr.net/npm/axios@0.19.1/dist/axios.min.js",
       "https://cdn.jsdelivr.net/npm/vuetify@2.2.4/dist/vuetify.min.js",
-      "https://cdn.jsdelivr.net/npm/mavon-editor@2.7.7/dist/mavon-editor.min.js",
+      "https://cdn.jsdelivr.net/gh/zhaokuohaha/mavonEditor@feature/lib-name/dist/mavon-editor.js",
       "https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js",
       "https://cdn.jsdelivr.net/npm/sweetalert2@9.6.0/dist/sweetalert2.all.min.js"
     ]
