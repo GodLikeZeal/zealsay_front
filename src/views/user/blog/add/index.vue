@@ -330,8 +330,7 @@ export default {
                 this.$refs.md.$img2Url(res.data[img].pos, res.data[img].url);
               }
               // 开始提交文章信息
-              this.$axios
-                .$request(saveArticle(this.form))
+              saveArticle(this.form)
                 .then(res => {
                   if (res.code === "200") {
                     this.loading = false;

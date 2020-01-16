@@ -191,8 +191,9 @@ export default {
       size: 192,
       tile: true
     },
-    category: [],
+    categorys: [],
     labels: [],
+    form: {},
     categoryLoading: false,
     cityLoading: false,
     areaLoading: false,
@@ -222,52 +223,94 @@ export default {
       };
     }
   },
-  async asyncData({ app, query, error }) {
-    const resArticle = await app.$axios.$request(getArticle(query.id));
-    let form = {};
-    if (resArticle.code === "200") {
-      form = resArticle.data;
-      form.label = form.label ? form.label.split(",") : [];
-    } else {
-      return error({
-        statusCode: resArticle.code,
-        message: resArticle.message
+  created() {
+    getCategoryList()
+      .then(res => {
+        if (res.code === "200") {
+          let categorys = [];
+          const de = {};
+          de.text = "请选择分类目录";
+          de.value = "";
+          categorys.push(de);
+          for (let i = 0; i < res.data.length; i++) {
+            const re = {};
+            re.text = res.data[i].name;
+            re.value = res.data[i].id;
+            categorys.push(re);
+          }
+          this.categorys = categorys;
+        } else {
+          this.$swal.fire({
+            text: res.message,
+            icon: "error",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 3000
+          });
+        }
+      })
+      .catch(() => {
+        this.$swal.fire({
+          text: "拉取文章分类失败",
+          icon: "error",
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
-    }
-    const resCategory = await app.$axios.$request(getCategoryList());
-    const category = [];
-    if (resCategory.code === "200") {
-      const de = {};
-      de.text = "请选择分类目录";
-      de.value = "";
-      category.push(de);
-      for (let i = 0; i < resCategory.data.length; i++) {
-        const re = {};
-        re.text = resCategory.data[i].name;
-        re.value = resCategory.data[i].id;
-        category.push(re);
-      }
-    } else {
-      return error({
-        statusCode: resCategory.code,
-        message: resCategory.message
+    getArticleLabelList()
+      .then(res => {
+        if (res.code === "200") {
+          this.labels = res.data.map(r => r.name);
+        } else {
+          this.$swal.fire({
+            text: res.message,
+            icon: "error",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 3000
+          });
+        }
+      })
+      .catch(() => {
+        this.$swal.fire({
+          text: "拉取标签失败",
+          icon: "error",
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
-    }
-    const resArticleLabel = await app.$axios.$request(getArticleLabelList());
-    let labels = [];
-    if (resArticleLabel.code === "200") {
-      labels = resArticleLabel.data.map(r => r.name);
-    } else {
-      return error({
-        statusCode: resArticleLabel.code,
-        message: resArticleLabel.message
+    getArticle(this.$route.query.id)
+      .then(res => {
+        if (res.code === "200") {
+          this.form = res.data;
+          this.form.label = this.form.label ? this.form.label.split(",") : [];
+        } else {
+          this.$swal.fire({
+            text: res.message,
+            icon: "error",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 3000
+          });
+        }
+      })
+      .catch(() => {
+        this.$swal.fire({
+          text: "拉取文章失败",
+          icon: "error",
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
-    }
-    return {
-      form: form,
-      category: category,
-      labels: labels
-    };
   },
   methods: {
     submit() {
