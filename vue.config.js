@@ -15,7 +15,7 @@ const externals = {
   axios: "axios",
   vuetify: "Vuetify",
   "mavon-editor": "mavonEditor",
-  "vue-chartist": "Chartist",
+  "vue-chartist": "VueCharts",
   "vue-sweetalert2": "VueSweetalert2",
   jquery: "$"
 };
@@ -46,7 +46,7 @@ const cdn = {
       "https://cdn.jsdelivr.net/npm/mavon-editor@2.7.7/dist/mavon-editor.min.js",
       "https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js",
       "https://cdn.jsdelivr.net/npm/vue-chartist@2.2.1/index.min.js",
-      "https://cdn.jsdelivr.net/npm/vue-sweetalert2"
+      "https://cdn.jsdelivr.net/npm/vue-sweetalert2@3.0.1/dist/index.min.js"
     ]
   }
 };
