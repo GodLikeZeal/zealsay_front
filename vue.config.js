@@ -15,7 +15,7 @@ const externals = {
   axios: "axios",
   vuetify: "Vuetify",
   "mavon-editor": "mavonEditor",
-  "vue-sweetalert2": "VueSweetalert2",
+  "vue-sweetalert2": "Swal",
   jquery: "$"
 };
 // CDN外链，会插入到index.html中
