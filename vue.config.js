@@ -15,7 +15,7 @@ const externals = {
   axios: "axios",
   vuetify: "Vuetify",
   "mavon-editor": "mavonEditor",
-  "vue-chartist": "VueCharts",
+  "vue-chartist": "Chartist",
   "vue-sweetalert2": "VueSweetalert2",
   jquery: "$"
 };
