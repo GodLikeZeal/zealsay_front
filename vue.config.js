@@ -56,12 +56,15 @@ const prerenderRoutes = ["/", "/contacts"];
 const productionGzip = true;
 // 需要gzip压缩的文件后缀
 const productionGzipExtensions = ["js", "css"];
+//cdn 域名
+const cdnDomian = "https://pan.zealsay.com";
 
 module.exports = {
-  publicPath: BASE_URL,
+  publicPath: process.env.NODE_ENV === "production" ? cdnDomian : "/",
   outputDir: DIST_ROOT + BASE_URL, // prerendner会借助一个express服务器来预渲染，改变baseUrl后要保证这个模拟服务器能够找到所需的资源
   assetsDir: "static",
   productionSourceMap: false,
+  filenameHashing: false, //去除文件hash值
 
   devServer: {
     proxy: {
