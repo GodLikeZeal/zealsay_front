@@ -16,6 +16,7 @@ const externals = {
   vuetify: "Vuetify",
   "mavon-editor": "mavonEditor",
   "vue-chartist": "chartist",
+  "vue-sweetalert2": "VueSweetalert2",
   jquery: "$"
 };
 // CDN外链，会插入到index.html中
@@ -43,7 +44,8 @@ const cdn = {
       "https://cdn.bootcss.com/vuetify/2.1.1/vuetify.min.js",
       "https://unpkg.com/mavon-editor/dist/mavon-editor.js",
       "https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js",
-      "https://cdn.bootcss.com/chartist/0.11.4/chartist.min.js"
+      "https://cdn.bootcss.com/chartist/0.11.4/chartist.min.js",
+      "https://cdn.jsdelivr.net/npm/sweetalert2@9"
     ]
   }
 };
@@ -80,15 +82,15 @@ module.exports = {
   css: {
     extract: true
   },
-  pluginOptions: {
-    prerenderSpa: {
-      registry: undefined,
-      renderRoutes: ["/"],
-      useRenderEvent: true,
-      headless: true,
-      onlyProduction: true
-    }
-  },
+  // pluginOptions: {
+  //   prerenderSpa: {
+  //     registry: undefined,
+  //     renderRoutes: ["/"],
+  //     useRenderEvent: true,
+  //     headless: true,
+  //     onlyProduction: true
+  //   }
+  // },
   configureWebpack: () => {
     const myConfig = {};
     if (process.env.NODE_ENV === "production") {
@@ -96,7 +98,7 @@ module.exports = {
       myConfig.externals = externals;
       // 2. 使用预渲染，在仅加载html和css之后即可显示出基础的页面，提升用户体验，避免白屏
       myConfig.plugins = [];
-      productionPrerender &&
+      if (productionPrerender) {
         myConfig.plugins.push(
           new PrerenderSPAPlugin({
             staticDir: path.resolve(__dirname, DIST_ROOT), // 作为express.static()中间件的路径
@@ -134,17 +136,21 @@ module.exports = {
             }
           })
         );
+      }
       // 3. 构建时开启gzip，降低服务器压缩对CPU资源的占用，服务器也要相应开启gzip
-      productionGzip &&
+      if (productionGzip) {
         myConfig.plugins.push(
           new CompressionWebpackPlugin({
             test: new RegExp(
               "\\.(" + productionGzipExtensions.join("|") + ")$"
             ),
-            threshold: 8192,
-            minRatio: 0.8
+            algorithm: "gzip",
+            threshold: 10240,
+            minRatio: 0.8,
+            cache: true
           })
         );
+      }
     }
     if (process.env.NODE_ENV === "development") {
       /**
