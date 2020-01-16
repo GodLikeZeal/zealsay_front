@@ -38,24 +38,22 @@
                       </template>
                       <v-card>
                         <v-card-title>
-                          <client-only>
-                            <div style="width: 800px;height: 400px;">
-                              <vueCropper
-                                ref="cropper"
-                                style="background-repeat:repeat"
-                                :output-size="option.outputSize"
-                                :output-type="option.outputType"
-                                :info="option.info"
-                                :can-scale="option.canScale"
-                                :can-move-box="option.canMoveBox"
-                                :center-box="option.centerBox"
-                                :auto-crop="option.autoCrop"
-                                :fixed="option.fixed"
-                                :fixed-number="option.fixedNumber"
-                                :img="option.img"
-                              ></vueCropper>
-                            </div>
-                          </client-only>
+                          <div style="width: 800px;height: 400px;">
+                            <vueCropper
+                              ref="cropper"
+                              style="background-repeat:repeat"
+                              :output-size="option.outputSize"
+                              :output-type="option.outputType"
+                              :info="option.info"
+                              :can-scale="option.canScale"
+                              :can-move-box="option.canMoveBox"
+                              :center-box="option.centerBox"
+                              :auto-crop="option.autoCrop"
+                              :fixed="option.fixed"
+                              :fixed-number="option.fixedNumber"
+                              :img="option.img"
+                            ></vueCropper>
+                          </div>
                         </v-card-title>
                         <v-card-actions>
                           <v-spacer></v-spacer>
@@ -155,18 +153,16 @@
           text="支持使用markdown语法"
         >
           <div id="editor" class="mavonEditor">
-            <client-only>
-              <mavon-editor
-                ref="md"
-                v-model="form.contentMd"
-                style="z-index:0;height: 800px"
-                :ishljs="true"
-                code-style="atelier-plateau-dark"
-                @change="changeData"
-                @imgAdd="$imgAdd"
-                @imgDel="$imgDel"
-              />
-            </client-only>
+            <mavon-editor
+              ref="md"
+              v-model="form.contentMd"
+              style="z-index:0;height: 800px"
+              :ishljs="true"
+              code-style="atelier-plateau-dark"
+              @change="changeData"
+              @imgAdd="$imgAdd"
+              @imgDel="$imgDel"
+            />
           </div>
         </material-card>
       </v-flex>

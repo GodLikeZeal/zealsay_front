@@ -188,6 +188,7 @@
 .markdown-body pre {
   font-family: monospace, monospace;
   font-size: 1em;
+  box-shadow: none;
 }
 
 .markdown-body hr {
@@ -336,9 +337,10 @@
 .markdown-body code {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
   font-size: 12px;
-  //color: #7179dc;
-  color: inherit;
+  color: #7179dc;
+  //color: #ff69b4;
 }
+
 
 .markdown-body pre {
   margin-top: 0;

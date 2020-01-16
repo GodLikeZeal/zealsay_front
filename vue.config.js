@@ -32,20 +32,21 @@ const cdn = {
     css: [
       "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900",
       "https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css",
-      "https://cdn.bootcss.com/vuetify/2.1.1/vuetify.min.css",
-      "https://unpkg.com/mavon-editor/dist/css/index.css",
-      "https://cdn.bootcss.com/chartist/0.11.4/chartist.min.css"
+      "https://cdn.jsdelivr.net/npm/vuetify@2.2.4/dist/vuetify.min.css",
+      "https://cdn.jsdelivr.net/npm/mavon-editor@2.7.7/dist/css/index.css",
+      "https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.css"
     ],
     // cdn的js链接
     js: [
-      "https://cdn.bootcss.com/vue/2.6.10/vue.min.js",
-      "https://cdn.bootcss.com/vuex/3.1.1/vuex.min.js",
-      "https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js",
-      "https://cdn.bootcss.com/vuetify/2.1.1/vuetify.min.js",
-      "https://unpkg.com/mavon-editor/dist/mavon-editor.js",
-      "https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js",
-      "https://cdn.bootcss.com/chartist/0.11.4/chartist.min.js",
-      "https://cdn.jsdelivr.net/npm/sweetalert2@9"
+      "https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js",
+      "https://cdn.jsdelivr.net/npm/vuex@3.1.2/dist/vuex.min.js",
+      "https://cdn.jsdelivr.net/npm/vue-router@3.1.5/dist/vue-router.min.js",
+      "https://cdn.jsdelivr.net/npm/axios@0.19.1/index.min.js",
+      "https://cdn.jsdelivr.net/npm/vuetify@2.2.4/dist/vuetify.min.js",
+      "https://cdn.jsdelivr.net/npm/mavon-editor@2.7.7/dist/mavon-editor.min.js",
+      "https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js",
+      "https://cdn.jsdelivr.net/npm/vue-chartist@2.2.1/index.min.js",
+      "https://cdn.jsdelivr.net/npm/vue-sweetalert2"
     ]
   }
 };

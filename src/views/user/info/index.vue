@@ -116,8 +116,9 @@
   </v-container>
 </template>
 <script>
-import { editUser, uploadAvatar } from "@/api/user";
-import { getCityList, getAreaList } from "@/api/dict";
+import { getRoleList } from "@/api/role";
+import { getUserById, editUser, uploadAvatar } from "@/api/user";
+import { getProvinceList, getCityList, getAreaList } from "@/api/dict";
 import {
   validateUsername,
   validatePassword,
@@ -127,30 +128,13 @@ import {
 
 export default {
   name: "Info",
-  props: {
-    form: {
-      type: Object,
-      default: function() {
-        return {};
-      }
-    },
-    province: {
-      type: Array,
-      default: function() {
-        return [];
-      }
-    },
-    roles: {
-      type: Array,
-      default: function() {
-        return [];
-      }
-    }
-  },
   data: () => ({
     showCropper: false,
     valid: false,
     clickable: true,
+    form: {},
+    province: [],
+    roles: [],
     avatar: {
       size: 128
     },
@@ -183,6 +167,12 @@ export default {
     emailRules: [v => !v || validateEmail(v) || "不是合法的邮箱"]
   }),
   computed: {
+    provinces: function() {
+      return this.form.province;
+    },
+    citys: function() {
+      return this.form.city;
+    },
     option: function() {
       return {
         img:
@@ -200,12 +190,152 @@ export default {
       };
     }
   },
+  watch: {
+    // 如果 `question` 发生改变，这个函数就会运行
+    provinces: function(newQuestion) {
+      this.cityLoading = true;
+      const obj = {};
+      obj.code = newQuestion;
+      getCityList(obj).then(res => {
+        if (res.code === "200") {
+          this.city = res.data.map(r => {
+            return {
+              value: r.code,
+              text: r.name
+            };
+          });
+        } else {
+          this.$swal({
+            text: "拉取省市区信息失败!",
+            type: "error",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 3000
+          });
+        }
+        this.cityLoading = false;
+      });
+    },
+    citys: function(newQuestion) {
+      this.areaLoading = true;
+      const obj = {};
+      obj.code = newQuestion;
+      getAreaList(obj).then(res => {
+        if (res.code === "200") {
+          this.area = res.data.map(r => {
+            return {
+              value: r.code,
+              text: r.name
+            };
+          });
+        } else {
+          this.$swal({
+            text: "拉取省市区信息失败!",
+            type: "error",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 3000
+          });
+        }
+        this.areaLoading = false;
+      });
+    }
+  },
+  created() {
+    getRoleList()
+      .then(res => {
+        if (res.code === "200") {
+          this.roles = res.data.map(r => {
+            return {
+              value: r.value,
+              text: r.name
+            };
+          });
+        } else {
+          this.$swal({
+            text: res.message,
+            type: "error",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 3000
+          });
+        }
+      })
+      .catch(() => {
+        this.$swal({
+          text: "拉取角色失败",
+          type: "error",
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 3000
+        });
+      });
+    getProvinceList()
+      .then(res => {
+        if (res.code === "200") {
+          this.province = res.data.map(r => {
+            return {
+              value: r.code,
+              text: r.name
+            };
+          });
+        } else {
+          this.$swal({
+            text: res.message,
+            type: "error",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 3000
+          });
+        }
+      })
+      .catch(() => {
+        this.$swal({
+          text: "拉取省份失败",
+          type: "error",
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 3000
+        });
+      });
+    getUserById(this.$route.params.id)
+      .then(res => {
+        if (res.code === "200") {
+          this.form = res.data;
+        } else {
+          this.$swal({
+            text: res.message,
+            type: "error",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 3000
+          });
+        }
+      })
+      .catch(() => {
+        this.$swal({
+          text: "拉取省份失败",
+          type: "error",
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 3000
+        });
+      });
+  },
   methods: {
     changeProvince() {
       this.cityLoading = true;
       const obj = {};
       obj.code = this.form.province;
-      this.$axios.$request(getCityList(obj)).then(res => {
+      getCityList(obj).then(res => {
         if (res.code === "200") {
           this.city = res.data.map(r => {
             return {
@@ -230,7 +360,7 @@ export default {
       this.areaLoading = true;
       const obj = {};
       obj.code = this.form.city;
-      this.$axios.$request(getAreaList(obj)).then(res => {
+      getAreaList(obj).then(res => {
         if (res.code === "200") {
           this.area = res.data.map(r => {
             return {
@@ -262,8 +392,7 @@ export default {
     },
     save() {
       // 开始提交
-      this.$axios
-        .$request(editUser(this.form))
+      editUser(this.form)
         .then(res => {
           if (res.code === "200" && res.data) {
             this.$swal({
@@ -340,8 +469,7 @@ export default {
         const file = data;
         const param = new FormData();
         param.append("file", file);
-        this.$axios
-          .$request(uploadAvatar(param))
+        uploadAvatar(param)
           .then(res => {
             if (res.code === "200") {
               this.form.avatar = res.data;
