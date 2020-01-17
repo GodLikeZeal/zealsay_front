@@ -57,7 +57,7 @@ const productionGzip = true;
 // 需要gzip压缩的文件后缀
 const productionGzipExtensions = ["js", "css"];
 //cdn 域名
-const cdnDomian = "https://pan.zealsay.com";
+const cdnDomian = process.env.VUE_APP_CDN_URL;
 
 module.exports = {
   publicPath: process.env.NODE_ENV === "production" ? cdnDomian : "/",
