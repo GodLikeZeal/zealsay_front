@@ -18,6 +18,18 @@ const externals = {
   "vue-sweetalert2": "Swal",
   jquery: "$"
 };
+
+// 是否使用预渲染
+const productionPrerender = true;
+// 需要预渲染的路由
+const prerenderRoutes = ["/", "/contacts"];
+// 是否使用gzip
+const productionGzip = true;
+// 需要gzip压缩的文件后缀
+const productionGzipExtensions = ["js", "css"];
+//cdn 域名
+const cdnDomian = process.env.VUE_APP_CDN_URL;
+
 // CDN外链，会插入到index.html中
 const cdn = {
   // 开发环境
@@ -48,16 +60,6 @@ const cdn = {
     ]
   }
 };
-// 是否使用预渲染
-const productionPrerender = true;
-// 需要预渲染的路由
-const prerenderRoutes = ["/", "/contacts"];
-// 是否使用gzip
-const productionGzip = true;
-// 需要gzip压缩的文件后缀
-const productionGzipExtensions = ["js", "css"];
-//cdn 域名
-const cdnDomian = process.env.VUE_APP_CDN_URL;
 
 module.exports = {
   publicPath: process.env.NODE_ENV === "production" ? cdnDomian : "/",

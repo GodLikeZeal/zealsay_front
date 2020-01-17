@@ -7650,7 +7650,7 @@
       }),
       (r.prototype.loadTexture = function(t, e, i, r) {
         var n = new Image();
-        (n.crossOrigin = "Anonymous"),
+          (n.crossOrigin = "Anonymous"),
           (n.src = i),
           (n.onload = function() {
             var i = (0, o.getContext)(),
