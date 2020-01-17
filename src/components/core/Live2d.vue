@@ -83,7 +83,7 @@ export default {
     var port = document.location.port === ''? document.location.port: ':' + document.location.port
     var base_url = document.location.protocol + '//' + window.document.location.hostname + port + '/'
     var home_Path = document.location.protocol + '//' + window.document.location.hostname + '/'
-    var message_Path = '/live2d/'
+    var message_Path = process.env.VUE_APP_CDN_URL+'/live2d/'
     var userAgent = window.navigator.userAgent.toLowerCase()
     var talkAPI = 'https://luoyangc.cn/api/talk/'
     console.log(userAgent)
