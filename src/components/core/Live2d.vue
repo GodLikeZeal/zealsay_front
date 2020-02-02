@@ -90,6 +90,8 @@ export default {
     var norunFlag = false
 
 
+    console.log("测试")
+    console.log(message_Path)
     for (var i = 0; i < norunAI.length; i++) {
       if (userAgent.indexOf(norunAI[i]) > -1) {
         norunFlag = true
