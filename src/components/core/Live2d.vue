@@ -89,7 +89,8 @@ export default {
     var norunAI = ['android', 'iphone', 'ipod', 'ipad', 'windows phone', 'mqqbrowser','msie', 'trident/7.0']
     var norunFlag = false
 
-
+    console.log("测试2")
+    console.log(message_Path)
     for (var i = 0; i < norunAI.length; i++) {
       if (userAgent.indexOf(norunAI[i]) > -1) {
         norunFlag = true
