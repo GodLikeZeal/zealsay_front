@@ -86,7 +86,6 @@ export default {
     var message_Path = process.env.VUE_APP_CDN_URL+'/live2d/'
     var userAgent = window.navigator.userAgent.toLowerCase()
     var talkAPI = 'https://luoyangc.cn/api/talk/'
-    console.log(userAgent)
     var norunAI = ['android', 'iphone', 'ipod', 'ipad', 'windows phone', 'mqqbrowser','msie', 'trident/7.0']
     var norunFlag = false
 
