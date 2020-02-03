@@ -230,8 +230,7 @@ export default {
     },
     editSubmit(obj) {
       if (this.$refs.form.validate()) {
-        this.$axios
-          .$request(updateCategory(obj))
+        updateCategory(obj)
           .then(res => {
             if (res.code === "200" && res.data) {
               this.$swal.fire({
@@ -279,8 +278,7 @@ export default {
           });
           return;
         }
-        this.$axios
-          .$request(deleteCategory(id))
+        deleteCategory(id)
           .then(res => {
             if (res.code === "200" && res.data) {
               this.$swal.fire({

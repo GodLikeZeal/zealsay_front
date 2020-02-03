@@ -20,7 +20,7 @@ const externals = {
 };
 
 // 是否使用预渲染
-const productionPrerender = true;
+const productionPrerender = false;
 // 需要预渲染的路由
 const prerenderRoutes = ["/", "/contacts"];
 // 是否使用gzip
