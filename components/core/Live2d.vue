@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="mounted">
     <div id="landlord" style="left:5px;bottom:0px;">
       <div class="message" style="opacity:0" />
       <canvas id="live2d" width="500" height="560" class="live2d" />
@@ -71,3 +71,16 @@
     <script type="text/javascript" src="/live2d/js/message.js" />
   </div>
 </template>
+<script>
+export default {
+  name: 'Live2d',
+  data: () => ({
+    mounted: false
+  }),
+  mounted() {
+    setTimeout(() => {
+      this.mounted = true
+    }, 0)
+  }
+}
+</script>
