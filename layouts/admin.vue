@@ -47,7 +47,7 @@ export default {
     }
     setTimeout(() => {
       this.$vuetify.theme.primary = color
-    }, 0)
+    }, 5)
   },
   computed: {
     ...mapState('app', ['dark'])

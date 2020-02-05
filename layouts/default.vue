@@ -15,7 +15,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.mounted = true
-    }, 0)
+    }, 5)
   },
   created() {
     let color = '#4caf50'
