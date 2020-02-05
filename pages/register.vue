@@ -1,195 +1,191 @@
 <template>
-  <v-app id="register">
-    <v-content class="fill-height">
-      <v-container fluid fill-height>
-        <v-layout align-center justify-center>
-          <v-flex xs12 sm8 md4 lg4>
-            <v-card class="elevation-1 pa-3" style="margin-bottom: 10%">
-              <!--              <v-card-title-->
-              <!--                class="title font-weight-regular justify-space-between"-->
-              <!--              >-->
-              <!--                <span>{{ currentTitle }}</span>-->
-              <!--                <v-avatar-->
-              <!--                  color="primary lighten-2"-->
-              <!--                  class="subheading white&#45;&#45;text"-->
-              <!--                  size="24"-->
-              <!--                  v-text="step"-->
-              <!--                ></v-avatar>-->
-              <!--              </v-card-title>-->
+  <div class="html body">
+    <div class="main d-flex justify-center align-center">
+      <v-col cols="8">
+        <v-card class="elevation-1 pa-3" style="margin-bottom: 10%">
+          <!--              <v-card-title-->
+          <!--                class="title font-weight-regular justify-space-between"-->
+          <!--              >-->
+          <!--                <span>{{ currentTitle }}</span>-->
+          <!--                <v-avatar-->
+          <!--                  color="primary lighten-2"-->
+          <!--                  class="subheading white&#45;&#45;text"-->
+          <!--                  size="24"-->
+          <!--                  v-text="step"-->
+          <!--                ></v-avatar>-->
+          <!--              </v-card-title>-->
 
-              <v-card-text>
-                <v-window v-model="step">
-                  <div class="layout column align-center">
-                    <img
-                      src="@/static/image/logo/logo.png"
-                      alt="Zealsay Admin"
-                      width="30%"
-                      height="18%"
-                    />
-                    <h2 class="flex my-4 primary--text">zealsay 注册引导</h2>
-                  </div>
-                  <v-form ref="form1" lazy-validation>
-                    <v-window-item :value="1">
+          <v-card-text>
+            <v-window v-model="step">
+              <div class="layout column align-center">
+                <img
+                  src="@/static/image/logo/logo.png"
+                  alt="Zealsay Admin"
+                  width="30%"
+                  height="18%"
+                />
+                <h2 class="flex my-4 primary--text">zealsay 注册引导</h2>
+              </div>
+              <v-form ref="form1" lazy-validation>
+                <v-window-item :value="1">
+                  <v-text-field
+                    v-model="form.username"
+                    :rules="usernameRules"
+                    hint="用户名不能包含空格和特殊字符"
+                    label="用户名"
+                    required
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="form.password"
+                    :rules="passwordRules"
+                    required
+                    hint="密码必须以字母开头，长度在6~18之间，只能包含字母、数字和下划线"
+                    label="密码"
+                    type="password"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="form.passwordConfirm"
+                    :rules="passwordRules"
+                    hint="密码必须以字母开头，长度在6~18之间，只能包含字母、数字和下划线"
+                    label="确认密码"
+                    type="password"
+                  ></v-text-field>
+                  <span
+                    v-if="passwordValid"
+                    class="caption amber--text text--darken-1"
+                  >
+                    {{ errMsg }}
+                  </span>
+                </v-window-item>
+              </v-form>
+              <v-window-item :value="2">
+                <v-tabs
+                  v-model="tabs"
+                  centered
+                  icons-and-text
+                  active-class="primary--text"
+                >
+                  <v-tab href="#tab-1">
+                    绑定电子邮箱
+                    <v-icon>email</v-icon>
+                  </v-tab>
+
+                  <!--                    <v-tab href="#tab-2">-->
+                  <!--                      绑定手机号-->
+                  <!--                      <v-icon>phone</v-icon>-->
+                  <!--                    </v-tab>-->
+
+                  <v-tabs-slider></v-tabs-slider>
+                  <v-tab-item value="tab-1">
+                    <v-form ref="form21" lazy-validation>
                       <v-text-field
-                        v-model="form.username"
-                        :rules="usernameRules"
-                        hint="用户名不能包含空格和特殊字符"
-                        label="用户名"
-                        required
-                      ></v-text-field>
-                      <v-text-field
-                        v-model="form.password"
-                        :rules="passwordRules"
-                        required
-                        hint="密码必须以字母开头，长度在6~18之间，只能包含字母、数字和下划线"
-                        label="密码"
-                        type="password"
-                      ></v-text-field>
-                      <v-text-field
-                        v-model="form.passwordConfirm"
-                        :rules="passwordRules"
-                        hint="密码必须以字母开头，长度在6~18之间，只能包含字母、数字和下划线"
-                        label="确认密码"
-                        type="password"
+                        v-model="form.email"
+                        :rules="emailRules"
+                        hint="绑定邮箱可以使用邮箱登录，也可以在忘记密码后通过邮箱找回密码"
+                        label="电子邮箱"
                       ></v-text-field>
                       <span
-                        v-if="passwordValid"
-                        class="caption amber--text text--darken-1"
+                        v-if="validEmailFlag"
+                        class="caption grey--text text--darken-1"
                       >
-                        {{ errMsg }}
+                        {{ validEmailMsg }}
                       </span>
-                    </v-window-item>
-                  </v-form>
-                  <v-window-item :value="2">
-                    <v-tabs
-                      v-model="tabs"
-                      centered
-                      icons-and-text
-                      active-class="primary--text"
-                    >
-                      <v-tab href="#tab-1">
-                        绑定电子邮箱
-                        <v-icon>email</v-icon>
-                      </v-tab>
-
-                      <!--                    <v-tab href="#tab-2">-->
-                      <!--                      绑定手机号-->
-                      <!--                      <v-icon>phone</v-icon>-->
-                      <!--                    </v-tab>-->
-
-                      <v-tabs-slider></v-tabs-slider>
-                      <v-tab-item value="tab-1">
-                        <v-form ref="form21" lazy-validation>
-                          <v-text-field
-                            v-model="form.email"
-                            :rules="emailRules"
-                            hint="绑定邮箱可以使用邮箱登录，也可以在忘记密码后通过邮箱找回密码"
-                            label="电子邮箱"
-                          ></v-text-field>
-                          <span
-                            v-if="validEmailFlag"
-                            class="caption grey--text text--darken-1"
-                          >
-                            {{ validEmailMsg }}
-                          </span>
-                        </v-form>
-                      </v-tab-item>
-                      <v-tab-item value="tab-2">
-                        <v-form ref="form22" lazy-validation>
-                          <v-text-field
-                            v-model="form.phoneNumber"
-                            :rules="phoneRules"
-                            hint="绑定手机号可以使用手机号加验证码登录，也可以在忘记密码后通过手机号找回密码"
-                            label="手机号"
-                            mask="nnn nnnn nnnn"
-                          ></v-text-field>
-                          <v-layout>
-                            <v-flex md8
-                              ><v-text-field
-                                v-model="form.validCode"
-                                :rules="validCodeRules"
-                                label="验证码"
-                                required
-                              ></v-text-field
-                            ></v-flex>
-                            <v-flex md4>
-                              <v-btn
-                                :disabled="!canSend"
-                                @click="send"
-                                color="primary"
-                                >{{ validText }}</v-btn
-                              ></v-flex
-                            >
-                          </v-layout>
-                          <span
-                            v-if="validFlag"
-                            class="caption grey--text text--darken-1"
-                          >
-                            {{ validMsg }}
-                          </span>
-                        </v-form>
-                      </v-tab-item>
-                    </v-tabs>
-                  </v-window-item>
-
-                  <v-window-item :value="3">
-                    <div class="pa-3 text-xs-center">
-                      <h3 class="title font-weight-light mb-2">
-                        注册账号成功!
-                      </h3>
-                      <span class="caption grey--text"
-                        >欢迎，点击注册完成按钮，跳转到登录页。</span
+                    </v-form>
+                  </v-tab-item>
+                  <v-tab-item value="tab-2">
+                    <v-form ref="form22" lazy-validation>
+                      <v-text-field
+                        v-model="form.phoneNumber"
+                        :rules="phoneRules"
+                        hint="绑定手机号可以使用手机号加验证码登录，也可以在忘记密码后通过手机号找回密码"
+                        label="手机号"
+                        mask="nnn nnnn nnnn"
+                      ></v-text-field>
+                      <v-layout>
+                        <v-flex md8
+                          ><v-text-field
+                            v-model="form.validCode"
+                            :rules="validCodeRules"
+                            label="验证码"
+                            required
+                          ></v-text-field
+                        ></v-flex>
+                        <v-flex md4>
+                          <v-btn
+                            :disabled="!canSend"
+                            color="primary"
+                            @click="send"
+                            >{{ validText }}</v-btn
+                          ></v-flex
+                        >
+                      </v-layout>
+                      <span
+                        v-if="validFlag"
+                        class="caption grey--text text--darken-1"
                       >
-                      <span class="caption grey--text"
-                        >系统将会发送一封验证邮件，请按提示完成绑定操作。</span
-                      >
-                    </div>
-                  </v-window-item>
-                </v-window>
-              </v-card-text>
-              <v-card-actions v-if="step === 1">
-                <v-spacer></v-spacer>
-                <v-btn
-                  :disabled="step === 3"
-                  :loading="oneLoading"
-                  @click="oneStep"
-                  color="primary"
-                  depressed
-                >
-                  下一步
+                        {{ validMsg }}
+                      </span>
+                    </v-form>
+                  </v-tab-item>
+                </v-tabs>
+              </v-window-item>
+
+              <v-window-item :value="3">
+                <div class="pa-3 text-xs-center">
+                  <h3 class="title font-weight-light mb-2">
+                    注册账号成功!
+                  </h3>
+                  <span class="caption grey--text"
+                    >欢迎，点击注册完成按钮，跳转到登录页。</span
+                  >
+                  <span class="caption grey--text"
+                    >系统将会发送一封验证邮件，请按提示完成绑定操作。</span
+                  >
+                </div>
+              </v-window-item>
+            </v-window>
+          </v-card-text>
+          <v-card-actions v-if="step === 1">
+            <v-spacer></v-spacer>
+            <v-btn
+              :disabled="step === 3"
+              :loading="oneLoading"
+              color="primary"
+              depressed
+              @click="oneStep"
+            >
+              下一步
+            </v-btn>
+          </v-card-actions>
+          <v-card-actions v-if="step === 2">
+            <v-btn depressed @click="step--">
+              返回上一步
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn
+              :loading="twoLoading"
+              color="primary"
+              depressed
+              @click="twoStep"
+            >
+              提交注册
+            </v-btn>
+          </v-card-actions>
+          <v-card-actions v-if="step === 3">
+            <v-layout justify-center>
+              <v-flex md3 xs3>
+                <v-btn color="primary" depressed @click="threeStep">
+                  完成注册
                 </v-btn>
-              </v-card-actions>
-              <v-card-actions v-if="step === 2">
-                <v-btn @click="step--" depressed>
-                  返回上一步
-                </v-btn>
-                <v-spacer></v-spacer>
-                <v-btn
-                  :loading="twoLoading"
-                  @click="twoStep"
-                  color="primary"
-                  depressed
-                >
-                  提交注册
-                </v-btn>
-              </v-card-actions>
-              <v-card-actions v-if="step === 3">
-                <v-layout justify-center>
-                  <v-flex md3 xs3>
-                    <v-btn @click="threeStep" color="primary" depressed>
-                      完成注册
-                    </v-btn>
-                  </v-flex>
-                </v-layout>
-              </v-card-actions>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-content>
+              </v-flex>
+            </v-layout>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </div>
     <div class="container">
       <div class="content">
-        <canvas id="universe" width="1707" height="850"></canvas>
+        <canvas id="universe" ref="universe" width="1707" height="850"></canvas>
 
         <div id="footer">
           <svg id="scene" x="0px" y="0px" width="1600px" height="315px">
@@ -397,9 +393,8 @@
           </svg>
         </div>
       </div>
-    </div>
-  </v-app>
-</template>
+    </div></div
+></template>
 <script>
 import qs from 'qs'
 import {
@@ -462,9 +457,25 @@ export default {
       (v) => !!v || '验证码不能为空!',
       (v) => v.length === 4 || '验证码输入不合法'
     ],
-    emailRules: [(v) => !v || validateEmail(v) || '不是合法的邮箱']
+    emailRules: [(v) => !v || validateEmail(v) || '不是合法的邮箱'],
+    starDensity: 0.216,
+    speedCoeff: 0.05,
+    width: '',
+    height: '',
+    starCount: '',
+    first: true,
+    circleRadius: '',
+    circleCenter: '',
+    giantColor: '180,184,240',
+    starColor: '226,225,142',
+    cometColor: '226,225,224',
+    stars: [],
+    universe: ''
   }),
   computed: {
+    canva() {
+      return this.$refs.universe
+    },
     currentTitle() {
       switch (this.step) {
         case 1:
@@ -484,7 +495,16 @@ export default {
       immediate: true
     }
   },
-  created() {},
+  mounted() {
+    // this.canva = document.getElementById("universe");
+
+    this.windowResizeHandler()
+    window.addEventListener('resize', this.windowResizeHandler, false)
+
+    this.createUniverse()
+
+    this.init()
+  },
   methods: {
     oneStep() {
       this.oneLoading = true
@@ -697,23 +717,182 @@ export default {
       } else {
         this.loading = false
       }
+    },
+    windowResizeHandler() {
+      this.width = window.innerWidth
+      this.height = window.innerHeight
+      this.starCount = this.width * this.starDensity
+      this.circleRadius =
+        this.width > this.height ? this.height / 2 : this.width / 2
+      this.circleCenter = {
+        x: this.width / 2,
+        y: this.height / 2
+      }
+
+      this.canva.setAttribute('width', this.width)
+      this.canva.setAttribute('height', this.height)
+    },
+    createUniverse() {
+      this.universe = this.canva.getContext('2d')
+
+      for (let i = 0; i < this.starCount; i++) {
+        this.stars[i] = new this.Star(this)
+        this.stars[i].reset()
+      }
+
+      this.draw()
+    },
+    draw() {
+      this.universe.clearRect(0, 0, this.width, this.height)
+
+      const starsLength = this.stars.length
+
+      for (let i = 0; i < starsLength; i++) {
+        const star = this.stars[i]
+        star.move()
+        star.fadeIn()
+        star.fadeOut()
+        star.draw()
+      }
+
+      window.requestAnimationFrame =
+        window.requestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.msRequestAnimationFrame
+
+      window.requestAnimationFrame(this.draw)
+    },
+    Star(that) {
+      this.reset = function() {
+        this.giant = that.getProbability(3)
+        this.comet = this.giant || that.first ? false : that.getProbability(10)
+        this.x = that.getRandInterval(0, that.width - 10)
+        this.y = that.getRandInterval(0, that.height)
+        this.r = that.getRandInterval(1.1, 2.6)
+        this.dx =
+          that.getRandInterval(that.speedCoeff, 6 * that.speedCoeff) +
+          (this.comet + 1 - 1) *
+            that.speedCoeff *
+            that.getRandInterval(50, 120) +
+          that.speedCoeff * 2
+        this.dy =
+          -that.getRandInterval(that.speedCoeff, 6 * that.speedCoeff) -
+          (this.comet + 1 - 1) * that.speedCoeff * that.getRandInterval(50, 120)
+        this.fadingOut = null
+        this.fadingIn = true
+        this.opacity = 0
+        this.opacityTresh = that.getRandInterval(
+          0.2,
+          1 - (this.comet + 1 - 1) * 0.4
+        )
+        this.do =
+          that.getRandInterval(0.0005, 0.002) + (this.comet + 1 - 1) * 0.001
+      }
+
+      this.fadeIn = function() {
+        if (this.fadingIn) {
+          this.fadingIn = !(this.opacity > this.opacityTresh)
+          this.opacity += this.do
+        }
+      }
+
+      this.fadeOut = function() {
+        if (this.fadingOut) {
+          this.fadingOut = !(this.opacity < 0)
+          this.opacity -= this.do / 2
+          if (this.x > that.width || this.y < 0) {
+            this.fadingOut = false
+            this.reset()
+          }
+        }
+      }
+
+      this.draw = function() {
+        that.universe.beginPath()
+
+        if (this.giant) {
+          that.universe.fillStyle =
+            'rgba(' + that.giantColor + ',' + this.opacity + ')'
+          that.universe.arc(this.x, this.y, 2, 0, 2 * Math.PI, false)
+        } else if (this.comet) {
+          that.universe.fillStyle =
+            'rgba(' + that.cometColor + ',' + this.opacity + ')'
+          that.universe.arc(this.x, this.y, 1.5, 0, 2 * Math.PI, false)
+
+          // comet tail
+          for (let i = 0; i < 30; i++) {
+            that.universe.fillStyle =
+              'rgba(' +
+              that.cometColor +
+              ',' +
+              (this.opacity - (this.opacity / 20) * i) +
+              ')'
+            that.universe.rect(
+              this.x - (this.dx / 4) * i,
+              this.y - (this.dy / 4) * i - 2,
+              2,
+              2
+            )
+            that.universe.fill()
+          }
+        } else {
+          that.universe.fillStyle =
+            'rgba(' + that.starColor + ',' + this.opacity + ')'
+          that.universe.rect(this.x, this.y, this.r, this.r)
+        }
+
+        that.universe.closePath()
+        that.universe.fill()
+      }
+
+      this.move = function() {
+        this.x += this.dx
+        this.y += this.dy
+        if (this.fadingOut === false) {
+          this.reset()
+        }
+        if (this.x > that.width - that.width / 4 || this.y < 0) {
+          this.fadingOut = true
+        }
+      }
+      ;(function() {
+        setTimeout(function() {
+          that.first = false
+        }, 50)
+      })()
+    },
+    getProbability(percents) {
+      return Math.floor(Math.random() * 1000) + 1 < percents * 10
+    },
+    getRandInterval(min, max) {
+      return Math.random() * (max - min) + min
+    },
+    init() {
+      // TweenMax.to("#greens1", 5.5, { skewX: 5.07735 });
     }
   }
 }
 </script>
 <style scoped lang="scss">
-#register {
-  height: 0%;
+.html,
+.body {
+  padding: 0px;
+  margin: 0px;
   width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: '';
-  z-index: 0;
+  height: 100%;
+  position: fixed;
+}
+
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   -webkit-filter: contrast(120%);
   filter: contrast(120%);
   background-color: black;
 }
+
 .container {
   max-width: inherit;
   max-height: inherit;
@@ -739,7 +918,7 @@ export default {
 #footer {
   position: absolute;
   bottom: 0px;
-  height: 280px;
+  height: 300px;
   width: 100%;
   pointer-events: none;
 }
@@ -749,5 +928,8 @@ export default {
   position: absolute;
   left: 50%;
   margin-left: -800px;
+}
+.main {
+  position: absolute;
 }
 </style>
