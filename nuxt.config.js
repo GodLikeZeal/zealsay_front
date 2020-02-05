@@ -27,7 +27,12 @@ export default {
           '技术人生,技术笔记,情感交流,技术分享,java,spring boot,vue,nuxt,vuetify,后台,前端,服务器,动漫,程序员,全栈工程师,全栈,zealsay,zealsay博客,zealsay说你想说,王者荣耀,游戏,盘点,个人博客,建站系统,生活杂记,随笔,WEB平台,BOX-ROM,BoxMod。'
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [
+      {
+        src: 'https://apps.bdimg.com/libs/jquery/1.7.1/jquery.min.js'
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color

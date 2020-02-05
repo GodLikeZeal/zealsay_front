@@ -63,10 +63,6 @@
     </div>
     <div id="open_live2d">召唤小天使</div>
 
-    <script
-      type="text/javascript"
-      src="https://apps.bdimg.com/libs/jquery/1.7.1/jquery.min.js"
-    />
     <script type="text/javascript" src="/live2d/js/live2d.js" />
     <script type="text/javascript" src="/live2d/js/message.js" />
   </div>
