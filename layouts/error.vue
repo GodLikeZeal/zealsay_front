@@ -71,7 +71,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.mounted = true
-    }, 10)
+    }, 0)
   },
   methods: {
     goHome() {

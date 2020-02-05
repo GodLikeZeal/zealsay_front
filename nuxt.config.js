@@ -36,7 +36,11 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['chartist/dist/chartist.min.css', '@/assets/scss/styles/index.scss'],
+  css: [
+    'chartist/dist/chartist.min.css',
+    '@/assets/scss/styles/index.scss',
+    '@/static/live2d/css/live2d.css'
+  ],
   /*
    ** Plugins to load before mounting the App
    */
@@ -179,7 +183,7 @@ export default {
     productionSourceMap: false,
     productionGzip: true,
     productionGzipExtensions: ['js', 'css', 'svg'],
-    extractCSS: { allChunks: true }, // css 独立打包 link 的形式加载
+    // extractCSS: { allChunks: true }, // css 独立打包 link 的形式加载
     // publicPath:
     //   process.env.NODE_ENV === 'development'
     //     ? '/_nuxt/'

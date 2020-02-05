@@ -6,7 +6,7 @@
       class="primary accent-4  white--text text-center"
       width="100%"
     >
-      <!--      <live2d></live2d>-->
+      <live2d></live2d>
       <v-card-text>
         <v-list-item-title avatar>
           <v-list-item-avatar color="white" class="avatar">
@@ -62,12 +62,12 @@
 </template>
 
 <script>
-// import Live2d from '@/components/core/Live2d'
+import Live2d from '@/components/core/Live2d'
 export default {
   name: 'BlogFooter',
-  // components: {
-  //   live2d: Live2d
-  // },
+  components: {
+    live2d: Live2d
+  },
   data: () => ({
     icons: [
       { icon: 'mdi-facebook', url: '/', info: 'facebook' },
