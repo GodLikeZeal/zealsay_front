@@ -1,160 +1,80 @@
 <template>
-  <html>
-    <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <style type="text/css">
-        html,
-        body {
-          padding: 0px;
-          margin: 0px;
-          width: 100%;
-          height: 100%;
-          position: fixed;
-        }
+  <div class="html body">
+    <div class="main d-flex justify-center align-center">
+      <v-col cols="8">
+        <v-card class="elevation-1 pa-3" style="margin-bottom: 10%">
+          <v-card-text>
+            <div class="text-center">
+              <img
+                width="30%"
+                height="18%"
+                src="@/static/image/logo/logo.png"
+                alt="Zealsay Admin"
+              />
+              <h2 class=" my-4 primary--text">
+                zealsay 说你想说
+              </h2>
+            </div>
+            <v-form id="form" ref="form" lazy-validation>
+              <v-text-field
+                id="username"
+                v-model="form.username"
+                append-icon="person"
+                :rules="usernameRules"
+                placeholder="输入用户名或邮箱"
+                type="text"
+              ></v-text-field>
+              <v-text-field
+                id="password"
+                v-model="form.password"
+                append-icon="lock"
+                :rules="passwordRules"
+                placeholder="登录密码"
+                type="password"
+              ></v-text-field>
+              <a class="primary--text" href="register">注册账号</a>
+              OR
+              <a id="lost" class="right">忘记密码？</a>
+              <transition name="fade">
+                <p v-show="visible" class="caption amber--text text--darken-1">
+                  {{ errMsg }}
+                </p>
+              </transition>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <!--                <v-btn title="微信登录" icon>-->
+            <!--                  <v-icon medium color="light-green">mdi-wechat </v-icon>-->
+            <!--                </v-btn>-->
+            <!--                <v-btn title="QQ登录" icon>-->
+            <!--                  <v-icon medium color="light-blue">mdi-qqchat</v-icon>-->
+            <!--                </v-btn>-->
+            <v-btn title="github登录" nuxt :href="github" icon>
+              <v-icon medium color="light-grey">mdi-github-circle</v-icon>
+            </v-btn>
+            <v-spacer></v-spacer>
 
-        body {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          -webkit-filter: contrast(120%);
-          filter: contrast(120%);
-          background-color: black;
-        }
+            <v-btn
+              depressed
+              class="btn-primary"
+              color="primary"
+              :loading="loading"
+              @click="login"
+              >登 录
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </div>
+    <div class="container">
+      <div class="content">
+        <canvas id="universe" ref="universe" width="1707" height="850"></canvas>
 
-        .container {
-          max-width: inherit;
-          max-height: inherit;
-          width: 100%;
-          height: 100%;
-          background-image: radial-gradient(
-            1600px at 70% 120%,
-            rgba(33, 39, 80, 1) 10%,
-            #020409 100%
-          );
-        }
-
-        .content {
-          width: inherit;
-          height: inherit;
-        }
-
-        #universe {
-          width: 100%;
-          height: 100%;
-        }
-
-        #footer {
-          position: absolute;
-          bottom: 0px;
-          height: 300px;
-          width: 100%;
-          pointer-events: none;
-        }
-
-        #scene {
-          height: 100%;
-          position: absolute;
-          left: 50%;
-          margin-left: -800px;
-        }
-
-        /*a {*/
-        /*  text-decoration: none;*/
-        /*  color: rgba(200, 220, 255, 1);*/
-        /*  opacity: 0.4;*/
-        /*  transition: opacity 0.4s ease;*/
-        /*}*/
-
-        /*a:hover {*/
-        /*  opacity: 1;*/
-        /*}*/
-      </style>
-    </head>
-    <body>
-      <div class="main">
-        <v-app id="login">
-          <v-content>
-            <v-container class="form-container" fluid fill-height>
-              <v-layout align-center justify-center>
-                <v-flex xs12 sm8 md4 lg4>
-                  <v-card class="elevation-1 pa-3" style="margin-bottom: 10%">
-                    <v-card-text>
-                      <div class="layout column align-center">
-                        <img
-                          width="30%"
-                          height="18%"
-                          src="@/static/image/logo/logo.png"
-                          alt="Zealsay Admin"
-                        />
-                        <h2 class="flex my-4 primary--text">
-                          zealsay 说你想说
-                        </h2>
-                      </div>
-                      <v-form id="form">
-                        <v-text-field
-                          id="username"
-                          append-icon="person"
-                          name="username"
-                          placeholder="用户名/邮箱"
-                          type="text"
-                        ></v-text-field>
-                        <v-text-field
-                          id="password"
-                          append-icon="lock"
-                          name="password"
-                          placeholder="登录密码"
-                          type="password"
-                        ></v-text-field>
-                        <a nuxt href="register">注册账号</a> OR
-                        <a id="lost" class="right">忘记密码？</a>
-                        <transition name="fade">
-                          <p
-                            id="alert"
-                            class="caption amber--text text--darken-1"
-                            style="visibility: hidden"
-                          ></p>
-                        </transition>
-                      </v-form>
-                    </v-card-text>
-                    <v-card-actions>
-                      <!--                <v-btn title="微信登录" icon>-->
-                      <!--                  <v-icon medium color="light-green">mdi-wechat </v-icon>-->
-                      <!--                </v-btn>-->
-                      <!--                <v-btn title="QQ登录" icon>-->
-                      <!--                  <v-icon medium color="light-blue">mdi-qqchat</v-icon>-->
-                      <!--                </v-btn>-->
-                      <v-btn
-                        title="github登录"
-                        nuxt
-                        href="/app/api/v1/oauth/login/github"
-                        icon
-                      >
-                        <v-icon medium color="light-grey"
-                          >mdi-github-circle</v-icon
-                        >
-                      </v-btn>
-                      <v-spacer></v-spacer>
-
-                      <v-btn id="submit" depressed color="primary"
-                        >登 录
-                      </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-content>
-        </v-app>
-      </div>
-      <div class="container">
-        <div class="content">
-          <canvas id="universe" width="1707" height="850"></canvas>
-
-          <div id="footer">
-            <svg id="scene" x="0px" y="0px" width="1600px" height="315px">
-              <path
-                id="ground"
-                d="M0,316.4209c0,0,157.7119-35.416,469-56c7.3833-0.4883,23.7876-3.5488,31.3335-4.0166
+        <div id="footer">
+          <svg id="scene" x="0px" y="0px" width="1600px" height="315px">
+            <path
+              id="ground"
+              d="M0,316.4209c0,0,157.7119-35.416,469-56c7.3833-0.4883,23.7876-3.5488,31.3335-4.0166
                 	c3.7681-0.2334,19.4302,0.9424,28.3335,0.3506c17.1494-1.1396,30.9072-4.2734,38.333-4.6836
                 	c7.5972-0.4189,18.4058,0.3799,27.6665-0.9834c5.7075-0.8408,10.1318-4.042,14.9248-4.2705
                 	c7.8369-0.373,24.5693,3.6084,34.4087,4.2705c11.0586,0.7432,15.2656-1.8135,24.3335-2.1523c10.0576-0.376,20.4629,1.3867,28.6665,0
@@ -175,136 +95,136 @@
                 	c4.001,0.1514,4.7764-1.1602,8.75-1c3.1836,0.1289,16.834,1.9912,20,2.125c4.0059,0.1699,4.0029-0.9004,7.9814-0.7227
                 	c6.8594,0.3076,7.9102,1.7656,14.6855,2.0977c8.916,0.4365,23.5254-0.2432,32.293,0.2344
                 	c6.7168,0.3662,13.3896,0.7432,20.0186,1.1318C1458.8545,268.4941,1680,316.4209,1680,316.4209H0z"
-              ></path>
-              <path
-                id="stone1"
-                d="M680.3335,250.7549c7.3335,0.333,13.6665-1.2549,6-6.4609s-14.333-7.1221-18.6665,0.8359
+            ></path>
+            <path
+              id="stone1"
+              d="M680.3335,250.7549c7.3335,0.333,13.6665-1.2549,6-6.4609s-14.333-7.1221-18.6665,0.8359
                 	S680.3335,250.7549,680.3335,250.7549z"
-              ></path>
-              <path
-                id="stone2"
-                d="M750.5,243.1709c3.25,0,2.5-3.707-1.75-4.2285s-5,3.7285-3,4.2285S750.5,243.1709,750.5,243.1709z"
-              ></path>
-              <path
-                id="stone3"
-                d="M988.4893,243.8242c2.8857,0.3467,4.8438,1.2627,3.0107-2.0703s-7.3955,1.3555-5.2031,1.7129
+            ></path>
+            <path
+              id="stone2"
+              d="M750.5,243.1709c3.25,0,2.5-3.707-1.75-4.2285s-5,3.7285-3,4.2285S750.5,243.1709,750.5,243.1709z"
+            ></path>
+            <path
+              id="stone3"
+              d="M988.4893,243.8242c2.8857,0.3467,4.8438,1.2627,3.0107-2.0703s-7.3955,1.3555-5.2031,1.7129
                 	S988.4893,243.8242,988.4893,243.8242z"
-              ></path>
-              <path
-                id="stone4"
-                d="M697,248.9355c2.0142-0.2021,2.1665-2.0156,1-2.1816s-9.1543,1.8398-5.9937,2.6699S697,248.9355,697,248.9355z"
-              ></path>
-              <g id="greens" transform="translate(850, 180)">
-                <g transform="skewX(5.07735)">
-                  <path
-                    d="M36.3877,59.4268C33.0576,18.9482,6.4658,4.522,6.4658,4.522s22.4834,16.1426,24.4414,54.2251
+            ></path>
+            <path
+              id="stone4"
+              d="M697,248.9355c2.0142-0.2021,2.1665-2.0156,1-2.1816s-9.1543,1.8398-5.9937,2.6699S697,248.9355,697,248.9355z"
+            ></path>
+            <g id="greens" transform="translate(850, 180)">
+              <g transform="skewX(5.07735)">
+                <path
+                  d="M36.3877,59.4268C33.0576,18.9482,6.4658,4.522,6.4658,4.522s22.4834,16.1426,24.4414,54.2251
 			C32.8657,96.8311,36.3877,59.4268,36.3877,59.4268z"
-                  ></path>
-                  <path
-                    d="M41.8496,83.1641C31.1572,43.98,2.3711,34.6738,2.3711,34.6738s25.063,11.7471,33.9668,48.8271
+                ></path>
+                <path
+                  d="M41.8496,83.1641C31.1572,43.98,2.3711,34.6738,2.3711,34.6738s25.063,11.7471,33.9668,48.8271
 			C45.2441,120.5791,41.8496,83.1641,41.8496,83.1641z"
-                  ></path>
-                  <path
-                    d="M31.3955,60.7207C23.7139,25.7979,2.5381,16.9541,2.5381,16.9541s18.4165,10.9277,24.7925,43.9502
+                ></path>
+                <path
+                  d="M31.3955,60.7207C23.7139,25.7979,2.5381,16.9541,2.5381,16.9541s18.4165,10.9277,24.7925,43.9502
 			C33.7061,93.9258,31.3955,60.7207,31.3955,60.7207z"
-                  ></path>
-                  <path
-                    d="M40.4517,62.0068C47.9473,21.6187,25.4009,0.1914,25.4009,0.1914s18.0098,21.9634,9.7896,59.6357
+                ></path>
+                <path
+                  d="M40.4517,62.0068C47.9473,21.6187,25.4009,0.1914,25.4009,0.1914s18.0098,21.9634,9.7896,59.6357
 			C26.9722,97.499,40.4517,62.0068,40.4517,62.0068z"
-                  ></path>
-                  <path
-                    d="M41.9414,69.4316c13.0313-38.9565-6.3218-63.3062-6.3218-63.3062s14.7856,24.251,1.4141,60.4185
+                ></path>
+                <path
+                  d="M41.9414,69.4316c13.0313-38.9565-6.3218-63.3062-6.3218-63.3062s14.7856,24.251,1.4141,60.4185
 			C23.6621,102.709,41.9414,69.4316,41.9414,69.4316z"
-                  ></path>
-                  <path
-                    d="M29.4976,87.9092c27.4097-30.5938,19.2993-60.6226,19.2993-60.6226s3.958,28.1255-22.6606,56.0249
+                ></path>
+                <path
+                  d="M29.4976,87.9092c27.4097-30.5938,19.2993-60.6226,19.2993-60.6226s3.958,28.1255-22.6606,56.0249
 			C-0.4775,111.2109,29.4976,87.9092,29.4976,87.9092z"
-                  ></path>
-                  <animatetransform
-                    attributeName="transform"
-                    type="skewX"
-                    values="0;10;0"
-                    begin="0s"
-                    dur="5.5s"
-                    fill="freeze"
-                    repeatCount="indefinite"
-                  ></animatetransform>
-                  <animatemotion
-                    type="translate"
-                    values="0,0;-10,0;0,0"
-                    begin="0s"
-                    dur="5.5s"
-                    fill="freeze"
-                    repeatCount="indefinite"
-                  ></animatemotion>
-                </g>
-                <g transform="skewX(6.62237)">
-                  <path
-                    d="M34.9995,60.4189C56.0713,30.6665,46.1133,5.4014,46.1133,5.4014S52.2559,29.4746,31.6235,56.79
-			C10.9917,84.1035,34.9995,60.4189,34.9995,60.4189z"
-                  ></path>
-                  <path
-                    d="M36.3047,64.5391c28.4629-23.4443,25.3262-51.189,25.3262-51.189s-0.293,25.4971-27.6851,46.6538
-			C6.5552,81.1631,36.3047,64.5391,36.3047,64.5391z"
-                  ></path>
-                  <path
-                    d="M33.0449,70.502c31.4424-19.2637,32.1875-47.1748,32.1875-47.1748s-3.8291,25.208-33.897,42.3584
-			C1.271,82.833,33.0449,70.502,33.0449,70.502z"
-                  ></path>
-                  <path
-                    d="M13.8237,76.0244c36.5039-5.2158,48.2563-30.543,48.2563-30.543S48.5693,67.1045,14.168,70.9248
-			C-20.2324,74.749,13.8237,76.0244,13.8237,76.0244z"
-                  ></path>
-                  <animatetransform
-                    attributeName="transform"
-                    type="skewX"
-                    values="0;15;0"
-                    begin="0s"
-                    dur="5s"
-                    fill="freeze"
-                    repeatCount="indefinite"
-                  ></animatetransform>
-                  <animatemotion
-                    type="translate"
-                    values="0,0;-15,0;0,0"
-                    begin="0s"
-                    dur="5s"
-                    fill="freeze"
-                    repeatCount="indefinite"
-                  ></animatemotion>
-                </g>
+                ></path>
+                <animatetransform
+                  attributeName="transform"
+                  type="skewX"
+                  values="0;10;0"
+                  begin="0s"
+                  dur="5.5s"
+                  fill="freeze"
+                  repeatCount="indefinite"
+                ></animatetransform>
+                <animatemotion
+                  type="translate"
+                  values="0,0;-10,0;0,0"
+                  begin="0s"
+                  dur="5.5s"
+                  fill="freeze"
+                  repeatCount="indefinite"
+                ></animatemotion>
               </g>
-              <g id="sign" transform="translate(700, 180)">
-                <polygon
-                  points="21.2168,1.1143 20.6665,1.5459 19.7593,1.4473 19.229,1.4209 18.9707,1.6274 18.6665,1.9004 17.6865,1.9219
+              <g transform="skewX(6.62237)">
+                <path
+                  d="M34.9995,60.4189C56.0713,30.6665,46.1133,5.4014,46.1133,5.4014S52.2559,29.4746,31.6235,56.79
+			C10.9917,84.1035,34.9995,60.4189,34.9995,60.4189z"
+                ></path>
+                <path
+                  d="M36.3047,64.5391c28.4629-23.4443,25.3262-51.189,25.3262-51.189s-0.293,25.4971-27.6851,46.6538
+			C6.5552,81.1631,36.3047,64.5391,36.3047,64.5391z"
+                ></path>
+                <path
+                  d="M33.0449,70.502c31.4424-19.2637,32.1875-47.1748,32.1875-47.1748s-3.8291,25.208-33.897,42.3584
+			C1.271,82.833,33.0449,70.502,33.0449,70.502z"
+                ></path>
+                <path
+                  d="M13.8237,76.0244c36.5039-5.2158,48.2563-30.543,48.2563-30.543S48.5693,67.1045,14.168,70.9248
+			C-20.2324,74.749,13.8237,76.0244,13.8237,76.0244z"
+                ></path>
+                <animatetransform
+                  attributeName="transform"
+                  type="skewX"
+                  values="0;15;0"
+                  begin="0s"
+                  dur="5s"
+                  fill="freeze"
+                  repeatCount="indefinite"
+                ></animatetransform>
+                <animatemotion
+                  type="translate"
+                  values="0,0;-15,0;0,0"
+                  begin="0s"
+                  dur="5s"
+                  fill="freeze"
+                  repeatCount="indefinite"
+                ></animatemotion>
+              </g>
+            </g>
+            <g id="sign" transform="translate(700, 180)">
+              <polygon
+                points="21.2168,1.1143 20.6665,1.5459 19.7593,1.4473 19.229,1.4209 18.9707,1.6274 18.6665,1.9004 17.6865,1.9219
 		37.3516,87.8877 40.8828,87.0791 	"
-                ></polygon>
-                <polygon
-                  points="45.4111,9.5537 2.4258,18.7158 1.563,18.498 1.4585,17.2114 0.8291,15.583 0.9165,14.3364 0.0908,12.6548
+              ></polygon>
+              <polygon
+                points="45.4111,9.5537 2.4258,18.7158 1.563,18.498 1.4585,17.2114 0.8291,15.583 0.9165,14.3364 0.0908,12.6548
 		0.2085,12.0864 -0.1924,11.5308 -0.3296,9.271 43.3408,-0.0376 43.4766,0.5015 43.334,0.9629 43.6533,1.2046 43.8232,1.8784
 		43.8965,2.7754 44.2217,3.459 44.625,5.0576 45.041,7.5459 45.2637,7.5962 45.6191,9.0073 	"
-                ></polygon>
-                <polygon
-                  points="47.0078,20.8545 4.2368,29.5503 3.5933,28.5903 3.3965,26.9746 2.4683,24.5137 2.8398,24.1372 2.2676,23.7847
+              ></polygon>
+              <polygon
+                points="47.0078,20.8545 4.2368,29.5503 3.5933,28.5903 3.3965,26.9746 2.4683,24.5137 2.8398,24.1372 2.2676,23.7847
 		1.9834,22.7563 2.2417,22.3394 1.7388,21.8706 1.2627,20.1426 44.8281,11.2852 45.082,12.4014 45.0723,12.9517 45.3281,13.481
 		45.752,15.3369 46.0273,17.7524 46.4219,18.2803 	"
-                ></polygon>
-                <polygon
-                  points="47.666,31.168 4.7803,39.4023 4.251,37.4004 4.4429,36.1895 3.6465,35.1123 3.0142,32.7178 3.2754,32.1025
+              ></polygon>
+              <polygon
+                points="47.666,31.168 4.7803,39.4023 4.251,37.4004 4.4429,36.1895 3.6465,35.1123 3.0142,32.7178 3.2754,32.1025
 		2.7461,31.7046 2.2676,29.8945 45.9268,21.5107 46.0762,22.2007 45.9512,22.8423 46.2783,23.1372 46.6777,24.9795 46.5234,25.4795
 		47.3027,27.8667 47.8086,30.2017 	"
-                ></polygon>
-              </g>
-              <g id="boy_1_">
-                <g id="boy">
-                  <path
-                    d="M800.7324,167.6929c0,0-7.9688-6.5039-9.7197-8.041c-1.751-1.5366-7.9331-6.5039-8.7197-13.0435
+              ></polygon>
+            </g>
+            <g id="boy_1_">
+              <g id="boy">
+                <path
+                  d="M800.7324,167.6929c0,0-7.9688-6.5039-9.7197-8.041c-1.751-1.5366-7.9331-6.5039-8.7197-13.0435
 			c-0.7861-6.5396,6.0752-15.188,17.7969-16.1885c11.7207-1.0005,12.9727,1.0366,14.1514,2.7163
 			c1.1787,1.6792,5.7178,11.1494,5.0752,18.6538c-0.6445,7.5049-5.6826,10.1133-9.7559,13.3652
 			C805.4863,168.4072,800.7324,167.6929,800.7324,167.6929z"
-                  ></path>
-                  <path
-                    d="M810.7031,169.2109c-1.0723-1.3037-1.3574-2.9556-1.1426-4.0645c0.2139-1.1084-8.041,0.1128-8.8281,2.542
+                ></path>
+                <path
+                  d="M810.7031,169.2109c-1.0723-1.3037-1.3574-2.9556-1.1426-4.0645c0.2139-1.1084-8.041,0.1128-8.8281,2.542
 			c1.6445,1.6787,0.751,3.146-0.5,4.1108c-1.25,0.9648-1.6797,1.502-1.9297,1.8237c0.0361,0.5361,0,0.9653,0,0.9653
 			s-1.4297,1.7153-2.2871,6.5396s-0.6787,6.79-0.9648,8.3267c-0.2852,1.5366-1.4648,5.9678-1.751,10.292s0,4.5742,0,4.5742
 			s1.251,1.7153,1.1436,4.0742s-1.2705,5.6099-1.2705,5.6099s0.2344,1.8945,1.8779,2.252c1.6445,0.3574,2.3594-0.6436,2.3594-0.6436
@@ -316,312 +236,353 @@
 			c-1.1436-4.6104-0.5-4.4678-0.5-4.4678s1.75-0.8213,1.5-2.8584s-0.8574-3.6807-1.5352-5.5391
 			c0.4639-0.1074,1-0.7861-0.6797-2.7158c-0.2148-2.5015-0.9648-6.3242-0.6436-7.6465s0.2148-2.8232-0.1787-4.3599
 			c0-2.4302,0.7148-13.1509-1.25-17.0103c-1.9658-3.8594-2.5371-3.5737-2.5371-3.5737S812.5977,169.0142,810.7031,169.2109z"
-                  ></path>
-                </g>
-                <g transform="translate(783, 122)">
-                  <g transform="skewX(28.4441)">
-                    <path
-                      d="M35.3506,17.9644c2.9834-3.71,5.9824-15.2095-3.1846-18.3765c2.668,3.833,1.168,5.6665,1.168,5.6665
+                ></path>
+              </g>
+              <g transform="translate(783, 122)">
+                <g transform="skewX(28.4441)">
+                  <path
+                    d="M35.3506,17.9644c2.9834-3.71,5.9824-15.2095-3.1846-18.3765c2.668,3.833,1.168,5.6665,1.168,5.6665
 	S32,1.2549,28.666-0.4121c1.5,3.1665,0,5,0,5S20.5,8.9209,24.5,13.2544S35.3506,17.9644,35.3506,17.9644z"
-                    ></path>
-                    <animatetransform
-                      attributeName="transform"
-                      type="skewX"
-                      values="0;30;0"
-                      begin="0s"
-                      dur="4s"
-                      fill="freeze"
-                      repeatCount="indefinite"
-                    ></animatetransform>
-                    <animatemotion
-                      type="translate"
-                      values="0,0;-10,0;0,0"
-                      begin="0s"
-                      dur="4s"
-                      fill="freeze"
-                      repeatCount="indefinite"
-                    ></animatemotion>
-                  </g>
-                  <g>
-                    <path
-                      d="M27.125,6.2334c-1.8125-0.625-2.0625-1.9375-4.375-2.25c1,0.8125,1.125,1.6875,1.125,1.6875S21.5,4.3584,19.0625,3.9834
+                  ></path>
+                  <animatetransform
+                    attributeName="transform"
+                    type="skewX"
+                    values="0;30;0"
+                    begin="0s"
+                    dur="4s"
+                    fill="freeze"
+                    repeatCount="indefinite"
+                  ></animatetransform>
+                  <animatemotion
+                    type="translate"
+                    values="0,0;-10,0;0,0"
+                    begin="0s"
+                    dur="4s"
+                    fill="freeze"
+                    repeatCount="indefinite"
+                  ></animatemotion>
+                </g>
+                <g>
+                  <path
+                    d="M27.125,6.2334c-1.8125-0.625-2.0625-1.9375-4.375-2.25c1,0.8125,1.125,1.6875,1.125,1.6875S21.5,4.3584,19.0625,3.9834
 	c1.3125,0.75,2,1.875,2,1.875s-3.25-0.75-5.875-0.75c1.125,0.3125,1.125,0.6875,1.125,0.6875S10.75,5.8584,8.6875,7.4834
 	c1,0.125,0.9375,0.6714,0.9375,0.6714s-4.25,1.5786-5.375,3.7661c0.875-0.4375-0.8125,1.8125-0.8125,1.8125s0.75,1.375-0.3125,1.125
 	S0.5,14.1084,0.5,12.5459c-0.5,2.1875,0.6924,2.5767,1.4375,3.3125c-0.0625,1-0.9375,2.6494-1.25,2.106s0.8594,0.4282,0.0547,2.4731
 	c-0.8047,2.0459-1.1533,3.7432-0.5103,6.5195s2.7056,4.5264,3.5181,6.2139s0.5-1.6875,0.5-1.6875L27.125,6.2334z"
-                    ></path>
-                  </g>
+                  ></path>
                 </g>
               </g>
-            </svg>
-          </div>
+            </g>
+          </svg>
         </div>
       </div>
-    </body>
-  </html>
-</template>
-<script type="text/javascript">
-if (process.client) {
-  window.requestAnimationFrame =
-    window.requestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.msRequestAnimationFrame
-}
+    </div></div
+></template>
 
-const starDensity = 0.216
-const speedCoeff = 0.05
-let width
-let height
-let starCount
-// eslint-disable-next-line no-unused-vars
-let circleRadius
-// eslint-disable-next-line no-unused-vars
-let circleCenter
-let first = true
-const giantColor = '180,184,240'
-const starColor = '226,225,142'
-const cometColor = '226,225,224'
-let canva
-if (process.client) {
-  canva = document.getElementById('universe')
-  document.getElementById('submit').onclick = function() {
-    const alert = document.getElementById('alert')
-    alert.style.visibility = 'hidden'
-    const data = {}
-    const username = document.getElementById('username').value
-    const password = document.getElementById('password').value
-    if (
-      username == null ||
-      username === undefined ||
-      username === '' ||
-      password == null ||
-      password === undefined ||
-      password === ''
-    ) {
-      alert.innerHTML = '用户名和密码不能为空！'
-      alert.style.visibility = 'visible'
-      return
+<script>
+// import { TweenMax } from "gsap";
+import { loginByUsername } from '@/api/login'
+
+export default {
+  name: 'Test',
+  data: () => ({
+    alert: false,
+    msg: 'aa',
+    loading: false,
+    form: {
+      username: '',
+      password: ''
+    },
+    redirect: undefined,
+    visible: false,
+    errMsg: '',
+    usernameRules: [(v) => !!v || '用户名或邮箱不能为空!'],
+    passwordRules: [(v) => !!v || '密码不能为空!'],
+    starDensity: 0.216,
+    speedCoeff: 0.05,
+    width: '',
+    height: '',
+    starCount: '',
+    first: true,
+    circleRadius: '',
+    circleCenter: '',
+    giantColor: '180,184,240',
+    starColor: '226,225,142',
+    cometColor: '226,225,224',
+    stars: [],
+    universe: ''
+  }),
+  computed: {
+    canva() {
+      return this.$refs.universe
+    },
+    github() {
+      return process.env.VUE_APP_API_URL + '/api/v1/oauth/login/github'
     }
-    data.username = username
-    data.password = password
-
-    // 1.创建核心对象
-    let xmlhttp
-    if (window.XMLHttpRequest) {
-      // code for IE7+, Firefox, Chrome, Opera, Safari
-      xmlhttp = new XMLHttpRequest()
-    } else {
-      // code for IE6, IE5
-      // eslint-disable-next-line no-undef
-      xmlhttp = new ActiveXObject('Microsoft.XMLHTTP')
+  },
+  watch: {
+    $route: {
+      handler(route) {
+        this.redirect = route.query && route.query.redirect
+      },
+      immediate: true
     }
+  },
+  mounted() {
+    // this.canva = document.getElementById("universe");
 
-    // 2. 建立连接
-    /*
-        参数：
-        1. 请求方式：GET、POST
-               * get方式，请求参数在URL后边拼接。send方法为空参
-               * post方式，请求参数在send方法中定义
-        2. 请求的URL：
-        3. 同步或异步请求：true（异步）或 false（同步）
+    this.windowResizeHandler()
+    window.addEventListener('resize', this.windowResizeHandler, false)
 
-    */
-    xmlhttp.open('POST', '/app/api/v1/authentication/login', true)
-    xmlhttp.setRequestHeader(
-      'Content-Type',
-      'application/x-www-form-urlencoded'
-    )
-    // 3.发送请求
-    xmlhttp.send('username=' + username + '&password=' + password)
+    this.createUniverse()
 
-    // 4.接受并处理来自服务器的响应结果
-    // 获取方式 ：xmlhttp.responseText
-    // 什么时候获取？当服务器响应成功后再获取
+    this.init()
+  },
+  methods: {
+    login() {
+      this.loading = true
+      this.visible = false
+      // 登录接口待调试
+      if (this.$refs.form.validate()) {
+        this.$axios
+          .$request(loginByUsername(this.form))
+          .then((res) => {
+            this.loading = false
+            this.$router.push({ path: '/redirect?token=' + res.data.token })
+          })
+          .catch((err) => {
+            this.loading = false
+            this.visible = true
+            this.errMsg = err.message
+            setTimeout(() => {
+              this.visible = false
+            }, 5000)
+          })
+      }
+    },
+    windowResizeHandler() {
+      this.width = window.innerWidth
+      this.height = window.innerHeight
+      this.starCount = this.width * this.starDensity
+      this.circleRadius =
+        this.width > this.height ? this.height / 2 : this.width / 2
+      this.circleCenter = {
+        x: this.width / 2,
+        y: this.height / 2
+      }
 
-    // 当xmlhttp对象的就绪状态改变时，触发事件onreadystatechange。
-    xmlhttp.onreadystatechange = function() {
-      // 判断readyState就绪状态是否为4，判断status响应状态码是否为200
+      this.canva.setAttribute('width', this.width)
+      this.canva.setAttribute('height', this.height)
+    },
+    createUniverse() {
+      this.universe = this.canva.getContext('2d')
 
-      if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-        // 获取服务器的响应结果
-        const responseText = xmlhttp.responseText
-        const res = JSON.parse(responseText)
-        if (res.code === '200' && res.data) {
-          window.location = '/redirect?token=' + res.data.token
-        } else {
-          const alert = document.getElementById('alert')
-          alert.innerHTML = res.message
-          alert.style.visibility = 'visible'
+      for (let i = 0; i < this.starCount; i++) {
+        this.stars[i] = new this.Star(this)
+        this.stars[i].reset()
+      }
+
+      this.draw()
+    },
+    draw() {
+      this.universe.clearRect(0, 0, this.width, this.height)
+
+      const starsLength = this.stars.length
+
+      for (let i = 0; i < starsLength; i++) {
+        const star = this.stars[i]
+        star.move()
+        star.fadeIn()
+        star.fadeOut()
+        star.draw()
+      }
+
+      window.requestAnimationFrame =
+        window.requestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.msRequestAnimationFrame
+
+      window.requestAnimationFrame(this.draw)
+    },
+    Star(that) {
+      this.reset = function() {
+        this.giant = that.getProbability(3)
+        this.comet = this.giant || that.first ? false : that.getProbability(10)
+        this.x = that.getRandInterval(0, that.width - 10)
+        this.y = that.getRandInterval(0, that.height)
+        this.r = that.getRandInterval(1.1, 2.6)
+        this.dx =
+          that.getRandInterval(that.speedCoeff, 6 * that.speedCoeff) +
+          (this.comet + 1 - 1) *
+            that.speedCoeff *
+            that.getRandInterval(50, 120) +
+          that.speedCoeff * 2
+        this.dy =
+          -that.getRandInterval(that.speedCoeff, 6 * that.speedCoeff) -
+          (this.comet + 1 - 1) * that.speedCoeff * that.getRandInterval(50, 120)
+        this.fadingOut = null
+        this.fadingIn = true
+        this.opacity = 0
+        this.opacityTresh = that.getRandInterval(
+          0.2,
+          1 - (this.comet + 1 - 1) * 0.4
+        )
+        this.do =
+          that.getRandInterval(0.0005, 0.002) + (this.comet + 1 - 1) * 0.001
+      }
+
+      this.fadeIn = function() {
+        if (this.fadingIn) {
+          this.fadingIn = !(this.opacity > this.opacityTresh)
+          this.opacity += this.do
         }
       }
-    }
-  }
-  document.getElementById('lost').onclick = function() {
-    const alert = document.getElementById('alert')
-    alert.innerHTML = '功能开发中,忘记密码我现在也无能为力呀！'
-    alert.style.visibility = 'visible'
-  }
-}
 
-const stars = []
-let universe
-
-if (process.client) {
-  windowResizeHandler()
-  window.addEventListener('resize', windowResizeHandler, false)
-
-  createUniverse()
-}
-function createUniverse() {
-  universe = canva.getContext('2d')
-
-  for (let i = 0; i < starCount; i++) {
-    stars[i] = new Star()
-    stars[i].reset()
-  }
-
-  draw()
-}
-
-function draw() {
-  universe.clearRect(0, 0, width, height)
-
-  const starsLength = stars.length
-
-  for (let i = 0; i < starsLength; i++) {
-    const star = stars[i]
-    star.move()
-    star.fadeIn()
-    star.fadeOut()
-    star.draw()
-  }
-
-  window.requestAnimationFrame(draw)
-}
-
-function Star() {
-  this.reset = function() {
-    this.giant = getProbability(3)
-    this.comet = this.giant || first ? false : getProbability(10)
-    this.x = getRandInterval(0, width - 10)
-    this.y = getRandInterval(0, height)
-    this.r = getRandInterval(1.1, 2.6)
-    this.dx =
-      getRandInterval(speedCoeff, 6 * speedCoeff) +
-      (this.comet + 1 - 1) * speedCoeff * getRandInterval(50, 120) +
-      speedCoeff * 2
-    this.dy =
-      -getRandInterval(speedCoeff, 6 * speedCoeff) -
-      (this.comet + 1 - 1) * speedCoeff * getRandInterval(50, 120)
-    this.fadingOut = null
-    this.fadingIn = true
-    this.opacity = 0
-    this.opacityTresh = getRandInterval(0.2, 1 - (this.comet + 1 - 1) * 0.4)
-    this.do = getRandInterval(0.0005, 0.002) + (this.comet + 1 - 1) * 0.001
-  }
-
-  this.fadeIn = function() {
-    if (this.fadingIn) {
-      this.fadingIn = !(this.opacity > this.opacityTresh)
-      this.opacity += this.do
-    }
-  }
-
-  this.fadeOut = function() {
-    if (this.fadingOut) {
-      this.fadingOut = !(this.opacity < 0)
-      this.opacity -= this.do / 2
-      if (this.x > width || this.y < 0) {
-        this.fadingOut = false
-        this.reset()
+      this.fadeOut = function() {
+        if (this.fadingOut) {
+          this.fadingOut = !(this.opacity < 0)
+          this.opacity -= this.do / 2
+          if (this.x > that.width || this.y < 0) {
+            this.fadingOut = false
+            this.reset()
+          }
+        }
       }
-    }
-  }
 
-  this.draw = function() {
-    universe.beginPath()
+      this.draw = function() {
+        that.universe.beginPath()
 
-    if (this.giant) {
-      universe.fillStyle = 'rgba(' + giantColor + ',' + this.opacity + ')'
-      universe.arc(this.x, this.y, 2, 0, 2 * Math.PI, false)
-    } else if (this.comet) {
-      universe.fillStyle = 'rgba(' + cometColor + ',' + this.opacity + ')'
-      universe.arc(this.x, this.y, 1.5, 0, 2 * Math.PI, false)
+        if (this.giant) {
+          that.universe.fillStyle =
+            'rgba(' + that.giantColor + ',' + this.opacity + ')'
+          that.universe.arc(this.x, this.y, 2, 0, 2 * Math.PI, false)
+        } else if (this.comet) {
+          that.universe.fillStyle =
+            'rgba(' + that.cometColor + ',' + this.opacity + ')'
+          that.universe.arc(this.x, this.y, 1.5, 0, 2 * Math.PI, false)
 
-      // comet tail
-      for (let i = 0; i < 30; i++) {
-        universe.fillStyle =
-          'rgba(' +
-          cometColor +
-          ',' +
-          (this.opacity - (this.opacity / 20) * i) +
-          ')'
-        universe.rect(
-          this.x - (this.dx / 4) * i,
-          this.y - (this.dy / 4) * i - 2,
-          2,
-          2
-        )
-        universe.fill()
+          // comet tail
+          for (let i = 0; i < 30; i++) {
+            that.universe.fillStyle =
+              'rgba(' +
+              that.cometColor +
+              ',' +
+              (this.opacity - (this.opacity / 20) * i) +
+              ')'
+            that.universe.rect(
+              this.x - (this.dx / 4) * i,
+              this.y - (this.dy / 4) * i - 2,
+              2,
+              2
+            )
+            that.universe.fill()
+          }
+        } else {
+          that.universe.fillStyle =
+            'rgba(' + that.starColor + ',' + this.opacity + ')'
+          that.universe.rect(this.x, this.y, this.r, this.r)
+        }
+
+        that.universe.closePath()
+        that.universe.fill()
       }
-    } else {
-      universe.fillStyle = 'rgba(' + starColor + ',' + this.opacity + ')'
-      universe.rect(this.x, this.y, this.r, this.r)
+
+      this.move = function() {
+        this.x += this.dx
+        this.y += this.dy
+        if (this.fadingOut === false) {
+          this.reset()
+        }
+        if (this.x > that.width - that.width / 4 || this.y < 0) {
+          this.fadingOut = true
+        }
+      }
+      ;(function() {
+        setTimeout(function() {
+          that.first = false
+        }, 50)
+      })()
+    },
+    getProbability(percents) {
+      return Math.floor(Math.random() * 1000) + 1 < percents * 10
+    },
+    getRandInterval(min, max) {
+      return Math.random() * (max - min) + min
+    },
+    init() {
+      // TweenMax.to("#greens1", 5.5, { skewX: 5.07735 });
     }
-
-    universe.closePath()
-    universe.fill()
   }
-
-  this.move = function() {
-    this.x += this.dx
-    this.y += this.dy
-    if (this.fadingOut === false) {
-      this.reset()
-    }
-    if (this.x > width - width / 4 || this.y < 0) {
-      this.fadingOut = true
-    }
-  }
-  ;(function() {
-    setTimeout(function() {
-      first = false
-    }, 50)
-  })()
-}
-
-function getProbability(percents) {
-  return Math.floor(Math.random() * 1000) + 1 < percents * 10
-}
-
-function getRandInterval(min, max) {
-  return Math.random() * (max - min) + min
-}
-
-function windowResizeHandler() {
-  width = window.innerWidth
-  height = window.innerHeight
-  starCount = width * starDensity
-  circleRadius = width > height ? height / 2 : width / 2
-  circleCenter = {
-    x: width / 2,
-    y: height / 2
-  }
-
-  canva.setAttribute('width', width)
-  canva.setAttribute('height', height)
 }
 </script>
-<style scoped lang="scss">
-#login {
-  height: 0%;
+
+<style type="text/css" scoped>
+.html,
+.body {
+  padding: 0px;
+  margin: 0px;
   width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-filter: contrast(120%);
+  filter: contrast(120%);
+  background-color: black;
+}
+
+.container {
+  max-width: inherit;
+  max-height: inherit;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    1600px at 70% 120%,
+    rgba(33, 39, 80, 1) 10%,
+    #020409 100%
+  );
+}
+
+.content {
+  width: inherit;
+  height: inherit;
+}
+
+#universe {
+  width: 100%;
+  height: 100%;
+}
+
+#footer {
   position: absolute;
-  top: 0;
-  left: 0;
+  bottom: 0px;
+  height: 300px;
+  width: 100%;
+  pointer-events: none;
 }
-.form-container {
-  background: none;
+
+#scene {
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  margin-left: -800px;
 }
+.main {
+  position: absolute;
+}
+/*a {*/
+/*  text-decoration: none;*/
+/*  color: rgba(200, 220, 255, 1);*/
+/*  opacity: 0.4;*/
+/*  transition: opacity 0.4s ease;*/
+/*}*/
+
+/*a:hover {*/
+/*  opacity: 1;*/
+/*}*/
 </style>
