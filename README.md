@@ -3,6 +3,7 @@
 <p align="center">
 
  ![vue 1.0](https://img.shields.io/badge/vue-1.0-brightgreen.svg)
+ ![nuxt 2.11.0](https://img.shields.io/badge/nuxt-2.11.0-ff69b4.svg)
  ![vuetify 2.0](https://img.shields.io/badge/vuetify-2.0-blueviolet.svg)
  ![License MPL-2.0](https://img.shields.io/badge/license-MPL--2.0-green.svg)  [![Build Status](https://travis-ci.com/GodLikeZeal/zealsay_front.svg?branch=master)](https://travis-ci.com/GodLikeZeal/zealsay_front) [![](https://img.shields.io/docker/stars/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') [![](https://img.shields.io/docker/pulls/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') [![](https://img.shields.io/github/downloads/GodLikeZeal/zealsay_front/total.svg)](https://img.shields.io/github/downloads/GodLikeZeal/zealsay_front/total 'Github')
  
@@ -11,15 +12,12 @@
  ------
 ## 开发指南
 请参考 [开发文档](https://docs.zealsay.com)
-### 注意：原先的nuxt版本已经移到 [zealsay_web](https://github.com/GodLikeZeal/zealsay_web),
-由于最新nuxt和vuetify2.0整合有些问题，官方也没有很好的解决，因此暂时放弃使用nuxt，ssr部分改用局部渲染来完成。
 
 ## 介绍
-   zealsay是一套前后端分离的快速开发脚手架，后台采用的是最新的`Spring Boot 2.1.6.RELEASE`最新版本，
-   前端使用`vue`并且使用最新`vue cli 3.0`脚手架搭建,搭载`Vuetify 2.0`构造出符合 `Material Design` 
-   规范的扁平化风格主题UI,你有对美的偏爱,我同样有一份对美的执着,面对日趋多样化的技术,抽取一些常用的解决方案,
-   以快,轻为主,打造出一个开箱即用的轻应用脚手架,助力中小企业解决快速部署以及持续交付的`DevOps`,本项目为zealsay前端项目，
-   后台项目地址为[zealsay_backend](https://github.com/GodLikeZeal/zealsay_backend)
+   前端使用vue,搭载比较火热的`nuxt.js`服务器端渲染框架，截止到目前,使用的是`nuxt.js`最新`2.11.0`版本,
+      使用最新版`Vuetify 2.x`构造出符合 `Material Design` 规范的扁平化风格主题UI,你有对美的偏爱,我同样有一份对美的执着,
+      面对日趋多样化的技术,抽取一些常用的解决方案,以快,轻为主,打造出一个开箱即用的轻应用脚手架,助力中小企业解决
+      快速部署以及持续交付的`DevOps`,本项目为zealsay前端项目，后台项目地址为[zealsay_backend](https://github.com/GodLikeZeal/zealsay_backend)
 ## 技术选型
   
 ### zealsay_front（前端项目）
