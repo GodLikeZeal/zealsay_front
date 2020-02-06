@@ -74,42 +74,39 @@
       <v-flex sm6 xs12 md6 lg3>
         <material-stats-card
           color="green"
-          icon="mdi-store"
-          title="Revenue"
-          value="$34,245"
-          sub-icon="mdi-calendar"
-          sub-text="Last 24 Hours"
+          icon="mdi-book-open"
+          title="文章数量"
+          :value="54"
+          sub-icon="mdi-update"
+          sub-text="最后更新于刚刚"
         />
       </v-flex>
       <v-flex sm6 xs12 md6 lg3>
         <material-stats-card
           color="orange"
-          icon="mdi-content-copy"
-          title="硬盘使用"
-          value="49/50"
-          small-value="GB"
-          sub-icon="mdi-alert"
-          sub-icon-color="error"
-          sub-text="Get More Space..."
-          sub-text-color="text-primary"
+          icon="mdi-account-circle"
+          title="用户总数"
+          :value="147"
+          sub-icon="mdi-update"
+          sub-text="最后更新于刚刚"
         />
       </v-flex>
       <v-flex sm6 xs12 md6 lg3>
         <material-stats-card
           color="red"
-          icon="mdi-information-outline"
-          title="已修复Issues"
-          value="75"
-          sub-icon="mdi-tag"
-          sub-text="Tracked from Github"
+          icon="mdi-book-plus"
+          title="今日新增文章"
+          :value="5"
+          sub-icon="mdi-update"
+          sub-text="最后更新于刚刚"
         />
       </v-flex>
       <v-flex sm6 xs12 md6 lg3>
         <material-stats-card
           color="info"
-          icon="mdi-twitter"
-          title="Followers"
-          value="+245"
+          icon="mdi-account-plus"
+          title="今日新增注册用户"
+          :value="6"
           sub-icon="mdi-update"
           sub-text="Just Updated"
         />
@@ -123,8 +120,8 @@
           <v-data-table :headers="headers" :items="items">
             <template slot="headerCell" slot-scope="{ header }">
               <span
-                v-text="header.text"
                 class="font-weight-light text-warning text--darken-3"
+                v-text="header.text"
               />
             </template>
             <template slot="items" slot-scope="{ _id, item }">
@@ -144,7 +141,7 @@
               <span
                 class="subheading font-weight-light mr-3"
                 style="align-self: center"
-                >Tasks:</span
+                >任务:</span
               >
               <v-tab class="mr-3">
                 <v-icon class="mr-2">mdi-bug</v-icon>
@@ -170,8 +167,8 @@
                       <v-list-item-action>
                         <v-checkbox
                           v-model="active"
-                          @click="toggle"
                           color="primary"
+                          @click="toggle"
                         />
                       </v-list-item-action>
                       <v-list-item-content>
@@ -184,10 +181,10 @@
                         <v-tooltip top content-class="top">
                           <template v-slot:activator="{ on }">
                             <v-btn
-                              v-on="on"
                               class="v-btn--simple"
                               color="success"
                               icon
+                              v-on="on"
                             >
                               <v-icon color="primary">mdi-pencil</v-icon>
                             </v-btn>
@@ -198,10 +195,10 @@
                         <v-tooltip top content-class="top">
                           <template v-slot:activator="{ on }">
                             <v-btn
-                              v-on="on"
                               class="v-btn--simple"
                               color="danger"
                               icon
+                              v-on="on"
                             >
                               <v-icon color="error">mdi-close</v-icon>
                             </v-btn>
@@ -217,8 +214,8 @@
                       <v-list-item-action>
                         <v-checkbox
                           v-model="active"
-                          @click="toggle"
                           color="primary"
+                          @click="toggle"
                         />
                       </v-list-item-action>
                       <v-list-item-title>
@@ -229,10 +226,10 @@
                         <v-tooltip top content-class="top">
                           <template v-slot:activator="{ on }">
                             <v-btn
-                              v-on="on"
                               class="v-btn--simple"
                               color="success"
                               icon
+                              v-on="on"
                             >
                               <v-icon color="primary">mdi-pencil</v-icon>
                             </v-btn>
@@ -243,10 +240,10 @@
                         <v-tooltip top content-class="top">
                           <template v-slot:activator="{ on }">
                             <v-btn
-                              v-on="on"
                               class="v-btn--simple"
                               color="danger"
                               icon
+                              v-on="on"
                             >
                               <v-icon color="error">mdi-close</v-icon>
                             </v-btn>
@@ -262,8 +259,8 @@
                       <v-list-item-action>
                         <v-checkbox
                           v-model="active"
-                          @click="toggle"
                           color="primary"
+                          @click="toggle"
                         />
                       </v-list-item-action>
                       <v-list-item-title>
@@ -274,10 +271,10 @@
                         <v-tooltip top content-class="top">
                           <template v-slot:activator="{ on }">
                             <v-btn
-                              v-on="on"
                               class="v-btn--simple"
                               color="success"
                               icon
+                              v-on="on"
                             >
                               <v-icon color="primary">mdi-pencil</v-icon>
                             </v-btn>
@@ -288,10 +285,10 @@
                         <v-tooltip top content-class="top">
                           <template v-slot:activator="{ on }">
                             <v-btn
-                              v-on="on"
                               class="v-btn--simple"
                               color="danger"
                               icon
+                              v-on="on"
                             >
                               <v-icon color="error">mdi-close</v-icon>
                             </v-btn>
@@ -431,30 +428,35 @@ export default {
       ],
       items: [
         {
+          id: '1',
           name: 'zeal',
           country: '中国',
           city: '北京',
           salary: '$35,738'
         },
         {
+          id: '2',
           name: 'editor',
           country: '中国',
           city: '天津',
           salary: '$23,738'
         },
         {
+          id: '3',
           name: '小明',
           country: '中国',
           city: '上海',
           salary: '$56,142'
         },
         {
+          id: '4',
           name: '桔梗',
           country: '日本',
           city: '大阪',
           salary: '$38,735'
         },
         {
+          id: '5',
           name: '山的那边',
           country: '中国',
           city: '武汉',
