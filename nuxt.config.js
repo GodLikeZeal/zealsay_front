@@ -33,7 +33,7 @@ export default {
         src: 'https://apps.bdimg.com/libs/jquery/1.7.1/jquery.min.js'
       },
       {
-        src: 'live2d/js/live2d.js'
+        src: '/live2d/js/live2d.js'
       }
     ]
   },
@@ -192,16 +192,20 @@ export default {
     productionGzip: true,
     productionGzipExtensions: ['js', 'css', 'svg'],
     // extractCSS: { allChunks: true }, // css 独立打包 link 的形式加载
-    // publicPath:
-    //   process.env.NODE_ENV === 'development'
-    //     ? '/_nuxt/'
-    //     : 'https://pan.zealsay.com/_nuxt/', // sample/essays 打包的默认路径为 ‘_nuxt’ 或者可以指定cdn 域名
+    publicPath:
+      process.env.NODE_ENV === 'development'
+        ? '/_nuxt/'
+        : 'https://pan.zealsay.com/', // sample/essays 打包的默认路径为 ‘_nuxt’ 或者可以指定cdn 域名
     filenames: {
       // css 和 js  img 打包时指定文件夹
-      app: ({ isDev }) => (isDev ? '[name].js' : '[chunkhash].js'),
-      chunk: ({ isDev }) => (isDev ? '[name].js' : '[chunkhash].js'),
-      css: ({ isDev }) => (isDev ? '[name].js' : '[contenthash].css'),
-      img: ({ isDev }) => (isDev ? '[path][name].[ext]' : '[hash:7].[ext]')
+      app: ({ isDev }) => (isDev ? '[name].js' : '[name].js'),
+      chunk: ({ isDev }) => (isDev ? '[name].js' : '[name].js'),
+      css: ({ isDev }) => (isDev ? '[name].css' : '[name].css'),
+      img: ({ isDev }) => (isDev ? '[path][name].[ext]' : '[path][name].[ext]'),
+      font: ({ isDev }) =>
+        isDev ? '[path][name].[ext]' : '[path][name].[ext]',
+      video: ({ isDev }) =>
+        isDev ? '[path][name].[ext]' : '[path][name].[ext]'
     },
     /*
      ** You can extend webpack config here

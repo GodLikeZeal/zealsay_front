@@ -23,7 +23,7 @@
                 <span
                   class="text-detail white--text font-weight-bold"
                   title="男"
-                  ><img width="15px" src="/assets/image/sex/boy.png"
+                  ><img width="15px" src="@/static/image/sex/boy.png"
                 /></span>
                 <span class="white--text font-weight-thin ">|</span>
                 <span class="white--text font-weight-bold text-detail"
