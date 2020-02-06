@@ -1,7 +1,7 @@
 <template>
   <div class="html body">
     <div class="main d-flex justify-center align-center">
-      <v-col cols="8">
+      <v-col cols="7">
         <v-card class="elevation-1 pa-3" style="margin-bottom: 10%">
           <!--              <v-card-title-->
           <!--                class="title font-weight-regular justify-space-between"-->

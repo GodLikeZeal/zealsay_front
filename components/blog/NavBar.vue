@@ -42,7 +42,9 @@
         <v-list>
           <v-list-item v-for="(item, index) in categorys" :key="index">
             <nuxt-link :to="'/blog/category/' + item.id">
-              <v-list-item-title>{{ item.name }}</v-list-item-title>
+              <v-list-item-title class="subtitle-2">{{
+                item.name
+              }}</v-list-item-title>
             </nuxt-link>
           </v-list-item>
         </v-list>
