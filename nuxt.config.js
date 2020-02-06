@@ -146,7 +146,7 @@ export default {
   proxy: {
     '/app/': {
       // target: process.env.VUE_APP_API_URL, // 目标接口域名
-      target: process.env.VUE_APP_API_URL || 'http://localhost:8090', // 目标接口域名
+      target: process.env.VUE_APP_API_URL || 'https://api.zealsay.com', // 目标接口域名
       changeOrigin: true, // 是否跨域
       pathRewrite: { '^/app/': '' } // 把/app 替换成 /
     }
