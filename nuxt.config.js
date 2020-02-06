@@ -33,7 +33,7 @@ export default {
         src: 'https://apps.bdimg.com/libs/jquery/1.7.1/jquery.min.js'
       },
       {
-        src: '/live2d/js/live2d.js'
+        src: 'https://pan.zealsay.com/live2d//js/live2d.js'
       }
     ]
   },
