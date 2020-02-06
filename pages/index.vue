@@ -12,7 +12,7 @@
         </v-flex>
       </v-layout>
       <v-layout>
-        <v-flex xs12 sm12 md9>
+        <v-flex xs12 sm12 md8>
           <blog-article-list :list="list"></blog-article-list>
           <!-- page分页-->
           <div class="pagination text-center">
@@ -25,7 +25,7 @@
             ></v-pagination>
           </div>
         </v-flex>
-        <v-flex class="hidden-sm-and-down" md3>
+        <v-flex class="hidden-sm-and-down" md4>
           <!-- 最近评论 -->
           <blog-recent-discuss></blog-recent-discuss>
           <!-- 标签云 -->
