@@ -7,12 +7,12 @@
     </v-card>
     <v-container>
       <v-layout fill-height>
-        <v-flex xs12 md12 sm6>
+        <v-flex xs12 md12 sm12>
           <blog-main-card :item="desserts[0]"></blog-main-card>
         </v-flex>
       </v-layout>
       <v-layout>
-        <v-flex xs9>
+        <v-flex xs12 sm12 md9>
           <blog-article-list :list="list"></blog-article-list>
           <!-- page分页-->
           <div class="pagination text-center">
@@ -25,7 +25,7 @@
             ></v-pagination>
           </div>
         </v-flex>
-        <v-flex xs4>
+        <v-flex class="hidden-sm-and-down" md3>
           <!-- 最近评论 -->
           <blog-recent-discuss></blog-recent-discuss>
           <!-- 标签云 -->

@@ -1,5 +1,5 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <div :style="customStyle" class="back-to-ceiling">
+  <div :style="customStyle" class="hidden-sm-and-down back-to-ceiling">
     <v-tooltip top>
       <template v-slot:activator="{ on }">
         <v-fab-transition>
