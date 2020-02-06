@@ -11,14 +11,15 @@
       class="pa-4"
       dark
     >
-      <v-icon size="40">
+      <v-icon class="d-flex" size="40">
         {{ icon }}
       </v-icon>
     </v-card>
     <div class="text-xs-right">
-      <p class="category grey--text font-weight-light" v-text="title" />
+      <p class="category grey--text" v-text="title" />
       <h3 class="title display-1 font-weight-light">
-        {{ value }} <small>{{ smallValue }}</small>
+        <count-to :start-val="0" :end-val="value" :duration="3000"></count-to>
+        <small>{{ smallValue }}</small>
       </h3>
     </div>
 
@@ -70,7 +71,7 @@ export default {
       default: undefined
     },
     value: {
-      type: String,
+      type: Number,
       default: undefined
     },
     smallValue: {
