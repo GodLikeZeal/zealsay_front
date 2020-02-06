@@ -74,6 +74,7 @@ export default {
     setTimeout(() => {
       this.mounted = true
     }, 20)
+
     /* eslint-disable */
     var port = document.location.port === '' ? document.location.port : ':' + document.location.port
     var base_url = document.location.protocol + '//' + window.document.location.hostname + port + '/'
