@@ -6,7 +6,7 @@
       <v-container>
         <v-layout>
           <v-flex md12>
-            <div class="text-md-center word">
+            <div class="text-center word">
               <h1 class="hitokoto-title">
                 {{ article.title }}
               </h1>
@@ -16,7 +16,7 @@
                 {{ article.readNum }}次浏览 {{ article.likeNum }}个点赞
               </p>
               <div class="author">
-                <v-avatar :size="48" class="author-avatar"
+                <v-avatar class="author-avatar" :size="48"
                   ><img :src="article.authorAvatar" alt="avatar"
                 /></v-avatar>
                 <div class="font-weight-medium white--text author-name">
@@ -57,21 +57,23 @@
         </v-layout>
       </v-container>
     </v-card>
-    <v-container class="my-container">
+    <v-container>
       <v-breadcrumbs :items="breadcrumbs">
         <template v-slot:divider>
           <v-icon>chevron_right</v-icon>
         </template>
       </v-breadcrumbs>
-      <v-layout>
-        <v-flex xs12 md12>
-          <template>
-            <div class="markdown-body" v-html="article.contentHtml"></div>
-          </template>
-        </v-flex>
-      </v-layout>
+      <v-container>
+        <v-layout>
+          <v-flex xs12 md12>
+            <template>
+              <div class="markdown-body" v-html="article.contentHtml"></div>
+            </template>
+          </v-flex>
+        </v-layout>
+      </v-container>
 
-      <back-to-top :visibility-height="300" :back-position="0" />
+      <core-back-to-top :visibility-height="300" :back-position="0" />
     </v-container>
     <!-- 页脚 -->
     <v-layout row>
@@ -264,7 +266,7 @@ export default {
 }
 .icon-like {
   float: right;
-  margin-top: 3rem;
+  margin-top: 2rem;
   margin-right: 5rem;
 }
 .hitokoto-title {

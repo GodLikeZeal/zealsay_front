@@ -8,9 +8,9 @@
         height="300px"
         width="100%"
       >
-        <v-container fill-height fluid justify-center>
-          <v-layout fill-height align-center>
-            <v-flex xs12 class="text-md-center">
+        <v-container>
+          <v-row class="text-center">
+            <v-col cols="12">
               <span class="font-weight">
                 {{ blog.categoryName }}
               </span>
@@ -32,8 +32,8 @@
                 target="_Blank"
                 >阅读原文
               </v-btn>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
       </v-img>
     </v-card>
