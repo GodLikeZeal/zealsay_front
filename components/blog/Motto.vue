@@ -59,14 +59,12 @@ export default {
 .right {
   position: absolute;
   right: 0;
-  margin-right: -3rem;
 }
 
 .left {
   position: absolute;
   left: 0;
   top: -2.5rem;
-  margin-left: -3rem;
 }
 
 .word {

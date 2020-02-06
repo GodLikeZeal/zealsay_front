@@ -392,7 +392,7 @@ export default {
       }
     },
     handleAdd() {
-      this.$router.push({ path: '/article/add' })
+      this.$router.push({ path: '/admin/article/add' })
     },
     handleEdit(row) {
       this.formVisible = true

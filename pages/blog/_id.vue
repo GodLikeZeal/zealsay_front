@@ -76,7 +76,7 @@
       <core-back-to-top :visibility-height="300" :back-position="0" />
     </v-container>
     <!-- 页脚 -->
-    <v-layout row>
+    <v-layout>
       <v-flex>
         <div class="footer">
           <blog-footer v-if="$route.name !== 'Maps'" />
@@ -260,7 +260,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/styles/markdown/markdown';
 @import '../../assets/scss/styles/markdown/github-markdown';
-@import '../../assets/scss/styles/markdown/atelier-plateau-dark';
+/*@import '../../assets/scss/styles/markdown/atelier-plateau-dark';*/
 .index {
   background: #fafafa;
 }

@@ -42,7 +42,7 @@
       <core-back-to-top :visibility-height="300" :back-position="0" />
     </v-container>
     <!-- 页脚 -->
-    <v-layout row>
+    <v-layout>
       <v-flex>
         <div class="footer">
           <blog-footer v-if="$route.name !== 'Maps'" />

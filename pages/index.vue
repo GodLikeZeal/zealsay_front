@@ -19,9 +19,9 @@
             <v-pagination
               v-model="pagination.page"
               :length="length"
-              @input="search"
               circle
               color="primary"
+              @input="search"
             ></v-pagination>
           </div>
         </v-flex>
@@ -36,7 +36,7 @@
       <core-back-to-top :visibility-height="300" :back-position="0" />
     </v-container>
     <!-- 页脚 -->
-    <v-layout row>
+    <v-layout>
       <v-flex>
         <div class="footer">
           <blog-footer v-if="$route.name !== 'Maps'" />
@@ -185,7 +185,7 @@ export default {
 }
 
 .card {
-  margin: 1.5em;
+  margin: 0.5em;
   border-radius: 0.5em;
 }
 
