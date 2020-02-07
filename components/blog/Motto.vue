@@ -43,6 +43,7 @@ export default {
 }
 
 .hitokoto-title {
+  padding: 0 3rem;
   color: white;
   font-weight: 400 !important;
   margin-bottom: 0.6rem;

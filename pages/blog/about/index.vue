@@ -67,8 +67,8 @@
                 <v-divider></v-divider>
                 <h2 class="font-weight-regular text-gray">资料卡片</h2>
                 <v-card flat class="card">
-                  <v-layout row>
-                    <v-flex xs4>
+                  <v-row class="hidden-xs-only">
+                    <v-col cols="4">
                       <a target="_Blank">
                         <v-img
                           :aspect-ratio="320 / 200"
@@ -78,8 +78,8 @@
                           contain
                         ></v-img>
                       </a>
-                    </v-flex>
-                    <v-flex xs8>
+                    </v-col>
+                    <v-col cols="8">
                       <v-card-title primary-title>
                         <div>
                           <div class="font-weight-regular v-card__title">
@@ -100,12 +100,47 @@
                           </div>
                         </div>
                       </v-card-title>
-                    </v-flex>
-                  </v-layout>
+                    </v-col>
+                  </v-row>
+                  <v-row class="d-flex d-sm-none">
+                    <v-col cols="12">
+                      <a target="_Blank">
+                        <v-img
+                          :aspect-ratio="320 / 200"
+                          transition="fade-transition"
+                          class="card elevation-3 cover"
+                          src="https://pan.zealsay.com/20190909104236848000000.jpg"
+                          contain
+                        ></v-img>
+                      </a>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-card-title primary-title>
+                        <div>
+                          <div class="font-weight-regular v-card__title">
+                            毕业于
+                            <a class="font-weight-medium"> 武汉科技大学 </a>
+                          </div>
+                          <v-divider></v-divider>
+                          <div class="v-card__text">
+                            <p>
+                              不知不觉的已经毕业三年了。
+                            </p>
+                            <p>
+                              怀念食堂早上的面窝和豆浆，怀念教三楼的教室。
+                            </p>
+                            <p>
+                              依稀记得离开的时候，夕阳印在黄家湖畔上面，没想到一别竟三年已久了，仿佛就在昨日啊。
+                            </p>
+                          </div>
+                        </div>
+                      </v-card-title>
+                    </v-col>
+                  </v-row>
                 </v-card>
                 <v-card flat class="card">
-                  <v-layout row>
-                    <v-flex xs8>
+                  <v-row class="hidden-xs-only">
+                    <v-col cols="8">
                       <v-card-title primary-title>
                         <div>
                           <div class="font-weight-regular v-card__title">
@@ -129,8 +164,8 @@
                           </div>
                         </div>
                       </v-card-title>
-                    </v-flex>
-                    <v-flex xs4>
+                    </v-col>
+                    <v-col cols="4">
                       <a target="_Blank">
                         <v-img
                           :aspect-ratio="320 / 200"
@@ -140,12 +175,50 @@
                           contain
                         ></v-img>
                       </a>
-                    </v-flex>
-                  </v-layout>
+                    </v-col>
+                  </v-row>
+                  <v-row class="d-flex d-sm-none">
+                    <v-col cols="12">
+                      <a target="_Blank">
+                        <v-img
+                          :aspect-ratio="320 / 200"
+                          transition="fade-transition"
+                          class="card elevation-3 cover"
+                          src="https://pan.zealsay.com/20190909102821223000000.jpg"
+                          contain
+                        ></v-img>
+                      </a>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-card-title primary-title>
+                        <div>
+                          <div class="font-weight-regular v-card__title">
+                            技术栈
+                          </div>
+                          <v-divider></v-divider>
+                          <div class="v-card__text">
+                            <p>
+                              后台方面：spring boot全家桶, mybatis-plus, oauth,
+                              jwt, spring cloud全家桶,rabbitMQ,netty。
+                            </p>
+                            <p>
+                              前端方面：vue.js, nuxt.js, jquery。
+                            </p>
+                            <p>
+                              数据库：mysql,mongodb,redis。
+                            </p>
+                            <p>
+                              服务器：docker,docker-compose,k8s,shell。
+                            </p>
+                          </div>
+                        </div>
+                      </v-card-title>
+                    </v-col>
+                  </v-row>
                 </v-card>
                 <v-card flat class="card">
-                  <v-layout row>
-                    <v-flex xs4>
+                  <v-row class="hidden-xs-only">
+                    <v-col cols="4">
                       <a target="_Blank">
                         <v-img
                           :aspect-ratio="320 / 200"
@@ -155,8 +228,8 @@
                           contain
                         ></v-img>
                       </a>
-                    </v-flex>
-                    <v-flex xs8>
+                    </v-col>
+                    <v-col cols="8">
                       <v-card-title primary-title>
                         <div>
                           <div class="font-weight-regular v-card__title">
@@ -177,12 +250,47 @@
                           </div>
                         </div>
                       </v-card-title>
-                    </v-flex>
-                  </v-layout>
+                    </v-col>
+                  </v-row>
+                  <v-row class="d-flex d-sm-none">
+                    <v-col cols="12">
+                      <a target="_Blank">
+                        <v-img
+                          :aspect-ratio="320 / 200"
+                          transition="fade-transition"
+                          class="card elevation-3 cover"
+                          src="https://pan.zealsay.com/20190909100253617000000.jpg"
+                          contain
+                        ></v-img>
+                      </a>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-card-title primary-title>
+                        <div>
+                          <div class="font-weight-regular v-card__title">
+                            最爱看电影
+                            <a class="font-weight-medium">《战狼2》</a>
+                          </div>
+                          <v-divider></v-divider>
+                          <div class="v-card__text">
+                            <p>
+                              很少有一部电影，能让人看了之后热泪盈眶，久久不能平静。
+                            </p>
+                            <p>
+                              电影既展现了战争的残酷，也让我们知道生活在中国和平安定的环境的幸福。
+                            </p>
+                            <p>
+                              当长官的那句怒吼开火，老兵打完最后子弹，拿起板砖准备拼命的时候，真的是感动得一塌糊涂，影片最后出现的中国护照，更是让我感觉祖国的强大。
+                            </p>
+                          </div>
+                        </div>
+                      </v-card-title>
+                    </v-col>
+                  </v-row>
                 </v-card>
                 <v-card flat class="card">
-                  <v-layout row>
-                    <v-flex xs8>
+                  <v-row class="hidden-xs-only">
+                    <v-col cols="8">
                       <v-card-title primary-title>
                         <div>
                           <div class="font-weight-regular v-card__title">
@@ -203,8 +311,8 @@
                           </div>
                         </div>
                       </v-card-title>
-                    </v-flex>
-                    <v-flex xs4>
+                    </v-col>
+                    <v-col cols="4">
                       <a target="_Blank">
                         <v-img
                           :aspect-ratio="320 / 200"
@@ -214,8 +322,43 @@
                           contain
                         ></v-img>
                       </a>
-                    </v-flex>
-                  </v-layout>
+                    </v-col>
+                  </v-row>
+                  <v-row class="d-flex d-sm-none">
+                    <v-col cols="12">
+                      <a target="_Blank">
+                        <v-img
+                          :aspect-ratio="320 / 200"
+                          transition="fade-transition"
+                          class="card elevation-3 cover"
+                          src="https://pan.zealsay.com/20190909092058309000000.jpg"
+                          contain
+                        ></v-img>
+                      </a>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-card-title primary-title>
+                        <div>
+                          <div class="font-weight-regular v-card__title">
+                            最爱看电视剧
+                            <a class="font-weight-medium">《仙剑奇侠传》</a>
+                          </div>
+                          <v-divider></v-divider>
+                          <div class="v-card__text">
+                            <p>
+                              小时候爱看仙剑，喜欢里面的奇幻和武侠。
+                            </p>
+                            <p>
+                              长大后才知道这剧看得让人多么心痛。
+                            </p>
+                            <p>
+                              隔了这么多年，再去重温，依旧难以释怀，很怀念灵儿喊的那句逍遥哥哥，怀念陪伴在身边的月如，怀念里面的一切，到现在网易云偶尔还会日推原声带，音乐一响起就泪奔了。
+                            </p>
+                          </div>
+                        </div>
+                      </v-card-title>
+                    </v-col>
+                  </v-row>
                 </v-card>
                 <v-divider></v-divider>
                 <h2 class="font-weight-regular text-gray">写在后面</h2>

@@ -348,7 +348,15 @@ export default {
           .$request(loginByUsername(this.form))
           .then((res) => {
             this.loading = false
-            this.$router.push({ path: '/redirect?token=' + res.data.token })
+            if (res.code === '200' && res.data) {
+              this.$router.push({ path: '/redirect?token=' + res.data.token })
+            } else {
+              this.visible = true
+              this.errMsg = res.message
+              setTimeout(() => {
+                this.visible = false
+              }, 5000)
+            }
           })
           .catch((err) => {
             this.loading = false
