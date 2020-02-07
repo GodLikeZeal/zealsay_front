@@ -18,7 +18,12 @@
     <div class="text-xs-right">
       <p class="category grey--text" v-text="title" />
       <h3 class="title display-1 font-weight-light">
-        <count-to :start-val="0" :end-val="value" :duration="3000"></count-to>
+        <count-to
+          class="display-1 text-primary"
+          :start-val="0"
+          :end-val="value"
+          :duration="3000"
+        ></count-to>
         <small>{{ smallValue }}</small>
       </h3>
     </div>

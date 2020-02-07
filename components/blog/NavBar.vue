@@ -13,21 +13,27 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-tile>
+          <v-list-item>
             <nuxt-link to="/">
-              <v-list-tile-title class="white--text">主页</v-list-tile-title>
+              <v-list-item-title class="font-weight-medium"
+                >主页</v-list-item-title
+              >
             </nuxt-link>
-          </v-list-tile>
-          <v-list-tile>
+          </v-list-item>
+          <v-list-item>
             <nuxt-link to="/blog/friend">
-              <v-list-tile-title class="white--text">友链</v-list-tile-title>
+              <v-list-item-title class="font-weight-medium"
+                >友链</v-list-item-title
+              >
             </nuxt-link>
-          </v-list-tile>
-          <v-list-tile>
+          </v-list-item>
+          <v-list-item>
             <nuxt-link to="/blog/about">
-              <v-list-tile-title class="white--text">关于</v-list-tile-title>
+              <v-list-item-title class="font-weight-medium"
+                >关于</v-list-item-title
+              >
             </nuxt-link>
-          </v-list-tile>
+          </v-list-item>
         </v-list>
       </v-menu>
     </v-toolbar-items>

@@ -10,76 +10,135 @@
           <v-icon>chevron_right</v-icon>
         </template>
       </v-breadcrumbs>
-      <v-layout fill-height>
-        <v-flex xs12 md12 sm6>
-          <div v-if="links.length > 0">
-            <v-container>
-              <v-layout justify-space-around>
-                <template v-for="(item, i) in links">
-                  <v-flex :key="i" md3 sm6 xs12>
-                    <v-card hover>
-                      <v-container fill-height fluid class="friend-container">
-                        <v-layout fill-height wrap>
-                          <v-flex xs12 flexbox>
-                            <div
-                              :style="{ backgroundColor: item.color }"
-                              class="top-color radius"
-                            ></div>
-                            <v-img
-                              :lazy-src="item.avatar"
-                              :src="item.avatar"
-                              class="avator elevation-2"
-                              height="100"
-                              width="100"
-                            ></v-img>
-                            <h2
-                              class="justify-center text-md-center text-xs-center"
-                            >
-                              {{ item.friendName }}
-                            </h2>
-                            <p
-                              class="card-description justify-center text-md-center text-xs-center"
-                            >
-                              {{ item.friendInfo }}
-                            </p>
-                            <div class="foot-color">
-                              <p
-                                class="foot-text card-description text-md-center text-xs-center"
-                              >
-                                {{ item.link }}
-                              </p>
-                              <v-btn
-                                :href="item.link"
-                                class="foot-btn d-flex justify-center"
-                                color="primary"
-                                target="_Blank"
-                                >访问网站
-                              </v-btn>
-                            </div>
-                          </v-flex>
-                        </v-layout>
-                      </v-container>
-                    </v-card>
-                  </v-flex>
-                </template>
-              </v-layout>
-            </v-container>
-          </div>
-          <div v-else>
-            <v-container fluid fill-height>
-              <v-layout align-center justify-center>
-                <div class="mr-3 hidden-sm-and-down">
-                  <img src="@/static/image/gif/NotFound.gif" alt="NotFound" />
-                </div>
-                <div class="text-md-center">
-                  <h2 class="my-3 headline ">一个好友也没有!</h2>
-                  <h2 class="my-3 headline ">我能怎么办?我也很绝望!</h2>
-                </div>
-              </v-layout>
-            </v-container>
-          </div>
-        </v-flex>
-      </v-layout>
+      <v-row
+        v-if="links.length > 0"
+        class="hidden-sm-and-down justify-space-around"
+      >
+        <template v-for="(item, i) in links">
+          <v-col :key="i" cols="3">
+            <v-card hover>
+              <div
+                :style="{ backgroundColor: item.color }"
+                class="top-color radius"
+              ></div>
+              <v-img
+                :lazy-src="item.avatar"
+                :src="item.avatar"
+                class="avator elevation-2"
+                height="100"
+                width="100"
+              ></v-img>
+              <h2 class="justify-center text-center ">
+                {{ item.friendName }}
+              </h2>
+              <p class="card-description justify-center text-center ">
+                {{ item.friendInfo }}
+              </p>
+              <div class="foot-color">
+                <p class="foot-text card-description text-center ">
+                  {{ item.link }}
+                </p>
+                <v-btn
+                  :href="item.link"
+                  class="foot-btn d-flex justify-center"
+                  color="primary"
+                  target="_Blank"
+                  >访问网站
+                </v-btn>
+              </div>
+            </v-card>
+          </v-col>
+        </template>
+      </v-row>
+      <v-row
+        v-if="links.length > 0"
+        class="d-none d-sm-flex d-md-none justify-space-around"
+      >
+        <template v-for="(item, i) in links">
+          <v-col :key="i" cols="4">
+            <v-card hover>
+              <div
+                :style="{ backgroundColor: item.color }"
+                class="top-color radius"
+              ></div>
+              <v-img
+                :lazy-src="item.avatar"
+                :src="item.avatar"
+                class="avator elevation-2"
+                height="100"
+                width="100"
+              ></v-img>
+              <h2 class="justify-center text-center ">
+                {{ item.friendName }}
+              </h2>
+              <p class="card-description justify-center text-center ">
+                {{ item.friendInfo }}
+              </p>
+              <div class="foot-color">
+                <p class="foot-text card-description text-center ">
+                  {{ item.link }}
+                </p>
+                <v-btn
+                  :href="item.link"
+                  class="foot-btn d-flex justify-center"
+                  color="primary"
+                  target="_Blank"
+                  >访问网站
+                </v-btn>
+              </div>
+            </v-card>
+          </v-col>
+        </template>
+      </v-row>
+      <v-row
+        v-if="links.length > 0"
+        class="d-flex d-sm-none justify-space-around"
+      >
+        <template v-for="(item, i) in links">
+          <v-col :key="i" cols="12">
+            <v-card hover>
+              <div
+                :style="{ backgroundColor: item.color }"
+                class="top-color radius"
+              ></div>
+              <v-img
+                :lazy-src="item.avatar"
+                :src="item.avatar"
+                class="avator elevation-2"
+                height="100"
+                width="100"
+              ></v-img>
+              <h2 class="justify-center text-center ">
+                {{ item.friendName }}
+              </h2>
+              <p class="card-description justify-center text-center ">
+                {{ item.friendInfo }}
+              </p>
+              <div class="foot-color">
+                <p class="foot-text card-description text-center ">
+                  {{ item.link }}
+                </p>
+                <v-btn
+                  :href="item.link"
+                  class="foot-btn d-flex justify-center"
+                  color="primary"
+                  target="_Blank"
+                  >访问网站
+                </v-btn>
+              </div>
+            </v-card>
+          </v-col>
+        </template>
+      </v-row>
+      <v-row v-else>
+        <div class="mr-3 hidden-sm-and-down">
+          <img src="@/static/image/gif/NotFound.gif" alt="NotFound" />
+        </div>
+        <div class="text-center">
+          <h2 class="my-3 headline ">一个好友也没有!</h2>
+          <h2 class="my-3 headline ">我能怎么办?我也很绝望!</h2>
+        </div>
+      </v-row>
 
       <core-back-to-top :visibility-height="300" :back-position="0" />
     </v-container>
