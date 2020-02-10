@@ -12,4 +12,5 @@ EXPOSE 4000
 RUN apk add --no-cache --update nodejs nodejs-npm
 COPY --from=builder /usr/src/app/node_modules ./node_modules
 COPY . .
+RUN npm run build
 CMD [ 'npm', 'start' ]
