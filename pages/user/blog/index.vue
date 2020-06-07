@@ -33,13 +33,13 @@
           <v-card-actions>
             <v-tooltip v-if="card.openness === 'SELFONLY'" top>
               <template v-slot:activator="{ on }">
-                <v-icon v-on="on" medium>mdi-lock-outline</v-icon>
+                <v-icon medium v-on="on">mdi-lock-outline</v-icon>
               </template>
               仅自己可见
             </v-tooltip>
             <v-tooltip v-else top>
               <template v-slot:activator="{ on }">
-                <v-icon v-on="on" medium>mdi-eye-outline</v-icon>
+                <v-icon medium v-on="on">mdi-eye-outline</v-icon>
               </template>
               公开
             </v-tooltip>
@@ -47,7 +47,7 @@
             <v-tooltip top>
               <template v-slot:activator="{ on }">
                 <v-btn :href="'/blog/' + card.id" icon target="_Blank">
-                  <v-icon v-on="on" medium>mdi-information-outline</v-icon>
+                  <v-icon medium v-on="on">mdi-information-outline</v-icon>
                 </v-btn>
               </template>
               查看
@@ -59,7 +59,7 @@
                   icon
                   target="_Blank"
                 >
-                  <v-icon v-on="on" medium>mdi-pencil</v-icon>
+                  <v-icon medium v-on="on">mdi-pencil</v-icon>
                 </v-btn>
               </template>
               编辑

@@ -86,8 +86,8 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
 import mFilter from '@/components/core/Filter'
+import { mapMutations } from 'vuex'
 
 export default {
   components: {

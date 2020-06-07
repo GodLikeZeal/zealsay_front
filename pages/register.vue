@@ -102,22 +102,22 @@
                         mask="nnn nnnn nnnn"
                       ></v-text-field>
                       <v-layout>
-                        <v-flex md8
-                          ><v-text-field
+                        <v-flex md8>
+                          <v-text-field
                             v-model="form.validCode"
                             :rules="validCodeRules"
                             label="验证码"
                             required
-                          ></v-text-field
-                        ></v-flex>
+                          ></v-text-field>
+                        </v-flex>
                         <v-flex md4>
                           <v-btn
                             :disabled="!canSend"
                             color="primary"
                             @click="send"
-                            >{{ validText }}</v-btn
-                          ></v-flex
-                        >
+                            >{{ validText }}
+                          </v-btn>
+                        </v-flex>
                       </v-layout>
                       <span
                         v-if="validFlag"
@@ -393,10 +393,10 @@
           </svg>
         </div>
       </div>
-    </div></div
-></template>
+    </div>
+  </div>
+</template>
 <script>
-import qs from 'qs'
 import {
   validatePassword,
   validatePhone,
@@ -405,6 +405,7 @@ import {
 } from '@/util/validate'
 import { loginByUsername } from '@/api/login'
 import { getIsInUseByUsername, getIsInUseByEmail, register } from '@/api/user'
+import qs from 'qs'
 
 export default {
   layout: 'login',
@@ -929,6 +930,7 @@ export default {
   left: 50%;
   margin-left: -800px;
 }
+
 .main {
   position: absolute;
 }

@@ -140,8 +140,8 @@
 
 <script>
 // Utilities
-import { mapMutations, mapState } from 'vuex'
 import menu from '@/api/menu'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
   data: () => ({

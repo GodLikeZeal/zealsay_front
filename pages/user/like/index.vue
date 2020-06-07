@@ -19,8 +19,8 @@
             <v-spacer></v-spacer>
             <v-tooltip top>
               <template v-slot:activator="{ on }">
-                <v-btn @click="handleDel(card)" icon>
-                  <v-icon v-on="on" medium>delete_outline</v-icon>
+                <v-btn icon @click="handleDel(card)">
+                  <v-icon medium v-on="on">delete_outline</v-icon>
                 </v-btn>
               </template>
               不再喜欢

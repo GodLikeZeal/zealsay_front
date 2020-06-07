@@ -30,10 +30,10 @@
                         <input
                           id="uploads"
                           ref="avator"
-                          @change="fileChange($event)"
                           type="file"
                           style="display: none;"
                           accept="image/png, image/jpeg, image/gif, image/jpg"
+                          @change="fileChange($event)"
                         />
                       </template>
                       <v-card>
@@ -59,10 +59,10 @@
                         </v-card-title>
                         <v-card-actions>
                           <v-spacer></v-spacer>
-                          <v-btn @click="cropCancel" color="darken-1" outlined
+                          <v-btn color="darken-1" outlined @click="cropCancel"
                             >返回</v-btn
                           >
-                          <v-btn @click="cropSubmit" color="primary" outlined
+                          <v-btn color="primary" outlined @click="cropSubmit"
                             >裁剪</v-btn
                           >
                         </v-card-actions>
@@ -136,9 +136,9 @@
                 <v-flex xs12 text-center>
                   <v-btn
                     :loading="loading"
-                    @click="submit()"
                     rounded
                     color="primary"
+                    @click="submit()"
                   >
                     保存文章
                   </v-btn>
@@ -160,11 +160,11 @@
                 ref="md"
                 v-model="form.contentMd"
                 :ishljs="true"
+                style="min-height: 800px"
+                code-style="atelier-plateau-dark"
                 @change="changeData"
                 @imgAdd="$imgAdd"
                 @imgDel="$imgDel"
-                style="min-height: 800px"
-                code-style="atelier-plateau-dark"
               />
             </client-only>
           </div>

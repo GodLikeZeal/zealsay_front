@@ -10,7 +10,7 @@
               >
             </span>
             <h2>激活成功!</h2>
-            <v-btn @click="goHome" color="primary">回到首页</v-btn>
+            <v-btn color="primary" @click="goHome">回到首页</v-btn>
           </div>
           <div v-else>
             <v-progress-circular
