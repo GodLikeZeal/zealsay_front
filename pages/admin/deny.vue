@@ -7,8 +7,8 @@
           <h1>403</h1>
           <h2 class="my-3 headline ">抱歉, 您无权访问该资源.</h2>
           <div>
-            <v-btn @click="goHome" color="primary">返回首页</v-btn>
-            <v-btn @click="goLogin" color="success">返回登录</v-btn>
+            <v-btn color="primary" @click="goHome">返回首页</v-btn>
+            <v-btn color="success" @click="goLogin">返回登录</v-btn>
           </div>
         </div>
       </v-layout>

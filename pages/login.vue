@@ -60,6 +60,7 @@
               color="primary"
               :loading="loading"
               @click="login"
+              @keyup.enter="submit"
               >登 录
             </v-btn>
           </v-card-actions>
@@ -317,7 +318,7 @@ export default {
       return this.$refs.universe
     },
     github() {
-      return process.env.VUE_APP_API_URL + '/api/v1/oauth/login/github'
+      return process.env.api_url + '/api/v1/oauth/login/github'
     }
   },
   watch: {

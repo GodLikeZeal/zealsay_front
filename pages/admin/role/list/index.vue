@@ -3,22 +3,22 @@
     <v-container>
       <v-layout row wrap fill-height justify-end>
         <v-flex xs6 sm3 md1>
-          <v-btn @click="refresh()" color="primary" title="刷新">
+          <v-btn color="primary" title="刷新" @click="refresh()">
             刷新 <br />
             <v-icon small>refresh</v-icon>
           </v-btn>
         </v-flex>
         <v-flex xs6 sm3 md1>
-          <v-btn @click="handleAdd()" color="success" title="添加">
+          <v-btn color="success" title="添加" @click="handleAdd()">
             添加 <br />
             <v-icon small>add_circle</v-icon>
           </v-btn>
         </v-flex>
         <v-flex xs6 sm3 md1>
           <v-btn
-            @click="handleDeleteSelected(selected)"
             color="error"
             title="删除"
+            @click="handleDeleteSelected(selected)"
           >
             删除 <br />
             <v-icon small>remove_circle</v-icon>
@@ -45,20 +45,20 @@
       <template v-slot:item.command="{ item }">
         <v-layout justify-center class="mb-2">
           <v-btn
-            @click="handleEdit(item)"
             icon
             text
             color="primary"
             title="编辑"
+            @click="handleEdit(item)"
           >
             <v-icon>create</v-icon>
           </v-btn>
           <v-btn
-            @click="handleDelete(item)"
             icon
             text
             color="primary"
             title="删除"
+            @click="handleDelete(item)"
           >
             <v-icon>remove_circle</v-icon>
           </v-btn>
@@ -69,9 +69,9 @@
       <v-pagination
         v-model="pagination.page"
         :length="length"
-        @input="search"
         circle
         color="primary"
+        @input="search"
       ></v-pagination>
     </div>
     <div>

@@ -16,10 +16,10 @@
                 <input
                   id="uploads"
                   ref="avator"
-                  @change="fileChange($event)"
                   type="file"
                   style="display: none;"
                   accept="image/png, image/jpeg, image/gif, image/jpg"
+                  @change="fileChange($event)"
                 />
               </template>
               <v-card>
@@ -45,10 +45,10 @@
                 </v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn @click="cropCancel" color="darken-1" outline
+                  <v-btn color="darken-1" outline @click="cropCancel"
                     >返回</v-btn
                   >
-                  <v-btn @click="cropSubmit" color="primary" outline
+                  <v-btn color="primary" outline @click="cropSubmit"
                     >裁剪</v-btn
                   >
                 </v-card-actions>
@@ -135,11 +135,11 @@
                     v-model="form.province"
                     :items="province"
                     :loading="provinceLoading"
-                    @change="changeProvince"
                     item-text="text"
                     item-value="value"
                     item-avatar="avatar"
                     label="省"
+                    @change="changeProvince"
                   ></v-select>
                 </v-flex>
                 <v-flex xs12 md4>
@@ -147,11 +147,11 @@
                     v-model="form.city"
                     :items="city"
                     :loading="cityLoading"
-                    @change="changeCity"
                     item-text="text"
                     item-value="value"
                     item-avatar="avatar"
                     label="市"
+                    @change="changeCity"
                   ></v-select>
                 </v-flex>
                 <v-flex xs12 md4>
@@ -182,10 +182,10 @@
                 <v-flex xs12 text-center>
                   <v-btn
                     :loading="loading"
-                    @click="submit()"
                     rounded
                     class="mx-0"
                     color="primary"
+                    @click="submit()"
                   >
                     添加保存
                   </v-btn>

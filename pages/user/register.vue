@@ -104,22 +104,22 @@
                             mask="nnn nnnn nnnn"
                           ></v-text-field>
                           <v-layout>
-                            <v-flex md8
-                              ><v-text-field
+                            <v-flex md8>
+                              <v-text-field
                                 v-model="form.validCode"
                                 :rules="validCodeRules"
                                 label="验证码"
                                 required
-                              ></v-text-field
-                            ></v-flex>
+                              ></v-text-field>
+                            </v-flex>
                             <v-flex md4>
                               <v-btn
                                 :disabled="!canSend"
-                                @click="send"
                                 color="primary"
-                                >{{ validText }}</v-btn
-                              ></v-flex
-                            >
+                                @click="send"
+                                >{{ validText }}
+                              </v-btn>
+                            </v-flex>
                           </v-layout>
                           <span
                             v-if="validFlag"
@@ -152,23 +152,23 @@
                 <v-btn
                   :disabled="step === 3"
                   :loading="oneLoading"
-                  @click="oneStep"
                   color="primary"
                   depressed
+                  @click="oneStep"
                 >
                   下一步
                 </v-btn>
               </v-card-actions>
               <v-card-actions v-if="step === 2">
-                <v-btn @click="step--" depressed>
+                <v-btn depressed @click="step--">
                   返回上一步
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
                   :loading="twoLoading"
-                  @click="twoStep"
                   color="primary"
                   depressed
+                  @click="twoStep"
                 >
                   提交注册
                 </v-btn>
@@ -176,7 +176,7 @@
               <v-card-actions v-if="step === 3">
                 <v-layout justify-center>
                   <v-flex md3 xs3>
-                    <v-btn @click="threeStep" color="primary" depressed>
+                    <v-btn color="primary" depressed @click="threeStep">
                       完成注册
                     </v-btn>
                   </v-flex>
@@ -401,7 +401,6 @@
   </v-app>
 </template>
 <script>
-import qs from 'qs'
 import {
   validatePassword,
   validatePhone,
@@ -410,6 +409,7 @@ import {
 } from '@/util/validate'
 import { loginByUsername } from '@/api/login'
 import { getIsInUseByUsername, getIsInUseByEmail, register } from '@/api/user'
+import qs from 'qs'
 
 export default {
   layout: 'login',
@@ -714,6 +714,7 @@ export default {
   filter: contrast(120%);
   background-color: black;
 }
+
 .container {
   max-width: inherit;
   max-height: inherit;

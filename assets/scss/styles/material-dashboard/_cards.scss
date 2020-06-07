@@ -29,7 +29,7 @@
       color: rgba($white, .62);
     }
 
-    .v-card--material__header.v-card{
+    .v-card--material__header.v-card {
       padding: $padding-general;
     }
   }
@@ -46,7 +46,7 @@
     margin: $card-margin 0 !important;
   }
 
-  .v-card--material__header{
+  .v-card--material__header {
     border-radius: $border-radius-base + 3;
     min-height: $card-chart-min-height;
     padding: 0 !important;
@@ -169,6 +169,40 @@
 .card {
   margin: 0.5rem;
   border-radius: 0.5rem;
+}
+
+/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.blog-item-enter-active {
+  transition: transform 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;
+}
+.blog-item-leave-active {
+  transition: transform 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;
+}
+.blog-item-enter, .blog-item-leave-to
+  /* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateY(20px) scale(0.9);
+  opacity: 0;
+}
+
+.blog-item-hide {
+  visibility: visible;
+  -webkit-transform: translateY(20px) scale(0.9);
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  opacity: 0;
+  -webkit-transition: -webkit-transform 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;
+  transition: transform 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;
+}
+
+.blog-item-show {
+  visibility: visible;
+  -webkit-transform: translateY(0) scale(1);
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  -webkit-transition: -webkit-transform 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;
+  transition: transform 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;
 }
 
 .cover {

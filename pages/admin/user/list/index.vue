@@ -27,16 +27,16 @@
           ></v-text-field>
         </v-flex>
         <v-flex xs6 sm2 md1>
-          <v-btn @click="search(searchData)" color="info"
+          <v-btn color="info" @click="search(searchData)"
             >搜索 <br />
             <v-icon small>search</v-icon>
           </v-btn>
         </v-flex>
         <v-flex xs6 sm2 md1>
           <v-btn
-            @click="handleUnsealingSelected(selected)"
             color="success"
             title="解封"
+            @click="handleUnsealingSelected(selected)"
           >
             解封 <br />
             <v-icon small>how_to_reg</v-icon>
@@ -44,9 +44,9 @@
         </v-flex>
         <v-flex xs6 sm2 md1>
           <v-btn
-            @click="handleDisabledSelected(selected)"
             color="error"
             title="禁用"
+            @click="handleDisabledSelected(selected)"
           >
             封禁 <br />
             <v-icon small>mdi-cancel</v-icon>
@@ -106,7 +106,7 @@
             <div class="text-center">
               <v-dialog width="800">
                 <template v-slot:activator="{ on }">
-                  <v-btn v-on="on" icon text color="primary" title="详情">
+                  <v-btn icon text color="primary" title="详情" v-on="on">
                     <v-icon>portrait</v-icon>
                   </v-btn>
                 </template>
@@ -254,12 +254,12 @@
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
               <v-btn
-                v-on="on"
-                @click="handleEdit(item)"
                 icon
                 text
                 color="primary"
                 title="编辑"
+                v-on="on"
+                @click="handleEdit(item)"
               >
                 <v-icon>create</v-icon>
               </v-btn>
@@ -269,12 +269,12 @@
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
               <v-btn
-                v-on="on"
-                @click="handleUnsealing(item)"
                 icon
                 text
                 color="primary"
                 title="解封"
+                v-on="on"
+                @click="handleUnsealing(item)"
               >
                 <v-icon>how_to_reg</v-icon>
               </v-btn>
@@ -284,12 +284,12 @@
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
               <v-btn
-                v-on="on"
-                @click="handleDisabled(item)"
                 icon
                 text
                 color="primary"
                 title="封禁"
+                v-on="on"
+                @click="handleDisabled(item)"
               >
                 <v-icon>remove_circle</v-icon>
               </v-btn>
@@ -303,9 +303,9 @@
       <v-pagination
         v-model="pagination.page"
         :length="length"
-        @input="search"
         circle
         color="primary"
+        @input="search"
       ></v-pagination>
     </div>
     <div>

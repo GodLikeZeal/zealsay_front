@@ -30,10 +30,10 @@
                         <input
                           id="uploads"
                           ref="avator"
-                          @change="fileChange($event)"
                           type="file"
                           style="display: none;"
                           accept="image/png, image/jpeg, image/gif, image/jpg"
+                          @change="fileChange($event)"
                         />
                       </template>
                       <v-card>
@@ -59,10 +59,10 @@
                         </v-card-title>
                         <v-card-actions>
                           <v-spacer></v-spacer>
-                          <v-btn @click="cropCancel" color="darken-1" outline
+                          <v-btn color="darken-1" outline @click="cropCancel"
                             >返回</v-btn
                           >
-                          <v-btn @click="cropSubmit" color="primary" outline
+                          <v-btn color="primary" outline @click="cropSubmit"
                             >裁剪</v-btn
                           >
                         </v-card-actions>
@@ -133,13 +133,13 @@
                     required
                   />
                 </v-flex>
-                <v-flex xs12 text-xs-center>
+                <v-flex xs12 text-center>
                   <v-btn
                     :loading="loading"
-                    @click="submit()"
-                    round
+                    rounded
                     class="font-weight-light"
                     color="primary"
+                    @click="submit()"
                   >
                     保存文章
                   </v-btn>
@@ -161,11 +161,11 @@
                 ref="md"
                 v-model="form.contentMd"
                 :ishljs="true"
+                style="z-index:0;height: 800px"
+                code-style="atelier-plateau-dark"
                 @change="changeData"
                 @imgAdd="$imgAdd"
                 @imgDel="$imgDel"
-                style="z-index:0;height: 800px"
-                code-style="atelier-plateau-dark"
               />
             </client-only>
           </div>
