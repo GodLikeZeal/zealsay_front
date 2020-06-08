@@ -2,16 +2,14 @@
   <v-dialog v-model="dialog" width="600" persistent>
     <v-card ref="row">
       <v-container fill-height fluid>
-        <v-layout fill-height class="center">
-          <v-flex xs12 align-center flexbox>
+        <v-row class="text-center">
+          <v-col cols="12">
             <v-dialog v-model="showCropper" persistent width="800px">
               <template v-slot:activator="{ on }">
                 <label for="uploads">
-                  <a>
-                    <v-avatar size="96">
-                      <img :src="form.avatar" alt="avatar" />
-                    </v-avatar>
-                  </a>
+                  <v-avatar size="96">
+                    <img :src="form.avatar" alt="avatar" />
+                  </v-avatar>
                 </label>
                 <input
                   id="uploads"
@@ -56,8 +54,8 @@
             <p class="card-description font-weight-light">
               支持JPG、PNG格式图片，不超过5M。拖拽或缩放图中的虚线方格可调整头像
             </p>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
       <v-card-title>
         <v-form ref="form" lazy-validation>
