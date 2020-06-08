@@ -80,8 +80,8 @@ const Menu = [
       {
         name: 'write',
         title: '基本信息',
-        component: 'articleadd',
-        href: '/admin/article/add'
+        component: 'settingcommon',
+        href: '/admin/setting/common'
       },
       {
         name: 'list',

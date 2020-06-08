@@ -46,7 +46,8 @@ export default {
       }
     }
     setTimeout(() => {
-      this.$vuetify.theme.primary = color
+      this.$vuetify.theme.themes.light.primary = color
+      this.$vuetify.theme.themes.dark.primary = color
     }, 5)
   },
   computed: {

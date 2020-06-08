@@ -11,6 +11,7 @@
             fill-dot
           >
             <v-card
+              v-scroll-reveal.reset
               :color="color[parseInt((item.action.length + 15) % 15)]"
               dark
             >

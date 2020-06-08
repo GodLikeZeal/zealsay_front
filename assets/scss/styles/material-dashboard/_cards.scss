@@ -170,19 +170,12 @@
   margin: 0.5rem;
   border-radius: 0.5rem;
 }
-
-/* 可以设置不同的进入和离开动画 */
-/* 设置持续时间和动画函数 */
-.blog-item-enter-active {
-  transition: transform 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;
+.blog-card {
+  border-radius: 0.5rem;
 }
-.blog-item-leave-active {
-  transition: transform 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0.2s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;
-}
-.blog-item-enter, .blog-item-leave-to
-  /* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateY(20px) scale(0.9);
-  opacity: 0;
+.blog-card-container {
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .blog-item-hide {
@@ -206,9 +199,9 @@
 }
 
 .cover {
-  transition: 1s all;
+  transition: 1s ease-out;
 }
 
 .cover:hover {
-  transform: scale(1.1);
+  transform: scale3d(1.1,1.1,1);
 }

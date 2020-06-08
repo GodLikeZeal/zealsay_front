@@ -2,17 +2,19 @@
   <div>
     <div v-if="desserts.length > 0">
       <template v-for="(item, i) in desserts">
-        <v-card :key="i" flat class="card">
+        <v-card :key="i" v-scroll-reveal.reset flat class="card">
           <v-row class="hidden-xs-only">
             <v-col cols="6">
               <a :href="'/blog/' + item.id" target="_Blank">
-                <v-img
-                  :aspect-ratio="320 / 200"
-                  :src="item.coverImage"
-                  transition="fade-transition"
-                  class="card elevation-3 cover"
-                  contain
-                ></v-img>
+                <div class="blog-card-container">
+                  <v-img
+                    :aspect-ratio="320 / 200"
+                    :src="item.coverImage"
+                    transition="fade-transition"
+                    class="blog-card cover elevation-3"
+                    contain
+                  ></v-img>
+                </div>
               </a>
             </v-col>
             <v-col cols="6">
@@ -56,13 +58,15 @@
           <v-row class="d-flex d-sm-none">
             <v-col cols="12">
               <a :href="'/blog/' + item.id" target="_Blank">
-                <v-img
-                  :aspect-ratio="320 / 200"
-                  :src="item.coverImage"
-                  transition="fade-transition"
-                  class="card elevation-3 cover"
-                  contain
-                ></v-img>
+                <div class="blog-card-container">
+                  <v-img
+                    :aspect-ratio="320 / 200"
+                    :src="item.coverImage"
+                    transition="fade-transition"
+                    class="blog-card elevation-3 cover"
+                    contain
+                  ></v-img>
+                </div>
               </a>
             </v-col>
             <v-col cols="12">

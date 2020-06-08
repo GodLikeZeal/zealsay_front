@@ -253,6 +253,10 @@ export default {
       })
     }
   },
+  created() {
+    this.changeProvince()
+    this.changeCity()
+  },
   methods: {
     changeProvince() {
       this.cityLoading = true

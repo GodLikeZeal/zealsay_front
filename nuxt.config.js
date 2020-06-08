@@ -6,9 +6,6 @@ export default {
   server: {
     port: 4000 // default: 3000
   },
-  env: {
-    api_url: process.env.VUE_APP_API_URL || 'http://localhost:8090'
-  },
   /*
    ** Headers of the page
    */
@@ -28,6 +25,11 @@ export default {
         name: 'keywords',
         content:
           '技术人生,技术笔记,情感交流,技术分享,java,spring boot,vue,nuxt,vuetify,后台,前端,服务器,动漫,程序员,全栈工程师,全栈,zealsay,zealsay博客,zealsay说你想说,王者荣耀,游戏,盘点,个人博客,建站系统,生活杂记,随笔,WEB平台,BOX-ROM,BoxMod。'
+      },
+      {
+        hid: 'author',
+        name: 'author',
+        content: 'zeal'
       }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
@@ -63,6 +65,7 @@ export default {
     { src: '@/plugins/common', ssr: false },
     { src: '@/plugins/chartist', ssr: true },
     { src: '@/plugins/vue-perfect-scrollbar', ssr: false },
+    { src: '@/plugins/vue-scroll-reveal', ssr: false },
     { src: '@/plugins/vue-mavon-editor', srr: false },
     { src: '@/plugins/vue-cropper', ssr: false },
     { src: '@/plugins/localStorage.js', ssr: false }
@@ -201,7 +204,7 @@ export default {
     publicPath:
       process.env.NODE_ENV === 'development'
         ? '/_nuxt/'
-        : 'https://pan.zealsay.com/', // sample/essays 打包的默认路径为 ‘_nuxt’ 或者可以指定cdn 域名
+        : 'process.env.VUE_APP_CDN', // sample/essays 打包的默认路径为 ‘_nuxt’ 或者可以指定cdn 域名
     filenames: {
       // css 和 js  img 打包时指定文件夹
       app: ({ isDev }) => (isDev ? '[name].js' : '[name].js'),
