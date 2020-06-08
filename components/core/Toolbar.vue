@@ -93,51 +93,56 @@ export default {
   components: {
     mFilter
   },
-  data: (vm) => ({
-    notifications: [
-      'Mike, John responded to your email',
-      'You have 5 new tasks',
-      "You're now a friend with Andrew",
-      'Another Notification',
-      'Another One'
-    ],
-    title: null,
-    responsive: false,
-    responsiveInput: false,
-    items: [
-      {
-        icon: 'mdi-account',
-        href: '#',
-        title: 'Profile',
-        click: (e) => {
-          console.log(e)
-        }
-      },
-      {
-        icon: 'settings',
-        href: '#',
-        title: 'Settings',
-        click: (e) => {
-          console.log(e)
-        }
-      },
-      {
-        icon: 'fullscreen_exit',
-        href: '#',
-        title: 'Logout',
-        click: () => {
-          vm.logout()
-          // window.getApp.$emit('APP_LOGOUT');
-        }
-      }
-    ]
-  }),
   computed: {
     toolbarColor() {
       return this.$vuetify.options.extra.mainNav
     },
     avatar() {
       return this.$store.state.auth.user.avatar
+    },
+    notifications() {
+      return [
+        'Mike, John responded to your email',
+        'You have 5 new tasks',
+        "You're now a friend with Andrew",
+        'Another Notification',
+        'Another One'
+      ]
+    },
+    responsive: {
+      get() {
+        return false
+      },
+      set() {}
+    },
+    responsiveInput: {
+      get() {
+        return false
+      },
+      set() {}
+    },
+    items() {
+      return [
+        {
+          icon: 'mdi-account',
+          href: this.$store.state.auth.user
+            ? '/user/' + this.$store.state.auth.user.id
+            : '',
+          title: '个人主页',
+          click: (e) => {
+            console.log(e)
+          }
+        },
+        {
+          icon: 'fullscreen_exit',
+          href: '#',
+          title: '退出登录',
+          click: (e) => {
+            this.$auth.logout('local')
+            // window.getApp.$emit('APP_LOGOUT');
+          }
+        }
+      ]
     }
   },
 
