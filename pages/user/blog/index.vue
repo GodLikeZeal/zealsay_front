@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row wrap>
       <v-flex v-for="card in desserts" :key="card.id" xs6 sm3 md4>
-        <v-card class="card" hover>
+        <v-card v-scroll-reveal.reset class="card" hover>
           <v-img :src="card.coverImage" height="200px"> </v-img>
 
           <v-card-title>

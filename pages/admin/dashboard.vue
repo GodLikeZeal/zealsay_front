@@ -108,7 +108,7 @@
           title="今日新增注册用户"
           :value="6"
           sub-icon="mdi-update"
-          sub-text="Just Updated"
+          sub-text="最后更新于刚刚"
         />
       </v-flex>
       <v-flex md12 lg6>

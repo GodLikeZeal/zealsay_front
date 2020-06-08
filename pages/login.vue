@@ -318,7 +318,7 @@ export default {
       return this.$refs.universe
     },
     github() {
-      return process.env.api_url + '/api/v1/oauth/login/github'
+      return '/app/api/v1/oauth/login/github'
     }
   },
   watch: {

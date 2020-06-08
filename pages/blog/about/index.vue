@@ -66,17 +66,19 @@
                 </blockquote>
                 <v-divider></v-divider>
                 <h2 class="font-weight-regular text-gray">资料卡片</h2>
-                <v-card flat class="card">
+                <v-card v-scroll-reveal.reset flat class="card">
                   <v-row class="hidden-xs-only">
                     <v-col cols="4">
                       <a target="_Blank">
-                        <v-img
-                          :aspect-ratio="320 / 200"
-                          transition="fade-transition"
-                          class="card elevation-3 cover"
-                          src="https://pan.zealsay.com/20190909104236848000000.jpg"
-                          contain
-                        ></v-img>
+                        <div class="blog-card-container">
+                          <v-img
+                            :aspect-ratio="320 / 200"
+                            transition="fade-transition"
+                            class="blog-card elevation-3 cover"
+                            src="https://pan.zealsay.com/20190909104236848000000.jpg"
+                            contain
+                          ></v-img>
+                        </div>
                       </a>
                     </v-col>
                     <v-col cols="8">
@@ -105,13 +107,15 @@
                   <v-row class="d-flex d-sm-none">
                     <v-col cols="12">
                       <a target="_Blank">
-                        <v-img
-                          :aspect-ratio="320 / 200"
-                          transition="fade-transition"
-                          class="card elevation-3 cover"
-                          src="https://pan.zealsay.com/20190909104236848000000.jpg"
-                          contain
-                        ></v-img>
+                        <div class="blog-card-container">
+                          <v-img
+                            :aspect-ratio="320 / 200"
+                            transition="fade-transition"
+                            class="blog-card elevation-3 cover"
+                            src="https://pan.zealsay.com/20190909104236848000000.jpg"
+                            contain
+                          ></v-img>
+                        </div>
                       </a>
                     </v-col>
                     <v-col cols="12">
@@ -138,7 +142,7 @@
                     </v-col>
                   </v-row>
                 </v-card>
-                <v-card flat class="card">
+                <v-card v-scroll-reveal.reset flat class="card">
                   <v-row class="hidden-xs-only">
                     <v-col cols="8">
                       <v-card-title primary-title>
@@ -167,26 +171,30 @@
                     </v-col>
                     <v-col cols="4">
                       <a target="_Blank">
-                        <v-img
-                          :aspect-ratio="320 / 200"
-                          transition="fade-transition"
-                          class="card elevation-3 cover"
-                          src="https://pan.zealsay.com/20190909102821223000000.jpg"
-                          contain
-                        ></v-img>
+                        <div class="blog-card-container">
+                          <v-img
+                            :aspect-ratio="320 / 200"
+                            transition="fade-transition"
+                            class="blog-card elevation-3 cover"
+                            src="https://pan.zealsay.com/20190909102821223000000.jpg"
+                            contain
+                          ></v-img>
+                        </div>
                       </a>
                     </v-col>
                   </v-row>
                   <v-row class="d-flex d-sm-none">
                     <v-col cols="12">
                       <a target="_Blank">
-                        <v-img
-                          :aspect-ratio="320 / 200"
-                          transition="fade-transition"
-                          class="card elevation-3 cover"
-                          src="https://pan.zealsay.com/20190909102821223000000.jpg"
-                          contain
-                        ></v-img>
+                        <div class="blog-card-container">
+                          <v-img
+                            :aspect-ratio="320 / 200"
+                            transition="fade-transition"
+                            class="blog-card elevation-3 cover"
+                            src="https://pan.zealsay.com/20190909102821223000000.jpg"
+                            contain
+                          ></v-img>
+                        </div>
                       </a>
                     </v-col>
                     <v-col cols="12">
@@ -216,17 +224,19 @@
                     </v-col>
                   </v-row>
                 </v-card>
-                <v-card flat class="card">
+                <v-card v-scroll-reveal.reset flat class="card">
                   <v-row class="hidden-xs-only">
                     <v-col cols="4">
                       <a target="_Blank">
-                        <v-img
-                          :aspect-ratio="320 / 200"
-                          transition="fade-transition"
-                          class="card elevation-3 cover"
-                          src="https://pan.zealsay.com/20190909100253617000000.jpg"
-                          contain
-                        ></v-img>
+                        <div class="blog-card-container">
+                          <v-img
+                            :aspect-ratio="320 / 200"
+                            transition="fade-transition"
+                            class="blog-card elevation-3 cover"
+                            src="https://pan.zealsay.com/20190909100253617000000.jpg"
+                            contain
+                          ></v-img>
+                        </div>
                       </a>
                     </v-col>
                     <v-col cols="8">
@@ -255,13 +265,15 @@
                   <v-row class="d-flex d-sm-none">
                     <v-col cols="12">
                       <a target="_Blank">
-                        <v-img
-                          :aspect-ratio="320 / 200"
-                          transition="fade-transition"
-                          class="card elevation-3 cover"
-                          src="https://pan.zealsay.com/20190909100253617000000.jpg"
-                          contain
-                        ></v-img>
+                        <div class="blog-card-container">
+                          <v-img
+                            :aspect-ratio="320 / 200"
+                            transition="fade-transition"
+                            class="blog-card elevation-3 cover"
+                            src="https://pan.zealsay.com/20190909100253617000000.jpg"
+                            contain
+                          ></v-img>
+                        </div>
                       </a>
                     </v-col>
                     <v-col cols="12">
@@ -288,7 +300,7 @@
                     </v-col>
                   </v-row>
                 </v-card>
-                <v-card flat class="card">
+                <v-card v-scroll-reveal.reset flat class="card">
                   <v-row class="hidden-xs-only">
                     <v-col cols="8">
                       <v-card-title primary-title>
@@ -314,26 +326,30 @@
                     </v-col>
                     <v-col cols="4">
                       <a target="_Blank">
-                        <v-img
-                          :aspect-ratio="320 / 200"
-                          transition="fade-transition"
-                          class="card elevation-3 cover"
-                          src="https://pan.zealsay.com/20190909092058309000000.jpg"
-                          contain
-                        ></v-img>
+                        <div class="blog-card-container">
+                          <v-img
+                            :aspect-ratio="320 / 200"
+                            transition="fade-transition"
+                            class="blog-card elevation-3 cover"
+                            src="https://pan.zealsay.com/20190909092058309000000.jpg"
+                            contain
+                          ></v-img>
+                        </div>
                       </a>
                     </v-col>
                   </v-row>
                   <v-row class="d-flex d-sm-none">
                     <v-col cols="12">
                       <a target="_Blank">
-                        <v-img
-                          :aspect-ratio="320 / 200"
-                          transition="fade-transition"
-                          class="card elevation-3 cover"
-                          src="https://pan.zealsay.com/20190909092058309000000.jpg"
-                          contain
-                        ></v-img>
+                        <div class="blog-card-container">
+                          <v-img
+                            :aspect-ratio="320 / 200"
+                            transition="fade-transition"
+                            class="blog-card elevation-3 cover"
+                            src="https://pan.zealsay.com/20190909092058309000000.jpg"
+                            contain
+                          ></v-img>
+                        </div>
                       </a>
                     </v-col>
                     <v-col cols="12">
