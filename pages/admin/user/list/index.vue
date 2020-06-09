@@ -27,7 +27,7 @@
           ></v-text-field>
         </v-flex>
         <v-flex xs6 sm2 md1>
-          <v-btn color="info" @click="search(searchData)"
+          <v-btn color="info" title="搜索" @click="search(searchData)"
             >搜索 <br />
             <v-icon small>search</v-icon>
           </v-btn>
@@ -117,16 +117,12 @@
                     height="270"
                     src="https://pan.zealsay.com/user_info_bg.jpg"
                   >
-                    <v-container fill-height fluid>
+                    <v-container fill-height fluid class="text-center">
                       <v-layout fill-height>
-                        <v-flex xs12 align-end flexbox>
-                          <v-img
-                            :lazy-src="item.avatar"
-                            :src="item.avatar"
-                            class="avator"
-                            height="100"
-                            width="100"
-                          ></v-img>
+                        <v-flex xs12 align-center flexbox class="avatar">
+                          <v-avatar size="100">
+                            <img :src="item.avatar" alt="avatar" />
+                          </v-avatar>
                         </v-flex>
                       </v-layout>
                     </v-container>

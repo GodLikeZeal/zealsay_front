@@ -57,10 +57,10 @@
       <v-row>
         <v-col cols="12">
           <v-tabs centered>
-            <v-tab key="activity"> 动态 </v-tab>
-            <v-tab key="blog"> 博客 </v-tab>
-            <v-tab key="like"> 喜欢 </v-tab>
-            <v-tab key="info"> 资料 </v-tab>
+            <v-tab key="activity" class="font-weight-bold"> 动态 </v-tab>
+            <v-tab key="blog" class="font-weight-bold"> 博客 </v-tab>
+            <v-tab key="like" class="font-weight-bold"> 喜欢 </v-tab>
+            <v-tab key="info" class="font-weight-bold"> 资料 </v-tab>
             <v-tab-item key="activity">
               <activity :actions="actions"></activity>
             </v-tab-item>

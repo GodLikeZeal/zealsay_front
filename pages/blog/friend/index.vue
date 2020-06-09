@@ -16,7 +16,7 @@
       >
         <template v-for="(item, i) in links">
           <v-col :key="i" cols="3">
-            <v-card hover>
+            <v-card v-scroll-reveal.reset hover>
               <div
                 :style="{ backgroundColor: item.color }"
                 class="top-color radius"
@@ -56,7 +56,7 @@
       >
         <template v-for="(item, i) in links">
           <v-col :key="i" cols="4">
-            <v-card hover>
+            <v-card v-scroll-reveal.reset hover>
               <div
                 :style="{ backgroundColor: item.color }"
                 class="top-color radius"
@@ -96,7 +96,7 @@
       >
         <template v-for="(item, i) in links">
           <v-col :key="i" cols="12">
-            <v-card hover>
+            <v-card v-scroll-reveal.reset hover>
               <div
                 :style="{ backgroundColor: item.color }"
                 class="top-color radius"
