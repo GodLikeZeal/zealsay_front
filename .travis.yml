@@ -35,7 +35,6 @@ after_success:
   - docker push registry.cn-qingdao.aliyuncs.com/zealsay/zealsay_front:beta;
   - sshpass -p $VPS_PASSWORD ssh -o stricthostkeychecking=no travis@$HOST "/home/zeal/docker/zealsay/deploy-beta.sh"
 
-
 notifications:
   email:
     recipients:
