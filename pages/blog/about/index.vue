@@ -55,8 +55,8 @@
           <v-icon>chevron_right</v-icon>
         </template>
       </v-breadcrumbs>
-      <v-layout>
-        <v-flex xs12 md12>
+      <v-layout fill-height justify-center>
+        <v-flex xs12 md12 lg10>
           <v-container>
             <v-layout>
               <v-flex>

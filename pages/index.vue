@@ -6,13 +6,13 @@
       <blog-motto :hitokoto="motto"></blog-motto>
     </v-card>
     <v-container>
-      <v-layout fill-height>
-        <v-flex xs12 md12 sm12>
+      <v-layout fill-height justify-center>
+        <v-flex xs12 md12 sm12 lg10>
           <blog-main-card :item="desserts[0]"></blog-main-card>
         </v-flex>
       </v-layout>
-      <v-layout>
-        <v-flex xs12 sm12 md8>
+      <v-layout fill-height justify-center>
+        <v-flex xs12 sm12 md8 lg7>
           <blog-article-list :list="list"></blog-article-list>
           <!-- page分页-->
           <div class="pagination text-center">
@@ -25,7 +25,7 @@
             ></v-pagination>
           </div>
         </v-flex>
-        <v-flex class="hidden-sm-and-down" md4>
+        <v-flex class="hidden-sm-and-down" md4 lg3>
           <!-- 最近评论 -->
           <blog-recent-discuss></blog-recent-discuss>
           <!-- 标签云 -->
