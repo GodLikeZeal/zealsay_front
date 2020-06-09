@@ -41,7 +41,7 @@ export default {
         src: 'https://pan.zealsay.com/live2d/js/live2d.js'
       },
       {
-        src: '/js/baidu.js'
+        src: 'https://pan.zealsay.com/static/js/baidu.js'
       }
     ]
   },
