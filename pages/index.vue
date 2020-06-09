@@ -8,7 +8,8 @@
     <v-container>
       <v-layout fill-height justify-center>
         <v-flex xs12 md12 sm12 lg10>
-          <blog-main-card :item="desserts[0]"></blog-main-card>
+          <blog-main-slider></blog-main-slider>
+          <!--          <blog-main-card :item="desserts[0]"></blog-main-card>-->
         </v-flex>
       </v-layout>
       <v-layout fill-height justify-center>
@@ -49,7 +50,8 @@
 <script>
 import NavBar from '@/components/blog/NavBar'
 import Motto from '@/components/blog/Motto'
-import MainCard from '@/components/blog/MainCard'
+// import MainCard from '@/components/blog/MainCard'
+import MainSlider from '@/components/blog/MainSlider'
 import ArticleList from '@/components/blog/ArticleList'
 import RecentDiscuss from '@/components/blog/RecentDiscuss'
 import LabelCloud from '@/components/blog/LabelCloud'
@@ -65,7 +67,8 @@ export default {
   components: {
     'blog-nav': NavBar,
     'blog-motto': Motto,
-    'blog-main-card': MainCard,
+    // 'blog-main-card': MainCard,
+    'blog-main-slider': MainSlider,
     'blog-article-list': ArticleList,
     'blog-recent-discuss': RecentDiscuss,
     'blog-label-cloud': LabelCloud
@@ -80,10 +83,13 @@ export default {
         ? Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
         : 0
     },
+    // list() {
+    //   return this.desserts.filter(function(item, index) {
+    //     return index > 0
+    //   })
+    // },
     list() {
-      return this.desserts.filter(function(item, index) {
-        return index > 0
-      })
+      return this.desserts
     }
   },
   async asyncData({ app, params, error }) {
