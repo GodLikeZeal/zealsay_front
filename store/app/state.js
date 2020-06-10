@@ -5,5 +5,6 @@ export default {
   dark: false,
   theme: 'light',
   color: 'success',
-  image: 'https://pan.zealsay.com/slider-1.jpg'
+  image: 'https://pan.zealsay.com/slider-1.jpg',
+  categorys: ''
 }

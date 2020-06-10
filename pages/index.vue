@@ -8,7 +8,7 @@
     <v-container>
       <v-layout fill-height justify-center>
         <v-flex xs12 md12 sm12 lg10>
-          <blog-main-slider></blog-main-slider>
+          <blog-main-slider :hotArticles="hotArticles"></blog-main-slider>
           <!--          <blog-main-card :item="desserts[0]"></blog-main-card>-->
         </v-flex>
       </v-layout>
@@ -55,12 +55,9 @@ import MainSlider from '@/components/blog/MainSlider'
 import ArticleList from '@/components/blog/ArticleList'
 import RecentDiscuss from '@/components/blog/RecentDiscuss'
 import LabelCloud from '@/components/blog/LabelCloud'
-import { getHitokoto } from '@/api/service'
-import {
-  getArticleLabelPage,
-  getArticlePageListToC,
-  getCategoryList
-} from '@/api/article'
+import { getIndexData } from '@/api/data'
+import { getArticlePageListToC, getCategoryList } from '@/api/article'
+import { mapMutations } from 'vuex'
 
 export default {
   auth: false,
@@ -92,54 +89,58 @@ export default {
       return this.desserts
     }
   },
-  async asyncData({ app, params, error }) {
-    const resHitokoto = await app.$axios.$request(getHitokoto())
+  async asyncData({ app, params, error, store }) {
+    const res = await app.$axios.$request(getIndexData())
     const motto = {}
-    if (resHitokoto.code === '200') {
-      motto.hitokoto = resHitokoto.data.hitokoto
-      motto.creator = resHitokoto.data.creator
-      motto.from = resHitokoto.data.from
-    } else {
-      return error({
-        statusCode: resHitokoto.code,
-        message: resHitokoto.message
-      })
-    }
-    const resArticle = await app.$axios.$request(getArticlePageListToC())
     const pagination = {}
-    if (resArticle.code === '200') {
-      pagination.page = resArticle.data.currentPage
-      pagination.rowsPerPage = resArticle.data.pageSize
-      pagination.totalItems = resArticle.data.total
-    } else {
-      return error({ statusCode: resArticle.code, message: resArticle.message })
-    }
-    const resCategory = await app.$axios.$request(getCategoryList())
-    let categorys = []
-    if (resCategory.code === '200') {
-      categorys = resCategory.data
-    } else {
-      return error({ statusCode: resArticle.code, message: resArticle.message })
-    }
-    const resArticleLabel = await app.$axios.$request(getArticleLabelPage())
+    let desserts = {}
     let labels = []
-    if (resArticleLabel.code === '200') {
-      labels = resArticleLabel.data.records
+    let hotArticles = []
+    if (res.code === '200') {
+      motto.hitokoto = res.data.hitokoto.hitokoto
+      motto.creator = res.data.hitokoto.creator
+      motto.from = res.data.hitokoto.from
+
+      pagination.page = res.data.pageInfo.currentPage
+      pagination.rowsPerPage = res.data.pageInfo.pageSize
+      pagination.totalItems = res.data.pageInfo.total
+      desserts = res.data.pageInfo.desserts
+      labels = res.data.labels
+      hotArticles = res.data.hotArticles
     } else {
       return error({
-        statusCode: resArticleLabel.code,
-        message: resArticleLabel.message
+        statusCode: res.code,
+        message: res.message
       })
     }
+    let categorys = []
+    if (store.$app && store.$app.$state && store.$app.$state.categorys) {
+      categorys = store.$app.$state.categorys
+    } else {
+      const resCategory = await app.$axios.$request(getCategoryList())
+      if (resCategory.code === '200') {
+        categorys = resCategory.data
+        console.log(store)
+        // store.setCategorys(categorys)
+      } else {
+        return error({
+          statusCode: resCategory.code,
+          message: resCategory.message
+        })
+      }
+    }
+
     return {
       motto,
-      desserts: resArticle.data.records,
+      desserts,
+      hotArticles,
       pagination,
       categorys,
       labels
     }
   },
   methods: {
+    ...mapMutations('app', ['setCategorys']),
     search() {
       const searchData = {}
       searchData.pageSize = this.pagination.rowsPerPage
