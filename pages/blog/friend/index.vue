@@ -12,7 +12,47 @@
       </v-breadcrumbs>
       <v-row
         v-if="links.length > 0"
-        class="hidden-sm-and-down justify-space-around"
+        class="hidden-lg-and-down justify-space-around"
+      >
+        <template v-for="(item, i) in links">
+          <v-col :key="i" cols="2">
+            <v-card v-scroll-reveal.reset hover>
+              <div
+                :style="{ backgroundColor: item.color }"
+                class="top-color radius"
+              ></div>
+              <v-img
+                :lazy-src="item.avatar"
+                :src="item.avatar"
+                class="avator elevation-2"
+                height="100"
+                width="100"
+              ></v-img>
+              <h2 class="justify-center text-center ">
+                {{ item.friendName }}
+              </h2>
+              <p class="card-description justify-center text-center ">
+                {{ item.friendInfo }}
+              </p>
+              <div class="foot-color">
+                <p class="foot-text card-description text-center ">
+                  {{ item.link }}
+                </p>
+                <v-btn
+                  :href="item.link"
+                  class="foot-btn d-flex justify-center"
+                  color="primary"
+                  target="_Blank"
+                  >访问网站
+                </v-btn>
+              </div>
+            </v-card>
+          </v-col>
+        </template>
+      </v-row>
+      <v-row
+        v-if="links.length > 0"
+        class="d-none d-md-flex d-xl-none justify-space-around"
       >
         <template v-for="(item, i) in links">
           <v-col :key="i" cols="3">
