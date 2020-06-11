@@ -8,7 +8,7 @@
     <v-container>
       <v-layout fill-height justify-center>
         <v-flex xs12 md12 sm12 lg10>
-          <blog-main-slider :hotArticles="hotArticles"></blog-main-slider>
+          <blog-main-slider :articles="hotArticles"></blog-main-slider>
           <!--          <blog-main-card :item="desserts[0]"></blog-main-card>-->
         </v-flex>
       </v-layout>
@@ -56,8 +56,7 @@ import ArticleList from '@/components/blog/ArticleList'
 import RecentDiscuss from '@/components/blog/RecentDiscuss'
 import LabelCloud from '@/components/blog/LabelCloud'
 import { getIndexData } from '@/api/data'
-import { getArticlePageListToC, getCategoryList } from '@/api/article'
-import { mapMutations } from 'vuex'
+import { getArticlePageListToC } from '@/api/article'
 
 export default {
   auth: false,
@@ -91,56 +90,38 @@ export default {
   },
   async asyncData({ app, params, error, store }) {
     const res = await app.$axios.$request(getIndexData())
-    const motto = {}
-    const pagination = {}
-    let desserts = {}
-    let labels = []
-    let hotArticles = []
+
     if (res.code === '200') {
+      const motto = {}
       motto.hitokoto = res.data.hitokoto.hitokoto
       motto.creator = res.data.hitokoto.creator
       motto.from = res.data.hitokoto.from
 
+      const pagination = {}
       pagination.page = res.data.pageInfo.currentPage
       pagination.rowsPerPage = res.data.pageInfo.pageSize
       pagination.totalItems = res.data.pageInfo.total
-      desserts = res.data.pageInfo.desserts
-      labels = res.data.labels
-      hotArticles = res.data.hotArticles
+      const desserts = res.data.pageInfo.records
+      const labels = res.data.labels
+      const hotArticles = res.data.hotArticles
+      const categorys = res.data.categorys
+
+      return {
+        motto,
+        desserts,
+        hotArticles,
+        pagination,
+        categorys,
+        labels
+      }
     } else {
       return error({
         statusCode: res.code,
         message: res.message
       })
     }
-    let categorys = []
-    if (store.$app && store.$app.$state && store.$app.$state.categorys) {
-      categorys = store.$app.$state.categorys
-    } else {
-      const resCategory = await app.$axios.$request(getCategoryList())
-      if (resCategory.code === '200') {
-        categorys = resCategory.data
-        console.log(store)
-        // store.setCategorys(categorys)
-      } else {
-        return error({
-          statusCode: resCategory.code,
-          message: resCategory.message
-        })
-      }
-    }
-
-    return {
-      motto,
-      desserts,
-      hotArticles,
-      pagination,
-      categorys,
-      labels
-    }
   },
   methods: {
-    ...mapMutations('app', ['setCategorys']),
     search() {
       const searchData = {}
       searchData.pageSize = this.pagination.rowsPerPage

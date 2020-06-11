@@ -10,3 +10,15 @@ export function getIndexData() {
     method: 'get'
   }
 }
+/**
+ * 用户中心数据.
+ *
+ * @author  zhanglei
+ * @date 2020/6/11  5:43 下午
+ */
+export function getUserData(id) {
+  return {
+    url: '/api/v1/data/user/' + id,
+    method: 'get'
+  }
+}

@@ -91,15 +91,7 @@
 
 <script>
 import NavBar from '@/components/blog/NavBar'
-import { getCategoryList } from '@/api/article'
-import { getProvinceList } from '@/api/dict'
-import { getRoleList } from '@/api/role'
-import {
-  getUserById,
-  getCurrentUserBlog,
-  getCurrentUserLikeBlog,
-  getCurrentUserActions
-} from '@/api/user'
+import { getUserData } from '@/api/data'
 import Info from './info'
 import Blog from './blog'
 import Activity from './activity'
@@ -140,104 +132,29 @@ export default {
         message: '该页面不存在'
       })
     }
-    const resCategory = await app.$axios.$request(getCategoryList())
-    let categorys = []
-    if (resCategory.code === '200') {
-      categorys = resCategory.data
-    } else {
-      return error({
-        statusCode: resCategory.code,
-        message: resCategory.message
-      })
-    }
-    const resUser = await app.$axios.$request(getUserById(params.id))
-    let user = {}
-    if (resUser.code === '200') {
-      if (resUser.data) {
-        user = resUser.data
-      } else {
-        return error({
-          statusCode: 404,
-          message: '该页面不存在'
-        })
+    const res = await app.$axios.$request(getUserData(params.id))
+    if (res.code === '200') {
+      const categorys = res.data.categorys
+      const user = res.data.user
+      const blogs = res.data.userPage.records
+      const likes = res.data.likePage.records
+      const actions = res.data.actions
+      const province = res.data.provinces
+      const roles = res.data.roles
+      return {
+        categorys,
+        user,
+        blogs,
+        likes,
+        actions,
+        province,
+        roles
       }
     } else {
       return error({
-        statusCode: resUser.code,
-        message: resUser.message
+        statusCode: res.code,
+        message: res.message
       })
-    }
-    const objBlog = {}
-    objBlog.pageNumber = 1
-    objBlog.pageSize = 12
-    const resBlog = await app.$axios.$request(getCurrentUserBlog(objBlog))
-    let blogs = []
-    if (resBlog.code === '200') {
-      blogs = resBlog.data.records
-    } else {
-      return error({
-        statusCode: resBlog.code,
-        message: resBlog.message
-      })
-    }
-    const objLike = {}
-    objLike.pageNumber = 1
-    objLike.pageSize = 12
-    const resLike = await app.$axios.$request(getCurrentUserLikeBlog(objLike))
-    let likes = []
-    if (resLike.code === '200') {
-      likes = resLike.data.records
-    } else {
-      return error({
-        statusCode: resLike.code,
-        message: resLike.message
-      })
-    }
-    let actions = []
-    const resActions = await app.$axios.$request(getCurrentUserActions())
-    if (resActions.code === '200') {
-      actions = resActions.data
-    } else {
-      return error({
-        statusCode: resActions.code,
-        message: resActions.message
-      })
-    }
-    const resProvince = await app.$axios.$request(getProvinceList())
-    let provinces = []
-    if (resProvince.code === '200') {
-      provinces = resProvince.data.map((r) => {
-        return {
-          value: r.code,
-          text: r.name
-        }
-      })
-    } else {
-      return error({
-        statusCode: resProvince.code,
-        message: resProvince.message
-      })
-    }
-    const resRole = await app.$axios.$request(getRoleList())
-    let roles = []
-    if (resRole.code === '200') {
-      roles = resRole.data.map((r) => {
-        return {
-          value: r.value,
-          text: r.name
-        }
-      })
-    } else {
-      return error({ statusCode: resRole.code, message: resRole.message })
-    }
-    return {
-      categorys,
-      user,
-      blogs,
-      likes,
-      actions,
-      province: provinces,
-      roles
     }
   },
   methods: {

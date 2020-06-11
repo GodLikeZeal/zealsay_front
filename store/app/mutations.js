@@ -7,7 +7,6 @@ export default {
   setImage: set('image'),
   setColor: set('color'),
   setTheme: set('theme'),
-  setCategorys: set('categorys'),
   setSlider: toggle('slider'),
   toggleDrawer: toggle('drawer')
 }
