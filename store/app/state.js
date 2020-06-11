@@ -1,7 +1,7 @@
 export default {
   token: '',
   drawer: true,
-  slider: true,
+  slider: false,
   dark: false,
   theme: 'light',
   color: 'success',
