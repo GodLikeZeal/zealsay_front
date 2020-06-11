@@ -1,16 +1,16 @@
 {
   "name": "zealsay_front",
   "version": "1.0.0",
+  "private": true,
   "description": "My good Nuxt.js project",
   "author": "zhanglei",
-  "private": true,
   "scripts": {
-    "dev": "nuxt",
     "build": "nuxt build",
-    "upcdn": "nuxt build  && node ./scripts/upcdn.js",
-    "start": "nuxt start",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "dev": "nuxt",
     "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+    "start": "nuxt start",
+    "upcdn": "nuxt build  && node ./scripts/upcdn.js"
   },
   "dependencies": {
     "@nuxtjs/auth": "^4.9.1",

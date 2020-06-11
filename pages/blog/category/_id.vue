@@ -4,8 +4,8 @@
     <v-card color="primary" height="450">
       <blog-nav :category="categorys"></blog-nav>
       <v-container>
-        <v-layout>
-          <v-flex md12>
+        <v-layout justify-center>
+          <v-flex xs12 md12 sm12 lg10>
             <div class="text-md-center word">
               <template v-for="item in categorys">
                 <h1
@@ -22,16 +22,11 @@
       </v-container>
     </v-card>
     <v-container>
-      <v-layout fill-height>
-        <v-flex xs12 md12 sm6>
-          <blog-main-card :item="desserts[0]"></blog-main-card>
-        </v-flex>
-      </v-layout>
-      <v-layout>
-        <v-flex xs9>
+      <v-layout justify-center>
+        <v-flex xs12 sm12 md8 lg7>
           <blog-article-list :list="list"></blog-article-list>
         </v-flex>
-        <v-flex xs4>
+        <v-flex class="hidden-sm-and-down" md4 lg3>
           <!-- 最近评论 -->
           <blog-recent-discuss></blog-recent-discuss>
           <!-- 标签云 -->
@@ -55,7 +50,6 @@
 <script>
 import NavBar from '@/components/blog/NavBar'
 import ArticleList from '@/components/blog/ArticleList'
-import MainCard from '@/components/blog/MainCard'
 import RecentDiscuss from '@/components/blog/RecentDiscuss'
 import LabelCloud from '@/components/blog/LabelCloud'
 import {
@@ -68,7 +62,6 @@ export default {
   auth: false,
   components: {
     'blog-nav': NavBar,
-    'blog-main-card': MainCard,
     'blog-article-list': ArticleList,
     'blog-recent-discuss': RecentDiscuss,
     'blog-label-cloud': LabelCloud
@@ -80,10 +73,13 @@ export default {
         ? Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
         : 0
     },
+    // list() {
+    //   return this.desserts.filter(function(item, index) {
+    //     return index > 0
+    //   })
+    // },
     list() {
-      return this.desserts.filter(function(item, index) {
-        return index > 0
-      })
+      return this.desserts
     }
   },
   async asyncData({ app, params, error }) {

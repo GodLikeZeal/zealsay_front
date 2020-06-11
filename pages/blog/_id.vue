@@ -4,8 +4,8 @@
     <v-card color="primary" height="450">
       <blog-nav :category="categorys"></blog-nav>
       <v-container>
-        <v-layout>
-          <v-flex md12>
+        <v-layout justify-center>
+          <v-flex xs12 md10 lg8>
             <div class="text-center word">
               <h1 class="hitokoto-title">
                 {{ article.title }}
@@ -58,14 +58,14 @@
       </v-container>
     </v-card>
     <v-container>
-      <v-breadcrumbs :items="breadcrumbs">
-        <template v-slot:divider>
-          <v-icon>chevron_right</v-icon>
-        </template>
-      </v-breadcrumbs>
       <v-container>
-        <v-layout>
-          <v-flex xs12 md12>
+        <v-layout justify-center>
+          <v-flex xs12 md8 lg6>
+            <v-breadcrumbs :items="breadcrumbs" class="breadcrumbs-item title">
+              <template v-slot:divider>
+                <v-icon>chevron_right</v-icon>
+              </template>
+            </v-breadcrumbs>
             <template>
               <div class="markdown-body" v-html="article.contentHtml"></div>
             </template>
@@ -112,7 +112,9 @@ export default {
       }
     }
   },
-  data: () => ({ loading: true }),
+  data: () => ({
+    loading: true
+  }),
   computed: {
     breadcrumbs() {
       return [
@@ -259,7 +261,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '../../assets/scss/styles/markdown/markdown';
-@import '../../assets/scss/styles/markdown/github-markdown';
+/*@import '../../assets/scss/styles/markdown/github-markdown';*/
 /*@import '../../assets/scss/styles/markdown/atelier-plateau-dark';*/
 .index {
   background: #fafafa;
@@ -295,5 +297,8 @@ export default {
 }
 .author-text {
   margin: 0.5rem 0;
+}
+.breadcrumbs-item {
+  padding: 2rem 0;
 }
 </style>

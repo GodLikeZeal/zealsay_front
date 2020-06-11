@@ -1,6 +1,6 @@
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
   font-family: $font-family-sans-serif !important;
-  font-weight: $font-weight-lighter !important;
+  font-weight: $font-weight-base !important;
   line-height: $line-height-base !important;
 }
 
@@ -25,6 +25,7 @@ h2, .h2{
 h3, .h3{
     font-size: $font-size-h3 !important;
     line-height: 1.4em !important;
+    weight: $font-weight-bolder !important;
 }
 h4, .h4{
     font-size: $font-size-h4 !important;
@@ -34,6 +35,7 @@ h5, .h5 {
     font-size: $font-size-h5 !important;
     line-height: 1.55em !important;
     margin-bottom: $margin-general;
+    font-weight: $font-weight-lighter !important;
 }
 h6, .h6{
     font-size: $font-size-h6 !important;

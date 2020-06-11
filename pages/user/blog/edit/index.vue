@@ -161,7 +161,8 @@
                 v-model="form.contentMd"
                 style="z-index:0;height: 800px"
                 :ishljs="true"
-                code-style="atelier-plateau-dark"
+                :external-link="externalLink"
+                code-style="atom-one-light"
                 @change="changeData"
                 @imgAdd="$imgAdd"
                 @imgDel="$imgDel"
@@ -186,6 +187,32 @@ import {
 export default {
   name: 'Edit',
   data: () => ({
+    externalLink: {
+      markdown_css: false, // false后 highlight 才生效，在head中引用 markdown_css
+      hljs_js() {
+        return 'https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js'
+      },
+      hljs_lang(lang) {
+        return (
+          'https://cdn.bootcss.com/highlight.js/9.12.0/languages/' +
+          lang +
+          '.min.js'
+        )
+      },
+      hljs_css(css) {
+        return (
+          'https://cdn.bootcss.com/highlight.js/9.12.0/styles/' +
+          css +
+          '.min.css'
+        )
+      },
+      katex_js() {
+        return 'https://cdn.bootcss.com/KaTeX/0.8.3/katex.min.js'
+      },
+      katex_css() {
+        return 'https://cdn.bootcss.com/KaTeX/0.8.3/katex.min.css'
+      }
+    },
     showCropper: false,
     img_file: {},
     valid: false,

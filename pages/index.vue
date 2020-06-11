@@ -8,7 +8,8 @@
     <v-container>
       <v-layout fill-height justify-center>
         <v-flex xs12 md12 sm12 lg10>
-          <blog-main-card :item="desserts[0]"></blog-main-card>
+          <blog-main-slider :articles="hotArticles"></blog-main-slider>
+          <!--          <blog-main-card :item="desserts[0]"></blog-main-card>-->
         </v-flex>
       </v-layout>
       <v-layout fill-height justify-center>
@@ -49,23 +50,21 @@
 <script>
 import NavBar from '@/components/blog/NavBar'
 import Motto from '@/components/blog/Motto'
-import MainCard from '@/components/blog/MainCard'
+// import MainCard from '@/components/blog/MainCard'
+import MainSlider from '@/components/blog/MainSlider'
 import ArticleList from '@/components/blog/ArticleList'
 import RecentDiscuss from '@/components/blog/RecentDiscuss'
 import LabelCloud from '@/components/blog/LabelCloud'
-import { getHitokoto } from '@/api/service'
-import {
-  getArticleLabelPage,
-  getArticlePageListToC,
-  getCategoryList
-} from '@/api/article'
+import { getIndexData } from '@/api/data'
+import { getArticlePageListToC } from '@/api/article'
 
 export default {
   auth: false,
   components: {
     'blog-nav': NavBar,
     'blog-motto': Motto,
-    'blog-main-card': MainCard,
+    // 'blog-main-card': MainCard,
+    'blog-main-slider': MainSlider,
     'blog-article-list': ArticleList,
     'blog-recent-discuss': RecentDiscuss,
     'blog-label-cloud': LabelCloud
@@ -80,57 +79,46 @@ export default {
         ? Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
         : 0
     },
+    // list() {
+    //   return this.desserts.filter(function(item, index) {
+    //     return index > 0
+    //   })
+    // },
     list() {
-      return this.desserts.filter(function(item, index) {
-        return index > 0
-      })
+      return this.desserts
     }
   },
-  async asyncData({ app, params, error }) {
-    const resHitokoto = await app.$axios.$request(getHitokoto())
-    const motto = {}
-    if (resHitokoto.code === '200') {
-      motto.hitokoto = resHitokoto.data.hitokoto
-      motto.creator = resHitokoto.data.creator
-      motto.from = resHitokoto.data.from
+  async asyncData({ app, params, error, store }) {
+    const res = await app.$axios.$request(getIndexData())
+
+    if (res.code === '200') {
+      const motto = {}
+      motto.hitokoto = res.data.hitokoto.hitokoto
+      motto.creator = res.data.hitokoto.creator
+      motto.from = res.data.hitokoto.from
+
+      const pagination = {}
+      pagination.page = res.data.pageInfo.currentPage
+      pagination.rowsPerPage = res.data.pageInfo.pageSize
+      pagination.totalItems = res.data.pageInfo.total
+      const desserts = res.data.pageInfo.records
+      const labels = res.data.labels
+      const hotArticles = res.data.hotArticles
+      const categorys = res.data.categorys
+
+      return {
+        motto,
+        desserts,
+        hotArticles,
+        pagination,
+        categorys,
+        labels
+      }
     } else {
       return error({
-        statusCode: resHitokoto.code,
-        message: resHitokoto.message
+        statusCode: res.code,
+        message: res.message
       })
-    }
-    const resArticle = await app.$axios.$request(getArticlePageListToC())
-    const pagination = {}
-    if (resArticle.code === '200') {
-      pagination.page = resArticle.data.currentPage
-      pagination.rowsPerPage = resArticle.data.pageSize
-      pagination.totalItems = resArticle.data.total
-    } else {
-      return error({ statusCode: resArticle.code, message: resArticle.message })
-    }
-    const resCategory = await app.$axios.$request(getCategoryList())
-    let categorys = []
-    if (resCategory.code === '200') {
-      categorys = resCategory.data
-    } else {
-      return error({ statusCode: resArticle.code, message: resArticle.message })
-    }
-    const resArticleLabel = await app.$axios.$request(getArticleLabelPage())
-    let labels = []
-    if (resArticleLabel.code === '200') {
-      labels = resArticleLabel.data.records
-    } else {
-      return error({
-        statusCode: resArticleLabel.code,
-        message: resArticleLabel.message
-      })
-    }
-    return {
-      motto,
-      desserts: resArticle.data.records,
-      pagination,
-      categorys,
-      labels
     }
   },
   methods: {
