@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row class="text-center">
+    <v-row class="text-center hidden-sm-and-down">
       <v-col cols="12">
         <!-- Make a div wrapped slider,set height and width -->
         <div style="width:100%;margin:20px auto;height:300px">

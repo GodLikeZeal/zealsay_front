@@ -1,82 +1,12 @@
 <template>
   <v-container fill-height fluid grid-list-xl>
     <v-layout wrap>
-      <!--      <v-flex md12 sm12 lg4>-->
-      <!--        <material-chart-card-->
-      <!--          :data="dailySalesChart.data"-->
-      <!--          :options="dailySalesChart.options"-->
-      <!--          color="info"-->
-      <!--          type="Line"-->
-      <!--        >-->
-      <!--          <h4 class="title font-weight-light">日活跃用户</h4>-->
-      <!--          <p class="category d-inline-flex font-weight-light">-->
-      <!--            <v-icon color="green" small>-->
-      <!--              mdi-arrow-up-->
-      <!--            </v-icon>-->
-      <!--            <span class="green&#45;&#45;text">55%</span>&nbsp; 相比较昨天-->
-      <!--          </p>-->
-
-      <!--          <template slot="actions">-->
-      <!--            <v-icon class="mr-2" small>-->
-      <!--              mdi-clock-outline-->
-      <!--            </v-icon>-->
-      <!--            <span class="caption grey&#45;&#45;text font-weight-light"-->
-      <!--              >最后更新于4分钟前</span-->
-      <!--            >-->
-      <!--          </template>-->
-      <!--        </material-chart-card>-->
-      <!--      </v-flex>-->
-      <!--      <v-flex md12 sm12 lg4>-->
-      <!--        <material-chart-card-->
-      <!--          :data="emailsSubscriptionChart.data"-->
-      <!--          :options="emailsSubscriptionChart.options"-->
-      <!--          :responsive-options="emailsSubscriptionChart.responsiveOptions"-->
-      <!--          color="red"-->
-      <!--          type="Bar"-->
-      <!--        >-->
-      <!--          <h4 class="title font-weight-light">网站浏览量</h4>-->
-      <!--          <p class="category d-inline-flex font-weight-light">-->
-      <!--            本周数据一览-->
-      <!--          </p>-->
-
-      <!--          <template slot="actions">-->
-      <!--            <v-icon class="mr-2" small>-->
-      <!--              mdi-clock-outline-->
-      <!--            </v-icon>-->
-      <!--            <span class="caption grey&#45;&#45;text font-weight-light"-->
-      <!--              >最后更新10分钟前</span-->
-      <!--            >-->
-      <!--          </template>-->
-      <!--        </material-chart-card>-->
-      <!--      </v-flex>-->
-      <!--      <v-flex md12 sm12 lg4>-->
-      <!--        <material-chart-card-->
-      <!--          :data="dataCompletedTasksChart.data"-->
-      <!--          :options="dataCompletedTasksChart.options"-->
-      <!--          color="green"-->
-      <!--          type="Line"-->
-      <!--        >-->
-      <!--          <h3 class="title font-weight-light">文章新增量</h3>-->
-      <!--          <p class="category d-inline-flex font-weight-light">-->
-      <!--            上周数据展示-->
-      <!--          </p>-->
-
-      <!--          <template slot="actions">-->
-      <!--            <v-icon class="mr-2" small>-->
-      <!--              mdi-clock-outline-->
-      <!--            </v-icon>-->
-      <!--            <span class="caption grey&#45;&#45;text font-weight-light"-->
-      <!--              >最后更新于26分钟之前</span-->
-      <!--            >-->
-      <!--          </template>-->
-      <!--        </material-chart-card>-->
-      <!--      </v-flex>-->
       <v-flex sm6 xs12 md6 lg3>
         <material-stats-card
           color="green"
           icon="mdi-book-open"
           title="文章数量"
-          :value="54"
+          :value="this.blogNum"
           sub-icon="mdi-update"
           sub-text="最后更新于刚刚"
         />
@@ -86,7 +16,7 @@
           color="orange"
           icon="mdi-account-circle"
           title="用户总数"
-          :value="147"
+          :value="this.userNum"
           sub-icon="mdi-update"
           sub-text="最后更新于刚刚"
         />
@@ -96,7 +26,7 @@
           color="red"
           icon="mdi-book-plus"
           title="今日新增文章"
-          :value="5"
+          :value="this.blogAddNum"
           sub-icon="mdi-update"
           sub-text="最后更新于刚刚"
         />
@@ -106,209 +36,281 @@
           color="info"
           icon="mdi-account-plus"
           title="今日新增注册用户"
-          :value="6"
+          :value="this.userAddNum"
           sub-icon="mdi-update"
           sub-text="最后更新于刚刚"
         />
       </v-flex>
-      <v-flex md12 lg6>
-        <material-card
-          color="orange"
-          title="活跃排行榜"
-          text="最后更新于5分钟前"
+      <v-flex md12 sm12 lg4>
+        <material-chart-card
+          :data="dailySalesChart.data"
+          :options="dailySalesChart.options"
+          color="info"
+          type="Line"
         >
-          <v-data-table :headers="headers" :items="items">
-            <template slot="headerCell" slot-scope="{ header }">
-              <span
-                class="font-weight-light text-warning text--darken-3"
-                v-text="header.text"
-              />
-            </template>
-            <template slot="items" slot-scope="{ _id, item }">
-              <td>{{ _id + 1 }}</td>
-              <td>{{ item.name }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
-              <td class="text-xs-right">{{ item.country }}</td>
-              <td class="text-xs-right">{{ item.city }}</td>
-            </template>
-          </v-data-table>
-        </material-card>
+          <h4 class="title font-weight-light">日活跃用户</h4>
+          <p class="category d-inline-flex font-weight-light">
+            <v-icon color="green" small>
+              mdi-arrow-up
+            </v-icon>
+            <span class="green--text">55%</span>&nbsp; 相比较昨天
+          </p>
+
+          <template slot="actions">
+            <v-icon class="mr-2" small>
+              mdi-clock-outline
+            </v-icon>
+            <span class="caption grey--text font-weight-light"
+              >最后更新于4分钟前</span
+            >
+          </template>
+        </material-chart-card>
       </v-flex>
-      <v-flex md12 lg6>
-        <material-card class="card-tabs" color="green">
-          <v-flex slot="header">
-            <v-tabs v-model="tabs" background-color="transparent">
-              <span
-                class="subheading font-weight-light mr-3"
-                style="align-self: center"
-                >任务:</span
-              >
-              <v-tab class="mr-3">
-                <v-icon class="mr-2">mdi-bug</v-icon>
-                Bugs
-              </v-tab>
-              <v-tab class="mr-3">
-                <v-icon class="mr-2">mdi-code-tags</v-icon>
-                Website
-              </v-tab>
-              <v-tab>
-                <v-icon class="mr-2">mdi-cloud</v-icon>
-                Server
-              </v-tab>
-            </v-tabs>
-          </v-flex>
+      <v-flex md12 sm12 lg4>
+        <material-chart-card
+          :data="emailsSubscriptionChart.data"
+          :options="emailsSubscriptionChart.options"
+          :responsive-options="emailsSubscriptionChart.responsiveOptions"
+          color="red"
+          type="Bar"
+        >
+          <h4 class="title font-weight-light">网站浏览量</h4>
+          <p class="category d-inline-flex font-weight-light">
+            本周数据一览
+          </p>
 
-          <v-tabs-items v-model="tabs">
-            <v-tab-item v-for="n in 3" :key="n">
-              <v-list two-line>
-                <v-list-item-group multiple>
-                  <v-list-item>
-                    <template v-slot:default="{ active, toggle }">
-                      <v-list-item-action>
-                        <v-checkbox
-                          v-model="active"
-                          color="primary"
-                          @click="toggle"
-                        />
-                      </v-list-item-action>
-                      <v-list-item-content>
-                        <v-list-item-title>
-                          [refactor]首页展示优化
-                        </v-list-item-title>
-                      </v-list-item-content>
-
-                      <div class="d-flex">
-                        <v-tooltip top content-class="top">
-                          <template v-slot:activator="{ on }">
-                            <v-btn
-                              class="v-btn--simple"
-                              color="success"
-                              icon
-                              v-on="on"
-                            >
-                              <v-icon color="primary">mdi-pencil</v-icon>
-                            </v-btn>
-                          </template>
-                          <span>Edit</span>
-                        </v-tooltip>
-
-                        <v-tooltip top content-class="top">
-                          <template v-slot:activator="{ on }">
-                            <v-btn
-                              class="v-btn--simple"
-                              color="danger"
-                              icon
-                              v-on="on"
-                            >
-                              <v-icon color="error">mdi-close</v-icon>
-                            </v-btn>
-                          </template>
-                          <span>Close</span>
-                        </v-tooltip>
-                      </div>
-                    </template>
-                  </v-list-item>
-                  <v-divider />
-                  <v-list-item>
-                    <template v-slot:default="{ active, toggle }">
-                      <v-list-item-action>
-                        <v-checkbox
-                          v-model="active"
-                          color="primary"
-                          @click="toggle"
-                        />
-                      </v-list-item-action>
-                      <v-list-item-title>
-                        [feat]增加评论系统
-                      </v-list-item-title>
-
-                      <div class="d-flex">
-                        <v-tooltip top content-class="top">
-                          <template v-slot:activator="{ on }">
-                            <v-btn
-                              class="v-btn--simple"
-                              color="success"
-                              icon
-                              v-on="on"
-                            >
-                              <v-icon color="primary">mdi-pencil</v-icon>
-                            </v-btn>
-                          </template>
-                          <span>Edit</span>
-                        </v-tooltip>
-
-                        <v-tooltip top content-class="top">
-                          <template v-slot:activator="{ on }">
-                            <v-btn
-                              class="v-btn--simple"
-                              color="danger"
-                              icon
-                              v-on="on"
-                            >
-                              <v-icon color="error">mdi-close</v-icon>
-                            </v-btn>
-                          </template>
-                          <span>Close</span>
-                        </v-tooltip>
-                      </div>
-                    </template>
-                  </v-list-item>
-                  <v-divider />
-                  <v-list-item @click="complete(2)">
-                    <template v-slot:default="{ active, toggle }">
-                      <v-list-item-action>
-                        <v-checkbox
-                          v-model="active"
-                          color="primary"
-                          @click="toggle"
-                        />
-                      </v-list-item-action>
-                      <v-list-item-title>
-                        [fix]: 修复alert弹窗在移动端展示异常
-                      </v-list-item-title>
-
-                      <div class="d-flex">
-                        <v-tooltip top content-class="top">
-                          <template v-slot:activator="{ on }">
-                            <v-btn
-                              class="v-btn--simple"
-                              color="success"
-                              icon
-                              v-on="on"
-                            >
-                              <v-icon color="primary">mdi-pencil</v-icon>
-                            </v-btn>
-                          </template>
-                          <span>Edit</span>
-                        </v-tooltip>
-
-                        <v-tooltip top content-class="top">
-                          <template v-slot:activator="{ on }">
-                            <v-btn
-                              class="v-btn--simple"
-                              color="danger"
-                              icon
-                              v-on="on"
-                            >
-                              <v-icon color="error">mdi-close</v-icon>
-                            </v-btn>
-                          </template>
-                          <span>Close</span>
-                        </v-tooltip>
-                      </div>
-                    </template>
-                  </v-list-item>
-                </v-list-item-group>
-              </v-list>
-            </v-tab-item>
-          </v-tabs-items>
-        </material-card>
+          <template slot="actions">
+            <v-icon class="mr-2" small>
+              mdi-clock-outline
+            </v-icon>
+            <span class="caption grey--text font-weight-light"
+              >最后更新10分钟前</span
+            >
+          </template>
+        </material-chart-card>
       </v-flex>
+      <v-flex md12 sm12 lg4>
+        <material-chart-card
+          :data="dataCompletedTasksChart.data"
+          :options="dataCompletedTasksChart.options"
+          color="green"
+          type="Line"
+        >
+          <h3 class="title font-weight-light">文章新增量</h3>
+          <p class="category d-inline-flex font-weight-light">
+            上周数据展示
+          </p>
+
+          <template slot="actions">
+            <v-icon class="mr-2" small>
+              mdi-clock-outline
+            </v-icon>
+            <span class="caption grey--text font-weight-light"
+              >最后更新于26分钟之前</span
+            >
+          </template>
+        </material-chart-card>
+      </v-flex>
+      <!--      <v-flex md12 lg6>-->
+      <!--        <material-card-->
+      <!--          color="orange"-->
+      <!--          title="活跃排行榜"-->
+      <!--          text="最后更新于5分钟前"-->
+      <!--        >-->
+      <!--          <v-data-table :headers="headers" :items="items">-->
+      <!--            <template slot="headerCell" slot-scope="{ header }">-->
+      <!--              <span-->
+      <!--                class="font-weight-light text-warning text&#45;&#45;darken-3"-->
+      <!--                v-text="header.text"-->
+      <!--              />-->
+      <!--            </template>-->
+      <!--            <template slot="items" slot-scope="{ _id, item }">-->
+      <!--              <td>{{ _id + 1 }}</td>-->
+      <!--              <td>{{ item.name }}</td>-->
+      <!--              <td class="text-xs-right">{{ item.salary }}</td>-->
+      <!--              <td class="text-xs-right">{{ item.country }}</td>-->
+      <!--              <td class="text-xs-right">{{ item.city }}</td>-->
+      <!--            </template>-->
+      <!--          </v-data-table>-->
+      <!--        </material-card>-->
+      <!--      </v-flex>-->
+      <!--      <v-flex md12 lg6>-->
+      <!--        <material-card class="card-tabs" color="green">-->
+      <!--          <v-flex slot="header">-->
+      <!--            <v-tabs v-model="tabs" background-color="transparent">-->
+      <!--              <span-->
+      <!--                class="subheading font-weight-light mr-3"-->
+      <!--                style="align-self: center"-->
+      <!--                >任务:</span-->
+      <!--              >-->
+      <!--              <v-tab class="mr-3">-->
+      <!--                <v-icon class="mr-2">mdi-bug</v-icon>-->
+      <!--                Bugs-->
+      <!--              </v-tab>-->
+      <!--              <v-tab class="mr-3">-->
+      <!--                <v-icon class="mr-2">mdi-code-tags</v-icon>-->
+      <!--                Website-->
+      <!--              </v-tab>-->
+      <!--              <v-tab>-->
+      <!--                <v-icon class="mr-2">mdi-cloud</v-icon>-->
+      <!--                Server-->
+      <!--              </v-tab>-->
+      <!--            </v-tabs>-->
+      <!--          </v-flex>-->
+
+      <!--          <v-tabs-items v-model="tabs">-->
+      <!--            <v-tab-item v-for="n in 3" :key="n">-->
+      <!--              <v-list two-line>-->
+      <!--                <v-list-item-group multiple>-->
+      <!--                  <v-list-item>-->
+      <!--                    <template v-slot:default="{ active, toggle }">-->
+      <!--                      <v-list-item-action>-->
+      <!--                        <v-checkbox-->
+      <!--                          v-model="active"-->
+      <!--                          color="primary"-->
+      <!--                          @click="toggle"-->
+      <!--                        />-->
+      <!--                      </v-list-item-action>-->
+      <!--                      <v-list-item-content>-->
+      <!--                        <v-list-item-title>-->
+      <!--                          [refactor]首页展示优化-->
+      <!--                        </v-list-item-title>-->
+      <!--                      </v-list-item-content>-->
+
+      <!--                      <div class="d-flex">-->
+      <!--                        <v-tooltip top content-class="top">-->
+      <!--                          <template v-slot:activator="{ on }">-->
+      <!--                            <v-btn-->
+      <!--                              class="v-btn&#45;&#45;simple"-->
+      <!--                              color="success"-->
+      <!--                              icon-->
+      <!--                              v-on="on"-->
+      <!--                            >-->
+      <!--                              <v-icon color="primary">mdi-pencil</v-icon>-->
+      <!--                            </v-btn>-->
+      <!--                          </template>-->
+      <!--                          <span>Edit</span>-->
+      <!--                        </v-tooltip>-->
+
+      <!--                        <v-tooltip top content-class="top">-->
+      <!--                          <template v-slot:activator="{ on }">-->
+      <!--                            <v-btn-->
+      <!--                              class="v-btn&#45;&#45;simple"-->
+      <!--                              color="danger"-->
+      <!--                              icon-->
+      <!--                              v-on="on"-->
+      <!--                            >-->
+      <!--                              <v-icon color="error">mdi-close</v-icon>-->
+      <!--                            </v-btn>-->
+      <!--                          </template>-->
+      <!--                          <span>Close</span>-->
+      <!--                        </v-tooltip>-->
+      <!--                      </div>-->
+      <!--                    </template>-->
+      <!--                  </v-list-item>-->
+      <!--                  <v-divider />-->
+      <!--                  <v-list-item>-->
+      <!--                    <template v-slot:default="{ active, toggle }">-->
+      <!--                      <v-list-item-action>-->
+      <!--                        <v-checkbox-->
+      <!--                          v-model="active"-->
+      <!--                          color="primary"-->
+      <!--                          @click="toggle"-->
+      <!--                        />-->
+      <!--                      </v-list-item-action>-->
+      <!--                      <v-list-item-title>-->
+      <!--                        [feat]增加评论系统-->
+      <!--                      </v-list-item-title>-->
+
+      <!--                      <div class="d-flex">-->
+      <!--                        <v-tooltip top content-class="top">-->
+      <!--                          <template v-slot:activator="{ on }">-->
+      <!--                            <v-btn-->
+      <!--                              class="v-btn&#45;&#45;simple"-->
+      <!--                              color="success"-->
+      <!--                              icon-->
+      <!--                              v-on="on"-->
+      <!--                            >-->
+      <!--                              <v-icon color="primary">mdi-pencil</v-icon>-->
+      <!--                            </v-btn>-->
+      <!--                          </template>-->
+      <!--                          <span>Edit</span>-->
+      <!--                        </v-tooltip>-->
+
+      <!--                        <v-tooltip top content-class="top">-->
+      <!--                          <template v-slot:activator="{ on }">-->
+      <!--                            <v-btn-->
+      <!--                              class="v-btn&#45;&#45;simple"-->
+      <!--                              color="danger"-->
+      <!--                              icon-->
+      <!--                              v-on="on"-->
+      <!--                            >-->
+      <!--                              <v-icon color="error">mdi-close</v-icon>-->
+      <!--                            </v-btn>-->
+      <!--                          </template>-->
+      <!--                          <span>Close</span>-->
+      <!--                        </v-tooltip>-->
+      <!--                      </div>-->
+      <!--                    </template>-->
+      <!--                  </v-list-item>-->
+      <!--                  <v-divider />-->
+      <!--                  <v-list-item @click="complete(2)">-->
+      <!--                    <template v-slot:default="{ active, toggle }">-->
+      <!--                      <v-list-item-action>-->
+      <!--                        <v-checkbox-->
+      <!--                          v-model="active"-->
+      <!--                          color="primary"-->
+      <!--                          @click="toggle"-->
+      <!--                        />-->
+      <!--                      </v-list-item-action>-->
+      <!--                      <v-list-item-title>-->
+      <!--                        [fix]: 修复alert弹窗在移动端展示异常-->
+      <!--                      </v-list-item-title>-->
+
+      <!--                      <div class="d-flex">-->
+      <!--                        <v-tooltip top content-class="top">-->
+      <!--                          <template v-slot:activator="{ on }">-->
+      <!--                            <v-btn-->
+      <!--                              class="v-btn&#45;&#45;simple"-->
+      <!--                              color="success"-->
+      <!--                              icon-->
+      <!--                              v-on="on"-->
+      <!--                            >-->
+      <!--                              <v-icon color="primary">mdi-pencil</v-icon>-->
+      <!--                            </v-btn>-->
+      <!--                          </template>-->
+      <!--                          <span>Edit</span>-->
+      <!--                        </v-tooltip>-->
+
+      <!--                        <v-tooltip top content-class="top">-->
+      <!--                          <template v-slot:activator="{ on }">-->
+      <!--                            <v-btn-->
+      <!--                              class="v-btn&#45;&#45;simple"-->
+      <!--                              color="danger"-->
+      <!--                              icon-->
+      <!--                              v-on="on"-->
+      <!--                            >-->
+      <!--                              <v-icon color="error">mdi-close</v-icon>-->
+      <!--                            </v-btn>-->
+      <!--                          </template>-->
+      <!--                          <span>Close</span>-->
+      <!--                        </v-tooltip>-->
+      <!--                      </div>-->
+      <!--                    </template>-->
+      <!--                  </v-list-item>-->
+      <!--                </v-list-item-group>-->
+      <!--              </v-list>-->
+      <!--            </v-tab-item>-->
+      <!--          </v-tabs-items>-->
+      <!--        </material-card>-->
+      <!--      </v-flex>-->
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import { getDashboardData } from '@/api/data'
+
 export default {
   layout: 'admin',
   data() {
@@ -469,6 +471,28 @@ export default {
         1: false,
         2: false
       }
+    }
+  },
+  async asyncData({ app, error }) {
+    const res = await app.$axios.$request(getDashboardData())
+
+    if (res.code === '200') {
+      const userNum = res.data.userNum
+      const userAddNum = res.data.userAddNum
+      const blogNum = res.data.blogNum
+      const blogAddNum = res.data.blogAddNum
+
+      return {
+        userNum,
+        userAddNum,
+        blogNum,
+        blogAddNum
+      }
+    } else {
+      return error({
+        statusCode: res.code,
+        message: res.message
+      })
     }
   },
   methods: {

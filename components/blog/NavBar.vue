@@ -134,7 +134,7 @@ export default {
     },
     items() {
       return this.itemsMenu.filter(
-        (s) => s.all || this.$store.state.auth.user.role.includes('ADMIN')
+        (s) => s.all || this.$store.state.auth.user.role.includes('ROLE_ADMIN')
       )
     },
     itemsMenu() {

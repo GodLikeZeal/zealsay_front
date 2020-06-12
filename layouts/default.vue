@@ -7,6 +7,7 @@
 </template>
 <script>
 import { EnumColor } from '@/util/constans'
+import { mapState } from 'vuex'
 
 export default {
   data: () => ({
@@ -15,21 +16,28 @@ export default {
   mounted() {
     setTimeout(() => {
       this.mounted = true
-    }, 5)
+    }, 0)
   },
   created() {
     let color = '#4caf50'
     if (!this.$isServer) {
       const str = localStorage.getItem('vuex')
       let val
+      let dark
       if (str) {
         val = JSON.parse(str).app.color
+        dark = JSON.parse(str).app.dark
         color = EnumColor[val]
+        this.$vuetify.theme.dark = dark
       }
     }
     setTimeout(() => {
-      this.$vuetify.theme.primary = color
-    }, 0)
+      this.$vuetify.theme.themes.light.primary = color
+      this.$vuetify.theme.themes.dark.primary = color
+    }, 5)
+  },
+  computed: {
+    ...mapState('app', ['dark'])
   }
 }
 </script>

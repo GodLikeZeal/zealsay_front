@@ -57,22 +57,22 @@
       <v-row>
         <v-col cols="12">
           <v-tabs centered>
-            <v-tab key="activity" class="font-weight-bold"> 动态 </v-tab>
-            <v-tab key="blog" class="font-weight-bold"> 博客 </v-tab>
-            <v-tab key="like" class="font-weight-bold"> 喜欢 </v-tab>
-            <v-tab key="info" class="font-weight-bold"> 资料 </v-tab>
+            <v-tab key="activity" class="font-weight-bold"> 动态</v-tab>
+            <v-tab key="blog" class="font-weight-bold"> 博客</v-tab>
+            <v-tab key="like" class="font-weight-bold"> 喜欢</v-tab>
+            <v-tab key="info" class="font-weight-bold"> 资料</v-tab>
             <v-tab-item key="activity">
               <activity :actions="actions"></activity>
             </v-tab-item>
             <v-tab-item key="blog">
               <blog :desserts="blogs" :category="categorys"></blog>
             </v-tab-item>
-            <v-tab-item key="like"
-              ><like :desserts="likes" :category="categorys"></like
-            ></v-tab-item>
-            <v-tab-item key="info"
-              ><info :form="user" :province="province" :roles="roles"></info
-            ></v-tab-item>
+            <v-tab-item key="like">
+              <like :desserts="likes" :category="categorys"></like>
+            </v-tab-item>
+            <v-tab-item key="info">
+              <info :form="user" :province="province" :roles="roles"></info>
+            </v-tab-item>
           </v-tabs>
         </v-col>
       </v-row>
@@ -120,7 +120,7 @@ export default {
       set() {}
     }
   },
-  async asyncData({ app, params, error }) {
+  async asyncData({ app, params, store, error }) {
     if (
       params.id == null ||
       params.id === '' ||
@@ -132,6 +132,18 @@ export default {
         message: '该页面不存在'
       })
     }
+    if (
+      store.state.auth &&
+      store.state.auth.user &&
+      store.state.auth.user.username
+    ) {
+    } else {
+      return error({
+        statusCode: 403,
+        message: '您还未进行认证'
+      })
+    }
+
     const res = await app.$axios.$request(getUserData(params.id))
     if (res.code === '200') {
       const categorys = res.data.categorys
@@ -139,8 +151,18 @@ export default {
       const blogs = res.data.userPage.records
       const likes = res.data.likePage.records
       const actions = res.data.actions
-      const province = res.data.provinces
-      const roles = res.data.roles
+      const province = res.data.province.map((r) => {
+        return {
+          value: r.code,
+          text: r.name
+        }
+      })
+      const roles = res.data.roles.map((r) => {
+        return {
+          value: r.value,
+          text: r.name
+        }
+      })
       return {
         categorys,
         user,
@@ -169,6 +191,7 @@ export default {
 .index {
   background: #fafafa;
 }
+
 .hitokoto-title {
   color: white;
   font-weight: 400 !important;
@@ -177,15 +200,19 @@ export default {
   line-height: 1 !important;
   font-size: 2rem !important;
 }
+
 .word {
   position: relative;
 }
+
 .center {
   margin: 2rem auto 1rem auto;
 }
+
 .text-detail {
   margin: 0 1.5rem;
 }
+
 .fill {
   max-width: inherit;
 }

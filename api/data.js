@@ -22,3 +22,15 @@ export function getUserData(id) {
     method: 'get'
   }
 }
+/**
+ * 管理页面数据.
+ *
+ * @author  zhanglei
+ * @date 2020/6/11  5:43 下午
+ */
+export function getDashboardData() {
+  return {
+    url: '/api/v1/data/admin/dashboard',
+    method: 'get'
+  }
+}

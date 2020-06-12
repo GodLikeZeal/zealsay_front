@@ -1,7 +1,11 @@
 <template>
   <v-row v-if="mounted" cols="12">
     <v-col class="d-flex align-center justify-center">
-      <img src="@/static/image/gif/NotFound.gif" alt="NotFound" />
+      <img
+        class="hidden-sm-and-down"
+        src="@/static/image/gif/NotFound.gif"
+        alt="NotFound"
+      />
       <div v-if="error.statusCode === 404" class="text-center">
         <h1>404</h1>
         <h2 class="my-3 headline ">
