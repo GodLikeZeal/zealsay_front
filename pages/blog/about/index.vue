@@ -50,13 +50,13 @@
       </v-container>
     </v-card>
     <v-container>
-      <v-breadcrumbs :items="breadcrumbs">
-        <template v-slot:divider>
-          <v-icon>chevron_right</v-icon>
-        </template>
-      </v-breadcrumbs>
       <v-layout fill-height justify-center>
         <v-flex xs12 md12 lg10>
+          <v-breadcrumbs :items="breadcrumbs" class="title">
+            <template v-slot:divider>
+              <v-icon>chevron_right</v-icon>
+            </template>
+          </v-breadcrumbs>
           <v-container>
             <v-layout>
               <v-flex>
@@ -68,7 +68,7 @@
                 <h2 class="font-weight-regular text-gray">资料卡片</h2>
                 <v-card v-scroll-reveal.reset flat class="card">
                   <v-row class="hidden-xs-only">
-                    <v-col cols="4">
+                    <v-col cols="4" class="align-self-center">
                       <a target="_Blank">
                         <div class="blog-card-container">
                           <v-img
@@ -153,23 +153,24 @@
                           <v-divider></v-divider>
                           <div class="v-card__text">
                             <p>
-                              后台方面：spring boot全家桶, mybatis-plus, oauth,
-                              jwt, spring cloud全家桶,rabbitMQ,netty。
+                              后台方面：java,spring boot全家桶, mybatis, spring
+                              cloud全家桶,rabbitMQ。
                             </p>
                             <p>
-                              前端方面：vue.js, nuxt.js, jquery。
+                              前端方面：javascript,vue.js, nuxt.js, jquery。
                             </p>
                             <p>
                               数据库：mysql,mongodb,redis。
                             </p>
                             <p>
-                              服务器：docker,docker-compose,k8s,shell。
+                              服务器：docker,docker-compose,k8s,shell,nginx,ssl安全证书。
                             </p>
+                            <p>游戏引擎：cocos2d,renpy,mugen,rpgmaker</p>
                           </div>
                         </div>
                       </v-card-title>
                     </v-col>
-                    <v-col cols="4">
+                    <v-col cols="4" class="align-self-center">
                       <a target="_Blank">
                         <div class="blog-card-container">
                           <v-img
@@ -206,18 +207,19 @@
                           <v-divider></v-divider>
                           <div class="v-card__text">
                             <p>
-                              后台方面：spring boot全家桶, mybatis-plus, oauth,
-                              jwt, spring cloud全家桶,rabbitMQ,netty。
+                              后台方面：java,spring boot全家桶, mybatis, spring
+                              cloud全家桶,rabbitMQ。
                             </p>
                             <p>
-                              前端方面：vue.js, nuxt.js, jquery。
+                              前端方面：javascript,vue.js, nuxt.js, jquery。
                             </p>
                             <p>
                               数据库：mysql,mongodb,redis。
                             </p>
                             <p>
-                              服务器：docker,docker-compose,k8s,shell。
+                              服务器：docker,docker-compose,k8s,shell,nginx,ssl安全证书。
                             </p>
+                            <p>游戏引擎：cocos2d,renpy,mugen,rpgmaker</p>
                           </div>
                         </div>
                       </v-card-title>
@@ -226,7 +228,7 @@
                 </v-card>
                 <v-card v-scroll-reveal.reset flat class="card">
                   <v-row class="hidden-xs-only">
-                    <v-col cols="4">
+                    <v-col cols="4" class="align-self-center">
                       <a target="_Blank">
                         <div class="blog-card-container">
                           <v-img
@@ -249,13 +251,16 @@
                           <v-divider></v-divider>
                           <div class="v-card__text">
                             <p>
-                              很少有一部电影，能让人看了之后热泪盈眶，久久不能平静。
+                              尽管是一部主旋律电影
+                            </p>
+                            <p>
+                              但最近很少有一部电影，能让人看了之后热泪盈眶，久久不能平静。
                             </p>
                             <p>
                               电影既展现了战争的残酷，也让我们知道生活在中国和平安定的环境的幸福。
                             </p>
                             <p>
-                              当长官的那句怒吼开火，老兵打完最后子弹，拿起板砖准备拼命的时候，真的是感动得一塌糊涂，影片最后出现的中国护照，更是让我感觉祖国的强大。
+                              所以，此生无悔入华夏。
                             </p>
                           </div>
                         </div>
@@ -286,13 +291,16 @@
                           <v-divider></v-divider>
                           <div class="v-card__text">
                             <p>
-                              很少有一部电影，能让人看了之后热泪盈眶，久久不能平静。
+                              尽管是一部主旋律电影
+                            </p>
+                            <p>
+                              但最近很少有一部电影，能让人看了之后热泪盈眶，久久不能平静。
                             </p>
                             <p>
                               电影既展现了战争的残酷，也让我们知道生活在中国和平安定的环境的幸福。
                             </p>
                             <p>
-                              当长官的那句怒吼开火，老兵打完最后子弹，拿起板砖准备拼命的时候，真的是感动得一塌糊涂，影片最后出现的中国护照，更是让我感觉祖国的强大。
+                              所以，此生无悔入华夏。
                             </p>
                           </div>
                         </div>
@@ -315,16 +323,16 @@
                               小时候爱看仙剑，喜欢里面的奇幻和武侠。
                             </p>
                             <p>
-                              长大后才知道这剧看得让人多么心痛。
+                              长大后又看出不一样的滋味。
                             </p>
                             <p>
-                              隔了这么多年，再去重温，依旧难以释怀，很怀念灵儿喊的那句逍遥哥哥，怀念陪伴在身边的月如，怀念里面的一切，到现在网易云偶尔还会日推原声带，音乐一响起就泪奔了。
+                              青春不再，是否还能想起儿时凉席上吃瓜看剧的那种单纯的快乐.
                             </p>
                           </div>
                         </div>
                       </v-card-title>
                     </v-col>
-                    <v-col cols="4">
+                    <v-col cols="4" class="align-self-center">
                       <a target="_Blank">
                         <div class="blog-card-container">
                           <v-img
@@ -338,7 +346,7 @@
                       </a>
                     </v-col>
                   </v-row>
-                  <v-row class="d-flex d-sm-none">
+                  <v-row class="d-flex d-sm-none ">
                     <v-col cols="12">
                       <a target="_Blank">
                         <div class="blog-card-container">
@@ -365,10 +373,10 @@
                               小时候爱看仙剑，喜欢里面的奇幻和武侠。
                             </p>
                             <p>
-                              长大后才知道这剧看得让人多么心痛。
+                              长大后又看出不一样的滋味。
                             </p>
                             <p>
-                              隔了这么多年，再去重温，依旧难以释怀，很怀念灵儿喊的那句逍遥哥哥，怀念陪伴在身边的月如，怀念里面的一切，到现在网易云偶尔还会日推原声带，音乐一响起就泪奔了。
+                              青春不再，是否还能想起儿时凉席上吃瓜看剧的那种单纯的快乐.
                             </p>
                           </div>
                         </div>
@@ -470,6 +478,7 @@ export default {
 .index {
   background: #fafafa;
 }
+
 .hitokoto-title {
   color: white;
   font-weight: 400 !important;
@@ -478,12 +487,15 @@ export default {
   line-height: 1 !important;
   font-size: 2rem !important;
 }
+
 .word {
   position: relative;
 }
+
 .center {
   margin: 2rem auto 1rem auto;
 }
+
 .text-detail {
   margin: 0 1.5rem;
 }
