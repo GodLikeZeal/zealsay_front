@@ -34,3 +34,15 @@ export function getDashboardData() {
     method: 'get'
   }
 }
+/**
+ * 监控数据数据.
+ *
+ * @author  zhanglei
+ * @date 2020/6/11  5:43 下午
+ */
+export function getActuatorData() {
+  return {
+    url: '/actuator/health',
+    method: 'get'
+  }
+}

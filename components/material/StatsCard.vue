@@ -100,7 +100,7 @@ export default {
     margin-left: 0;
     margin-right: auto;
     margin-bottom: 0 !important;
-    max-width: auto;
+    max-width: inherit;
     padding: 0 16px 0;
   }
 
