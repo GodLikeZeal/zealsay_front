@@ -71,23 +71,27 @@
             </template>
             <v-layout justify-center wrap>
               <v-flex xs12 md12 lg12>
-                <blockquote style="margin-top: 10rem" class="blockquote">
+                <p style="margin-top: 10rem">
                   转载文章请注明xxx
-                </blockquote>
+                </p>
               </v-flex>
               <v-flex xs12 sm6 class="align-self-center">
-                <v-label>标签：</v-label>
-
-                <v-chip
-                  v-for="label in article.label ? article.label.split(',') : []"
-                  :key="label"
-                  :color="color[parseInt((label.length + 6) % 6)]"
-                  small
-                >
-                  {{ label }}
-                </v-chip>
+                <div class="article-label">
+                  <v-label>标签：</v-label>
+                  <v-chip
+                    v-for="label in article.label
+                      ? article.label.split(',')
+                      : []"
+                    :key="label"
+                    class="chip-label"
+                    :color="color[parseInt((label.length + 6) % 6)]"
+                    small
+                  >
+                    {{ label }}
+                  </v-chip>
+                </div>
               </v-flex>
-              <v-flex xs12 sm6 class="justify-end">
+              <v-flex xs12 sm6 class="text-right align-self-center">
                 <v-btn class="mx-2" fab dark small color="success">
                   <v-icon dark>mdi-wechat</v-icon>
                 </v-btn>
@@ -160,11 +164,12 @@ export default {
         fromAvatar:
           'http://ww4.sinaimg.cn/bmiddle/006DLFVFgy1ft0j2pddjuj30v90uvagf.jpg', // 评论者头像
         likeNum: 3, // 点赞人数
-        content: '非常靠谱的程序员', // 评论内容
+        content:
+          '非常靠谱的程序员a嗷嗷啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊aaaaaaaaaaaaaaaaaaaaaaaaa啊啊啊啊啊', // 评论内容
         reply: [
           // 回复，或子评论
           {
-            id: '34523244545', // 主键id
+            id: '34523244544', // 主键id
             commentId: 'comment0001', // 父评论id，即父亲的id
             fromId: 'observer223432', // 评论者id
             fromName: '夕阳红', // 评论者昵称
@@ -392,5 +397,11 @@ export default {
 }
 .breadcrumbs-item {
   padding: 2rem 0;
+}
+.article-label {
+  margin: 2rem 0;
+}
+.chip-label {
+  margin: 0.3rem;
 }
 </style>
