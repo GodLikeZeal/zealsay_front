@@ -458,7 +458,10 @@ export default {
       (v) => !!v || '验证码不能为空!',
       (v) => v.length === 4 || '验证码输入不合法'
     ],
-    emailRules: [(v) => !v || validateEmail(v) || '不是合法的邮箱'],
+    emailRules: [
+      (v) => !!v || '邮箱不能为空!',
+      (v) => !v || validateEmail(v) || '不是合法的邮箱'
+    ],
     starDensity: 0.216,
     speedCoeff: 0.05,
     width: '',
