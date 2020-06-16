@@ -1,20 +1,38 @@
 <template>
-  <v-form>
-    <v-textarea outlined placeholder="善意回帖，理性发言"></v-textarea>
+  <v-form v-show="show">
+    <v-textarea
+      outlined
+      hide-details
+      placeholder="善意回帖，理性发言"
+      :value="value"
+      @focus="handleComment"
+    ></v-textarea>
     <v-btn tile icon :color="active ? 'primary' : 'default'">
       <v-icon @click="toggleEmoji">mdi-emoticon-happy</v-icon>
     </v-btn>
     <div class="float-right">
-      <v-btn small class="justify-end" color="default">取消</v-btn>
+      <v-btn
+        small
+        class="justify-end"
+        color="default"
+        @click="handleCancel(comment)"
+        >取消
+      </v-btn>
       <v-btn small color="primary">发表评论</v-btn>
     </div>
-    <div v-if="active" class="well" transition="scale-transition">
-      <p class="d-flex">
-        <a v-for="emoji in emojis" :key="emoji.title"
-          ><v-img width="32" :src="emoji.url"></v-img
-        ></a>
-      </p>
-    </div>
+    <v-scroll-y-transition>
+      <div v-show="active" class="well">
+        <p class="d-flex">
+          <a
+            v-for="emoji in emojis"
+            :key="emoji.title"
+            @click="handleEmoji(emoji)"
+          >
+            <v-img width="32" :src="emoji.url"></v-img>
+          </a>
+        </p>
+      </div>
+    </v-scroll-y-transition>
   </v-form>
 </template>
 
@@ -22,17 +40,18 @@
 export default {
   name: 'Reply',
   props: {
-    articleId: {
-      type: String,
+    comment: {
+      type: Object,
       required: true
     },
-    commentId: {
-      type: String,
+    show: {
+      type: Boolean,
       required: true
     }
   },
   data: () => ({
     active: false,
+    value: '',
     emojis: [
       { title: '微笑', url: require('@/static/image/smilies/arrow.png') },
       { title: '大哭', url: require('@/static/image/smilies/biggrin.png') },
@@ -44,6 +63,17 @@ export default {
   methods: {
     toggleEmoji() {
       this.active = !this.active
+    },
+    handleComment() {
+      if (this.value === '') {
+        this.value += '@' + this.comment.fromName + ' '
+      }
+    },
+    handleCancel(comment) {
+      this.$emit('handleCancel', comment)
+    },
+    handleEmoji(emoji) {
+      this.value += '[' + emoji.title + ']'
     }
   }
 }

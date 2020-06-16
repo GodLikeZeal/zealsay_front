@@ -6,7 +6,7 @@
         <h3>4人评论</h3>
         <v-list two-line>
           <template v-for="comment in comments">
-            <v-list-item :key="comment.id">
+            <v-list-item :key="comment.id" v-scroll-reveal.reset>
               <v-list-item-avatar class="comment-avatar">
                 <v-img :src="comment.fromAvatar"></v-img>
               </v-list-item-avatar>
@@ -19,33 +19,49 @@
                 <v-list-item-subtitle class="caption comment-button">
                   <v-icon small>mdi-thumb-up-outline</v-icon>
                   <span class="comment-button-text">1人赞</span>
-                  <v-icon small>mdi-comment-outline</v-icon>
-                  <span class="comment-button-text">回复</span>
+                  <a @click="inputComment(comment)">
+                    <v-icon small>mdi-comment-outline</v-icon>
+                    <span class="comment-button-text">回复</span>
+                  </a>
                   <span class="comment-button-text">{{ comment.date }}</span>
                 </v-list-item-subtitle>
                 <v-list-item-subtitle>
                   <reply
-                    :article-id="comment.id"
-                    :comment-id="comment.commentId"
+                    :comment="comment"
+                    :show="comment.inputText"
+                    @handleCancel="handleCancel"
                   ></reply>
                 </v-list-item-subtitle>
-                <v-list v-if="comment.reply" two-line>
-                  <template v-for="r in comment.reply">
-                    <v-list-item :key="r.id">
+                <v-list v-if="comment.replys" two-line>
+                  <template v-for="reply in comment.replys">
+                    <v-list-item :key="reply.id" v-scroll-reveal.reset>
                       <v-list-item-avatar class="comment-avatar">
-                        <v-img :src="r.fromAvatar"></v-img>
+                        <v-img :src="reply.fromAvatar"></v-img>
                       </v-list-item-avatar>
                       <v-list-item-content>
-                        <v-list-item-title>{{ r.fromName }}</v-list-item-title>
+                        <v-list-item-title>{{
+                          reply.fromName
+                        }}</v-list-item-title>
                         <v-list-item-subtitle class="comment-subtitle">{{
-                          r.content
+                          reply.content
                         }}</v-list-item-subtitle>
                         <v-list-item-subtitle class="caption comment-button">
                           <v-icon small>mdi-thumb-up-outline</v-icon>
                           <span class="comment-button-text">赞</span>
-                          <v-icon small>mdi-comment-outline</v-icon>
-                          <span class="comment-button-text">回复</span>
-                          <span class="comment-button-text">{{ r.date }}</span>
+                          <a @click="inputComment(reply)">
+                            <v-icon small>mdi-comment-outline</v-icon>
+                            <span class="comment-button-text">回复</span>
+                          </a>
+                          <span class="comment-button-text">{{
+                            reply.date
+                          }}</span>
+                        </v-list-item-subtitle>
+                        <v-list-item-subtitle>
+                          <reply
+                            :comment="reply"
+                            :show="reply.inputText"
+                            @handleCancel="handleCancel"
+                          ></reply>
                         </v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -60,7 +76,7 @@
             <v-flex>
               <h3>发表评论</h3>
               <v-switch label="那我不是机器人呀"></v-switch>
-              <v-textarea label="善意回帖，理性发言"></v-textarea>
+              <v-textarea hide-details label="善意回帖，理性发言"></v-textarea>
               <v-btn tile icon color="primary">
                 <v-icon>mdi-emoticon-happy</v-icon>
               </v-btn>
@@ -93,13 +109,22 @@ export default {
       { title: '酷', url: require('@/static/image/smilies/cool.png') },
       { title: '牛皮', url: require('@/static/image/smilies/cowboy.png') }
     ]
-  })
+  }),
+  methods: {
+    handleCancel(comment) {
+      comment.inputText = false
+    },
+    inputComment(comment) {
+      comment.inputText = true
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
 .comment-subtitle {
   margin: 0.5rem 0;
+  white-space: inherit;
 }
 .comment-avatar {
   align-self: flex-start;

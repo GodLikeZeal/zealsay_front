@@ -165,8 +165,9 @@ export default {
           'http://ww4.sinaimg.cn/bmiddle/006DLFVFgy1ft0j2pddjuj30v90uvagf.jpg', // 评论者头像
         likeNum: 3, // 点赞人数
         content:
-          '非常靠谱的程序员a嗷嗷啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊aaaaaaaaaaaaaaaaaaaaaaaaa啊啊啊啊啊', // 评论内容
-        reply: [
+          '非常靠谱的程序员a嗷嗷啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊厉害厉害啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊', // 评论内容
+        inputText: false, // 是否打开评论框
+        replys: [
           // 回复，或子评论
           {
             id: '34523244544', // 主键id
@@ -180,6 +181,7 @@ export default {
             toAvatar:
               'http://ww4.sinaimg.cn/bmiddle/006DLFVFgy1ft0j2pddjuj30v90uvagf.jpg', // 被评论者头像
             content: '赞同，很靠谱，水平很高', // 评论内容
+            inputText: false, // 是否打开评论框
             date: '2018-07-05 08:35' // 评论时间
           },
           {
@@ -194,6 +196,7 @@ export default {
             toAvatar:
               'https://wx4.sinaimg.cn/mw690/69e273f8gy1ft1541dmb7j215o0qv7wh.jpg',
             content: '大神一个！',
+            inputText: false, // 是否打开评论框
             date: '2018-07-05 08:50'
           }
         ]
@@ -208,7 +211,8 @@ export default {
           'http://ww1.sinaimg.cn/bmiddle/006DLFVFgy1ft0j2q2p8pj30v90uzmzz.jpg',
         likeNum: 0,
         content: '从没见过这么优秀的人',
-        reply: []
+        inputText: false, // 是否打开评论框
+        replys: []
       }
     ]
   }),
