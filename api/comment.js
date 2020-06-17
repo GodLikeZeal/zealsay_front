@@ -1,37 +1,37 @@
 /**
- * 获取index页面数据.
+ * 添加评论.
  *
  * @author  zhanglei
  * @date 2019-03-13  16:13
  */
-export function getIndexData(obj) {
+export function createComment(obj) {
   return {
-    url: '/api/v1/data/index',
-    method: 'get',
-    params: obj
+    url: '/api/v1/comment',
+    method: 'post',
+    data: obj
   }
 }
 /**
- * 用户中心数据.
+ * 点赞.
  *
  * @author  zhanglei
  * @date 2020/6/11  5:43 下午
  */
-export function getUserData(id) {
+export function thumbUp(id) {
   return {
-    url: '/api/v1/data/user/' + id,
+    url: '/api/v1/comment/thumb/up/' + id,
     method: 'get'
   }
 }
 /**
- * 文章详情数据.
+ * 取消赞.
  *
  * @author  zhanglei
  * @date 2020/6/11  5:43 下午
  */
-export function getArticleData(id) {
+export function thumbDown(id) {
   return {
-    url: '/api/v1/data/article/' + id,
+    url: '/api/v1/comment/thumb/down/' + id,
     method: 'get'
   }
 }

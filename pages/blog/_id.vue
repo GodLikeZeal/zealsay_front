@@ -85,9 +85,16 @@
                     :key="label"
                     class="chip-label"
                     :color="color[parseInt((label.length + 6) % 6)]"
+                    text-color="text-white"
                     small
                   >
-                    {{ label }}
+                    <a
+                      :href="'/blog/label/' + label"
+                      style="color: white"
+                      target="_Blank"
+                    >
+                      {{ label }}</a
+                    >
                   </v-chip>
                 </div>
               </v-flex>
@@ -105,7 +112,7 @@
             </v-layout>
 
             <v-divider></v-divider>
-            <blog-comment :comments="comments"></blog-comment>
+            <blog-comment :page="commentPage" :article="article"></blog-comment>
           </v-flex>
         </v-layout>
       </v-container>
@@ -127,14 +134,8 @@
 import Util from '@/util'
 import NavBar from '@/components/blog/NavBar'
 import Comment from '@/components/blog/Comment'
-import {
-  getArticle,
-  getCategoryList,
-  readArticle,
-  isLikeArticle,
-  likeArticle,
-  disLikeArticle
-} from '@/api/article'
+import { readArticle, likeArticle, disLikeArticle } from '@/api/article'
+import { getArticleData } from '@/api/data'
 
 export default {
   auth: false,
@@ -242,40 +243,22 @@ export default {
     }
   },
   async asyncData({ app, params, error, store }) {
-    const resArticle = await app.$axios.$request(getArticle(params.id))
-    let article = {}
-    if (resArticle.code === '200') {
-      article = resArticle.data
-    } else {
-      return error({ statusCode: resArticle.code, message: resArticle.message })
-    }
-    const resCategory = await app.$axios.$request(getCategoryList())
-    let categorys = []
-    if (resCategory.code === '200') {
-      categorys = resCategory.data
-    } else {
-      return error({ statusCode: resArticle.code, message: resArticle.message })
-    }
-    let like
-    if (store.$auth && store.$auth.$state && store.$auth.$state.loggedIn) {
-      const likeRes = await app.$axios.$request(isLikeArticle(params.id))
-      if (likeRes.code === '200') {
-        like = likeRes.data
-      } else {
-        return error({
-          statusCode: likeRes.code,
-          message: likeRes.message
-        })
-      }
-    } else {
-      like = false
-    }
     // 标记阅读数
     await app.$axios.$request(readArticle(params.id))
-    return {
-      article,
-      categorys,
-      like
+    const res = await app.$axios.$request(getArticleData(params.id))
+    if (res.code === '200') {
+      const article = res.data.article
+      const categorys = res.data.categorys
+      const like = res.data.like
+      const commentPage = res.data.commentPage
+      return {
+        article,
+        categorys,
+        like,
+        commentPage
+      }
+    } else {
+      return error({ statusCode: res.code, message: res.message })
     }
   },
   methods: {

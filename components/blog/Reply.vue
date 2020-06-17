@@ -1,10 +1,11 @@
 <template>
   <v-form v-show="show">
     <v-textarea
+      v-model="value"
       outlined
-      hide-details
+      :counter="500"
+      hide-details="auto"
       placeholder="善意回帖，理性发言"
-      :value="value"
       @focus="handleComment"
     ></v-textarea>
     <v-btn tile icon :color="active ? 'primary' : 'default'">
@@ -38,6 +39,10 @@ export default {
       type: Object,
       required: true
     },
+    article: {
+      type: Object,
+      required: true
+    },
     show: {
       type: Boolean,
       required: true
@@ -48,30 +53,30 @@ export default {
     value: '',
     emojis: [
       { title: '大笑', url: require('@/static/image/smilies/arrow.png') },
-      { title: '大哭', url: require('@/static/image/smilies/biggrin.png') },
-      { title: '困惑', url: require('@/static/image/smilies/confused.png') },
+      { title: '可爱', url: require('@/static/image/smilies/biggrin.png') },
+      { title: '冷笑', url: require('@/static/image/smilies/confused.png') },
       { title: '酷', url: require('@/static/image/smilies/cool.png') },
       { title: '牛皮', url: require('@/static/image/smilies/cowboy.png') },
       { title: '哭', url: require('@/static/image/smilies/cry.png') },
-      { title: '摇头', url: require('@/static/image/smilies/drooling.png') },
-      { title: '害怕', url: require('@/static/image/smilies/eek.png') },
-      { title: '恶魔', url: require('@/static/image/smilies/evil.png') },
+      { title: '憨笑', url: require('@/static/image/smilies/drooling.png') },
+      { title: '舔', url: require('@/static/image/smilies/eek.png') },
+      { title: '滑稽', url: require('@/static/image/smilies/evil.png') },
       { title: '惊叫', url: require('@/static/image/smilies/exclaim.png') },
-      { title: '机智', url: require('@/static/image/smilies/idea.png') },
-      { title: '发疯', url: require('@/static/image/smilies/mad.png') },
-      { title: '变绿', url: require('@/static/image/smilies/mrgreen.png') },
-      { title: '中立', url: require('@/static/image/smilies/neutral.png') },
-      { title: '坚持', url: require('@/static/image/smilies/persevering.png') },
-      { title: '疑问', url: require('@/static/image/smilies/question.png') },
-      { title: '嘲弄', url: require('@/static/image/smilies/razz.png') },
-      { title: '红脸', url: require('@/static/image/smilies/redface.png') },
-      { title: '揉眼', url: require('@/static/image/smilies/rolleyes.png') },
-      { title: '大便', url: require('@/static/image/smilies/shit.png') },
+      { title: '卖萌', url: require('@/static/image/smilies/idea.png') },
+      { title: '难过', url: require('@/static/image/smilies/mad.png') },
+      { title: '汗', url: require('@/static/image/smilies/mrgreen.png') },
+      { title: '疑问', url: require('@/static/image/smilies/neutral.png') },
+      { title: '委屈', url: require('@/static/image/smilies/persevering.png') },
+      { title: '震惊', url: require('@/static/image/smilies/question.png') },
+      { title: '机智', url: require('@/static/image/smilies/razz.png') },
+      { title: '不屑', url: require('@/static/image/smilies/redface.png') },
+      { title: '色', url: require('@/static/image/smilies/rolleyes.png') },
+      { title: '吐', url: require('@/static/image/smilies/shit.png') },
       { title: '微笑', url: require('@/static/image/smilies/smile.png') },
       { title: '惊讶', url: require('@/static/image/smilies/surprised.png') },
-      { title: '符号', url: require('@/static/image/smilies/symbols.png') },
-      { title: '怪癖', url: require('@/static/image/smilies/twisted.png') },
-      { title: '眨眼', url: require('@/static/image/smilies/wink.png') }
+      { title: '内涵', url: require('@/static/image/smilies/symbols.png') },
+      { title: '生气', url: require('@/static/image/smilies/twisted.png') },
+      { title: '呵呵', url: require('@/static/image/smilies/wink.png') }
     ]
   }),
   methods: {

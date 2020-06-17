@@ -4,8 +4,8 @@
     <v-card color="primary" height="450">
       <blog-nav :category="categorys"></blog-nav>
       <v-container>
-        <v-layout>
-          <v-flex md12>
+        <v-layout fill-height justify-center>
+          <v-flex xs12 md12 sm12 lg10>
             <div class="text-md-center word">
               <h1 v-if="$route.params.name" class="hitokoto-title">
                 标签：{{ $route.params.name }}
@@ -16,7 +16,7 @@
       </v-container>
     </v-card>
     <v-container>
-      <v-layout>
+      <v-layout fill-height justify-center>
         <v-flex xs12 sm12 md8 lg7>
           <blog-article-list :list="list"></blog-article-list>
         </v-flex>
@@ -46,7 +46,7 @@ import NavBar from '@/components/blog/NavBar'
 import ArticleList from '@/components/blog/ArticleList'
 import RecentDiscuss from '@/components/blog/RecentDiscuss'
 import LabelCloud from '@/components/blog/LabelCloud'
-import { getArticlePageListToC, getArticleLabelPage } from '@/api/article'
+import { getIndexData } from '@/api/data'
 
 export default {
   auth: false,
@@ -72,32 +72,36 @@ export default {
       return this.desserts
     }
   },
-  async asyncData({ app, params, error }) {
+  async asyncData({ app, params, error, store }) {
     const query = {}
     query.label = params.name
-    const resArticle = await app.$axios.$request(getArticlePageListToC(query))
-    const pagination = {}
-    if (resArticle.code === '200') {
-      pagination.page = resArticle.data.currentPage
-      pagination.rowsPerPage = resArticle.data.pageSize
-      pagination.totalItems = resArticle.data.total
-    } else {
-      return error({ statusCode: resArticle.code, message: resArticle.message })
-    }
-    const resArticleLabel = await app.$axios.$request(getArticleLabelPage())
-    let labels = []
-    if (resArticleLabel.code === '200') {
-      labels = resArticleLabel.data.records
+    const res = await app.$axios.$request(getIndexData(query))
+
+    if (res.code === '200') {
+      const motto = {}
+      motto.hitokoto = res.data.hitokoto.hitokoto
+      motto.creator = res.data.hitokoto.creator
+      motto.from = res.data.hitokoto.from
+
+      const pagination = {}
+      pagination.page = res.data.pageInfo.currentPage
+      pagination.rowsPerPage = res.data.pageInfo.pageSize
+      pagination.totalItems = res.data.pageInfo.total
+      const desserts = res.data.pageInfo.records
+      const labels = res.data.labels
+      const categorys = res.data.categorys
+
+      return {
+        desserts,
+        pagination,
+        categorys,
+        labels
+      }
     } else {
       return error({
-        statusCode: resArticleLabel.code,
-        message: resArticleLabel.message
+        statusCode: res.code,
+        message: res.message
       })
-    }
-    return {
-      desserts: resArticle.data.records,
-      pagination,
-      labels
     }
   },
   methods: {
