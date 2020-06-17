@@ -7,3 +7,30 @@ export const EnumColor = {
   warning: '#fcd783',
   danger: '#f375b5'
 }
+export const emojis = [
+  { title: '大笑', url: require('@/static/image/smilies/arrow.png') },
+  { title: '可爱', url: require('@/static/image/smilies/biggrin.png') },
+  { title: '冷笑', url: require('@/static/image/smilies/confused.png') },
+  { title: '酷', url: require('@/static/image/smilies/cool.png') },
+  { title: '牛皮', url: require('@/static/image/smilies/cowboy.png') },
+  { title: '哭', url: require('@/static/image/smilies/cry.png') },
+  { title: '憨笑', url: require('@/static/image/smilies/drooling.png') },
+  { title: '舔', url: require('@/static/image/smilies/eek.png') },
+  { title: '滑稽', url: require('@/static/image/smilies/evil.png') },
+  { title: '惊叫', url: require('@/static/image/smilies/exclaim.png') },
+  { title: '卖萌', url: require('@/static/image/smilies/idea.png') },
+  { title: '难过', url: require('@/static/image/smilies/mad.png') },
+  { title: '汗', url: require('@/static/image/smilies/mrgreen.png') },
+  { title: '疑问', url: require('@/static/image/smilies/neutral.png') },
+  { title: '委屈', url: require('@/static/image/smilies/persevering.png') },
+  { title: '震惊', url: require('@/static/image/smilies/question.png') },
+  { title: '机智', url: require('@/static/image/smilies/razz.png') },
+  { title: '不屑', url: require('@/static/image/smilies/redface.png') },
+  { title: '色', url: require('@/static/image/smilies/rolleyes.png') },
+  { title: '吐', url: require('@/static/image/smilies/shit.png') },
+  { title: '微笑', url: require('@/static/image/smilies/smile.png') },
+  { title: '惊讶', url: require('@/static/image/smilies/surprised.png') },
+  { title: '内涵', url: require('@/static/image/smilies/symbols.png') },
+  { title: '生气', url: require('@/static/image/smilies/twisted.png') },
+  { title: '呵呵', url: require('@/static/image/smilies/wink.png') }
+]

@@ -1,3 +1,4 @@
+import { emojis } from '@/util/constans'
 // export function camel (str) {
 //   const camel = (str || '').replace(/-([^-])/g, g => g[1].toUpperCase());
 
@@ -162,10 +163,33 @@ const formateDateTime = (time) => {
   )
 }
 
+const formateComment = (content) => {
+  const regex = /\[(.+?)\]/g
+  const list = content.match(regex)
+  if (list) {
+    list.forEach((v, k) => {
+      const str = v.replace(/\[|]/g, '')
+      const src = emojis.find((e) => e.title === str).url
+      content = content.replace(
+        regex,
+        `<img
+                          class="d-inline-flex"
+                          width="32"
+                          src="` +
+          src +
+          `"
+                        ></img>`
+      )
+    })
+  }
+  return content
+}
+
 export default {
   randomElement,
   toggleFullScreen,
   kebab,
   formateDate,
-  formateDateTime
+  formateDateTime,
+  formateComment
 }

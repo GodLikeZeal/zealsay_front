@@ -1,5 +1,5 @@
 <template>
-  <v-form v-show="show">
+  <v-form v-show="show" ref="commentForm" lazy-validation>
     <v-textarea
       v-model="value"
       outlined
@@ -12,8 +12,8 @@
       <v-icon @click="toggleEmoji">mdi-emoticon-happy</v-icon>
     </v-btn>
     <div class="float-right">
-      <v-btn small color="default" @click="handleCancel(comment)">取消 </v-btn>
-      <v-btn small color="primary">发表评论</v-btn>
+      <v-btn small color="default" @click="handleCancel(comment)">取消</v-btn>
+      <v-btn small color="primary" @click="handleSubmit">发表评论</v-btn>
     </div>
     <v-scroll-y-transition>
       <div v-show="active" class="well">
@@ -32,6 +32,9 @@
 </template>
 
 <script>
+import { emojis } from '@/util/constans'
+import { createComment } from '@/api/comment'
+
 export default {
   name: 'Reply',
   props: {
@@ -51,32 +54,10 @@ export default {
   data: () => ({
     active: false,
     value: '',
-    emojis: [
-      { title: '大笑', url: require('@/static/image/smilies/arrow.png') },
-      { title: '可爱', url: require('@/static/image/smilies/biggrin.png') },
-      { title: '冷笑', url: require('@/static/image/smilies/confused.png') },
-      { title: '酷', url: require('@/static/image/smilies/cool.png') },
-      { title: '牛皮', url: require('@/static/image/smilies/cowboy.png') },
-      { title: '哭', url: require('@/static/image/smilies/cry.png') },
-      { title: '憨笑', url: require('@/static/image/smilies/drooling.png') },
-      { title: '舔', url: require('@/static/image/smilies/eek.png') },
-      { title: '滑稽', url: require('@/static/image/smilies/evil.png') },
-      { title: '惊叫', url: require('@/static/image/smilies/exclaim.png') },
-      { title: '卖萌', url: require('@/static/image/smilies/idea.png') },
-      { title: '难过', url: require('@/static/image/smilies/mad.png') },
-      { title: '汗', url: require('@/static/image/smilies/mrgreen.png') },
-      { title: '疑问', url: require('@/static/image/smilies/neutral.png') },
-      { title: '委屈', url: require('@/static/image/smilies/persevering.png') },
-      { title: '震惊', url: require('@/static/image/smilies/question.png') },
-      { title: '机智', url: require('@/static/image/smilies/razz.png') },
-      { title: '不屑', url: require('@/static/image/smilies/redface.png') },
-      { title: '色', url: require('@/static/image/smilies/rolleyes.png') },
-      { title: '吐', url: require('@/static/image/smilies/shit.png') },
-      { title: '微笑', url: require('@/static/image/smilies/smile.png') },
-      { title: '惊讶', url: require('@/static/image/smilies/surprised.png') },
-      { title: '内涵', url: require('@/static/image/smilies/symbols.png') },
-      { title: '生气', url: require('@/static/image/smilies/twisted.png') },
-      { title: '呵呵', url: require('@/static/image/smilies/wink.png') }
+    emojis,
+    commentRules: [
+      (v) => !!v || '评论不能为空!',
+      (v) => !v || v.length <= 500 || '评论超过500字上限'
     ]
   }),
   methods: {
@@ -93,6 +74,52 @@ export default {
     },
     handleEmoji(emoji) {
       this.value += '[' + emoji.title + ']'
+    },
+    handleSubmit() {
+      if (this.$refs.commentForm.validate()) {
+        const data = {}
+        data.content = this.value
+        data.commentId = this.comment.id
+        data.articleId = this.article.id
+        data.articleTitle = this.article.title
+        data.fromId = this.$store.state.auth.user.id
+        data.fromName = this.$store.state.auth.user.username
+        data.fromAvatar = this.$store.state.auth.user.avatar
+        this.$axios
+          .$request(createComment(data))
+          .then((res) => {
+            if (res.code === '200' && res.data) {
+              this.$swal({
+                text: '评论成功！',
+                type: 'success',
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 3000
+              })
+              this.$emit('handleCancel', this.comment)
+            } else {
+              this.$swal({
+                text: '发表评论失败！',
+                type: 'error',
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 3000
+              })
+            }
+          })
+          .catch((e) => {
+            this.$swal({
+              text: e.message,
+              type: 'error',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3000
+            })
+          })
+      }
     }
   }
 }

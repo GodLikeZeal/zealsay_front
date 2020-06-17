@@ -14,7 +14,7 @@
               <v-list-item-content>
                 <v-list-item-title>{{ comment.fromName }}</v-list-item-title>
                 <v-list-item-subtitle class="comment-subtitle">
-                  {{ comment.content }}
+                  <div v-html="formateComment(comment.content)"></div>
                 </v-list-item-subtitle>
                 <v-list-item-subtitle class="caption comment-button">
                   <template v-if="comment.likeNum == 0">
@@ -23,11 +23,11 @@
                         v-if="comment.thumbUp"
                         small
                         @click="handleThumbCancel(comment)"
-                        >mdi-thumb-up</v-icon
-                      >
+                        >mdi-thumb-up
+                      </v-icon>
                       <v-icon v-else small @click="handleThumbUp(comment)"
-                        >mdi-thumb-up-outline</v-icon
-                      >
+                        >mdi-thumb-up-outline
+                      </v-icon>
                     </a>
                     <span class="comment-button-text">赞</span>
                   </template>
@@ -37,11 +37,11 @@
                         v-if="comment.thumbUp"
                         small
                         @click="handleThumbCancel(comment)"
-                        >mdi-thumb-up</v-icon
-                      >
+                        >mdi-thumb-up
+                      </v-icon>
                       <v-icon v-else small @click="handleThumbUp(comment)"
-                        >mdi-thumb-up-outline</v-icon
-                      >
+                        >mdi-thumb-up-outline
+                      </v-icon>
                     </a>
                     <span class="comment-button-text"
                       >{{ comment.likeNum }}人赞</span
@@ -51,7 +51,9 @@
                     <v-icon small>mdi-comment-outline</v-icon>
                     <span class="comment-button-text">回复</span>
                   </a>
-                  <span class="comment-button-text">{{ comment.date }}</span>
+                  <span class="comment-button-text">{{
+                    comment.date | formateDateTime
+                  }}</span>
                 </v-list-item-subtitle>
                 <v-list-item-subtitle class="reply-subtitle">
                   <reply
@@ -72,7 +74,7 @@
                           >{{ reply.fromName }}
                         </v-list-item-title>
                         <v-list-item-subtitle class="comment-subtitle"
-                          >{{ reply.content }}
+                          ><div v-html="formateComment(reply.content)"></div>
                         </v-list-item-subtitle>
                         <v-list-item-subtitle class="caption comment-button">
                           <template v-if="reply.likeNum == 0">
@@ -84,8 +86,8 @@
                                 >mdi-thumb-up
                               </v-icon>
                               <v-icon v-else small @click="handleThumbUp(reply)"
-                                >mdi-thumb-up-outline</v-icon
-                              >
+                                >mdi-thumb-up-outline
+                              </v-icon>
                             </a>
                             <span class="comment-button-text">赞</span>
                           </template>
@@ -98,8 +100,8 @@
                                 >mdi-thumb-up
                               </v-icon>
                               <v-icon v-else small @click="handleThumbUp(reply)"
-                                >mdi-thumb-up-outline</v-icon
-                              >
+                                >mdi-thumb-up-outline
+                              </v-icon>
                             </a>
 
                             <span class="comment-button-text"
@@ -111,7 +113,7 @@
                             <span class="comment-button-text">回复</span>
                           </a>
                           <span class="comment-button-text">{{
-                            reply.date
+                            reply.date | formateDateTime
                           }}</span>
                         </v-list-item-subtitle>
                         <v-list-item-subtitle class="reply-subtitle">
@@ -163,8 +165,8 @@
                   color="primary"
                   class="float-right"
                   @click="handleComment"
-                  >发表评论</v-btn
-                >
+                  >发表评论
+                </v-btn>
                 <v-scroll-y-transition>
                   <div v-show="active" class="well">
                     <p>
@@ -183,7 +185,7 @@
                   </div>
                 </v-scroll-y-transition>
               </v-form>
-              <p v-else>你可以在<a>登录</a>后，发表评论</p>
+              <p v-else>你可以在<a href="/login">登录</a>后，发表评论</p>
             </v-flex>
           </v-layout>
         </v-form>
@@ -194,11 +196,22 @@
 
 <script>
 import Reply from '@/components/blog/Reply'
+import Util from '@/util'
+import { emojis } from '@/util/constans'
 import { createComment, thumbUp, thumbDown } from '@/api/comment'
 
 export default {
   components: {
     reply: Reply
+  },
+  filters: {
+    formateDateTime(time) {
+      if (time != null && time !== '') {
+        return Util.formateDateTime(time)
+      } else {
+        return ''
+      }
+    }
   },
   props: {
     page: {
@@ -214,33 +227,7 @@ export default {
     active: false,
     check: false,
     content: '',
-    emojis: [
-      { title: '大笑', url: require('@/static/image/smilies/arrow.png') },
-      { title: '可爱', url: require('@/static/image/smilies/biggrin.png') },
-      { title: '冷笑', url: require('@/static/image/smilies/confused.png') },
-      { title: '酷', url: require('@/static/image/smilies/cool.png') },
-      { title: '牛皮', url: require('@/static/image/smilies/cowboy.png') },
-      { title: '哭', url: require('@/static/image/smilies/cry.png') },
-      { title: '憨笑', url: require('@/static/image/smilies/drooling.png') },
-      { title: '舔', url: require('@/static/image/smilies/eek.png') },
-      { title: '滑稽', url: require('@/static/image/smilies/evil.png') },
-      { title: '惊叫', url: require('@/static/image/smilies/exclaim.png') },
-      { title: '卖萌', url: require('@/static/image/smilies/idea.png') },
-      { title: '难过', url: require('@/static/image/smilies/mad.png') },
-      { title: '汗', url: require('@/static/image/smilies/mrgreen.png') },
-      { title: '疑问', url: require('@/static/image/smilies/neutral.png') },
-      { title: '委屈', url: require('@/static/image/smilies/persevering.png') },
-      { title: '震惊', url: require('@/static/image/smilies/question.png') },
-      { title: '机智', url: require('@/static/image/smilies/razz.png') },
-      { title: '不屑', url: require('@/static/image/smilies/redface.png') },
-      { title: '色', url: require('@/static/image/smilies/rolleyes.png') },
-      { title: '吐', url: require('@/static/image/smilies/shit.png') },
-      { title: '微笑', url: require('@/static/image/smilies/smile.png') },
-      { title: '惊讶', url: require('@/static/image/smilies/surprised.png') },
-      { title: '内涵', url: require('@/static/image/smilies/symbols.png') },
-      { title: '生气', url: require('@/static/image/smilies/twisted.png') },
-      { title: '呵呵', url: require('@/static/image/smilies/wink.png') }
-    ],
+    emojis,
     commentRules: [
       (v) => !!v || '评论不能为空!',
       (v) => !v || v.length <= 500 || '评论超过500字上限'
@@ -369,6 +356,13 @@ export default {
     },
     inputComment(comment) {
       comment.inputText = true
+    },
+    formateComment(content) {
+      if (content != null && content !== '') {
+        return Util.formateComment(content)
+      } else {
+        return ''
+      }
     }
   }
 }
