@@ -60,7 +60,7 @@
     <v-container>
       <v-container>
         <v-layout justify-center>
-          <v-flex xs12 md8 lg6>
+          <v-flex xs12 md10 lg8>
             <v-breadcrumbs :items="breadcrumbs" class="breadcrumbs-item title">
               <template v-slot:divider>
                 <v-icon>chevron_right</v-icon>
@@ -69,6 +69,50 @@
             <template>
               <div class="markdown-body" v-html="article.contentHtml"></div>
             </template>
+            <v-layout justify-center wrap>
+              <v-flex xs12 md12 lg12>
+                <p style="margin-top: 10rem">
+                  转载文章请注明xxx
+                </p>
+              </v-flex>
+              <v-flex xs12 sm6 class="align-self-center">
+                <div class="article-label">
+                  <v-label>标签：</v-label>
+                  <v-chip
+                    v-for="label in article.label
+                      ? article.label.split(',')
+                      : []"
+                    :key="label"
+                    class="chip-label"
+                    :color="color[parseInt((label.length + 6) % 6)]"
+                    text-color="text-white"
+                    small
+                  >
+                    <a
+                      :href="'/blog/label/' + label"
+                      style="color: white"
+                      target="_Blank"
+                    >
+                      {{ label }}</a
+                    >
+                  </v-chip>
+                </div>
+              </v-flex>
+              <v-flex xs12 sm6 class="text-right align-self-center">
+                <v-btn class="mx-2" fab dark small color="success">
+                  <v-icon dark>mdi-wechat</v-icon>
+                </v-btn>
+                <v-btn class="mx-2" fab dark small color="blue">
+                  <v-icon dark>mdi-qqchat</v-icon>
+                </v-btn>
+                <v-btn class="mx-2" fab dark small color="pink">
+                  <v-icon dark>mdi-sina-weibo</v-icon>
+                </v-btn>
+              </v-flex>
+            </v-layout>
+
+            <v-divider></v-divider>
+            <blog-comment :page="commentPage" :article="article"></blog-comment>
           </v-flex>
         </v-layout>
       </v-container>
@@ -89,19 +133,15 @@
 <script>
 import Util from '@/util'
 import NavBar from '@/components/blog/NavBar'
-import {
-  getArticle,
-  getCategoryList,
-  readArticle,
-  isLikeArticle,
-  likeArticle,
-  disLikeArticle
-} from '@/api/article'
+import Comment from '@/components/blog/Comment'
+import { readArticle, likeArticle, disLikeArticle } from '@/api/article'
+import { getArticleData } from '@/api/data'
 
 export default {
   auth: false,
   components: {
-    'blog-nav': NavBar
+    'blog-nav': NavBar,
+    'blog-comment': Comment
   },
   filters: {
     formatDate(time) {
@@ -113,7 +153,73 @@ export default {
     }
   },
   data: () => ({
-    loading: true
+    loading: true,
+    color: ['primary', 'secondary', 'success', 'info', 'warning', 'danger'],
+    comments: [
+      {
+        id: 'comment0001', // 主键id
+        date: '2018-07-05 08:30', // 评论时间
+        ownerId: 'talents100020', // 文章的id
+        fromId: 'errhefe232213', // 评论者id
+        fromName: '犀利的评论家', // 评论者昵称
+        fromAvatar:
+          'http://ww4.sinaimg.cn/bmiddle/006DLFVFgy1ft0j2pddjuj30v90uvagf.jpg', // 评论者头像
+        likeNum: 3, // 点赞人数
+        content:
+          '非常靠谱的程序员a嗷嗷啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊厉害厉害啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊', // 评论内容
+        inputText: false, // 是否打开评论框
+        thumbUp: true,
+        replys: [
+          // 回复，或子评论
+          {
+            id: '34523244544', // 主键id
+            commentId: 'comment0001', // 父评论id，即父亲的id
+            fromId: 'observer223432', // 评论者id
+            fromName: '夕阳红', // 评论者昵称
+            fromAvatar:
+              'https://wx4.sinaimg.cn/mw690/69e273f8gy1ft1541dmb7j215o0qv7wh.jpg', // 评论者头像
+            toId: 'errhefe232213', // 被评论者id
+            toName: '犀利的评论家', // 被评论者昵称
+            toAvatar:
+              'http://ww4.sinaimg.cn/bmiddle/006DLFVFgy1ft0j2pddjuj30v90uvagf.jpg', // 被评论者头像
+            content: '赞同，很靠谱，水平很高', // 评论内容
+            inputText: false, // 是否打开评论框
+            thumbUp: false,
+            date: '2018-07-05 08:35' // 评论时间
+          },
+          {
+            id: '34523244545',
+            commentId: 'comment0001',
+            fromId: 'observer567422',
+            fromName: '清晨一缕阳光',
+            fromAvatar:
+              'http://imgsrc.baidu.com/imgad/pic/item/c2fdfc039245d688fcba1b80aec27d1ed21b245d.jpg',
+            toId: 'observer223432',
+            toName: '夕阳红',
+            toAvatar:
+              'https://wx4.sinaimg.cn/mw690/69e273f8gy1ft1541dmb7j215o0qv7wh.jpg',
+            content: '大神一个！',
+            inputText: false, // 是否打开评论框
+            thumbUp: false,
+            date: '2018-07-05 08:50'
+          }
+        ]
+      },
+      {
+        id: 'comment0002',
+        date: '2018-07-05 08:30',
+        ownerId: 'talents100020',
+        fromId: 'errhefe232213',
+        fromName: '毒蛇郭德纲',
+        fromAvatar:
+          'http://ww1.sinaimg.cn/bmiddle/006DLFVFgy1ft0j2q2p8pj30v90uzmzz.jpg',
+        likeNum: 0,
+        content: '从没见过这么优秀的人',
+        inputText: false, // 是否打开评论框
+        thumbUp: false,
+        replys: []
+      }
+    ]
   }),
   computed: {
     breadcrumbs() {
@@ -137,40 +243,22 @@ export default {
     }
   },
   async asyncData({ app, params, error, store }) {
-    const resArticle = await app.$axios.$request(getArticle(params.id))
-    let article = {}
-    if (resArticle.code === '200') {
-      article = resArticle.data
-    } else {
-      return error({ statusCode: resArticle.code, message: resArticle.message })
-    }
-    const resCategory = await app.$axios.$request(getCategoryList())
-    let categorys = []
-    if (resCategory.code === '200') {
-      categorys = resCategory.data
-    } else {
-      return error({ statusCode: resArticle.code, message: resArticle.message })
-    }
-    let like
-    if (store.$auth && store.$auth.$state && store.$auth.$state.loggedIn) {
-      const likeRes = await app.$axios.$request(isLikeArticle(params.id))
-      if (likeRes.code === '200') {
-        like = likeRes.data
-      } else {
-        return error({
-          statusCode: likeRes.code,
-          message: likeRes.message
-        })
-      }
-    } else {
-      like = false
-    }
     // 标记阅读数
     await app.$axios.$request(readArticle(params.id))
-    return {
-      article,
-      categorys,
-      like
+    const res = await app.$axios.$request(getArticleData(params.id))
+    if (res.code === '200') {
+      const article = res.data.article
+      const categorys = res.data.categorys
+      const like = res.data.like
+      const commentPage = res.data.commentPage
+      return {
+        article,
+        categorys,
+        like,
+        commentPage
+      }
+    } else {
+      return error({ statusCode: res.code, message: res.message })
     }
   },
   methods: {
@@ -300,5 +388,11 @@ export default {
 }
 .breadcrumbs-item {
   padding: 2rem 0;
+}
+.article-label {
+  margin: 2rem 0;
+}
+.chip-label {
+  margin: 0.3rem;
 }
 </style>
