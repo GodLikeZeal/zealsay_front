@@ -30,9 +30,13 @@
                   </a>
                   <h6 class="caption text-none">
                     {{ item.authorName }} 发表于
+                    <v-icon small>mdi-clock</v-icon>
                     {{ item.createDate | formatDate }}
                   </h6>
-                  <h6>{{ item.readNum }}次浏览 {{ item.likeNum }}个点赞</h6>
+                  <h6>
+                    {{ item.readNum }}次浏览 · {{ item.likeNum }}个点赞 ·
+                    {{ item.commentNum }}人评论
+                  </h6>
                   <div v-if="item.label">
                     <v-chip
                       v-for="(label, index) in item.label.split(',')"
@@ -82,9 +86,13 @@
                   </a>
                   <h6 class="caption text-none">
                     {{ item.authorName }} 发表于
+                    <v-icon small>mdi-clock</v-icon>
                     {{ item.createDate | formatDate }}
                   </h6>
-                  <h6>{{ item.readNum }}次浏览 {{ item.likeNum }}个点赞</h6>
+                  <h6>
+                    {{ item.readNum }}次浏览 · {{ item.likeNum }}个点赞 ·
+                    {{ item.commentNum }}人评论
+                  </h6>
                   <div v-if="item.label">
                     <v-chip
                       v-for="(label, index) in item.label.split(',')"
