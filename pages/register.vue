@@ -4,7 +4,7 @@
       <div class="html body">
         <div class="main d-flex justify-center align-center">
           <v-layout justify-center>
-            <v-flex>
+            <v-flex sm7>
               <v-card class="elevation-1 pa-3" style="margin-bottom: 10%">
                 <!--              <v-card-title-->
                 <!--                class="title font-weight-regular justify-space-between"-->
