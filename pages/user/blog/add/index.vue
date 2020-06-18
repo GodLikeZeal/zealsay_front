@@ -161,6 +161,7 @@
                 v-model="form.contentMd"
                 style="min-height: 800px"
                 :ishljs="true"
+                :xssOptions="xssOptions"
                 :external-link="externalLink"
                 code-style="atom-one-light"
                 @change="changeData"
@@ -195,6 +196,10 @@ export default {
       openness: 'ALL',
       contentMd: '',
       contentHtml: ''
+    },
+    xssOptions: {
+      whiteList: {}, // 白名单
+      stripIgnoreTagBody: '*' | true // 去掉所有不在白名单上的标签
     },
     externalLink: {
       markdown_css: false, // false后 highlight 才生效，在head中引用 markdown_css

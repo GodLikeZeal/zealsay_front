@@ -379,7 +379,21 @@ export default {
     handleComment() {
       if (this.$refs.commentForm.validate()) {
         const data = {}
-        data.content = this.content
+        data.content = this.xssComment(this.content)
+        if (
+          data.content === 'undefined' ||
+          data.content === '' ||
+          data.content.trim().length === 0
+        ) {
+          this.$swal({
+            text: '输入不能为空！',
+            type: 'error',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000
+          })
+        }
         data.articleId = this.article.id
         data.articleTitle = this.article.title
         data.fromId = this.$store.state.auth.user.id
@@ -438,6 +452,13 @@ export default {
     formateComment(content) {
       if (content != null && content !== '') {
         return Util.formateComment(content)
+      } else {
+        return ''
+      }
+    },
+    xssComment(content) {
+      if (content != null && content !== '') {
+        return Util.xssComment(content)
       } else {
         return ''
       }

@@ -83,5 +83,6 @@ export default {
 }
 .typed {
   display: block;
+  height: 4rem;
 }
 </style>

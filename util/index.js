@@ -77,7 +77,12 @@ const toggleFullScreen = () => {
     cancelFullScreen.call(doc)
   }
 }
-
+/**
+ * 格式化日期.
+ *
+ * @author  zhanglei
+ * @date 2020/6/18 22:07
+ */
 const formateDate = (time) => {
   const date =
     typeof time === 'number'
@@ -119,6 +124,12 @@ const formateDate = (time) => {
   )
 }
 
+/**
+ * 格式化时间.
+ *
+ * @author  zhanglei
+ * @date 2020/6/18 22:07
+ */
 const formateDateTime = (time) => {
   const date =
     typeof time === 'number'
@@ -163,6 +174,12 @@ const formateDateTime = (time) => {
   )
 }
 
+/**
+ * 解析评论中的表情.
+ *
+ * @author  zhanglei
+ * @date 2020/6/18 22:08
+ */
 const formateComment = (content) => {
   const regex = /\[(.+?)\]/g
   const list = content.match(regex)
@@ -185,11 +202,28 @@ const formateComment = (content) => {
   return content
 }
 
+/**
+ * 防止评论xss攻击.
+ *
+ * @author  zhanglei
+ * @date 2020/6/18 22:08
+ */
+const xssComment = (content) => {
+  const options = {
+    whiteList: {}, // 白名单
+    stripIgnoreTag: true // 去掉不在白名单上的标签
+  }
+  const xss = require('xss')
+  const html = xss(content, options)
+  return html
+}
+
 export default {
   randomElement,
   toggleFullScreen,
   kebab,
   formateDate,
   formateDateTime,
-  formateComment
+  formateComment,
+  xssComment
 }

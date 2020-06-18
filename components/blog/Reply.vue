@@ -34,6 +34,7 @@
 <script>
 import { emojis } from '@/util/constans'
 import { createComment } from '@/api/comment'
+import Util from '@/util'
 
 export default {
   name: 'Reply',
@@ -75,10 +76,32 @@ export default {
     handleEmoji(emoji) {
       this.value += '[' + emoji.title + ']'
     },
+    xssComment(content) {
+      if (content != null && content !== '') {
+        return Util.xssComment(content)
+      } else {
+        return ''
+      }
+    },
     handleSubmit() {
       if (this.$refs.commentForm.validate()) {
         const data = {}
         data.content = this.value
+        data.content = this.xssComment(this.value)
+        if (
+          data.content === 'undefined' ||
+          data.content === '' ||
+          data.content.trim().length === 0
+        ) {
+          this.$swal({
+            text: '输入不能为空！',
+            type: 'error',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000
+          })
+        }
         data.commentId = this.comment.id
         data.articleId = this.article.id
         data.articleTitle = this.article.title

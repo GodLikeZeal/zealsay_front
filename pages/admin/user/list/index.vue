@@ -321,6 +321,7 @@ import {
   unsealingUserBatch,
   unsealingUser
 } from '@/api/user'
+import { icons } from '@/util/constans'
 import forms from './components/form'
 
 export default {
@@ -355,28 +356,7 @@ export default {
       dialogVisible: false,
       formVisible: false,
       title: '',
-      icon: [
-        require('@/static/image/food/南瓜.png'),
-        require('@/static/image/food/吐司.png'),
-        require('@/static/image/food/夏威夷果.png'),
-        require('@/static/image/food/山楂片.png'),
-        require('@/static/image/food/开心果.png'),
-        require('@/static/image/food/抹茶麻薯.png'),
-        require('@/static/image/food/杏仁.png'),
-        require('@/static/image/food/板栗.png'),
-        require('@/static/image/food/柠檬干.png'),
-        require('@/static/image/food/炭烤肠.png'),
-        require('@/static/image/food/猪肉铺.png'),
-        require('@/static/image/food/瓜子.png'),
-        require('@/static/image/food/芒果干.png'),
-        require('@/static/image/food/花生.png'),
-        require('@/static/image/food/草莓干.png'),
-        require('@/static/image/food/蒸蛋糕.png'),
-        require('@/static/image/food/蚕豆.png'),
-        require('@/static/image/food/蛋黄酥.png'),
-        require('@/static/image/food/辣条.png'),
-        require('@/static/image/food/鱿鱼仔.png')
-      ],
+      icon: icons,
       color: ['info', 'success', 'primary', 'warning', 'error', 'admin.vue']
     }
   },
