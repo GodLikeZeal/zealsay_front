@@ -192,8 +192,8 @@ export default {
   mounted() {
     const that = this
     setTimeout(function() {
-      console.log('看看')
-      console.log(that)
+      // console.log('看看')
+      // console.log(that)
       that.blogs = that.articles
     }, 20)
   },
@@ -203,10 +203,10 @@ export default {
       // console.log(data)
     },
     onTap(data) {
-      console.log(data)
+      // console.log(data)
     },
     onInit(data) {
-      console.log(data)
+      // console.log(data)
     }
   }
 }

@@ -174,7 +174,7 @@ const formateComment = (content) => {
         regex,
         `<img
                           class="d-inline-flex"
-                          width="32"
+                          width="16"
                           src="` +
           src +
           `"

@@ -41,10 +41,11 @@ export function thumbDown(id) {
  * @author  zhanglei
  * @date 2020/6/11  5:43 下午
  */
-export function getDashboardData() {
+export function getCommentPage(obj) {
   return {
-    url: '/api/v1/data/admin/dashboard',
-    method: 'get'
+    url: '/api/v1/comment/page',
+    method: 'get',
+    params: obj
   }
 }
 /**

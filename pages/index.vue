@@ -7,13 +7,13 @@
     </v-card>
     <v-container>
       <v-layout fill-height justify-center>
-        <v-flex xs12 md12 sm12 lg10>
+        <v-flex xs12 sm12 md11 lg11 xl9>
           <blog-main-slider :articles="hotArticles"></blog-main-slider>
           <!--          <blog-main-card :item="desserts[0]"></blog-main-card>-->
         </v-flex>
       </v-layout>
       <v-layout fill-height justify-center>
-        <v-flex xs12 sm12 md8 lg7>
+        <v-flex xs12 sm12 md6 lg7 xl6>
           <blog-article-list :list="list"></blog-article-list>
           <!-- page分页-->
           <div class="pagination text-center">
@@ -26,9 +26,9 @@
             ></v-pagination>
           </div>
         </v-flex>
-        <v-flex class="hidden-sm-and-down" md4 lg3>
+        <v-flex class="hidden-sm-and-down" md5 lg4 xl3>
           <!-- 最近评论 -->
-          <blog-recent-discuss></blog-recent-discuss>
+          <blog-recent-discuss :comments="comments"></blog-recent-discuss>
           <!-- 标签云 -->
           <blog-label-cloud :items="labels"></blog-label-cloud>
         </v-flex>
@@ -105,6 +105,7 @@ export default {
       const labels = res.data.labels
       const hotArticles = res.data.hotArticles
       const categorys = res.data.categorys
+      const comments = res.data.comments
 
       return {
         motto,
@@ -112,6 +113,7 @@ export default {
         hotArticles,
         pagination,
         categorys,
+        comments,
         labels
       }
     } else {

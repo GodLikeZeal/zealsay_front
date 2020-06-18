@@ -3,7 +3,7 @@
   <v-container fluid>
     <v-layout wrap>
       <v-flex sm12>
-        <h3>{{ page.total }}人评论</h3>
+        <h3>{{ count }}人评论</h3>
         <v-list two-line>
           <template v-for="comment in page.records">
             <v-list-item :key="comment.id">
@@ -12,7 +12,21 @@
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title>{{ comment.fromName }}</v-list-item-title>
+                <v-list-item-title>
+                  <template v-if="comment.fromId === article.authorId">
+                    <v-badge
+                      color="primary"
+                      content="博主"
+                      inline
+                      transition="scale-transition"
+                    >
+                      {{ comment.fromName }}
+                    </v-badge>
+                  </template>
+                  <template v-else>
+                    {{ comment.fromName }}
+                  </template>
+                </v-list-item-title>
                 <v-list-item-subtitle class="comment-subtitle">
                   <div v-html="formateComment(comment.content)"></div>
                 </v-list-item-subtitle>
@@ -47,7 +61,7 @@
                       >{{ comment.likeNum }}人赞</span
                     >
                   </template>
-                  <a v-show="loggedIn" @click="inputComment(comment)">
+                  <a @click="inputComment(comment)">
                     <v-icon small>mdi-comment-outline</v-icon>
                     <span class="comment-button-text">回复</span>
                   </a>
@@ -64,14 +78,26 @@
                   ></reply>
                 </v-list-item-subtitle>
                 <v-list v-if="comment.replys" two-line>
-                  <template v-for="reply in comment.replys">
+                  <template v-for="reply in comment.replys.records">
                     <v-list-item :key="reply.id">
                       <v-list-item-avatar class="comment-avatar">
                         <v-img :src="reply.fromAvatar"></v-img>
                       </v-list-item-avatar>
                       <v-list-item-content>
                         <v-list-item-title
-                          >{{ reply.fromName }}
+                          ><template v-if="reply.fromId === article.authorId">
+                            <v-badge
+                              color="primary"
+                              content="博主"
+                              inline
+                              transition="scale-transition"
+                            >
+                              {{ reply.fromName }}
+                            </v-badge>
+                          </template>
+                          <template v-else>
+                            {{ reply.fromName }}
+                          </template>
                         </v-list-item-title>
                         <v-list-item-subtitle class="comment-subtitle"
                           ><div v-html="formateComment(reply.content)"></div>
@@ -108,7 +134,7 @@
                               >{{ reply.likeNum }}人赞</span
                             >
                           </template>
-                          <a v-show="loggedIn" @click="inputComment(reply)">
+                          <a @click="inputComment(reply)">
                             <v-icon small>mdi-comment-outline</v-icon>
                             <span class="comment-button-text">回复</span>
                           </a>
@@ -128,10 +154,41 @@
                     </v-list-item>
                   </template>
                 </v-list>
+                <div
+                  v-show="
+                    Math.ceil(comment.replys.total / comment.replys.pageSize) >
+                      1
+                  "
+                  class="pagination text-left"
+                >
+                  <v-pagination
+                    v-model="comment.replys.currentPage"
+                    :length="
+                      Math.ceil(comment.replys.total / comment.replys.pageSize)
+                    "
+                    circle
+                    color="primary"
+                    class="justify-start"
+                    @input="replyPage(content)"
+                  ></v-pagination>
+                </div>
               </v-list-item-content>
             </v-list-item>
           </template>
         </v-list>
+        <div
+          v-show="Math.ceil(page.total / page.pageSize) > 1"
+          class="pagination text-left"
+        >
+          <v-pagination
+            v-model="page.currentPage"
+            :length="Math.ceil(page.total / page.pageSize)"
+            circle
+            color="primary"
+            class="justify-start"
+            @input="commentPage"
+          ></v-pagination>
+        </div>
         <v-form>
           <v-layout>
             <v-flex>
@@ -198,7 +255,12 @@
 import Reply from '@/components/blog/Reply'
 import Util from '@/util'
 import { emojis } from '@/util/constans'
-import { createComment, thumbUp, thumbDown } from '@/api/comment'
+import {
+  createComment,
+  getCommentPage,
+  thumbUp,
+  thumbDown
+} from '@/api/comment'
 
 export default {
   components: {
@@ -220,6 +282,10 @@ export default {
     },
     article: {
       type: Object,
+      required: true
+    },
+    count: {
+      type: Number,
       required: true
     }
   },
@@ -323,6 +389,7 @@ export default {
           .$request(createComment(data))
           .then((res) => {
             if (res.code === '200' && res.data) {
+              this.commentPage()
               this.$swal({
                 text: '评论成功！',
                 type: 'success',
@@ -355,7 +422,18 @@ export default {
       }
     },
     inputComment(comment) {
-      comment.inputText = true
+      if (this.loggedIn) {
+        comment.inputText = true
+      } else {
+        this.$swal({
+          text: '亲，需要先登录才能回复哦！',
+          type: 'info',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      }
     },
     formateComment(content) {
       if (content != null && content !== '') {
@@ -363,6 +441,70 @@ export default {
       } else {
         return ''
       }
+    },
+    commentPage() {
+      const data = {}
+      data.pageNumber = this.page.currentPage
+      data.articleId = this.article.id
+      this.$axios
+        .$request(getCommentPage(data))
+        .then((res) => {
+          if (res.code === '200' && res.data) {
+            this.page = res.data
+          } else {
+            this.$swal({
+              text: '发表评论失败！',
+              type: 'error',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3000
+            })
+          }
+        })
+        .catch((e) => {
+          this.$swal({
+            text: e.message,
+            type: 'error',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000
+          })
+        })
+    },
+    replyPage(comment) {
+      const data = {}
+      data.pageNumber = this.page.currentPage
+      data.pageSize = 5 // 5条一页
+      data.articleId = this.article.id
+      data.commentId = comment.id
+      this.$axios
+        .$request(getCommentPage(data))
+        .then((res) => {
+          if (res.code === '200' && res.data) {
+            comment.page = res.data
+          } else {
+            this.$swal({
+              text: '发表评论失败！',
+              type: 'error',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3000
+            })
+          }
+        })
+        .catch((e) => {
+          this.$swal({
+            text: e.message,
+            type: 'error',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000
+          })
+        })
     }
   }
 }
