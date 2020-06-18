@@ -160,6 +160,7 @@
                 ref="md"
                 v-model="form.contentMd"
                 :ishljs="true"
+                :xssOptions="xssOptions"
                 :external-link="externalLink"
                 style="z-index:0;height: 800px"
                 code-style="atom-one-light"
@@ -188,6 +189,10 @@ export default {
   name: 'Edit',
   layout: 'admin',
   data: () => ({
+    xssOptions: {
+      whiteList: {}, // 白名单
+      stripIgnoreTagBody: '*' | true // 去掉所有不在白名单上的标签
+    },
     externalLink: {
       markdown_css: false, // false后 highlight 才生效，在head中引用 markdown_css
       hljs_js() {

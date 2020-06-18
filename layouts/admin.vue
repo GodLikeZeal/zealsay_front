@@ -33,7 +33,7 @@ export default {
     }, 0)
   },
   created() {
-    let color = '#4caf50'
+    let color = '#00b894'
     if (!this.$isServer) {
       const str = localStorage.getItem('vuex')
       let val

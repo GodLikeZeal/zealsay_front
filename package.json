@@ -41,6 +41,7 @@
     "vue-cropper": "^0.5.4",
     "vue-perfect-scrollbar": "^0.2.1",
     "vue-scroll-reveal": "^1.0.11",
-    "vue-typed-js": "^0.1.2"
+    "vue-typed-js": "^0.1.2",
+    "xss": "^1.0.7"
   }
 }

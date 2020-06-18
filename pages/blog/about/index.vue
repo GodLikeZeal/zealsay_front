@@ -63,16 +63,20 @@
                 <h2 class="font-weight-regular text-gray">个人简介</h2>
                 <div class="text-center">
                   <vue-typed-js
-                    :show-cursor="true"
+                    class="typed"
+                    :loop="true"
+                    :show-cursor="false"
                     :type-speed="100"
                     :start-delay="1000"
                     :back-speed="10"
                     :back-delay="1000"
                     :strings="[
                       '90后小哥哥，喜欢关注些技术前沿新闻，乐意分享一些知识。',
-                      '只对好看的UI心动，追求优雅的代码，严重强迫症患者，如果不够完美，哪怕推倒重构也在所不惜。',
+                      '只对好看的UI心动，追求优雅的代码。',
+                      '严重强迫症患者，如果不够完美，哪怕推倒重构也在所不惜。',
                       '喜欢GTA5、还有喜欢玩王者荣耀，主玩打野，我韩信李白贼溜，开黑加我，哈哈。',
-                      '目前在北京，从事互联网公司后端开发，当前主要是负责业务系统中台，主要方向为系统架构师'
+                      '目前在北京，从事互联网公司后端开发。',
+                      '当前主要是负责业务系统中台，主要方向为系统架构师。'
                     ]"
                   >
                     <h3 id="luke" class="typing"></h3>
@@ -516,5 +520,7 @@ export default {
 }
 .typed {
   display: block;
+  height: 5rem;
+  font-family: 'Sigmar One', Arial;
 }
 </style>

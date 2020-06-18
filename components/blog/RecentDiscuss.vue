@@ -10,7 +10,7 @@
             <template v-for="(comment, index) in comments">
               <v-divider
                 v-if="index > 0 && index < comments.length"
-                :key="comment.id"
+                :key="index"
                 :inset="true"
               ></v-divider>
               <v-list-item :key="comment.id">

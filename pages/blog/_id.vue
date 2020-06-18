@@ -240,7 +240,7 @@ export default {
           })
       } else {
         this.$swal({
-          text: '需要先登录才能进行该操作哦！',
+          text: '请先登录！',
           type: 'warning',
           toast: true,
           position: 'top',
@@ -279,7 +279,7 @@ export default {
           })
       } else {
         this.$swal({
-          text: '需要先登录才能进行该操作哦！',
+          text: '请先登录！',
           type: 'warning',
           toast: true,
           position: 'top',
