@@ -3,7 +3,7 @@
     <div v-if="desserts.length > 0">
       <template v-for="(item, i) in desserts">
         <v-card :key="i" v-scroll-reveal.reset flat class="card">
-          <v-row class="hidden-xs-only">
+          <v-row class="d-none d-lg-flex">
             <v-col cols="6">
               <a :href="'/blog/' + item.id" target="_Blank">
                 <div class="blog-card-container">
@@ -55,7 +55,7 @@
               </v-card-title>
             </v-col>
           </v-row>
-          <v-row class="d-flex d-sm-none">
+          <v-row class="d-flex d-lg-none">
             <v-col cols="12">
               <a :href="'/blog/' + item.id" target="_Blank">
                 <div class="blog-card-container">

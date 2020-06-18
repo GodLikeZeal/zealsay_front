@@ -10,7 +10,7 @@
               <h1 class="hitokoto-title">
                 <v-avatar size="120">
                   <img
-                    src="https://pan.zealsay.com/20190630224926258000000.jpg"
+                    src="https://pan.zealsay.com/avatar/20200606105310570000000.jpg"
                     alt="avatar"
                   />
                 </v-avatar>
@@ -61,9 +61,24 @@
             <v-layout>
               <v-flex>
                 <h2 class="font-weight-regular text-gray">个人简介</h2>
-                <blockquote class="blockquote">
-                  对代码有洁癖的小哥哥，小石狗的偶像。
-                </blockquote>
+                <div class="text-center">
+                  <vue-typed-js
+                    :show-cursor="true"
+                    :type-speed="100"
+                    :start-delay="1000"
+                    :back-speed="10"
+                    :back-delay="1000"
+                    :strings="[
+                      '90后小哥哥，喜欢关注些技术前沿新闻，乐意分享一些知识。',
+                      '只对好看的UI心动，追求优雅的代码，严重强迫症患者，如果不够完美，哪怕推倒重构也在所不惜。',
+                      '喜欢GTA5、还有喜欢玩王者荣耀，主玩打野，我韩信李白贼溜，开黑加我，哈哈。',
+                      '目前在北京，从事互联网公司后端开发，当前主要是负责业务系统中台，主要方向为系统架构师'
+                    ]"
+                  >
+                    <h3 id="luke" class="typing"></h3>
+                  </vue-typed-js>
+                </div>
+
                 <v-divider></v-divider>
                 <h2 class="font-weight-regular text-gray">资料卡片</h2>
                 <v-card v-scroll-reveal.reset flat class="card">
@@ -498,5 +513,8 @@ export default {
 
 .text-detail {
   margin: 0 1.5rem;
+}
+.typed {
+  display: block;
 }
 </style>

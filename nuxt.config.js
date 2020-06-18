@@ -63,6 +63,7 @@ export default {
     { src: '@/plugins/chartist', ssr: true },
     { src: '@/plugins/vue-perfect-scrollbar', ssr: false },
     { src: '@/plugins/vue-scroll-reveal', ssr: false },
+    { src: '@/plugins/vue-type', ssr: false },
     { src: '@/plugins/vue-mavon-editor', srr: false },
     { src: '@/plugins/vue-cropper', ssr: false }
   ],

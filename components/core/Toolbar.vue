@@ -10,9 +10,15 @@
           hide-details
           color="purple"
         />
-        <v-btn text icon color="tertiary" to="/">
-          <v-icon>mdi-view-dashboard</v-icon>
-        </v-btn>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn text icon color="tertiary" to="/" v-on="on">
+              <v-icon>mdi-view-dashboard</v-icon>
+            </v-btn>
+          </template>
+          博客首页
+        </v-tooltip>
+
         <v-menu
           bottom
           left
@@ -21,12 +27,17 @@
           transition="slide-y-transition"
         >
           <template v-slot:activator="{ on }">
-            <v-btn text icon color="tertiary" to="/" v-on="on">
+            <v-btn text icon color="tertiary" v-on="on">
               <v-badge color="error" overlap>
                 <template slot="badge">
                   {{ notifications.length }}
                 </template>
-                <v-icon color="tertiary">mdi-bell</v-icon>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-icon color="tertiary" v-on="on">mdi-bell</v-icon>
+                  </template>
+                  消息
+                </v-tooltip>
               </v-badge>
             </v-btn>
           </template>

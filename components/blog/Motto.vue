@@ -4,9 +4,18 @@
       <v-flex md12>
         <div class="text-center word">
           <h1 class="bracket left">『</h1>
-          <h1 class="hitokoto-title">
-            {{ motto.hitokoto }}
-          </h1>
+          <vue-typed-js
+            class="typed"
+            :show-cursor="false"
+            :type-speed="100"
+            :start-delay="1000"
+            :back-speed="10"
+            :back-delay="1000"
+            :strings="['Hello', 'Welcome to zealsay!', motto.hitokoto]"
+          >
+            <h1 id="luke" class="hitokoto-title typing"></h1>
+          </vue-typed-js>
+
           <h1 class="bracket right">』</h1>
           <h3 class="hitokoto_author">-「{{ motto.from }}」</h3>
         </div>
@@ -71,5 +80,8 @@ export default {
 .word {
   position: relative;
   margin: 5rem 0;
+}
+.typed {
+  display: block;
 }
 </style>
