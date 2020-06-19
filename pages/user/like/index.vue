@@ -15,7 +15,7 @@
               </h6>
             </div>
           </v-card-title>
-          <v-card-actions>
+          <v-card-actions v-show="owner">
             <v-spacer></v-spacer>
             <v-tooltip top>
               <template v-slot:activator="{ on }">
@@ -46,6 +46,12 @@ export default {
       type: Array,
       default() {
         return []
+      }
+    },
+    owner: {
+      type: Boolean,
+      default() {
+        return false
       }
     }
   },

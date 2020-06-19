@@ -7,7 +7,7 @@
           title="基本信息"
           text="点击提交按钮，可保存"
         >
-          <v-form ref="form" lazy-validation>
+          <v-form v-if="owner" ref="form" lazy-validation>
             <v-container py-0>
               <v-layout wrap>
                 <v-flex xs12 md4>
@@ -110,6 +110,106 @@
               </v-layout>
             </v-container>
           </v-form>
+          <v-form v-else ref="form" lazy-validation>
+            <v-container py-0>
+              <v-layout wrap>
+                <v-flex xs12 md4>
+                  <v-text-field
+                    v-model="form.username"
+                    disabled
+                    :rules="usernameRules"
+                    hint="用户名不能包含空格和特殊字符"
+                    class="purple-input"
+                    label="用户名*"
+                    required
+                  />
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-text-field
+                    v-model="form.name"
+                    disabled
+                    label="真实姓名"
+                    class="purple-input"
+                  />
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-select
+                    v-model="form.sex"
+                    disabled
+                    :items="sex"
+                    item-text="text"
+                    item-value="value"
+                    item-avatar="avatar"
+                    label="性别"
+                  ></v-select>
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-select
+                    v-model="form.province"
+                    disabled
+                    :items="province"
+                    item-text="text"
+                    item-value="value"
+                    item-avatar="avatar"
+                    label="省"
+                    :loading="provinceLoading"
+                    @change="changeProvince"
+                  ></v-select>
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-select
+                    v-model="form.city"
+                    disabled
+                    :items="city"
+                    item-text="text"
+                    item-value="value"
+                    item-avatar="avatar"
+                    label="市"
+                    :loading="cityLoading"
+                    @change="changeCity"
+                  ></v-select>
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-select
+                    v-model="form.area"
+                    disabled
+                    :items="area"
+                    item-text="text"
+                    item-value="value"
+                    item-avatar="avatar"
+                    label="区"
+                    :loading="areaLoading"
+                  ></v-select>
+                </v-flex>
+                <v-flex xs12 md6>
+                  <v-select
+                    v-model="form.role"
+                    :items="roles"
+                    item-text="text"
+                    item-value="value"
+                    label="角色"
+                    disabled
+                    required
+                  ></v-select>
+                </v-flex>
+                <v-flex xs12 md6>
+                  <v-text-field
+                    v-model="form.address"
+                    label="详细住址"
+                    class="purple-input"
+                  />
+                </v-flex>
+                <v-flex xs12>
+                  <v-textarea
+                    v-model="form.introduction"
+                    disabled
+                    class="purple-input"
+                    label="简介"
+                  />
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-form>
         </material-card>
       </v-flex>
     </v-layout>
@@ -144,6 +244,12 @@ export default {
       type: Array,
       default() {
         return []
+      }
+    },
+    owner: {
+      type: Boolean,
+      default() {
+        return false
       }
     }
   },
