@@ -222,6 +222,7 @@
                   color="primary"
                   class="float-right"
                   @click="handleComment"
+                  :loading="loading"
                   >发表评论
                 </v-btn>
                 <v-scroll-y-transition>
@@ -292,6 +293,7 @@ export default {
   data: () => ({
     active: false,
     check: false,
+    loading: false,
     content: '',
     emojis,
     commentRules: [
@@ -399,11 +401,15 @@ export default {
         data.fromId = this.$store.state.auth.user.id
         data.fromName = this.$store.state.auth.user.username
         data.fromAvatar = this.$store.state.auth.user.avatar
+        this.loading = true
         this.$axios
           .$request(createComment(data))
           .then((res) => {
             if (res.code === '200' && res.data) {
               this.commentPage()
+              this.loading = false
+              this.active = false
+              this.content = ''
               this.$swal({
                 text: '评论成功！',
                 type: 'success',

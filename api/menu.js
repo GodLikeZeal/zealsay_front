@@ -82,24 +82,6 @@ const Menu = [
         title: '基本信息',
         component: 'settingcommon',
         href: '/admin/setting/common'
-      },
-      {
-        name: 'list',
-        title: 'SEO配置',
-        component: 'articlelist',
-        href: '/admin/article/list'
-      },
-      {
-        name: 'write',
-        title: '对象云存储配置',
-        component: 'articleadd',
-        href: '/admin/article/add'
-      },
-      {
-        name: 'write',
-        title: '第三方登录配置',
-        component: 'articleadd',
-        href: '/admin/article/add'
       }
     ]
   },

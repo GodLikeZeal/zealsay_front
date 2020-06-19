@@ -13,7 +13,9 @@
     </v-btn>
     <div class="float-right">
       <v-btn small color="default" @click="handleCancel(comment)">取消</v-btn>
-      <v-btn small color="primary" @click="handleSubmit">发表评论</v-btn>
+      <v-btn small color="primary" loading="loading" @click="handleSubmit"
+        >发表评论</v-btn
+      >
     </div>
     <v-scroll-y-transition>
       <div v-show="active" class="well">
@@ -54,6 +56,7 @@ export default {
   },
   data: () => ({
     active: false,
+    loading: false,
     value: '',
     emojis,
     commentRules: [
@@ -108,10 +111,14 @@ export default {
         data.fromId = this.$store.state.auth.user.id
         data.fromName = this.$store.state.auth.user.username
         data.fromAvatar = this.$store.state.auth.user.avatar
+        this.loading = true
         this.$axios
           .$request(createComment(data))
           .then((res) => {
             if (res.code === '200' && res.data) {
+              this.loading = false
+              this.active = false
+              this.value = ''
               this.$swal({
                 text: '评论成功！',
                 type: 'success',

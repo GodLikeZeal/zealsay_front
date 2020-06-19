@@ -24,10 +24,7 @@
                     v-if="user.sex == 1"
                     width="15px"
                     src="@/static/image/sex/boy.png"/>
-                  <img
-                    v-if="user.sex == 2"
-                    width="15px"
-                    src="@/static/image/sex/girl.png"
+                  <img v-else width="15px" src="@/static/image/sex/girl.png"
                 /></span>
                 <span class="white--text font-weight-thin ">|</span>
                 <span class="white--text font-weight-bold text-detail">{{
@@ -58,9 +55,15 @@
         <v-col cols="12">
           <v-tabs centered>
             <v-tab key="activity" class="font-weight-bold"> 动态</v-tab>
-            <v-tab key="blog" class="font-weight-bold"> 博客</v-tab>
-            <v-tab key="like" class="font-weight-bold"> 喜欢</v-tab>
-            <v-tab key="info" class="font-weight-bold"> 资料</v-tab>
+            <v-tab key="blog" class="font-weight-bold" :owner="owner">
+              博客</v-tab
+            >
+            <v-tab key="like" class="font-weight-bold" :owner="owner">
+              喜欢</v-tab
+            >
+            <v-tab key="info" class="font-weight-bold" :owner="owner">
+              资料</v-tab
+            >
             <v-tab-item key="activity">
               <activity :actions="actions"></activity>
             </v-tab-item>
@@ -132,17 +135,6 @@ export default {
         message: '该页面不存在'
       })
     }
-    if (
-      store.state.auth &&
-      store.state.auth.user &&
-      store.state.auth.user.username
-    ) {
-    } else {
-      return error({
-        statusCode: 403,
-        message: '您还未进行认证'
-      })
-    }
 
     const res = await app.$axios.$request(getUserData(params.id))
     if (res.code === '200') {
@@ -163,6 +155,15 @@ export default {
           text: r.name
         }
       })
+      let owner = false
+      if (
+        store.state.auth &&
+        store.state.auth.user &&
+        store.state.auth.user.id
+      ) {
+      } else {
+        owner = store.state.auth.user.id === user.id
+      }
       return {
         categorys,
         user,
@@ -170,7 +171,8 @@ export default {
         likes,
         actions,
         province,
-        roles
+        roles,
+        owner
       }
     } else {
       return error({
