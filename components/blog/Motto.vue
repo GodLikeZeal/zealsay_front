@@ -11,7 +11,12 @@
             :start-delay="1000"
             :back-speed="10"
             :back-delay="1000"
-            :strings="['Hello', 'Welcome to zealsay!', motto.hitokoto]"
+            :strings="[
+              'Hello!',
+              'I am zeal',
+              'Welcome to zealsay!',
+              motto.hitokoto
+            ]"
           >
             <h1 id="luke" class="hitokoto-title typing"></h1>
           </vue-typed-js>

@@ -1,7 +1,7 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-container>
     <v-layout row wrap>
-      <v-flex v-for="card in blogs" :key="card.id" xs6 sm3 md4>
+      <v-flex v-for="card in blogs" :key="card.id" xs12 sm6 md4>
         <div v-if="owner">
           <v-card v-scroll-reveal.reset class="card" hover>
             <v-img :src="card.coverImage" height="200px"> </v-img>

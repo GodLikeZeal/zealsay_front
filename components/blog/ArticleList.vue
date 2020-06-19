@@ -29,7 +29,10 @@
                     </h4>
                   </a>
                   <h6 class="caption text-none">
-                    {{ item.authorName }} 发表于
+                    <a :href="'/user/' + item.authorId" target="_Blank">{{
+                      item.authorName
+                    }}</a>
+                    发表于
                     <v-icon small>mdi-clock</v-icon>
                     {{ item.createDate | formatDate }}
                   </h6>
@@ -85,7 +88,10 @@
                     </h4>
                   </a>
                   <h6 class="caption text-none">
-                    {{ item.authorName }} 发表于
+                    <a :href="'/user/' + item.authorId" target="_Blank">{{
+                      item.authorName
+                    }}</a>
+                    发表于
                     <v-icon small>mdi-clock</v-icon>
                     {{ item.createDate | formatDate }}
                   </h6>
@@ -179,6 +185,6 @@ export default {
   margin: 0.3rem;
 }
 .article-title {
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 </style>

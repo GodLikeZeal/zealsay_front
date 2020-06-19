@@ -13,7 +13,7 @@
     </v-btn>
     <div class="float-right">
       <v-btn small color="default" @click="handleCancel(comment)">取消</v-btn>
-      <v-btn small color="primary" loading="loading" @click="handleSubmit"
+      <v-btn small color="primary" :loading="loading" @click="handleSubmit"
         >发表评论</v-btn
       >
     </div>

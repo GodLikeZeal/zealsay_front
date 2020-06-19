@@ -70,17 +70,41 @@ export default {
   },
   data: () => ({
     icons: [
-      { icon: 'mdi-facebook', url: '/', info: 'facebook' },
-      { icon: 'mdi-twitter', url: '/', info: 'twitter' },
-      { icon: 'mdi-google-plus', url: '/', info: 'google' },
-      { icon: 'mdi-linkedin', url: '/', info: 'linkedin' },
-      { icon: 'mdi-instagram', url: '/', info: 'instagram' },
       {
         icon: 'mdi-github-circle',
         url: 'https://github.com/GodLikeZeal',
         info: 'github'
       },
-      { icon: 'mdi-sina-weibo', url: '/', info: 'sina' }
+      {
+        icon: 'mdi-github-face',
+        url: 'https://gitee.com/GodLikeZeal',
+        info: 'gitee'
+      },
+      {
+        icon: 'mdi-language-c',
+        url: 'https://blog.csdn.net/zealsay',
+        info: 'CSDN'
+      },
+      {
+        icon: 'mdi-skype',
+        url: 'https://segmentfault.com/u/zeal_5eecb699bdb08',
+        info: 'Segmentfault'
+      },
+      {
+        icon: 'mdi-qqchat',
+        url: 'https://pan.zealsay.com/zealsay/qq.png',
+        info: 'QQ'
+      },
+      {
+        icon: 'mdi-wechat',
+        url: 'https://pan.zealsay.com/zealsay/wechat.jpg',
+        info: '微信'
+      },
+      {
+        icon: 'mdi-sina-weibo',
+        url: 'https://weibo.com/u/7472823409/home?leftnav=1',
+        info: 'sina'
+      }
     ],
     logo: '/image/logo/cat.png'
   })

@@ -20,7 +20,10 @@
 
                 <v-list-item-content>
                   <v-list-item-title
-                    >{{ comment.fromName }} 在
+                    ><a :href="'/user/' + comment.fromId" target="_Blank">{{
+                      comment.fromName
+                    }}</a>
+                    在
                     <a :href="'/blog/' + comment.articleId">{{
                       comment.articleTitle
                     }}</a>
