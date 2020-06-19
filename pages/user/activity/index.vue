@@ -2,7 +2,74 @@
   <v-container>
     <v-layout>
       <v-flex>
-        <v-timeline align-top>
+        <v-timeline class="hidden-md-and-up" dense align-top>
+          <v-timeline-item
+            v-for="(item, i) in actions"
+            :key="i"
+            :color="color[parseInt((item.action.length + 15) % 15)]"
+            :icon="'mdi-star'"
+            fill-dot
+            right
+          >
+            <v-card
+              v-scroll-reveal.reset
+              :color="color[parseInt((item.action.length + 15) % 15)]"
+              dark
+            >
+              <template v-if="item.action === 'REGISTER'">
+                <v-card-title class="title"
+                  >您注册系统并成为zealsay小站的一员</v-card-title
+                >
+                <v-card-text class="white text--primary">
+                  <p>
+                    您成为了系统的用户
+                  </p>
+                </v-card-text>
+              </template>
+              <template v-if="item.action === 'UNSEALING'">
+                <v-card-title class="title">您已经被管理员解封</v-card-title>
+                <v-card-text class="white text--primary">
+                  <p>
+                    您表现不错，已经被管理员解除封印！
+                  </p>
+                </v-card-text>
+              </template>
+              <template v-if="item.action === 'BAN'">
+                <v-card-title class="title">您已经被管理员封禁</v-card-title>
+                <v-card-text class="white text--primary">
+                  <p>
+                    您因为不合规操作，已经被管理员使用仙术封印！
+                  </p>
+                </v-card-text>
+              </template>
+              <template v-if="item.action === 'UP'">
+                <v-card-title class="title">{{ item.targetName }}</v-card-title>
+                <v-card-text class="white text--primary">
+                  <p>您上架了一篇文章！</p>
+                </v-card-text>
+              </template>
+              <template v-if="item.action === 'DOWN'">
+                <v-card-title class="title">{{ item.targetName }}</v-card-title>
+                <v-card-text class="white text--primary">
+                  <p>您下架了一篇文章！</p>
+                </v-card-text>
+              </template>
+              <template v-if="item.action === 'LIKE_BLOG'">
+                <v-card-title class="title">{{ item.targetName }}</v-card-title>
+                <v-card-text class="white text--primary">
+                  <p>您点赞了一篇博客！</p>
+                </v-card-text>
+              </template>
+              <template v-if="item.action === 'DISLIKE_BLOG'">
+                <v-card-title class="title">{{ item.targetName }}</v-card-title>
+                <v-card-text class="white text--primary">
+                  <p>您移情别恋已不再喜欢该博客！</p>
+                </v-card-text>
+              </template>
+            </v-card>
+          </v-timeline-item>
+        </v-timeline>
+        <v-timeline class="hidden-sm-and-down" align-top>
           <v-timeline-item
             v-for="(item, i) in actions"
             :key="i"

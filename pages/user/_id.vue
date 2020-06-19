@@ -51,34 +51,41 @@
       </v-container>
     </v-card>
     <v-container class="fill">
-      <v-row>
-        <v-col cols="12">
+      <v-layout wrap>
+        <v-flex md12>
           <v-tabs centered>
             <v-tab key="activity" class="font-weight-bold"> 动态</v-tab>
-            <v-tab key="blog" class="font-weight-bold" :owner="owner">
-              博客</v-tab
-            >
-            <v-tab key="like" class="font-weight-bold" :owner="owner">
-              喜欢</v-tab
-            >
-            <v-tab key="info" class="font-weight-bold" :owner="owner">
-              资料</v-tab
-            >
+            <v-tab key="blog" class="font-weight-bold"> 博客</v-tab>
+            <v-tab key="like" class="font-weight-bold"> 喜欢</v-tab>
+            <v-tab key="info" class="font-weight-bold"> 资料</v-tab>
             <v-tab-item key="activity">
               <activity :actions="actions"></activity>
             </v-tab-item>
             <v-tab-item key="blog">
-              <blog :desserts="blogs" :category="categorys"></blog>
+              <blog
+                :desserts="blogs"
+                :category="categorys"
+                :owner="owner"
+              ></blog>
             </v-tab-item>
             <v-tab-item key="like">
-              <like :desserts="likes" :category="categorys"></like>
+              <like
+                :desserts="likes"
+                :category="categorys"
+                :owner="owner"
+              ></like>
             </v-tab-item>
             <v-tab-item key="info">
-              <info :form="user" :province="province" :roles="roles"></info>
+              <info
+                :form="user"
+                :province="province"
+                :roles="roles"
+                :owner="owner"
+              ></info>
             </v-tab-item>
           </v-tabs>
-        </v-col>
-      </v-row>
+        </v-flex>
+      </v-layout>
       <core-back-to-top :visibility-height="300" :back-position="0" />
     </v-container>
     <!-- 页脚 -->
@@ -161,9 +168,9 @@ export default {
         store.state.auth.user &&
         store.state.auth.user.id
       ) {
-      } else {
         owner = store.state.auth.user.id === user.id
       }
+
       return {
         categorys,
         user,

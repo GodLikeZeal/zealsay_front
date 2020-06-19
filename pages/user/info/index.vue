@@ -195,6 +195,7 @@
                 <v-flex xs12 md6>
                   <v-text-field
                     v-model="form.address"
+                    disabled
                     label="详细住址"
                     class="purple-input"
                   />

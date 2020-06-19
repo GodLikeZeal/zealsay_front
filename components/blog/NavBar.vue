@@ -34,6 +34,24 @@
               >
             </nuxt-link>
           </v-list-item>
+          <template v-if="loggedIn">
+            <v-list-item v-for="(item, index) in items" :key="index">
+              <nuxt-link :to="item.href">
+                <v-list-item-title class="font-weight-medium">{{
+                  item.title
+                }}</v-list-item-title>
+              </nuxt-link>
+            </v-list-item>
+          </template>
+          <template v-else>
+            <v-list-item>
+              <nuxt-link to="/login">
+                <v-list-item-title class="font-weight-medium"
+                  >登录</v-list-item-title
+                >
+              </nuxt-link>
+            </v-list-item>
+          </template>
         </v-list>
       </v-menu>
     </v-toolbar-items>
@@ -58,7 +76,7 @@
 
       <v-btn class="white--text" to="/blog/friend" text>友链</v-btn>
       <v-btn class="white--text" to="/blog/about" text>关于</v-btn>
-      <v-btn class="white--text" text>
+      <v-btn class="white--text" text @click="search">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
@@ -174,6 +192,18 @@ export default {
           }
         }
       ]
+    }
+  },
+  methods: {
+    search() {
+      this.$swal({
+        text: '搜索我还没想好哩！',
+        type: 'info',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000
+      })
     }
   }
 }
