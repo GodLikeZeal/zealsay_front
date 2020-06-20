@@ -152,13 +152,15 @@ export default {
     },
     items() {
       return this.itemsMenu.filter(
-        (s) => s.all || this.$store.state.auth.user.role.includes('ROLE_ADMIN')
+        (s) =>
+          s.show.includes('ALL') ||
+          s.show.includes(this.$store.state.auth.user.role)
       )
     },
     itemsMenu() {
       return [
         {
-          all: true,
+          show: ['ALL'],
           icon: 'mdi-account',
           href: this.$store.state.auth.user
             ? '/user/' + this.$store.state.auth.user.id
@@ -167,21 +169,21 @@ export default {
           click: (e) => {}
         },
         {
-          all: false,
+          show: ['ROLE_ADMIN', 'ROLE_EXPERIENCER'],
           icon: 'mdi-settings',
           href: '/admin/dashboard',
           title: '后台管理',
           click: (e) => {}
         },
         {
-          all: true,
+          show: ['ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_EXPERIENCER'],
           icon: 'mdi-lead-pencil',
           href: '/user/blog/add',
           title: '写篇博客',
           click: (e) => {}
         },
         {
-          all: true,
+          show: ['ALL'],
           icon: 'mdi-logout',
           href: '#',
           title: '退出登录',

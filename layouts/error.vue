@@ -6,7 +6,7 @@
         src="@/static/image/gif/NotFound.gif"
         alt="NotFound"
       />
-      <div v-if="error.statusCode === 404" class="text-center">
+      <div v-if="error.statusCode === '404'" class="text-center">
         <h1>404</h1>
         <h2 class="my-3 headline ">
           抱歉, 再怎么找也找不到啦!
@@ -17,7 +17,7 @@
           </v-btn>
         </div>
       </div>
-      <div v-else-if="error.statusCode === 403" class="text-center">
+      <div v-else-if="error.statusCode === '403'" class="text-center">
         <h1>403</h1>
         <h2 class="my-3 headline ">
           抱歉, 您还未进行认证!
@@ -31,7 +31,7 @@
           </v-btn>
         </div>
       </div>
-      <div v-else-if="error.statusCode === 401" class="text-center">
+      <div v-else-if="error.statusCode === '401'" class="text-center">
         <h1>401</h1>
         <h2 class="my-3 headline ">
           抱歉, 您无权访问该资源哦!
