@@ -92,7 +92,8 @@ export default {
       this.loading = true
       // 开始提交
       if (this.$refs.form.validate()) {
-        addRole(this.form)
+        this.$axios
+          .$request(addRole(this.form))
           .then((res) => {
             this.loading = false
             if (res.code === '200' && res.data) {

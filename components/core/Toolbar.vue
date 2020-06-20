@@ -113,11 +113,11 @@ export default {
     },
     notifications() {
       return [
-        'Mike, John responded to your email',
-        'You have 5 new tasks',
-        "You're now a friend with Andrew",
-        'Another Notification',
-        'Another One'
+        '系统提示：欢迎注册zealsay',
+        '系统提示：您关注的博客有更新',
+        '系统提示：你的好友 Tina 上线了',
+        'zeal 对你说: hello!',
+        'Tina 回复你：好的'
       ]
     },
     responsive: {

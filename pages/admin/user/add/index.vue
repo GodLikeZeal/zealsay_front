@@ -174,9 +174,10 @@
                 </v-flex>
                 <v-flex xs12>
                   <v-textarea
+                    v-model="form.introduction"
                     class="purple-input"
                     label="简介"
-                    value="一个喜欢安静的程序员."
+                    placeholder="一个喜欢安静的程序员."
                   />
                 </v-flex>
                 <v-flex xs12 text-center>

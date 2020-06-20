@@ -225,6 +225,7 @@
                               v-for="label in item.label.split(',')"
                               :key="label"
                               :color="color[parseInt(Math.random() * 6, 10)]"
+                              class="chip-label"
                               small
                             >
                               <v-avatar>
@@ -616,5 +617,11 @@ export default {
 
 .pagination {
   margin: 20px;
+}
+.chip-label {
+  margin: 0.3rem;
+}
+.avatar {
+  margin-top: 5rem;
 }
 </style>

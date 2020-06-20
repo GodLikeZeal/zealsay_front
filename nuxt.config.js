@@ -38,7 +38,7 @@ export default {
         src: 'https://pan.zealsay.com/live2d/js/live2d.js'
       },
       {
-        src: 'https://pan.zealsay.com/static/js/baidu.js'
+        src: 'https://pic.zealsay.com/static/js/baidu.js'
       }
     ]
   },
@@ -172,10 +172,7 @@ export default {
     productionGzip: true,
     productionGzipExtensions: ['js', 'css', 'svg'],
     // extractCSS: { allChunks: true }, // css 独立打包 link 的形式加载
-    publicPath:
-      process.env.NODE_ENV === 'production'
-        ? 'https://pan.zealsay.com/' // sample/essays 打包的默认路径为 ‘_nuxt’ 或者可以指定cdn 域名
-        : '/_nuxt/',
+    publicPath: '/_nuxt/',
     filenames: {
       // css 和 js  img 打包时指定文件夹
       app: ({ isDev }) => (isDev ? '[name].js' : '[name].js'),

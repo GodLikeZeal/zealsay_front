@@ -41,7 +41,7 @@ const Menu = [
   },
   { header: '资源' },
   {
-    title: '文章',
+    title: '博客文章',
     group: 'article',
     icon: 'mdi-book-open-page-variant',
     items: [
