@@ -62,12 +62,8 @@
 </template>
 
 <script>
-import Live2d from '@/components/core/Live2d'
 export default {
   name: 'BlogFooter',
-  components: {
-    live2d: Live2d
-  },
   data: () => ({
     icons: [
       {

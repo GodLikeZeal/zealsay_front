@@ -29,18 +29,7 @@ export default {
         content: 'zeal'
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-    script: [
-      {
-        src: 'https://apps.bdimg.com/libs/jquery/1.7.1/jquery.min.js'
-      },
-      {
-        src: 'https://pan.zealsay.com/live2d/js/live2d.js'
-      },
-      {
-        src: 'https://pic.zealsay.com/static/js/baidu.js'
-      }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   /*
    ** Customize the progress-bar color
