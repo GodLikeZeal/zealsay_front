@@ -55,6 +55,7 @@
                   <!--                <v-btn title="QQ登录" icon>-->
                   <!--                  <v-icon medium color="light-blue">mdi-qqchat</v-icon>-->
                   <!--                </v-btn>-->
+
                   <v-btn title="github登录" nuxt :href="github" icon>
                     <v-icon medium color="light-grey">mdi-github-circle</v-icon>
                   </v-btn>
