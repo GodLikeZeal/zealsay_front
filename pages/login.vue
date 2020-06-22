@@ -69,22 +69,10 @@
                             >mdi-github-circle</v-icon
                           >
                         </v-btn>
-                        <v-btn
-                          title="微信登录"
-                          nuxt
-                          :href="github"
-                          icon
-                          @click="wechat"
-                        >
+                        <v-btn title="微信登录" nuxt icon @click="wechat">
                           <v-icon medium color="success">mdi-wechat</v-icon>
                         </v-btn>
-                        <v-btn
-                          title="微信登录"
-                          nuxt
-                          :href="github"
-                          icon
-                          @click="qqchat"
-                        >
+                        <v-btn title="微信登录" nuxt icon @click="qqchat">
                           <v-icon medium color="info">mdi-qqchat</v-icon>
                         </v-btn>
                       </v-flex>
@@ -380,22 +368,10 @@
                           >mdi-github-circle</v-icon
                         >
                       </v-btn>
-                      <v-btn
-                        title="微信登录"
-                        nuxt
-                        :href="github"
-                        icon
-                        @click="wechat"
-                      >
+                      <v-btn title="微信登录" nuxt icon @click="wechat">
                         <v-icon medium color="success">mdi-wechat</v-icon>
                       </v-btn>
-                      <v-btn
-                        title="微信登录"
-                        nuxt
-                        :href="github"
-                        icon
-                        @click="qqchat"
-                      >
+                      <v-btn title="微信登录" nuxt icon @click="qqchat">
                         <v-icon medium color="info">mdi-qqchat</v-icon>
                       </v-btn>
                     </v-flex>
