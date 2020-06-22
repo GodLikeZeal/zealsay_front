@@ -14,9 +14,6 @@
                       src="@/static/image/logo/logo.png"
                       alt="Zealsay Admin"
                     />
-                    <h2 class=" my-4 primary--text">
-                      zealsay 说你想说
-                    </h2>
                   </div>
                   <v-form ref="form" lazy-validation>
                     <v-text-field
@@ -26,6 +23,7 @@
                       :rules="usernameRules"
                       placeholder="输入用户名或邮箱"
                       type="text"
+                      @keyup.enter="submit"
                     ></v-text-field>
                     <v-text-field
                       id="password"
@@ -34,10 +32,9 @@
                       :rules="passwordRules"
                       placeholder="登录密码"
                       type="password"
+                      @keyup.enter="submit"
                     ></v-text-field>
-                    <a class="primary--text" href="register">注册账号</a>
-                    OR
-                    <a class="right">忘记密码？</a>
+
                     <transition name="fade">
                       <p
                         v-show="visible"
@@ -46,30 +43,54 @@
                         {{ errMsg }}
                       </p>
                     </transition>
+                    <v-btn
+                      block
+                      class="btn-primary"
+                      color="primary"
+                      :loading="loading"
+                      @click="submit"
+                      >立即登录
+                    </v-btn>
+                    <div style="display: flow-root">
+                      <a class="float-left">忘记密码？</a>
+                      <p class="float-right">
+                        没有账号？<a href="register">注册一个</a>
+                      </p>
+                    </div>
+                    <p>
+                      注册登录即表示您已同意 <a href="/licence">用户协议</a>
+                      <a href="privacy">隐私政策</a>
+                    </p>
+                    <v-divider></v-divider>
+                    <v-layout justify-center wrap>
+                      <v-flex class="text-center">
+                        <v-btn title="github登录" nuxt icon @click="github">
+                          <v-icon medium color="light-grey"
+                            >mdi-github-circle</v-icon
+                          >
+                        </v-btn>
+                        <v-btn
+                          title="微信登录"
+                          nuxt
+                          :href="github"
+                          icon
+                          @click="wechat"
+                        >
+                          <v-icon medium color="success">mdi-wechat</v-icon>
+                        </v-btn>
+                        <v-btn
+                          title="微信登录"
+                          nuxt
+                          :href="github"
+                          icon
+                          @click="qqchat"
+                        >
+                          <v-icon medium color="info">mdi-qqchat</v-icon>
+                        </v-btn>
+                      </v-flex>
+                    </v-layout>
                   </v-form>
                 </v-card-text>
-                <v-card-actions>
-                  <!--                <v-btn title="微信登录" icon>-->
-                  <!--                  <v-icon medium color="light-green">mdi-wechat </v-icon>-->
-                  <!--                </v-btn>-->
-                  <!--                <v-btn title="QQ登录" icon>-->
-                  <!--                  <v-icon medium color="light-blue">mdi-qqchat</v-icon>-->
-                  <!--                </v-btn>-->
-                  <v-btn title="github登录" nuxt :href="github" icon>
-                    <v-icon medium color="light-grey">mdi-github-circle</v-icon>
-                  </v-btn>
-                  <v-spacer></v-spacer>
-
-                  <v-btn
-                    depressed
-                    class="btn-primary"
-                    color="primary"
-                    :loading="loading"
-                    @click="login"
-                    @keyup.enter="submit"
-                    >登 录
-                  </v-btn>
-                </v-card-actions>
               </v-card>
             </v-flex>
           </v-layout>
@@ -305,9 +326,6 @@
                     src="@/static/image/logo/logo.png"
                     alt="Zealsay Admin"
                   />
-                  <h2 class=" my-4 primary--text">
-                    zealsay 说你想说
-                  </h2>
                 </div>
                 <v-form ref="form" lazy-validation>
                   <v-text-field
@@ -317,6 +335,7 @@
                     :rules="usernameRules"
                     placeholder="输入用户名或邮箱"
                     type="text"
+                    @keyup.enter="submit"
                   ></v-text-field>
                   <v-text-field
                     id="password"
@@ -325,10 +344,8 @@
                     :rules="passwordRules"
                     placeholder="登录密码"
                     type="password"
+                    @keyup.enter="submit"
                   ></v-text-field>
-                  <a class="primary--text" href="register">注册账号</a>
-                  OR
-                  <a id="lost" class="right">忘记密码？</a>
                   <transition name="fade">
                     <p
                       v-show="visible"
@@ -337,30 +354,54 @@
                       {{ errMsg }}
                     </p>
                   </transition>
+                  <v-btn
+                    block
+                    class="btn-primary"
+                    color="primary"
+                    :loading="loading"
+                    @click="submit"
+                    >立即登录
+                  </v-btn>
+                  <div style="display: flow-root">
+                    <a class="float-left">忘记密码？</a>
+                    <p class="float-right">
+                      没有账号？<a href="register">注册一个</a>
+                    </p>
+                  </div>
+                  <p>
+                    注册登录即表示您已同意 <a href="/licence">用户协议</a>
+                    <a href="privacy">隐私政策</a>
+                  </p>
+                  <v-divider></v-divider>
+                  <v-layout justify-center wrap>
+                    <v-flex class="text-center">
+                      <v-btn title="github登录" nuxt icon @click="github">
+                        <v-icon medium color="light-grey"
+                          >mdi-github-circle</v-icon
+                        >
+                      </v-btn>
+                      <v-btn
+                        title="微信登录"
+                        nuxt
+                        :href="github"
+                        icon
+                        @click="wechat"
+                      >
+                        <v-icon medium color="success">mdi-wechat</v-icon>
+                      </v-btn>
+                      <v-btn
+                        title="微信登录"
+                        nuxt
+                        :href="github"
+                        icon
+                        @click="qqchat"
+                      >
+                        <v-icon medium color="info">mdi-qqchat</v-icon>
+                      </v-btn>
+                    </v-flex>
+                  </v-layout>
                 </v-form>
               </v-card-text>
-              <v-card-actions>
-                <!--                <v-btn title="微信登录" icon>-->
-                <!--                  <v-icon medium color="light-green">mdi-wechat </v-icon>-->
-                <!--                </v-btn>-->
-                <!--                <v-btn title="QQ登录" icon>-->
-                <!--                  <v-icon medium color="light-blue">mdi-qqchat</v-icon>-->
-                <!--                </v-btn>-->
-                <v-btn title="github登录" nuxt :href="github" icon>
-                  <v-icon medium color="light-grey">mdi-github-circle</v-icon>
-                </v-btn>
-                <v-spacer></v-spacer>
-
-                <v-btn
-                  depressed
-                  class="btn-primary"
-                  color="primary"
-                  :loading="loading"
-                  @click="login"
-                  @keyup.enter="submit"
-                  >登 录
-                </v-btn>
-              </v-card-actions>
             </v-card>
           </v-flex>
         </v-layout>
@@ -429,7 +470,7 @@ export default {
     this.init()
   },
   methods: {
-    login() {
+    submit() {
       this.loading = true
       this.visible = false
       // 登录接口待调试
@@ -457,6 +498,36 @@ export default {
             }, 5000)
           })
       }
+    },
+    github() {
+      this.$swal({
+        text: '体验环境暂未接入',
+        type: 'info',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000
+      })
+    },
+    wechat() {
+      this.$swal({
+        text: '体验环境暂未接入',
+        type: 'info',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000
+      })
+    },
+    qqchat() {
+      this.$swal({
+        text: '体验环境暂未接入',
+        type: 'info',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000
+      })
     },
     windowResizeHandler() {
       this.width = window.innerWidth

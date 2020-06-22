@@ -32,10 +32,7 @@
 
             <v-tooltip v-if="like" top>
               <template v-slot:activator="{ on }">
-                <v-btn
-                  style="float: right;margin-top: 3rem;margin-right: 5rem;"
-                  fab
-                >
+                <v-btn class="icon-like" fab>
                   <v-icon medium color="pink" v-on="on" @click="dislikeArticle"
                     >mdi-heart</v-icon
                   >
@@ -163,6 +160,20 @@ export default {
     loading: true,
     color: ['primary', 'secondary', 'success', 'info', 'warning', 'danger']
   }),
+  head() {
+    return {
+      title: this.article.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.article.contentHtml
+            .replace(/<[^>]+>/g, '')
+            .slice(0, 100)
+        }
+      ]
+    }
+  },
   computed: {
     breadcrumbs() {
       return [

@@ -70,14 +70,7 @@
                     :start-delay="1000"
                     :back-speed="10"
                     :back-delay="1000"
-                    :strings="[
-                      '90后小哥哥，喜欢关注些技术前沿新闻，乐意分享一些知识。',
-                      '只对好看的UI心动，追求优雅的代码。',
-                      '严重强迫症患者，如果不够完美，哪怕推倒重构也在所不惜。',
-                      '喜欢GTA5、还有喜欢玩王者荣耀，主玩打野，我韩信李白贼溜，开黑加我，哈哈。',
-                      '目前在北京，从事互联网公司后端开发。',
-                      '当前主要是负责业务系统中台，主要方向为系统架构师。'
-                    ]"
+                    :strings="strings"
                   >
                     <h3 id="luke" class="typing"></h3>
                   </vue-typed-js>
@@ -405,18 +398,28 @@
                 </v-card>
                 <v-divider></v-divider>
                 <h2 class="font-weight-regular text-gray">写在后面</h2>
-                <blockquote class="blockquote">
-                  如果你能够看到这个博客，说明我们本身就很有缘分，因为我很懒，很少去宣传，假如能帮到你，那么我就会很开心了。
-                </blockquote>
-                <blockquote class="blockquote">
-                  曾经总觉得，时间过得很慢很慢，好希望快点长大，可是发现十几年走过来，回忆一幕幕，很多的回忆都涌上心头。
-                </blockquote>
-                <blockquote class="blockquote">
-                  正如：年少不识曲中意，回首已成曲中人。
-                </blockquote>
-                <blockquote class="blockquote">
+                <p>
+                  如果你能够看到这个博客，说明我们本身就很有缘分，假如博客能帮到你，那么我就就会很开心了。
+                </p>
+                <p>
+                  编程，从一门课程，变成了自己的职业，现在更多的，是一种热爱，怀揣梦想，Write
+                  the Code, Change the World.
+                </p>
+                <p>
+                  当然，任何事情都不是一蹴而就，成长路上经常会遇到各种奇奇怪怪的bug。
+                </p>
+                <p>
+                  就像是一个剃度的推子，你变强了，头也秃了～～。
+                </p>
+                <p>
+                  但是还是想要通过自己的双手，让梦想变得触手可及，让梦不再仅仅是一场梦。
+                </p>
+                <p>
+                  不忘初心，不负韶华。
+                </p>
+                <p>
                   自己很喜欢的一句话:
-                </blockquote>
+                </p>
                 <p class="blockquote font-weight-medium text-gray">
                   Some of us get dipped in flat, some in satin, some in
                   gloss.... But every once in a while you find someone who's
@@ -453,7 +456,17 @@ export default {
   components: {
     'blog-nav': NavBar
   },
-  data: () => ({ loading: true }),
+  data: () => ({
+    loading: true,
+    strings: [
+      '90后小哥哥，喜欢关注些技术前沿新闻，乐意分享一些知识。',
+      '只对好看的UI心动，追求优雅的代码。',
+      '严重强迫症患者，如果不够完美，哪怕推倒重构也在所不惜。',
+      '喜欢GTA5、还有喜欢玩王者荣耀，主玩打野，我韩信李白贼溜，开黑加我，哈哈。',
+      '目前在北京，在某互联网公司从事后端开发。',
+      '当前主要是负责业务系统中台，主要方向为系统架构师。'
+    ]
+  }),
   computed: {
     breadcrumbs() {
       return [

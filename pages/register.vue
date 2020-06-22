@@ -27,7 +27,7 @@
                         width="30%"
                         height="18%"
                       />
-                      <h2 class="flex my-4 primary--text">zealsay 注册引导</h2>
+                      <h3 class="flex my-4 primary--text">zealsay 注册引导</h3>
                     </div>
                     <v-form ref="form1" lazy-validation>
                       <v-window-item :value="1">
@@ -431,7 +431,7 @@
                       width="30%"
                       height="18%"
                     />
-                    <h2 class="flex my-4 primary--text">zealsay 注册引导</h2>
+                    <h3 class="flex my-4 primary--text">zealsay 注册引导</h3>
                   </div>
                   <v-form ref="form1" lazy-validation>
                     <v-window-item :value="1">

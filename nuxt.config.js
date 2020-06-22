@@ -10,7 +10,67 @@ export default {
     title: 'zealsay说你想说-为分享快乐而生',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        name: 'viewport',
+        content:
+          'width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0'
+      },
+      {
+        name: 'X-UA-Compatible',
+        content: 'ie=edge,chrome=1'
+      },
+      {
+        name: 'Cache-Control',
+        content: 'no-siteapp'
+      },
+      {
+        name: 'Cache-Control',
+        content: 'no-transform'
+      },
+      {
+        name: 'applicable-device',
+        content: 'pc,mobile'
+      },
+      {
+        name: 'MobileOptimized',
+        content: 'width'
+      },
+      {
+        name: 'HandheldFriendly',
+        content: 'true'
+      },
+      {
+        name: 'renderer',
+        content: 'webkit'
+      },
+      {
+        name: 'force-rendering',
+        content: 'webkit'
+      },
+      {
+        name: 'google',
+        content: 'notranslate'
+      },
+      {
+        name: '360-site-verification',
+        content: '604a14b53c6b871206001285921e81d8'
+      },
+      {
+        name: 'google-site-verification',
+        content: 'cV4-qkUJZR6gmFeajx_UyPe47GW9vY6cnCrYtCHYNh4'
+      },
+      {
+        name: 'google-site-verification',
+        content: 'HF7lfF8YEGs1qtCE-kPml8Z469e2RHhGajy6JPVy5XI'
+      },
+      {
+        name: 'tencent-site-verification',
+        content: 'da26ce22cfed7aba6a96d8409f9b53a6'
+      },
+      {
+        name: 'apple-mobile-web-app-title',
+        content: 'zealsay说你想说'
+      },
       {
         hid: 'description',
         name: 'description',
@@ -161,7 +221,10 @@ export default {
     productionGzip: true,
     productionGzipExtensions: ['js', 'css', 'svg'],
     // extractCSS: { allChunks: true }, // css 独立打包 link 的形式加载
-    publicPath: '/_nuxt/',
+    publicPath:
+      process.env.NODE_ENV === 'production'
+        ? 'https://pic.zealsay.com/' // sample/essays 打包的默认路径为 ‘_nuxt’ 或者可以指定cdn 域名
+        : '/_nuxt/',
     filenames: {
       // css 和 js  img 打包时指定文件夹
       app: ({ isDev }) => (isDev ? '[name].js' : '[name].js'),
