@@ -61,6 +61,34 @@
                       注册登录即表示您已同意 <a href="/licence">用户协议</a>
                       <a href="privacy">隐私政策</a>
                     </p>
+                    <v-divider></v-divider>
+                    <v-layout justify-center wrap>
+                      <v-flex class="text-center">
+                        <v-btn title="github登录" nuxt icon @click="github">
+                          <v-icon medium color="light-grey"
+                            >mdi-github-circle</v-icon
+                          >
+                        </v-btn>
+                        <v-btn
+                          title="微信登录"
+                          nuxt
+                          :href="github"
+                          icon
+                          @click="wechat"
+                        >
+                          <v-icon medium color="success">mdi-wechat</v-icon>
+                        </v-btn>
+                        <v-btn
+                          title="微信登录"
+                          nuxt
+                          :href="github"
+                          icon
+                          @click="qqchat"
+                        >
+                          <v-icon medium color="info">mdi-qqchat</v-icon>
+                        </v-btn>
+                      </v-flex>
+                    </v-layout>
                   </v-form>
                 </v-card-text>
               </v-card>
@@ -344,6 +372,34 @@
                     注册登录即表示您已同意 <a href="/licence">用户协议</a>
                     <a href="privacy">隐私政策</a>
                   </p>
+                  <v-divider></v-divider>
+                  <v-layout justify-center wrap>
+                    <v-flex class="text-center">
+                      <v-btn title="github登录" nuxt icon @click="github">
+                        <v-icon medium color="light-grey"
+                          >mdi-github-circle</v-icon
+                        >
+                      </v-btn>
+                      <v-btn
+                        title="微信登录"
+                        nuxt
+                        :href="github"
+                        icon
+                        @click="wechat"
+                      >
+                        <v-icon medium color="success">mdi-wechat</v-icon>
+                      </v-btn>
+                      <v-btn
+                        title="微信登录"
+                        nuxt
+                        :href="github"
+                        icon
+                        @click="qqchat"
+                      >
+                        <v-icon medium color="info">mdi-qqchat</v-icon>
+                      </v-btn>
+                    </v-flex>
+                  </v-layout>
                 </v-form>
               </v-card-text>
             </v-card>
@@ -443,9 +499,19 @@ export default {
           })
       }
     },
+    github() {
+      this.$swal({
+        text: '体验环境暂未接入',
+        type: 'info',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000
+      })
+    },
     wechat() {
       this.$swal({
-        text: '暂未接入',
+        text: '体验环境暂未接入',
         type: 'info',
         toast: true,
         position: 'top',
@@ -455,7 +521,7 @@ export default {
     },
     qqchat() {
       this.$swal({
-        text: '暂未接入',
+        text: '体验环境暂未接入',
         type: 'info',
         toast: true,
         position: 'top',
