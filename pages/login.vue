@@ -52,7 +52,7 @@
                       >立即登录
                     </v-btn>
                     <div style="display: flow-root">
-                      <a class="float-left">忘记密码？</a>
+                      <a class="float-left" @click="forget">忘记密码？</a>
                       <p class="float-right">
                         没有账号？<a href="register">注册一个</a>
                       </p>
@@ -64,7 +64,7 @@
                     <v-divider></v-divider>
                     <v-layout justify-center wrap>
                       <v-flex class="text-center">
-                        <v-btn title="github登录" nuxt icon @click="github">
+                        <v-btn title="github登录" nuxt icon @click="git">
                           <v-icon medium color="light-grey"
                             >mdi-github-circle</v-icon
                           >
@@ -351,7 +351,7 @@
                     >立即登录
                   </v-btn>
                   <div style="display: flow-root">
-                    <a class="float-left">忘记密码？</a>
+                    <a class="float-left" @click="forget">忘记密码？</a>
                     <p class="float-right">
                       没有账号？<a href="register">注册一个</a>
                     </p>
@@ -363,7 +363,7 @@
                   <v-divider></v-divider>
                   <v-layout justify-center wrap>
                     <v-flex class="text-center">
-                      <v-btn title="github登录" nuxt icon @click="github">
+                      <v-btn title="github登录" nuxt icon @click="git">
                         <v-icon medium color="light-grey"
                           >mdi-github-circle</v-icon
                         >
@@ -475,7 +475,17 @@ export default {
           })
       }
     },
-    github() {
+    forget() {
+      this.$swal({
+        text: '还没开发哩',
+        type: 'info',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000
+      })
+    },
+    git() {
       this.$swal({
         text: '体验环境暂未接入',
         type: 'info',
