@@ -79,7 +79,8 @@
 
 <script>
 export default {
-  name: 'Privacy'
+  name: 'Privacy',
+  auth: false
 }
 </script>
 

@@ -42,7 +42,8 @@
 
 <script>
 export default {
-  name: 'Licence'
+  name: 'Licence',
+  auth: false
 }
 </script>
 
