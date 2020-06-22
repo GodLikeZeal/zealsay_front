@@ -397,6 +397,18 @@
                   </v-row>
                 </v-card>
                 <v-divider></v-divider>
+                <h2 class="font-weight-regular text-gray">意见反馈</h2>
+                <p>
+                  若本站内容有涉及版权问题请及时联系站长进行整改，站内错误，页面bug或是其他内容建议也欢迎反馈到站长。
+                </p>
+                <p>
+                  站长社交账号在页脚处按钮，站长邮箱：<A
+                    data-auto-link="1"
+                    href="mailto:admin@zealsay.com"
+                    >admin@zealsay.com</A
+                  >
+                </p>
+                <v-divider></v-divider>
                 <h2 class="font-weight-regular text-gray">写在后面</h2>
                 <p>
                   如果你能够看到这个博客，说明我们本身就很有缘分，假如博客能帮到你，那么我就就会很开心了。
