@@ -16,72 +16,14 @@ export default {
           'width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0'
       },
       {
-        name: 'X-UA-Compatible',
-        content: 'ie=edge,chrome=1'
-      },
-      {
-        name: 'Cache-Control',
-        content: 'no-siteapp'
-      },
-      {
-        name: 'Cache-Control',
-        content: 'no-transform'
-      },
-      {
-        name: 'applicable-device',
-        content: 'pc,mobile'
-      },
-      {
-        name: 'MobileOptimized',
-        content: 'width'
-      },
-      {
-        name: 'HandheldFriendly',
-        content: 'true'
-      },
-      {
-        name: 'renderer',
-        content: 'webkit'
-      },
-      {
-        name: 'force-rendering',
-        content: 'webkit'
-      },
-      {
-        name: 'google',
-        content: 'notranslate'
-      },
-      {
-        name: '360-site-verification',
-        content: '604a14b53c6b871206001285921e81d8'
-      },
-      {
-        name: 'google-site-verification',
-        content: 'cV4-qkUJZR6gmFeajx_UyPe47GW9vY6cnCrYtCHYNh4'
-      },
-      {
-        name: 'google-site-verification',
-        content: 'HF7lfF8YEGs1qtCE-kPml8Z469e2RHhGajy6JPVy5XI'
-      },
-      {
-        name: 'tencent-site-verification',
-        content: 'da26ce22cfed7aba6a96d8409f9b53a6'
-      },
-      {
-        name: 'apple-mobile-web-app-title',
-        content: 'zealsay说你想说'
-      },
-      {
         hid: 'description',
         name: 'description',
-        content:
-          'zealsay说你想说，是一个关注于互联网、IT技术经验分享的个人独立博客。专注于IT行业最前沿的技术。致力成为互联网上最个性、最极客、具传播力的个人独立博客。'
+        content: 'zealsay轻应用快速开发框架'
       },
       {
         hid: 'keywords',
         name: 'keywords',
-        content:
-          '技术人生,技术笔记,情感交流,技术分享,java,spring boot,vue,nuxt,vuetify,后台,前端,服务器,动漫,程序员,全栈工程师,全栈,zealsay,zealsay博客,zealsay说你想说,王者荣耀,游戏,盘点,个人博客,建站系统,生活杂记,随笔,WEB平台,BOX-ROM,BoxMod。'
+        content: 'zealsay轻应用快速开发框架'
       },
       {
         hid: 'author',
@@ -195,7 +137,7 @@ export default {
     credentials: true, // 表示跨域请求时候是否需要携带凭证
     retry: { retries: 3 }, // 超时重试3次
     progress: false, // 请求的时候是否加载loading页面
-    debug: false // 开启调试，线上关闭
+    debug: true // 开启调试，线上关闭
   },
 
   proxy: {

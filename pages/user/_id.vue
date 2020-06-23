@@ -2,7 +2,6 @@
   <div id="index">
     <!-- header -->
     <v-card color="primary" height="450">
-      <blog-nav></blog-nav>
       <v-container>
         <v-layout>
           <v-flex md12>
@@ -86,7 +85,6 @@
           </v-tabs>
         </v-flex>
       </v-layout>
-      <core-back-to-top :visibility-height="300" :back-position="0" />
     </v-container>
     <!-- 页脚 -->
     <v-layout>
@@ -100,7 +98,6 @@
 </template>
 
 <script>
-import NavBar from '@/components/blog/NavBar'
 import { getUserData } from '@/api/data'
 import Info from './info'
 import Blog from './blog'
@@ -109,7 +106,6 @@ import Like from './like'
 
 export default {
   components: {
-    'blog-nav': NavBar,
     like: Like,
     activity: Activity,
     blog: Blog,

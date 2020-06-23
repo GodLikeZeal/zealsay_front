@@ -35,9 +35,3 @@ after_success:
   - docker build  -t registry.cn-qingdao.aliyuncs.com/zealsay/zealsay_front:latest .
   - docker push registry.cn-qingdao.aliyuncs.com/zealsay/zealsay_front:latest;
 
-notifications:
-  email:
-    recipients:
-      - zhangleifor@163.com
-    on_success: change # default: change
-    on_failure: always # default: always
