@@ -228,7 +228,6 @@ export default {
               text = '嗨~ 快来逗我玩吧！'
             }
           } else {
-            console.log(document.title)
             text = '欢迎阅读<span style="color:#0099cc;">「 ' + document.title.split(' - ')[0] + ' 」</span>'
           }
         }
@@ -385,7 +384,6 @@ export default {
                   talkValTimer()
                   showMessage(res.text, 0)
                 }
-                console.log(res)
                 $('#AIuserText').val('')
                 sessionStorage.setItem('live2duser', userid_)
               }
