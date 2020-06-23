@@ -19,11 +19,9 @@
    使用`Vuetify 2.x`构造出符合 `Material Design` 规范的扁平化风格主题UI,你有对美的偏爱,我同样有一份对美的执着,
    面对日趋多样化的技术,抽取一些常用的解决方案,以快,轻为主,打造出一个开箱即用的轻应用脚手架,助力中小企业解决快速部署以及持续交付的`DevOps`。
    > 本项目以个人博客网站为示例，展示如何使用`zealsay`快速搭建一个漂亮的个人博客，前后端项目全部开源，此项目为zealsay前端项目，后台项目地址为: [https://github.com/GodLikeZeal/zealsay_backend](https://github.com/GodLikeZeal/zealsay_backend)，国内[https://gitee.com/GodLikeZeal/zealsay_backend](https://gitee.com/GodLikeZeal/zealsay_backend)，欢迎frok，发现bug或者有好的建议也欢迎issue。
-#### 博客体验地址[https://beta.zealsay.com](https://beta.zealsay.com)
-#### 后台管理体验[https://beta.zealsay.com/admin/dashboard](https://beta.zealsay.com/admin/dashboard) 体验账号用户名:visitor 密码：abc123
-#### 后台管理登录[https://beta.zealsay.com/login](https://beta.zealsay.com/login) 体验账号用户名:visitor 密码：abc123
-#### api接口文档[https://dev-api.zealsay.com/doc.html](https://dev-api.zealsay.com/doc.html) 授权用户名：zealsay 密码:api123456
-### 本项目已成功上线部署，欢迎来我的线上版博客水一波[https://blog.zealsay.com](https://blog.zealsay.com)
+- 后台管理登录[https://beta.zealsay.com](https://beta.zealsay.com) 体验账号用户名:visitor 密码：abc123
+- api接口文档[https://dev-api.zealsay.com/doc.html](https://dev-api.zealsay.com/doc.html) 授权用户名：zealsay 密码:api123456
+#### 以本项目开发的博客系统已成功上线部署，欢迎体验[https://blog.zealsay.com](https://blog.zealsay.com)
  
 -------
 本项目会一直持续更新迭代，新功能正在马不停蹄更新，开发文档也正在不断的完善中...
@@ -210,6 +208,8 @@ $ npm run build
 $ npm run start
 
 ```
+### 谁在使用
+zealsay博客[https://blog.zealsay.com](https://blog.zealsay.com)
 ### zealsay blog
 基于zealsay快应用框架构建的博客系统,包含一个blog前端和对应的后台管理系统,为简约,美观和高性能而生。已实现部分功能,项目目前仍在开发中。
 ### 主要特色
@@ -219,6 +219,9 @@ $ npm run start
 4. 添加看(lao)板(po)娘，让你的博客不再单调。
 5. nuxt服务端渲染，让你的页面访问速度飞起，seo优化自定义，让你不再烦恼用vue的单页面搜索引擎不收录。
 6. 支持cdn部署，天下武功，唯快不破。
+7. 支持markdown编辑器，书写流畅。
+8. 编辑器和评论回复支持防xss攻击，安全可靠。
+9. 支持白天和夜间两种模式，多种主题色可供自行配置。
 
 ### 反馈
 欢迎大家在使用的过程中提出宝贵的意见和反馈问题，也可以直接提issue。

@@ -4,7 +4,7 @@ const Menu = [
     title: '桌面看板',
     group: 'apps',
     icon: 'mdi-monitor-dashboard',
-    href: '/admin/dashboard'
+    href: '/'
   },
   { header: '用户' },
   {
@@ -73,7 +73,7 @@ const Menu = [
   },
   { header: '配置' },
   {
-    title: '站点主体',
+    title: '站点配置',
     group: 'article',
     icon: 'mdi-home-circle',
     items: [
@@ -82,25 +82,6 @@ const Menu = [
         title: '基本信息',
         component: 'settingcommon',
         href: '/admin/setting/common'
-      }
-    ]
-  },
-  {
-    title: '友链管理',
-    group: 'article',
-    icon: 'mdi-link-variant',
-    items: [
-      {
-        name: 'write',
-        title: '友链列表',
-        component: 'friendlist',
-        href: '/admin/friendlink/list'
-      },
-      {
-        name: 'write',
-        title: '友链添加',
-        component: 'friendadd',
-        href: '/admin/friendlink/add'
       }
     ]
   }
