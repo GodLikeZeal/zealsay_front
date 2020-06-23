@@ -397,6 +397,22 @@
                   </v-row>
                 </v-card>
                 <v-divider></v-divider>
+                <h2 class="font-weight-regular text-gray">我的项目</h2>
+                <p>
+                  学而时习之,不亦说乎,通过闲暇时间，开发了一些个人觉得有趣的项目
+                </p>
+                <p>
+                  得益于此，除了后台之外，自己也学会了前端以及与运维相关的一些知识
+                </p>
+                <p class="font-weight-medium text-gray">
+                  <a href="https://docs.zealsay.com">zealsay</a>
+                  前后端分离的开发脚手架，也是款功能齐全的个人博客
+                </p>
+                <p class="font-weight-medium text-gray">
+                  <a @click="account">幸福账本</a>
+                  一款基于springboot的个人账本，可记录每天支出收入
+                </p>
+                <v-divider></v-divider>
                 <h2 class="font-weight-regular text-gray">意见反馈</h2>
                 <p>
                   若本站内容有涉及版权问题请及时联系站长进行整改，站内错误，页面bug或是其他内容建议也欢迎反馈到站长。
@@ -514,6 +530,16 @@ export default {
     search() {
       // eslint-disable-next-line no-console
       console.log('click search')
+    },
+    account() {
+      this.$swal({
+        text: '开发中...',
+        type: 'info',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000
+      })
     }
   }
 }
