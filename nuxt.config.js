@@ -45,6 +45,12 @@ export default {
     '@/assets/scss/styles/index.scss',
     '@/static/live2d/css/live2d.css'
   ],
+  script: [
+    {
+      src: 'https://pic.zealsay.com/static/js/baidu.js'
+    }
+  ],
+
   /*
    ** Plugins to load before mounting the App
    */
