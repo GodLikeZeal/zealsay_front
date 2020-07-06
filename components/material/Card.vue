@@ -16,7 +16,7 @@
         <slot v-if="!title && !text" name="header" />
         <span v-else>
           <h4 class="title font-weight-light mb-2" v-text="title" />
-          <p class="category font-weight-light" v-text="text" />
+          <p class="category font-weight-medium" v-text="text" />
         </span>
       </v-card>
       <slot v-else name="offset" />

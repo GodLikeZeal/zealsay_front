@@ -47,14 +47,6 @@
               <v-spacer></v-spacer>
               <v-tooltip top>
                 <template v-slot:activator="{ on }">
-                  <v-btn :href="'/blog/' + card.id" icon target="_Blank">
-                    <v-icon medium v-on="on">mdi-information-outline</v-icon>
-                  </v-btn>
-                </template>
-                查看
-              </v-tooltip>
-              <v-tooltip top>
-                <template v-slot:activator="{ on }">
                   <v-btn
                     :href="'/user/blog/edit?id=' + card.id"
                     icon
@@ -99,14 +91,6 @@
             </v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-tooltip top>
-                <template v-slot:activator="{ on }">
-                  <v-btn :href="'/blog/' + card.id" icon target="_Blank">
-                    <v-icon medium v-on="on">mdi-information-outline</v-icon>
-                  </v-btn>
-                </template>
-                查看
-              </v-tooltip>
             </v-card-actions>
           </v-card>
         </div>

@@ -10,14 +10,6 @@
           hide-details
           color="purple"
         />
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn text icon color="tertiary" to="/" v-on="on">
-              <v-icon>mdi-view-dashboard</v-icon>
-            </v-btn>
-          </template>
-          博客首页
-        </v-tooltip>
 
         <v-menu
           bottom
