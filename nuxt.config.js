@@ -7,7 +7,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: 'zealsay说你想说-为分享快乐而生',
+    title: 'zealsay-轻应用开发框架',
     meta: [
       { charset: 'utf-8' },
       {
@@ -44,11 +44,6 @@ export default {
     'chartist/dist/chartist.min.css',
     '@/assets/scss/styles/index.scss',
     '@/static/live2d/css/live2d.css'
-  ],
-  script: [
-    {
-      src: 'https://pic.zealsay.com/static/js/baidu.js'
-    }
   ],
 
   /*
