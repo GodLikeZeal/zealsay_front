@@ -206,16 +206,6 @@
             icon
             text
             color="primary"
-            title="预览"
-            :to="'/blog/' + item.id"
-            target="_Blank"
-          >
-            <v-icon>portrait</v-icon>
-          </v-btn>
-          <v-btn
-            icon
-            text
-            color="primary"
             title="编辑"
             @click="handleEdit(item)"
           >

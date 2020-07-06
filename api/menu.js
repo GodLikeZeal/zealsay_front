@@ -73,15 +73,15 @@ const Menu = [
   },
   { header: '配置' },
   {
-    title: '站点配置',
+    title: '系统配置',
     group: 'article',
     icon: 'mdi-home-circle',
     items: [
       {
         name: 'write',
-        title: '基本信息',
-        component: 'settingcommon',
-        href: '/admin/setting/common'
+        title: '数据字典',
+        component: 'settingdict',
+        href: '/admin/setting/dict'
       }
     ]
   }
