@@ -11,7 +11,7 @@
             <v-container py-0>
               <v-layout wrap>
                 <v-flex xs6 md6>
-                  <v-card-text class="text-xs-center">
+                  <v-card-text class="text-center">
                     <v-dialog v-model="showCropper" persistent width="800px">
                       <template v-slot:activator="{ on }">
                         <label for="uploads">
