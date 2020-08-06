@@ -5,34 +5,40 @@
         <v-form ref="form" lazy-validation>
           <material-card
             color="primary"
-            title="配置网站基本信息"
-            text="完善网站基本信息后，点击保存设置"
+            title="配置站点作者信息"
+            text="完善作者基本信息后，点击保存设置"
           >
             <v-container py-0>
               <v-layout wrap>
                 <template v-for="(item, i) in config">
                   <v-flex
-                    v-if="item.name != null && !(typeof item.name == 'string')"
+                    v-if="
+                      item.name != null &&
+                        (item.name === 'MALE' || item.name === 'FEMALE')
+                    "
                     :key="i"
                     xs12
                     md12
                   >
-                    <p>{{ item.description }}</p>
-                    <v-switch v-model="item.name"></v-switch>
+                    <v-radio-group
+                      v-model="item.name"
+                      :label="item.description"
+                      row
+                    >
+                      <v-radio label="男" value="MALE"></v-radio>
+                      <v-radio label="女" value="FEMALE"></v-radio>
+                    </v-radio-group>
                   </v-flex>
                   <v-flex v-else :key="i" xs12 md12>
                     <v-text-field
                       v-model="item.name"
                       :rules="titleRules"
-                      hint="不能包含空格和特殊字符,不超过40个字符"
+                      hint="不能包含空格和特殊字符,不超过250个字符"
                       class="purple-input"
                       :label="item.description"
                     />
                   </v-flex>
                 </template>
-                <p class="caption text-gray">
-                  站点关闭后将不能访问，后台可正常登录
-                </p>
                 <v-flex xs12 text-center>
                   <v-btn
                     :loading="loading"
@@ -53,21 +59,21 @@
 </template>
 
 <script>
-import { getConfig, saveConfig } from '@/api/dict'
+import { getConfigAuthor, saveConfig } from '@/api/dict'
 
 export default {
-  name: 'Common',
+  name: 'Author',
   layout: 'admin',
   data: () => ({
     loading: false,
     titleRules: [
       (v) => !!v || '内容不能为空!',
-      (v) => (v && v.length <= 40) || '内容不得超过40个字符'
+      (v) => (v && v.length <= 250) || '内容不得超过250个字符'
     ]
   }),
 
   async asyncData({ app, query, error }) {
-    const res = await app.$axios.$request(getConfig())
+    const res = await app.$axios.$request(getConfigAuthor())
     let config = {}
     if (res.code === '200') {
       config = res.data.map((c) => {

@@ -1,5 +1,5 @@
 const Menu = [
-  { header: '看板' },
+  { header: '监控' },
   {
     title: '桌面看板',
     group: 'apps',
@@ -41,7 +41,7 @@ const Menu = [
   },
   { header: '资源' },
   {
-    title: '博客文章',
+    title: '资源管理',
     group: 'article',
     icon: 'mdi-book-open-page-variant',
     items: [
@@ -71,20 +71,33 @@ const Menu = [
       }
     ]
   },
-  { header: '配置' },
+  { header: '资讯' },
   {
-    title: '站点主体',
-    group: 'article',
-    icon: 'mdi-home-circle',
+    title: '博客展示',
+    group: 'blog',
+    icon: 'mdi-heart',
     items: [
       {
-        name: 'write',
-        title: '基本信息',
-        component: 'settingcommon',
-        href: '/admin/setting/common'
+        name: 'landing',
+        title: 'landing首页',
+        component: 'article',
+        href: '/'
+      },
+      {
+        name: 'about',
+        title: 'about页',
+        component: 'articlelist',
+        href: '/blog/about'
+      },
+      {
+        name: 'friend',
+        title: '友链展示',
+        component: 'category',
+        href: '/admin/article/category'
       }
     ]
   },
+  { header: '配置' },
   {
     title: '友链管理',
     group: 'article',
@@ -101,6 +114,37 @@ const Menu = [
         title: '友链添加',
         component: 'friendadd',
         href: '/admin/friendlink/add'
+      }
+    ]
+  },
+  {
+    title: '系统设置',
+    group: 'article',
+    icon: 'mdi-settings',
+    items: [
+      {
+        name: 'write',
+        title: '站点配置',
+        component: 'settingcommon',
+        href: '/admin/setting/common'
+      },
+      {
+        name: 'author',
+        title: 'Owner',
+        component: 'settingauthor',
+        href: '/admin/setting/author'
+      },
+      {
+        name: 'pageabout',
+        title: '关于页面',
+        component: 'settingabout',
+        href: '/admin/setting/about'
+      },
+      {
+        name: 'dict',
+        title: '数据字典',
+        component: 'settingdict',
+        href: '/admin/setting/dict'
       }
     ]
   }

@@ -5,34 +5,28 @@
         <v-form ref="form" lazy-validation>
           <material-card
             color="primary"
-            title="配置网站基本信息"
-            text="完善网站基本信息后，点击保存设置"
+            title="配置站点作者信息"
+            text="完善作者基本信息后，点击保存设置"
           >
-            <v-container py-0>
+            <v-container>
               <v-layout wrap>
                 <template v-for="(item, i) in config">
-                  <v-flex
-                    v-if="item.name != null && !(typeof item.name == 'string')"
-                    :key="i"
-                    xs12
-                    md12
-                  >
-                    <p>{{ item.description }}</p>
-                    <v-switch v-model="item.name"></v-switch>
-                  </v-flex>
-                  <v-flex v-else :key="i" xs12 md12>
-                    <v-text-field
+                  <v-flex :key="i" xs12 md6>
+                    <v-textarea
                       v-model="item.name"
-                      :rules="titleRules"
-                      hint="不能包含空格和特殊字符,不超过40个字符"
+                      outlined
+                      hint="不能包含js代码"
                       class="purple-input"
+                      height="500px"
                       :label="item.description"
                     />
                   </v-flex>
+                  <v-flex :key="'l' - i" xs12 md6>
+                    <h4>效果预览</h4>
+                    <div v-html="xssAboutPage(item.name)"></div>
+                  </v-flex>
                 </template>
-                <p class="caption text-gray">
-                  站点关闭后将不能访问，后台可正常登录
-                </p>
+
                 <v-flex xs12 text-center>
                   <v-btn
                     :loading="loading"
@@ -53,21 +47,26 @@
 </template>
 
 <script>
-import { getConfig, saveConfig } from '@/api/dict'
+import { getConfigAbout, saveConfig } from '@/api/dict'
+import Util from '@/util'
 
 export default {
-  name: 'Common',
+  name: 'About',
   layout: 'admin',
   data: () => ({
     loading: false,
     titleRules: [
       (v) => !!v || '内容不能为空!',
-      (v) => (v && v.length <= 40) || '内容不得超过40个字符'
-    ]
+      (v) => (v && v.length <= 250) || '内容不得超过250个字符'
+    ],
+    xssOptions: {
+      whiteList: {}, // 白名单
+      stripIgnoreTagBody: '*' | true // 去掉所有不在白名单上的标签
+    }
   }),
 
   async asyncData({ app, query, error }) {
-    const res = await app.$axios.$request(getConfig())
+    const res = await app.$axios.$request(getConfigAbout())
     let config = {}
     if (res.code === '200') {
       config = res.data.map((c) => {
@@ -88,6 +87,13 @@ export default {
     }
   },
   methods: {
+    xssAboutPage(content) {
+      if (content != null && content !== '') {
+        return Util.xssAboutPage(content)
+      } else {
+        return ''
+      }
+    },
     submit() {
       this.loading = true
       if (this.$refs.form.validate()) {
