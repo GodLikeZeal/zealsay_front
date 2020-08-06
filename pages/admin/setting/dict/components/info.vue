@@ -113,7 +113,7 @@ export default {
   },
   data: () => ({
     icon: icons,
-    color: ['info', 'success', 'primary', 'warning', 'error', 'admin.vue']
+    color: ['info', 'success', 'primary', 'warning', 'error', 'secondary']
   })
 }
 </script>
