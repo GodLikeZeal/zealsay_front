@@ -1,34 +1,28 @@
 <template>
   <div id="index">
     <!-- header -->
-    <v-card tile flat color="primary" height="450">
+    <v-card color="primary" height="450">
       <blog-nav :category="categorys"></blog-nav>
-      <blog-motto :hitokoto="motto"></blog-motto>
+      <v-container>
+        <v-layout fill-height justify-center>
+          <v-flex xs12 md12 sm12 lg10>
+            <div class="text-md-center word">
+              <h1 v-if="$route.params.name" class="hitokoto-title">
+                标签：{{ $route.params.name }}
+              </h1>
+            </div>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </v-card>
     <v-container>
       <v-layout fill-height justify-center>
-        <v-flex xs12 sm12 md11 lg11 xl9>
-          <blog-main-slider :articles="hotArticles"></blog-main-slider>
-          <!--          <blog-main-card :item="desserts[0]"></blog-main-card>-->
-        </v-flex>
-      </v-layout>
-      <v-layout fill-height justify-center>
-        <v-flex xs12 sm12 md6 lg7 xl6>
+        <v-flex xs12 sm12 md8 lg7>
           <blog-article-list :list="list"></blog-article-list>
-          <!-- page分页-->
-          <div class="pagination text-center">
-            <v-pagination
-              v-model="pagination.page"
-              :length="length"
-              circle
-              color="primary"
-              @input="search"
-            ></v-pagination>
-          </div>
         </v-flex>
-        <v-flex class="hidden-sm-and-down" md5 lg4 xl3>
+        <v-flex class="hidden-sm-and-down" md4 lg3>
           <!-- 最近评论 -->
-          <blog-recent-discuss :comments="comments"></blog-recent-discuss>
+          <blog-recent-discuss></blog-recent-discuss>
           <!-- 标签云 -->
           <blog-label-cloud :items="labels"></blog-label-cloud>
         </v-flex>
@@ -49,30 +43,20 @@
 
 <script>
 import NavBar from '@/components/blog/NavBar'
-import Motto from '@/components/blog/Motto'
-// import MainCard from '@/components/blog/MainCard'
-import MainSlider from '@/components/blog/MainSlider'
 import ArticleList from '@/components/blog/ArticleList'
 import RecentDiscuss from '@/components/blog/RecentDiscuss'
 import LabelCloud from '@/components/blog/LabelCloud'
 import { getIndexData } from '@/api/data'
-import { getArticlePageListToC } from '@/api/article'
 
 export default {
   auth: false,
   components: {
     'blog-nav': NavBar,
-    'blog-motto': Motto,
-    // 'blog-main-card': MainCard,
-    'blog-main-slider': MainSlider,
     'blog-article-list': ArticleList,
     'blog-recent-discuss': RecentDiscuss,
     'blog-label-cloud': LabelCloud
   },
-  data: () => ({
-    loading: true,
-    colors: ['primary', 'success', 'info', 'warning', 'danger']
-  }),
+  data: () => ({ loading: true }),
   computed: {
     length() {
       return this.pagination.totalItems
@@ -89,7 +73,9 @@ export default {
     }
   },
   async asyncData({ app, params, error, store }) {
-    const res = await app.$axios.$request(getIndexData())
+    const query = {}
+    query.label = params.name
+    const res = await app.$axios.$request(getIndexData(query))
 
     if (res.code === '200') {
       const motto = {}
@@ -103,17 +89,12 @@ export default {
       pagination.totalItems = res.data.pageInfo.total
       const desserts = res.data.pageInfo.records
       const labels = res.data.labels
-      const hotArticles = res.data.hotArticles
       const categorys = res.data.categorys
-      const comments = res.data.comments
 
       return {
-        motto,
         desserts,
-        hotArticles,
         pagination,
         categorys,
-        comments,
         labels
       }
     } else {
@@ -125,43 +106,17 @@ export default {
   },
   methods: {
     search() {
-      const searchData = {}
-      searchData.pageSize = this.pagination.rowsPerPage
-      searchData.pageNumber = this.pagination.page
-      this.$axios
-        .$request(getArticlePageListToC(searchData))
-        .then((res) => {
-          if (res.code === '200') {
-            this.desserts = res.data.records
-            // this.pagination.page = res.data.currentPage;
-            // this.pagination.rowsPerPage = res.data.pageSize;
-            this.pagination.totalItems = res.data.total
-          } else {
-            this.$swal({
-              text: '拉取文章列表失败',
-              type: 'error',
-              toast: true,
-              position: 'top',
-              showConfirmButton: false,
-              timer: 3000
-            })
-          }
-        })
-        .catch((e) => {
-          this.$swal({
-            text: e.message,
-            type: 'error',
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000
-          })
-        })
+      // eslint-disable-next-line no-console
+      console.log('click search')
     }
   }
 }
 </script>
 <style lang="scss" scoped>
+[v-cloak] {
+  display: none;
+}
+
 .index {
   background: #fafafa;
 }
@@ -170,12 +125,46 @@ export default {
   margin-left: 1.2em !important;
 }
 
+.hitokoto-title {
+  color: white;
+  font-weight: 400 !important;
+  margin-top: 5rem;
+  margin-bottom: 0.6rem;
+  line-height: 1 !important;
+  font-size: 2rem !important;
+}
+
+.hitokoto_author {
+  color: snow;
+  float: right;
+  margin-top: 3rem;
+}
+
+.bracket {
+  color: white;
+  font-weight: 400 !important;
+  line-height: 0 !important;
+  font-size: 2rem !important;
+}
+
+.right {
+  position: relative;
+  right: 0;
+  bottom: 0;
+}
+
+.left {
+  position: relative;
+  left: 0;
+  top: -2.5rem;
+}
+
 .word {
   position: relative;
 }
 
 .card {
-  margin: 0.5em;
+  margin: 1.5em;
   border-radius: 0.5em;
 }
 
@@ -187,8 +176,6 @@ export default {
 
 .left_list_item {
   margin: 0.5rem 1.25rem;
-  font-size: small;
-  width: inherit;
 }
 
 .cover {

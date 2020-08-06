@@ -20,7 +20,7 @@
               <template v-slot:prepend>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <v-btn text icon color="primary" @click="add">
+                    <v-btn flat icon color="primary" @click="add">
                       <v-icon v-on="on">add</v-icon>
                     </v-btn>
                   </template>
@@ -30,7 +30,7 @@
               <template v-slot:append-outer>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <v-btn text icon color="primary" @click="search">
+                    <v-btn flat icon color="primary" @click="search">
                       <v-icon v-on="on">search</v-icon>
                     </v-btn>
                   </template>
@@ -47,7 +47,7 @@
               class="chip-label"
               :color="label.outColor"
               text-color="white"
-              @click:close="remove(label.id)"
+              @input="remove(label.id)"
             >
               <v-avatar v-if="label.icon.startsWith('http')">
                 <img :src="label.icon" alt="trevor" />
