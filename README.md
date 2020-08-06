@@ -5,11 +5,15 @@
  ![vue 2.x](https://img.shields.io/badge/vue-2.x-brightgreen.svg)
  ![nuxt 2.12.2](https://img.shields.io/badge/nuxt-2.12.2-ff69b4.svg)
  ![vuetify 2.3.1](https://img.shields.io/badge/vuetify-2.x-green)
- ![License MIT](https://img.shields.io/badge/license-MIT-green.svg)  [![Build Status](https://travis-ci.com/GodLikeZeal/zealsay_front.svg?branch=master)](https://travis-ci.com/GodLikeZeal/zealsay_front) [![](https://img.shields.io/docker/stars/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') [![](https://img.shields.io/docker/pulls/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') [![](https://img.shields.io/github/downloads/GodLikeZeal/zealsay_front/total.svg)](https://img.shields.io/github/downloads/GodLikeZeal/zealsay_front/total 'Github')
+ ![License MIT](https://img.shields.io/badge/license-MIT-green.svg)  
+ [![Build Status](https://travis-ci.com/GodLikeZeal/zealsay_front.svg?branch=master)](https://travis-ci.com/GodLikeZeal/zealsay_front) 
+ [![](https://img.shields.io/docker/stars/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') 
+ [![](https://img.shields.io/docker/pulls/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') 
+ [![](https://img.shields.io/github/downloads/GodLikeZeal/zealsay_front/total.svg)](https://img.shields.io/github/downloads/GodLikeZeal/zealsay_front/total 'Github')
  
  </p>
  
-------
+------ 
 
 ### 介绍
 🚀  zealsay是一套前后端分离的快速开发脚手架,抽取一些常用的解决方案,以快,轻为主,打造出一个开箱即用的轻应用脚手架。  
