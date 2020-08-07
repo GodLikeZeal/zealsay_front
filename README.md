@@ -1,11 +1,11 @@
-<p align="center"><a href="https://vuejs.org" target="_blank" rel="noopener noreferrer"><img width="100" src="https://pan.zealsay.com/2019091615686216710547.png" alt="Vue logo"></a></p>
+<p align="center"><a href="https://vuejs.org" target="_blank" rel="noopener noreferrer"><img width="300" src="https://pan.zealsay.com/2019091615686216710547.png" alt="Vue logo"></a></p>
 
 <p align="center">
 
  ![vue 2.x](https://img.shields.io/badge/vue-2.x-brightgreen.svg)
  ![nuxt 2.12.2](https://img.shields.io/badge/nuxt-2.12.2-ff69b4.svg)
  ![vuetify 2.3.1](https://img.shields.io/badge/vuetify-2.x-green)
- ![License MIT](https://img.shields.io/badge/license-MIT-green.svg)  
+ ![License MIT](https://img.shields.io/badge/license-MIT-green.svg)
  [![Build Status](https://travis-ci.com/GodLikeZeal/zealsay_front.svg?branch=master)](https://travis-ci.com/GodLikeZeal/zealsay_front) 
  [![](https://img.shields.io/docker/stars/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') 
  [![](https://img.shields.io/docker/pulls/zealsay/zealsay_front.svg)](https://hub.docker.com/r/zealsay/zealsay_front 'DockerHub') 
@@ -100,9 +100,9 @@
 - 感谢开发神器[Mybatis-Plus](https://mp.baomidou.com/)
 - 感谢dto转换工具[Mapstruct](https://github.com/mapstruct/mapstruct)
 - 感谢友好的swagger ui插件[knife4j](https://gitee.com/xiaoym/knife4j)
-- 😘😘感谢前端妹子[jinjinyike](https://github.com/jinjinyike)的帮助。
-- ❤️❤️❤️️️兜兜里有糖。
-- 作为一位后台开发者,接触前端时间不长，熟悉了vue后，便使用nuxt.js来开发此项目,刚使用nuxt,踩了不少坑,后面会写一些那些年，开发nuxt踩过的坑。
+- 😘😘 感谢前端妹子[jinjinyike](https://github.com/jinjinyike)的帮助。
+- ❤️❤️❤️️️ 兜兜里有糖。
+- 作为一位后台开发者,也是在坚持学习前端,挺喜欢vue的,希望各位前端大佬不吝赐教,我也学习学习写前端代码的正确姿势,使用nuxt,踩了不少坑,后面会写一些博客记录下那些年，开发nuxt踩过的坑。
 
 ### 部分页面预览
 ![20200706183003](https://pan.zealsay.com/mweb/2020070615940322923732.jpg)

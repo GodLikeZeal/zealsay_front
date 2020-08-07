@@ -93,7 +93,7 @@ const Menu = [
         name: 'friend',
         title: '友链展示',
         component: 'category',
-        href: '/admin/article/category'
+        href: '/blog/friend'
       }
     ]
   },
