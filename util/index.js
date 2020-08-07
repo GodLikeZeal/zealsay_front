@@ -218,6 +218,37 @@ const xssComment = (content) => {
   return html
 }
 
+/**
+ * 防止页面xss攻击.
+ *
+ * @author  zhanglei
+ * @date 2020/6/18 22:08
+ */
+const xssAboutPage = (content) => {
+  const options = {
+    stripIgnoreTagBody: ['script'],
+    onIgnoreTag(tag, html, options) {
+      if (tag.substr(0, 2) === 'v-') {
+        // 不对其属性列表进行过滤
+        return html
+      }
+    }
+  }
+  const xss = require('xss')
+  const html = xss(content, options)
+  return html
+}
+
+/**
+ * 取min到max之间随机数,如0到100则min为0，max为100
+ * @param min
+ * @param max
+ * @returns {*}
+ */
+const randomNum = (min, max) => {
+  return Math.floor(Math.random() * (max - min)) + min
+}
+
 export default {
   randomElement,
   toggleFullScreen,
@@ -225,5 +256,7 @@ export default {
   formateDate,
   formateDateTime,
   formateComment,
-  xssComment
+  xssComment,
+  xssAboutPage,
+  randomNum
 }
