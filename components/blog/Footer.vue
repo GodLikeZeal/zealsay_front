@@ -51,8 +51,8 @@
         </p>
         <p>
           鄂ICP备17008798号 Powered by
-          <a class="pink--text" href="https://blog.zealsay.com/" target="_blank"
-            >zeal</a
+          <a class="pink--text" href="https://docs.zealsay.com/" target="_blank"
+            >zealsay</a
           >, made with love
           <v-icon color="pink" size="17">mdi-heart</v-icon>
         </p>
