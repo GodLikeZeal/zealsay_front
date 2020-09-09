@@ -316,18 +316,17 @@ export default {
         })
         $('#youduButton').on('click', function () {
           if ($('#youduButton').hasClass('doudong')) {
-            var typeIs = $('#youduButton').attr('data-type')
+            var typeIs = $('#youduButton').data('data-type')
             $('#youduButton').removeClass('doudong')
-            $('body').removeClass(typeIs)
-            $('#youduButton').attr('data-type', '')
+            $('html').removeClass(typeIs)
           } else {
             var duType = $('#duType').val()
             var duArr = duType.split(',')
             var dataType = duArr[Math.floor(Math.random() * duArr.length)]
 
             $('#youduButton').addClass('doudong')
-            $('#youduButton').attr('data-type', dataType)
-            $('body').addClass(dataType)
+            $('#youduButton').data('data-type', dataType)
+            $('html').addClass(dataType)
           }
         })
         if (talkAPI !== '') {
