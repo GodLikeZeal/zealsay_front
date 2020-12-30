@@ -10,7 +10,7 @@
     "dev": "nuxt",
     "generate": "nuxt generate",
     "start": "nuxt start",
-    "upcdn": "nuxt build  && node ./scripts/upcdn.js"
+    "upcdn": "node ./scripts/upcdn.js"
   },
   "dependencies": {
     "@nuxtjs/auth": "^4.9.1",

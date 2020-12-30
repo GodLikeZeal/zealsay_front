@@ -38,6 +38,9 @@ export default {
       },
       {
         src: 'https://pan.zealsay.com/live2d/js/live2d.js'
+      },
+      {
+        src: 'https://pic.zealsay.com/static/js/baidu.js'
       }
     ]
   },
@@ -146,7 +149,7 @@ export default {
     credentials: true, // 表示跨域请求时候是否需要携带凭证
     retry: { retries: 3 }, // 超时重试3次
     progress: false, // 请求的时候是否加载loading页面
-    debug: true // 开启调试，线上关闭
+    debug: false // 开启调试，线上关闭
   },
 
   proxy: {
