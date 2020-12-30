@@ -234,7 +234,7 @@ export default {
     // extractCSS: { allChunks: true }, // css 独立打包 link 的形式加载
     publicPath:
       process.env.NODE_ENV === 'production'
-        ? 'https://pic.zealsay.com/' // sample/essays 打包的默认路径为 ‘_nuxt’ 或者可以指定cdn 域名
+        ? 'https://pic.zealsay.com/zealsay/static/' // sample/essays 打包的默认路径为 ‘_nuxt’ 或者可以指定cdn 域名
         : '/_nuxt/',
     filenames: {
       // css 和 js  img 打包时指定文件夹
